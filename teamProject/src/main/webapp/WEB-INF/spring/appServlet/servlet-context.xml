@@ -41,15 +41,15 @@
         <!-- mybatis 세션생성후 쿼리를 실행시킬때 사용할 쿼리위치(메퍼)설정 -->
         <property name="mapperLocations">
             <list>
-                <value>classpath:com/cafe24/iso159/member/MemberMapper.xml</value>
-                <value>classpath:com/cafe24/iso159/animal/AnimalMapper.xml</value>
-                <value>classpath:com/cafe24/iso159/shelter/ShelterMapper.xml</value>
-                <value>classpath:com/cafe24/iso159/exp/ExpMapper.xml</value>
-                <value>classpath:com/cafe24/iso159/adopt/AdoptMapper.xml</value>
-                <value>classpath:com/cafe24/iso159/goods/GoodsMapper.xml</value>
-                <value>classpath:com/cafe24/iso159/jindan/JindanMapper.xml</value>
-                <value>classpath:com/cafe24/iso159/survey/SurveyMapper.xml</value>
-                <value>classpath:com/cafe24/iso159/board/BoardMapper.xml</value>
+                <value>classpath:com/cafe24/iso159/member/service/MemberMapper.xml</value>
+                <value>classpath:com/cafe24/iso159/animal/service/AnimalMapper.xml</value>
+                <value>classpath:com/cafe24/iso159/shelter/service/ShelterMapper.xml</value>
+                <value>classpath:com/cafe24/iso159/exp/service/ExpMapper.xml</value>
+                <value>classpath:com/cafe24/iso159/adopt/service/AdoptMapper.xml</value>
+                <value>classpath:com/cafe24/iso159/goods/service/GoodsMapper.xml</value>
+                <value>classpath:com/cafe24/iso159/jindan/service/JindanMapper.xml</value>
+                <value>classpath:com/cafe24/iso159/survey/service/SurveyMapper.xml</value>
+                <value>classpath:com/cafe24/iso159/board/service/BoardMapper.xml</value>
                 <value>classpath:com/cafe24/iso159/TestMapper.xml</value>
             </list>
         </property>
