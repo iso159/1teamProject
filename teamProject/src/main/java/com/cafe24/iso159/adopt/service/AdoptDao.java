@@ -1,0 +1,38 @@
+package com.cafe24.iso159.adopt.service;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class AdoptDao {
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	private static final Logger logger = LoggerFactory.getLogger(AdoptDao.class);
+	private final String nameSpace = "com.cafe24.iso159.adopt.service.AdoptMapper."; 
+	
+	// 입양신청
+	public void insertAdopt(AdoptRequest adoptRequest) {
+		logger.debug("insertAdopt(AdoptRequest adoptRequest) 메서드 호출");
+		sqlSessionTemplate.insert(nameSpace + "AdoptRequest", adoptRequest);
+	}
+	
+	// max코드값 조회
+	public int selectLastCode() {
+		logger.debug("selectLastCode() 메서드 호출");
+		int lastCode = sqlSessionTemplate.selectOne(nameSpace + "selectLastCode");
+		return lastCode;
+	}
+	
+	// 입양신청조회
+	public List<AdoptRequest> selectAdoptRequest(){
+		logger.debug("List<AdoptRequest> selectAdoptRequest() 메서드 호출");
+		List<AdoptRequest> list = sqlSessionTemplate.selectList(nameSpace + "selectAdoptRequest");
+		logger.debug("list is {}", list);
+		return list;
+	}
+}

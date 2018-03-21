@@ -4,4 +4,54 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.adopt.service.AdoptMapper">
 
+	<!-- max코드값 조회 쿼리문 -->
+	<select id="selectLastCode" resultType="Integer">
+		select max(CAST(substring(adopt_request_code,20) AS DECIMAL)) as maxcol from t_adopt_request
+	</select>
+	
+	<!-- 입양신청 등록 쿼리문 -->
+	<insert id="AdoptRequest"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
+	
+	INSERT INTO 
+		t_adopt_request 
+		(
+			adopt_request_code, 
+			animal_code, 
+			bl_code, 
+			m_member_id, 
+			os_code_adopt, 
+			adopt_request_reason, 
+			adopt_request_date, 
+			adopt_point
+		) 
+		VALUES 
+		(
+			#{adoptRequestCode}, 
+			#{animalCode}, 
+			#{blCode}, 
+			#{mMemberId}, 
+			#{osCodeAdopt}, 
+			#{adoptRequestReason}, 
+			now(), 
+			#{adoptPoint}
+		)
+	</insert>
+	
+	<!-- 입양신청한 조회 리스트 -->
+	<select id="selectAdoptRequest"
+			resultType="com.cafe24.iso159.adopt.service.AdoptRequest">
+		SELECT 
+			adopt_request_code as adoptRequestCode,
+			animal_code as animalCode,
+			bl_code as blCode,
+			m_member_id as mMemberId,
+			os_code_adopt as osCodeAdopt,
+			adopt_request_reason as adoptRequestReason,
+			adopt_request_date as adoptRequestDate,
+			adopt_point as adoptPoint
+		FROM 
+			t_adopt_request 
+	</select>
+	
 </mapper>
