@@ -29,10 +29,17 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" 
-        		  value="jdbc:mysql://localhost/iso159?useUnicode=true&amp;characterEncoding=euckr"/>
+        		  value="jdbc:mysql://183.111.100.230:3306/iso159?useUnicode=true&amp;characterEncoding=euckr"/>
         <property name="username" value="iso159"/>
         <property name="password" value="qswaed258!"/>
     </bean>
+    
+    <!-- connection가진 tx기능을 spring에게 위임 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <tx:annotation-driven />
+    <tx:annotation-driven proxy-target-class="true"/>
     
     <!-- mybatis 세션생성을 위한 팩토리 생성 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
