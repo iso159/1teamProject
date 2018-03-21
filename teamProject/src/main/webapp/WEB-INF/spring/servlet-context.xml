@@ -57,7 +57,6 @@
                 <value>classpath:com/cafe24/iso159/jindan/service/JindanMapper.xml</value>
                 <value>classpath:com/cafe24/iso159/survey/service/SurveyMapper.xml</value>
                 <value>classpath:com/cafe24/iso159/board/service/BoardMapper.xml</value>
-                <value>classpath:com/cafe24/iso159/TestMapper.xml</value>
             </list>
         </property>
     </bean>
