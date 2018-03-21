@@ -4,4 +4,53 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.member.service.MemberMapper">
 
+	<!-- 회원등록 -->
+	<insert id="addMemberInfo" parameterType="com.cafe24.iso159.member.service.MemberInfo">
+		INSERT INTO
+		t_member_info (m_info_code, m_info_name, m_info_nickname,m_info_gender, m_info_birth, m_info_postcode, m_info_address, m_info_email, m_info_phone, m_info_join_date) 
+		VALUES (#{mInfoCode}, #{mInfoName}, #{mInfoNickname}, #{mInfoGender}, #{mInfoBirth}, #{mInfoPostcode}, #{mInfoAddress}, #{mInfoEmail}, #{mInfoPhone}, now());
+	</insert>
+
+	<!-- 회원가입 -->
+	<insert id="addMember" parameterType="com.cafe24.iso159.member.service.Member">
+		INSERT INTO t_member (m_id,	m_info_code, m_right_code, m_pw) 
+		VALUES (#{mId},	#{mInfoCode}, #{mRightCode}, #{mPw});
+	</insert>
+
+	<select id="selectMemberInfoCodeNumber" resultType="int">
+		SELECT
+		MAX(cast(substring(m_info_code, 13) as DECIMAL))
+		FROM t_member_info
+	</select>
+
+	<select id="selectOneMember" parameterType="int"
+		resultType="com.cafe24.iso159.member.service.MemberInfo">
+		SELECT
+			m_info_code as mInfoCode
+			,m_info_name as mInfoName
+			,m_info_nickname as mInfoNickname
+			,m_info_gender as mInfoGender
+			,m_info_birth as mInfoBirth
+			,m_info_postcode as mInfoPostcode       
+			,m_info_address as mInfoAddress
+			,m_info_email as mInfoEmail
+			,m_info_phone as mInfoPhone
+		FROM member
+		WHERE m_info_code=#{mInfoCode}
+	</select>
+
+	<select id="selectLoginCheck" parameterType="com.cafe24.iso159.member.service.Member"
+		resultType="com.cafe24.iso159.member.service.MemberLoginLevel">
+		SELECT 
+			m.m_id as mId
+			,m.bl_code as blCode
+			,mr.m_right_grade_name as mRightGradeName
+			,mr.m_right_level as mRightLevel
+		FROM t_member m
+		INNER JOIN t_member_right mr
+		ON m.m_right_code =	mr.m_right_code 
+		WHERE m_id = #{mId} AND m_pw=#{mPw}
+	</select>
+
+
 </mapper>

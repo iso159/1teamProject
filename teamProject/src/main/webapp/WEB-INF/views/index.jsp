@@ -18,7 +18,7 @@
 		<h1> 기능 </h1>
 		<ul class="list-group">
 			<li class="list-group-item list-group-item-white">
-				<a href="${pageContext.request.contextPath}/member">
+				<a href="${pageContext.request.contextPath}/member/memberMenu">
 					<button type="button" class="btn btn-white">회원</button>
 				</a>
 			</li>
