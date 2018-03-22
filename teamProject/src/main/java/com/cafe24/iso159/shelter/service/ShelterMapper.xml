@@ -4,4 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.shelter.service.ShelterMapper">
 
+	<!-- 보호소 대표 신청 쿼리문 -->
+	<insert id="insertBusinessLicense" parameterType="com.cafe24.iso159.shelter.service.BusinessLicense">
+		INSERT INTO 
+			t_business_license (bl_code, m_member_id, os_code_license_status, bl_shelter_name,bl_shelter_number, bl_shelter_postcode, bl_shelter_address, bl_shelter_date) 
+		VALUES (#{blCode}, #{mMemberId}, #{osCodeLicenseStatus}, #{blShelterName}, #{blShelterNumber}, #{blShelterPostcode}, #{blShelterAddress}, now());
+	</insert>
+		
+	<!-- t_business_license테이블의 bl코드를 잘라서 가장 높은 숫자를 리턴 -->
+	<select id="selectBlCodeNum" resultType="String">
+		SELECT 
+			MAX(CAST(SUBSTRING(bl_code,9) AS DECIMAL)) 
+		FROM t_business_license
+	</select>
+	
+	<!-- 마지막으로 insert한 테이블의 기본키를 조회 -->
+	<select id="selectLastInsertCode" resultType="String">
+		SELECT LAST_INSERT_ID();
+	</select>
+	
+	<!-- 보호소 대표 신청 파일 등록 쿼리문 -->
+	<insert id="insertBusinessLicenseFile" parameterType="com.cafe24.iso159.shelter.service.BusinessLicenseFile">
+		INSERT 
+		INTO t_overall_file (of_code, bl_code, of_path, of_origin_name, of_save_name, of_ext, of_size, of_down_date) 
+		VALUES (#{ofCode}, #{blCode}, #{ofPath}, #{ofOriginName}, #{ofSaveName}, #{ofExt}, #{ofSize}, now());
+	</insert>
 </mapper>
