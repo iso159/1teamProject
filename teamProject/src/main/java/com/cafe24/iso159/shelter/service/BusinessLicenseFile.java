@@ -7,7 +7,7 @@ public class BusinessLicenseFile {
 	private String ofOriginName;
 	private String ofSaveName;
 	private String ofExt;
-	private int ofSize;
+	private long ofSize;
 	private String ofDate;
 	public String getOfCode() {
 		return ofCode;
@@ -45,10 +45,10 @@ public class BusinessLicenseFile {
 	public void setOfExt(String ofExt) {
 		this.ofExt = ofExt;
 	}
-	public int getOfSize() {
+	public long getOfSize() {
 		return ofSize;
 	}
-	public void setOfSize(int ofSize) {
+	public void setOfSize(long ofSize) {
 		this.ofSize = ofSize;
 	}
 	public String getOfDate() {
@@ -62,6 +62,7 @@ public class BusinessLicenseFile {
 		return "BusinessLicenseFile [ofCode=" + ofCode + ", blCode=" + blCode + ", ofPath=" + ofPath + ", ofOriginName="
 				+ ofOriginName + ", ofSaveName=" + ofSaveName + ", ofExt=" + ofExt + ", ofSize=" + ofSize + ", ofDate="
 				+ ofDate + "]";
-	}	
+	}
+
 	
 }

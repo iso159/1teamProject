@@ -1,31 +1,21 @@
 package com.cafe24.iso159.shelter.service;
 
-public class BusinessLicense {
-	private String blCode;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class BusinessLicenseCommand {
 	private String mMemberId;
-	private String osCodeLicenseStatus;
 	private String blShelterName;
 	private String blShelterNumber;
 	private String blShelterPostcode;
 	private String blShelterAddress;
-	private String blShelterDate;
-	public String getBlCode() {
-		return blCode;
-	}
-	public void setBlCode(String blCode) {
-		this.blCode = blCode;
-	}
+	private List<MultipartFile> multipartFile;
 	public String getmMemberId() {
 		return mMemberId;
 	}
 	public void setmMemberId(String mMemberId) {
 		this.mMemberId = mMemberId;
-	}
-	public String getOsCodeLicenseStatus() {
-		return osCodeLicenseStatus;
-	}
-	public void setOsCodeLicenseStatus(String osCodeLicenseStatus) {
-		this.osCodeLicenseStatus = osCodeLicenseStatus;
 	}
 	public String getBlShelterName() {
 		return blShelterName;
@@ -51,17 +41,18 @@ public class BusinessLicense {
 	public void setBlShelterAddress(String blShelterAddress) {
 		this.blShelterAddress = blShelterAddress;
 	}
-	public String getBlShelterDate() {
-		return blShelterDate;
+	public List<MultipartFile> getMultipartFile() {
+		return multipartFile;
 	}
-	public void setBlShelterDate(String blShelterDate) {
-		this.blShelterDate = blShelterDate;
+	public void setMultipartFile(List<MultipartFile> multipartFile) {
+		this.multipartFile = multipartFile;
 	}
 	@Override
 	public String toString() {
-		return "BusinessLicense [blCode=" + blCode + ", mMemberId=" + mMemberId + ", osCodeLicenseStatus="
-				+ osCodeLicenseStatus + ", blShelterName=" + blShelterName + ", blShelterNumber=" + blShelterNumber
-				+ ", blShelterPostcode=" + blShelterPostcode + ", blShelterAddress=" + blShelterAddress
-				+ ", blShelterDate=" + blShelterDate + "]";
-	}	
+		return "BusinessLicenseCommand [mMemberId=" + mMemberId + ", blShelterName=" + blShelterName
+				+ ", blShelterNumber=" + blShelterNumber + ", blShelterPostcode=" + blShelterPostcode
+				+ ", blShelterAddress=" + blShelterAddress + ", multipartFile=" + multipartFile + "]";
+	}
+
+	
 }

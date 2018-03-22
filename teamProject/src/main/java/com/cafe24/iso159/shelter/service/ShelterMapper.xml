@@ -11,16 +11,18 @@
 		VALUES (#{blCode}, #{mMemberId}, #{osCodeLicenseStatus}, #{blShelterName}, #{blShelterNumber}, #{blShelterPostcode}, #{blShelterAddress}, now());
 	</insert>
 		
-	<!-- t_business_license테이블의 bl코드를 잘라서 가장 높은 숫자를 리턴 -->
+	<!-- t_overall_file 테이블의 of_code를 잘라서 가장 높은 숫자를 리턴 -->
+	<select id="selectOfCodeNum" resultType="String">
+		SELECT 
+			MAX(CAST(SUBSTRING(of_code,9) AS DECIMAL)) 
+		FROM t_overall_file
+	</select>
+		
+	<!-- t_business_license테이블의 bl_code를 잘라서 가장 높은 숫자를 리턴 -->
 	<select id="selectBlCodeNum" resultType="String">
 		SELECT 
 			MAX(CAST(SUBSTRING(bl_code,9) AS DECIMAL)) 
 		FROM t_business_license
-	</select>
-	
-	<!-- 마지막으로 insert한 테이블의 기본키를 조회 -->
-	<select id="selectLastInsertCode" resultType="String">
-		SELECT LAST_INSERT_ID();
 	</select>
 	
 	<!-- 보호소 대표 신청 파일 등록 쿼리문 -->

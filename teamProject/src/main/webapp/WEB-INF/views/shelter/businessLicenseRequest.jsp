@@ -27,6 +27,7 @@
 <body>
 	<h1>대표 보호소 신청</h1>
 	<form id="businessLicenseRequestForm"
+		  enctype="multipart/form-data"
 		  action="${pageContext.request.contextPath}/shelter/businessLicenseRequest"
 		  method="post">
 		<table>
@@ -45,6 +46,10 @@
 			<tr>
 				<td>보호소 주소</td>
 				<td><input type="text" name="blShelterAddress" id="shelterAddr"></td>
+			</tr>
+			<tr>
+				<td>사업자 등록증 파일</td>
+				<td><input type="file" name="multipartFile" id="shelterFile" multiple="multiple"></td>
 			</tr>
 		</table>
 		<button type="button" id="shelterInsertBtn">대표 보호소 신청</button>

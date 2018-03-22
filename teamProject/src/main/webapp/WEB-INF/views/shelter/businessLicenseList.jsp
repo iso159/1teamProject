@@ -12,8 +12,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
-	<title></title>
+	<script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
+	<title>보호소 신청 리스트</title>
 </head>
 <body>
 

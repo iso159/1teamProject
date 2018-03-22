@@ -13,27 +13,33 @@ public class ShelterDao {
 	private static final Logger logger = LoggerFactory.getLogger(ShelterDao.class);
 	private final String nameSpace = "com.cafe24.iso159.shelter.service.ShelterMapper.";
 	
-	// 보호소 대표 신청 쿼리문 호출하는 메서드
-	public void insertBusinessLicense(BusinessLicense businessLicense) {
-		logger.debug("insertBusinessLicense 메서드 businessLicense is {}",businessLicense);
-		int result = sqlSessionTemplate.insert(nameSpace + "insertBusinessLicense", businessLicense);
-		logger.debug("insertBusinessLicense 메서드 result is {}",result);
+	// t_overall_file 테이블의 of_code를 잘라서 가장 높은 숫자를 리턴하는 쿼리문을 호출하는 메서드
+	public String selectOfCodeNum() {
+		logger.debug("selectOfCodeNum() 메서드");
+		String result = sqlSessionTemplate.selectOne(nameSpace + "selectOfCodeNum");
+		logger.debug("selectOfCodeNum() 메서드 result is {}", result);
+		return result;
 	}
 	
-	// t_business_license테이블의 bl코드를 잘라서 가장 높은 숫자를 리턴하는 쿼리문을 호출하는 메서드
+	// MVC 규칙을 위한 businessLicense 메서드
+	public void businessLicense() {
+		logger.debug("businessLicense() 메서드 호출");
+		logger.debug("businessLicense() 메서드 끝");
+	}
+	
+	// 보호소 대표 신청 쿼리문 호출하는 메서드
+	public void insertBusinessLicense(BusinessLicense businessLicense) {
+		logger.debug("insertBusinessLicense(BusinessLicense businessLicense) 메서드 businessLicense is {}",businessLicense);
+		int result = sqlSessionTemplate.insert(nameSpace + "insertBusinessLicense", businessLicense);
+		logger.debug("insertBusinessLicense(BusinessLicense businessLicense) 메서드 result is {}",result);
+	}
+	
+	// t_business_license테이블의 bl_code를 잘라서 가장 높은 숫자를 리턴하는 쿼리문을 호출하는 메서드
 	public String selectBlCodeNum() {
 		logger.debug("selectBlCodeNum() 메서드");
 		String result = sqlSessionTemplate.selectOne(nameSpace + "selectBlCodeNum");
 		logger.debug("selectBlCodeNum() 메서드 result is {}",result);
 		return result;
-	}
-	
-	// 마지막으로 insert한 테이블의 기본키를 조회하는 쿼리문을 호출하는 메서드
-	public String selectLastInsertCode() {
-		logger.debug("selectLastInsertCode() 메서드");
-		String blCode = sqlSessionTemplate.selectOne(nameSpace+"selectLastInsertCode");
-		logger.debug("selectLastInsertCode() 메서드 blCode is {}",blCode);
-		return blCode;
 	}
 	
 	// 사업자 등록증 파일 등록 쿼리문 호출하는 메서드
