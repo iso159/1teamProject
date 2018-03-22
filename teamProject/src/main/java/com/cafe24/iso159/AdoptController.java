@@ -25,8 +25,15 @@ public class AdoptController {
 	private AdoptService adoptService;
 	private AdoptRequest AdoptRequest;
 	
-	// 입양신청 페이지
+	// 입양메뉴
 	@RequestMapping(value="/adopt", method = RequestMethod.GET)
+	public String addAdopt() {
+		logger.debug("addAdopt(HttpSession session) 메서드 호출");
+		return "/adopt/adopt";
+	}
+	
+	// 입양신청 페이지
+	@RequestMapping(value="/adopt/adoptRequest", method = RequestMethod.GET)
 	public String addAdopt(HttpSession session) {
 		logger.debug("addAdopt(HttpSession session) 메서드 호출");
 		return "/adopt/adoptRequest";
@@ -39,6 +46,14 @@ public class AdoptController {
 		adoptService.addAdopt(adoptRequest);
 		return "redirect:/adopt/adoptList";	//입양신청 완료 후 입양리스트로
 		
+	}
+	
+	// 입양취소
+	@RequestMapping(value="/adopt/adoptCancle", method = RequestMethod.GET)
+	public String removeAdopt(@RequestParam(value="adoptRequestCode") String adoptRequestCode) {
+		logger.debug("removeAdopt() 메소드 호출");
+		adoptService.removeAdopt(adoptRequestCode);
+		return "redirect:/adopt/adoptList";
 	}
 	
 	// 입양리스트
