@@ -3,5 +3,50 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.exp.service.ExpMapper">
-
+	
+	<!-- 체험 신청할때 날짜선택 뿌려주는 부분 -->
+	<select id="selectExpPeriod" resultType="com.cafe24.iso159.exp.service.ExpPeriod">
+		SELECT 
+			exp_period_code as expPeriodCode
+			,exp_period_period as expPeriodPeriod
+			,exp_period_level as exPperiodLevel
+			,exp_period_cost as expPeriodCost
+			,exp_period_cost_level as expPeriodCostLevel
+			,exp_period_cost_minus as expPeriodCostMinus
+			,exp_period_journal_count  as expPeriodJournalCount
+		FROM 
+			t_exp_period;
+	</select>
+	
+	<!-- animalCode 로 blCode 구하는 부분 -->
+	<select id="selectAnimalCodeBlCode" parameterType="String" resultType="String">
+		SELECT 
+			a.bl_code FROM t_exp e INNER Join t_animal a 
+		ON 
+			e.animal_code = a.animal_code 
+		WHERE 
+			e.animal_code = 'animal_code_01'
+	</select>
+	
+	<!-- exp_code PK값 구하는 부분 -->
+	<select id="selectExpCode" resultType="int">
+		SELECT MAX(CAST(SUBSTRING(exp_code,10) AS DECIMAL)) FROM t_exp
+	</select>
+	
+	<!-- 유기동물 체험신청 부분 -->
+	<insert id="addExp" parameterType="com.cafe24.iso159.exp.service.Exp">
+		INSERT INTO 
+			t_exp
+			(exp_code, animal_code, m_exp_id, 
+			bl_code, exp_period_code, os_code_reserve, 
+			os_code_cost_return, exp_journal_count, exp_cost, 
+			exp_purpose, exp_reserve_request_date, exp_start_date, 
+			exp_end_date) 
+		VALUES 
+			(#{expCode}, #{animalCode}, #{mExpId}, 
+			#{blCode}, #{expPeriodCode}, #{osCodeReserve}, 
+			#{osCodeCostReturn}, #{expJournalCount}, #{expCost}, 
+			#{expPurpose}, now(), #{expStartDate}
+			 ,#{expEndDate});
+	</insert>
 </mapper>
