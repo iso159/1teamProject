@@ -51,6 +51,6 @@ public class ShelterController {
 		path += "resources/shelterUpload/";
 		logger.debug("addBusinessLicense(...) 메서드 path is {}",path);
 		shelterService.addBusinessLicense(businessLicenseCommand, path, file);
-		return "redirect:shelter/shelterMenu";
+		return "redirect:/shelter";
 	}
 }
