@@ -32,7 +32,7 @@
 	<!-- 메인 화면  -->
 	<!-- 메인 화면 내용 부분 -->
 	<div class="container">
-		<h2>회원 가입 화면</h2>
+		<h2>회원가입</h2>
 		<form id="signUpForm" class="form-inline" action="${pageContext.request.contextPath}/member/memberAdd" method="post">
 			<div class="row">
 				<div class="col-md-4">
@@ -66,7 +66,7 @@
 					<label for="title">핸드폰 번호</label>
 					<input id="userPhone" class="form-control" type="text" name="mInfoPhone"><br>
 					
-					<button type="submit" id="signUpBtn" class="btn btn-info">회원 가입 하기.</button>
+					<button type="submit" id="signUpBtn" class="btn btn-info">회원가입</button>
 				</div>
 			</div>
 		</form>

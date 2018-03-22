@@ -23,9 +23,9 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	// GET 방식 컨트롤러
-	@RequestMapping(value = "/member/memberAdd", method = RequestMethod.GET)
-	public String addMember() {
-		return "member/memberAdd";
+	@RequestMapping(value = "/member/memberMenu", method = RequestMethod.GET)
+	public String member() {
+		return "member/memberMenu";
 	}
 
 	// POST 방식 컨트롤러
@@ -34,9 +34,16 @@ public class MemberController {
 		logger.debug("addmember(Member member, MemberInfo memberInfo) 메서드 member is {}", member);
 		logger.debug("addmember(Member member, MemberInfo memberInfo) 메서드 member is {}", memberInfo);
 		memberService.addMember(member, memberInfo);
-		return "redirect:/member/login";
+		return "index";
 	}
-
+	
+	// GET 방식 컨트롤러
+		@RequestMapping(value = "/member/memberAdd", method = RequestMethod.GET)
+		public String addMember() {
+			logger.debug("addmember() 메서드 member is {}");
+			return "member/memberAdd";
+		}
+	
 	// 로그인요청메서드
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
 	public String login(Member member, HttpSession session) {
@@ -51,19 +58,12 @@ public class MemberController {
 		session.setAttribute("rightLevel", memberLoginLevel.getmRightLevel());
 		return "redirect:/";
 	}
-
-	// 로그인페이지요청 메서드
+	
+	// 로그인페이지요청
 	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
 	public String login() {
 		logger.debug("로그인페이지 요청확인");
 		return "/member/login";
 	}
-	
-	// 회원 맵핑
-	@RequestMapping(value = "/member/memberMenu", method = RequestMethod.GET)
-	public String pass() {
-		logger.debug("회원 이동함");
-		return "/member/memberMenu";
-	}
-	
+
 }

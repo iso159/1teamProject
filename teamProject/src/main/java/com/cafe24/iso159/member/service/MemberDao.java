@@ -44,6 +44,8 @@ public class MemberDao {
 	// 로그인 메서드
 	public MemberLoginLevel MemberLoginLevel(Member member){
 		logger.debug("MemberLoginLevel(Member member) 메서드 member is {}", member);
-		return sqlSessionTemplate.selectOne(nameSpace + "selectLoginCheck");
+		MemberLoginLevel memberLoginLevel = sqlSessionTemplate.selectOne(nameSpace + "selectLoginCheck",member);
+		logger.debug("MemberLoginLevel(Member member) 메서드 rsult is {}", memberLoginLevel);
+		return memberLoginLevel;
 	}
 }

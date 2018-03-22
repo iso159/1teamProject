@@ -1,20 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html>
 <head>
-	<title></title>
+<title></title>
 </head>
 <body>
-<div class="container">
+	<div class="container">
 		<h2>회원 메뉴</h2>
-		<form id="edong" class="form-inline" action="${pageContext.request.contextPath}/member/memberAdd" method="post">
 			<div class="row">
-				<div class="col-md-4">ss				
-					<button type="submit" id="signUpBtn" class="btn btn-info">회원가입 하러가기</button>
+				<div class="col-md-4">
+				<a href="${pageContext.request.contextPath}/member/memberAdd">
+						<button type="button" id="signUpBtn" class="btn btn-info"> 회원가입</button>
+				</a>
+				</div>
+				<div class="col-md-4">
+				<a href="${pageContext.request.contextPath}/#">
+						<button type="button" id="signUpBtn" class="btn btn-info"> 회원 검색</button>
+				</a>
+				</div>
+				<div class="col-md-4">
+				<a href="${pageContext.request.contextPath}/member/memberAdd">
+						<button type="button" id="signUpBtn" class="btn btn-info"> 회원수정</button>
+				</a>
+				</div>
+				
+				<div class="col-md-4">
+				<a href="${pageContext.request.contextPath}/member/login">
+						<button type="button" id="signUpBtn" class="btn btn-info"> 로그인</button>
+				</a>
 				</div>
 			</div>
-		</form>
 	</div>
 </body>
 </html>
