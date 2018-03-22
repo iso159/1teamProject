@@ -17,6 +17,12 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<!-- 파일 다운로드 -->	
+	<bean id="fileDownloadView" class="com.cafe24.iso159.service.FileDownloadView"/>
+	<bean id="fileViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">	
+	    <property name="order" value="0"/>	
+	</bean>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -24,6 +30,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean>
 	<context:component-scan base-package="com.cafe24.iso159" />
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
