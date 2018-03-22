@@ -48,6 +48,15 @@ public class AdoptController {
 		
 	}
 	
+	// 입양신청 들어오면 확인
+	@RequestMapping(value="/adopt/adoptCheck", method = RequestMethod.GET)
+	public String UpdateOsCodeAdopt(@RequestParam(value="adoptRequestCode") String adoptRequestCode,
+									@RequestParam(value="osCodeAdopt") String osCodeAdopt) {
+		logger.debug("UpdateOsCodeAdopt() 메서드 호출");
+		adoptService.ModifyOsCodeAdopt(adoptRequestCode,osCodeAdopt);
+		return "redirect:/adopt/adoptList";
+	}
+	
 	// 입양취소
 	@RequestMapping(value="/adopt/adoptCancle", method = RequestMethod.GET)
 	public String removeAdopt(@RequestParam(value="adoptRequestCode") String adoptRequestCode) {

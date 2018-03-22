@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
@@ -26,13 +29,24 @@ public class AdoptService {
 			lastCode += 1;
 			adoptRequestCode = tempCode + lastCode;
 			logger.debug("adoptRequestCode is {}", adoptRequestCode);
-			
 			adoptRequest.setAdoptRequestCode(adoptRequestCode);
-			
 			logger.debug("adoptRequest is {}", adoptRequest);
+			
 			
 			adoptDao.insertAdopt(adoptRequest);
 		}
+	// 입양신청확인
+		public void ModifyOsCodeAdopt(String adoptRequestCode, String osCodeAdopt) {
+			logger.debug("updateOsCodeAdopt() 메소드 호출");
+			adoptDao.updateOsCodeAdopt(adoptRequestCode, osCodeAdopt);
+		}
+		
+	// 입양취소
+		public void removeAdopt(String adoptRequestCode) {
+			logger.debug("removeAdopt() 메소드 호출");
+			adoptDao.deleteAdopt(adoptRequestCode);
+		}
+		
 	// 입양신청리스트
 		public List<AdoptRequest> listAdoptRequest(){
 			logger.debug("AdoptRequest<List> listAdoptRequest() 메소드 호출");

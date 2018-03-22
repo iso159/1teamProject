@@ -17,7 +17,7 @@ public class AdoptDao {
 	
 	// 입양신청
 	public void insertAdopt(AdoptRequest adoptRequest) {
-		logger.debug("insertAdopt(AdoptRequest adoptRequest) 메서드 호출");
+		logger.debug("insertAdopt() 메서드 호출");
 		sqlSessionTemplate.insert(nameSpace + "AdoptRequest", adoptRequest);
 	}
 	
@@ -34,5 +34,17 @@ public class AdoptDao {
 		List<AdoptRequest> list = sqlSessionTemplate.selectList(nameSpace + "selectAdoptRequest");
 		logger.debug("list is {}", list);
 		return list;
+	}
+	
+	// 입양신청 확인
+	public void updateOsCodeAdopt(String adoptRequestCode, String osCodeAdopt) {
+		logger.debug("updateOsCodeAdopt() 메서드 호출");
+		sqlSessionTemplate.update(nameSpace + "updateOsCodeAdopt", adoptRequestCode);
+	}
+	
+	// 입양취소 
+	public void deleteAdopt(String adoptRequestCode) {
+		logger.debug("deleteAdopt() 메서드 호출");
+		sqlSessionTemplate.delete(nameSpace + "deleteAdopt", adoptRequestCode);
 	}
 }

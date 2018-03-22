@@ -42,16 +42,39 @@
 	<select id="selectAdoptRequest"
 			resultType="com.cafe24.iso159.adopt.service.AdoptRequest">
 		SELECT 
-			adopt_request_code as adoptRequestCode,
-			animal_code as animalCode,
-			bl_code as blCode,
-			m_member_id as mMemberId,
-			os_code_adopt as osCodeAdopt,
+			adopt_request_code as adoptRequestCode, 
+			animal_code as animalCode, 
+			bl_code as blCode, 
+			m_member_id as mMemberId,  
+			os.os_name as osCodeAdopt, 
 			adopt_request_reason as adoptRequestReason,
-			adopt_request_date as adoptRequestDate,
-			adopt_point as adoptPoint
+			adopt_request_date as adoptRequestDate
 		FROM 
-			t_adopt_request 
+			t_adopt_request ar 
+		INNER JOIN 
+			t_overall_status os 
+		ON 
+			os.os_code = ar.os_code_adopt 
 	</select>
+	
+	<!-- 입양신청코드로 조회해서 입양신청-> 입양신청확인 업데이트 쿼리문 -->
+	<update id="updateOsCodeAdopt"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
+	UPDATE 
+		t_adopt_request 
+	SET 
+		os_code_adopt = #{osCodeAdopt} 
+	WHERE 
+		adopt_request_code = #{adoptRequestCode}
+	</update>
+	
+	<!-- 입양취소 쿼리문 -->
+	<delete id="deleteAdopt"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
+		DELETE FROM 
+			t_adopt_request 
+		WHERE 
+			adopt_request_code = #{adoptRequestCode}
+	</delete>
 	
 </mapper>
