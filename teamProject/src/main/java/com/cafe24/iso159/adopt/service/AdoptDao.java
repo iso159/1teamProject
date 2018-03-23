@@ -21,12 +21,22 @@ public class AdoptDao {
 		sqlSessionTemplate.insert(nameSpace + "AdoptRequest", adoptRequest);
 	}
 	
-	// max코드값 조회
-	public int selectLastCode() {
-		logger.debug("selectLastCode() 메서드 호출");
-		int lastCode = sqlSessionTemplate.selectOne(nameSpace + "selectLastCode");
-		return lastCode;
+	// 파일등록
+	public int insertAdoptFile(AdoptRequestFile adoptRequestFile) {
+		logger.debug("insertAdoptFile() 메서드 호출, adoptRequestFile is {}", adoptRequestFile);
+		return sqlSessionTemplate.insert(nameSpace + "insertAdoptFile", adoptRequestFile);
 	}
+	
+	// max코드값 조회
+	public String selectLastCodeAr() {
+		logger.debug("selectLastCodeAr() 메서드 호출");
+		return sqlSessionTemplate.selectOne(nameSpace + "selectLastCodeAr");
+	}
+	public String selectLastCodeOf() {
+		logger.debug("selectLastCodeOf() 메서드 호출");
+		return sqlSessionTemplate.selectOne(nameSpace + "selectLastCodeOf");
+	}
+	
 	
 	// 입양신청조회
 	public List<AdoptRequest> selectAdoptRequest(){
@@ -37,7 +47,7 @@ public class AdoptDao {
 	}
 	
 	// 입양신청 확인
-	public void updateOsCodeAdopt(String adoptRequestCode, String osCodeAdopt) {
+	public void updateOsCodeAdopt(String adoptRequestCode) {
 		logger.debug("updateOsCodeAdopt() 메서드 호출");
 		sqlSessionTemplate.update(nameSpace + "updateOsCodeAdopt", adoptRequestCode);
 	}

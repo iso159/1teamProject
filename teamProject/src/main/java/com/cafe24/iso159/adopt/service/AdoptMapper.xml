@@ -4,10 +4,47 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.adopt.service.AdoptMapper">
 
-	<!-- max코드값 조회 쿼리문 -->
-	<select id="selectLastCode" resultType="Integer">
+	<!-- 파일등록 -->
+	<insert id="insertAdoptFile"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequestFile">
+	INSERT INTO 
+		t_overall_file 
+		(
+			of_code, 
+			adopt_request_code, 
+			of_path, 
+			of_origin_name, 
+			of_save_name, 
+			of_ext, 
+			of_size, 
+			of_down_date
+		) 
+	VALUES 
+		(
+			#{ofCode}, 
+			#{adoptRequestCode}, 
+			#{ofPath}, 
+			#{ofOriginName}, 
+			#{ofSaveName}, 
+			#{ofExt}, 
+			#{ofSize}, 
+			now()
+		)
+			
+			
+	</insert>
+
+
+	<!-- 입양요청 max코드값 조회 쿼리문 -->
+	<select id="selectLastCodeAr" resultType="String">
 		select max(CAST(substring(adopt_request_code,20) AS DECIMAL)) as maxcol from t_adopt_request
 	</select>
+	
+	<!-- 파일추가 max코드값 조회 쿼리문 -->
+	<select id="selectLastCodeOf" resultType="String">
+		select max(CAST(substring(of_code,9) AS DECIMAL)) as maxcol from t_overall_file
+	</select>
+	
 	
 	<!-- 입양신청 등록 쿼리문 -->
 	<insert id="AdoptRequest"
@@ -48,24 +85,25 @@
 			m_member_id as mMemberId,  
 			os.os_name as osCodeAdopt, 
 			adopt_request_reason as adoptRequestReason,
-			adopt_request_date as adoptRequestDate
+			adopt_request_date as adoptRequestDate 
 		FROM 
 			t_adopt_request ar 
 		INNER JOIN 
 			t_overall_status os 
 		ON 
 			os.os_code = ar.os_code_adopt 
+		ORDER BY ar.adopt_request_date DESC
 	</select>
 	
 	<!-- 입양신청코드로 조회해서 입양신청-> 입양신청확인 업데이트 쿼리문 -->
 	<update id="updateOsCodeAdopt"
 			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
-	UPDATE 
-		t_adopt_request 
-	SET 
-		os_code_adopt = #{osCodeAdopt} 
-	WHERE 
-		adopt_request_code = #{adoptRequestCode}
+		UPDATE 
+			t_adopt_request 
+		SET 
+			os_code_adopt = 'os_adopt_4_1_2'
+		WHERE 
+			adopt_request_code = #{adoptRequestCode}
 	</update>
 	
 	<!-- 입양취소 쿼리문 -->
