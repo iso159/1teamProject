@@ -2,6 +2,7 @@ package com.cafe24.iso159.shelter.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -18,6 +19,15 @@ public class ShelterService {
 	ShelterDao shelterDao;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
 	
+	// 보호소 신청 전체 쿼리문을 접근하는 DAO 메서드 호출
+	public List<BusinessLicense> getBusinessLicense(){
+		logger.debug("getBusinessLicense() 메서드 호출");
+		List<BusinessLicense> list = shelterDao.selectAllBusinessLicense();
+		logger.debug("getBusinessLicense() 메서드 list is {}", list);
+		logger.debug("getBusinessLicense() 메서드 끝");
+		return list;
+	}
+	
 	// MVC 규칙을 위한 businessLicense 메서드
 	public void businessLicense() {
 		logger.debug("businessLicense() 메서드 호출");
@@ -27,6 +37,7 @@ public class ShelterService {
 	
 	// 보호소 대표 신청 메서드 호출
 	public void addBusinessLicense(BusinessLicenseCommand businessLicenseCommand, String path, MultipartFile file) {
+		logger.debug("addBusinessLicense(...) 메서드 호출");
 		logger.debug("addBusinessLicense(...) 메서드 businessLicenseCommand is {}", businessLicenseCommand);
 		logger.debug("addBusinessLicense(...) 메서드 path is {}", path);
 		
@@ -150,6 +161,6 @@ public class ShelterService {
 			logger.debug("파일이 비어있습니다.");
 		}
 		
-		logger.debug("addBusinessLicense 메서드 끝");
+		logger.debug("addBusinessLicense(...) 메서드 끝");
 	}
 }

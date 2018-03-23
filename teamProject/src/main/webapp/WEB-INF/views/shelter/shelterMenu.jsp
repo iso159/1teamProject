@@ -18,9 +18,14 @@
 <body>
 	<h1>보호소 기능</h1>
 	<ul class="list-group">
-		<li class="list-group-item list-group-item-info">
+		<li class="list-group-item list-group-item-primary">
 			<a href="${pageContext.request.contextPath}/shelter/businessLicenseRequest">
 				<button type="button" class="btn btn-danger">대표 보호소 신청</button>
+			</a>
+		</li>
+		<li class="list-group-item list-group-item-primary">
+			<a href="${pageContext.request.contextPath}/businessLicenseList">
+				<button type="button" class="btn btn-warning">대표 보호소 신청 리스트</button>
 			</a>
 		</li>
 	</ul>

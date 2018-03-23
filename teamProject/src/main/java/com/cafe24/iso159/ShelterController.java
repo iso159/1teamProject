@@ -1,5 +1,7 @@
 package com.cafe24.iso159;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -20,6 +22,15 @@ public class ShelterController {
 	@Autowired
 	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterController.class);
+	
+	@RequestMapping(value="/businessLicenseList")
+	public String getBusinessLicense(HttpSession session) {
+		logger.debug("getBusinessLicense() 메서드 호출");
+		List<BusinessLicense> list = shelterService.getBusinessLicense();
+		session.setAttribute("list", list);
+		logger.debug("getBusinessLicense() 메서드 끝");
+		return "/shelter/businessLicenseList";
+	}
 	
 	@RequestMapping(value="/shelter", method=RequestMethod.GET)
 	public String BusinessLicense() {
@@ -51,6 +62,6 @@ public class ShelterController {
 		path += "resources/shelterUpload/";
 		logger.debug("addBusinessLicense(...) 메서드 path is {}",path);
 		shelterService.addBusinessLicense(businessLicenseCommand, path, file);
-		return "redirect:/shelter";
+		return "redirect:/businessLicenseList";
 	}
 }

@@ -9,6 +9,10 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
     <multipart-config>
+      <!-- 
+      	호스팅시 경로 
+      	<location>/home/hosting_users/iso159/tomcat/temp</location>
+       -->
       <location>c:\temp</location>
       <max-file-size>-1</max-file-size>
       <max-request-size>-1</max-request-size>
