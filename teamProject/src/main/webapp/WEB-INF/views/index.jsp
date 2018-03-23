@@ -38,7 +38,7 @@
 				</a>
 			</li>
 			<li class="list-group-item list-group-item-dark">
-				<a href="${pageContext.request.contextPath}/animal">
+				<a href="${pageContext.request.contextPath}/animal/animalList">
 					<button type="button" class="btn btn-dark">동물</button>
 				</a>
 			</li>

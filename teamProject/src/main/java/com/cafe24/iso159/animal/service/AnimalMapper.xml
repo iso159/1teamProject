@@ -3,5 +3,40 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.animal.service.AnimalMapper">
-
+	<!-- 동물등록 -->
+	<insert id="insertAnimal" parameterType="com.cafe24.iso159.animal.service.Animal">
+		INSERT INTO 
+			t_animal 
+			(
+				animal_code, 
+				os_code_animal, 
+				bl_code, 
+				m_shelter_id, 
+				os_code_kind, 
+				animal_breed, 
+				animal_area, 
+				animal_id_code, 
+				animal_weight, 
+				animal_age, 
+				animal_enroll_date) 
+			VALUES 
+			(
+				#{animalCode}, 
+				#{osCodeAnimal}, 
+				#{blCode},
+				#{mShelterId}, 
+				#{osCodeKind}, 
+				#{animalBreed}, 
+				#{animalArea}, 
+				#{animalIdCode}, 
+				#{animalWeight}, 
+				#{animalAge},
+				now()
+			);
+	</insert>
+	
+	<!-- 동물 리스트 전체조회-->
+	<select id="selectAnimalList" resultType="com.cafe24.iso159.animal.service.Animal">
+		SELECT animal_code AS animalCode, os_code_animal AS osCodeAnimal, bl_code AS blCode, os_code_kind osCodeKind, animal_breed AS animalBreed, animal_area AS animalArea, animal_id_code AS animalIdCode, animal_weight AS animalWeight, animal_age AS animalAge, animal_enroll_date AS animalEnrollDate FROM t_animal;
+	</select>	
 </mapper>
