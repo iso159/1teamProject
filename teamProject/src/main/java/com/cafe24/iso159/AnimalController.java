@@ -24,15 +24,18 @@ public class AnimalController {
 	//동물등록 페이지로 이동
 	@RequestMapping(value="/animal/animalAdd", method=RequestMethod.GET)
 	public String animalAdd(HttpSession session) {
-		
+		if(session.getAttribute("loginId")==null) {
+			return "redirect:/member/login";
+		}
 		return "animal/animalAdd";
 	}
 	
 	//동물등록
 	@RequestMapping(value="/animal/animalList", method=RequestMethod.POST)
 	public String animalAdd(HttpSession session, Animal animal) {
+		
 		logger.debug("animalAdd()메서드 호출");
-		animalservice.addAnimal(animal);
+		animalservice.addAnimal(animal, session);
 		return "redirect:/animal/animalList";
 	}
 	//동물리스트

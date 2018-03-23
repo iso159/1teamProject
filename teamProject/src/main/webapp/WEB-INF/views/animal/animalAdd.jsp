@@ -23,10 +23,6 @@
 				<td><input type="text" name="blCode" value=""></td>
 			</tr>
 			<tr>
-				<td>보호소아이디:</td>
-				<td><input type="text" name="mShelterId" value=""></td>
-			</tr>
-			<tr>
 				<td>동물코드:</td>
 				<td><input type="text" name="animalCode"></td>
 			</tr>
