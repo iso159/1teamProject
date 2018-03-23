@@ -29,7 +29,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
+	<div class="container"> 
 	<h2>로그인 화면</h2>
 		<form id="loginForm" class="form-inline" action="${pageContext.request.contextPath}/member/login" method="post">
 			<div class="row">
