@@ -18,18 +18,23 @@ public class AnimalService {
 
 	@Autowired
 	private AnimalDao animaldao;
+	
 	private static final Logger logger = LoggerFactory.getLogger(AnimalService.class);
 	//동물등록
 	public void addAnimal(Animal animal, HttpSession session){
 		logger.debug("addAnimal()메서드 Animal is {}",animal);
 		//세션에서 로그인 아이디를 가져와서 mShelterId에 셋팅
 		String mShelterId = (String)session.getAttribute("loginId");
+		logger.debug("mShelterId is {}", mShelterId);
 		animal.setmShelterId(mShelterId);
-		//mShelterId로 보호소 통합관리코드 조회
-		List<BusinessLicense> list = animaldao.selectShelterName(mShelterId);
-		logger.debug("list is{}", list);
-		
+		String blCode = (String)session.getAttribute("loginBlCode");
+		logger.debug("blcode is {}", blCode);
+		//bl_code 셋팅
+		animal.setBlCode(blCode);	
 		animaldao.insertAnimal(animal);
+		//bl_code로 보호소 이름조회
+		BusinessLicense shelterName = animaldao.selectShelterName(blCode);
+		logger.debug("shelterName is{}", shelterName);
 	}
 	//동물리스트
 	public List<Animal> listAnimal() {

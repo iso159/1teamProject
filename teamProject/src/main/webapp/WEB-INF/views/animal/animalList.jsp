@@ -19,7 +19,7 @@
 			<td>동물식별코드</td>
 			<td>체중</td>
 			<td>나이</td>
-			<!-- <td>보호소</td> -->
+			<!-- <td>보호소이름</td> -->
 			<td>등록일자</td>
 			<td>수정</td>
 			<td>삭제</td>
@@ -35,6 +35,7 @@
 			<td>${i.animalIdCode}</td>
 			<td>${i.animalWeight}</td>
 			<td>${i.animalAge}</td>
+			<%-- <td>${i.blShelterName}</td> --%>
 			<td>${i.animalEnrollDate}</td>
 			<td><a href="#">수정</a></td>
 			<td><a href="#">삭제</a></td>

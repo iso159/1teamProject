@@ -19,10 +19,6 @@
 				<td><input type="text" name="osCodeKind"></td>
 			</tr>
 			<tr>
-				<td>보호소통합관리코드:</td>
-				<td><input type="text" name="blCode" value=""></td>
-			</tr>
-			<tr>
 				<td>동물코드:</td>
 				<td><input type="text" name="animalCode"></td>
 			</tr>

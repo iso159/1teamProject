@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cafe24.iso159.animal.service.Animal;
+import com.cafe24.iso159.animal.service.AnimalAndBusinessLicense;
 import com.cafe24.iso159.animal.service.AnimalService;
 
 @Controller

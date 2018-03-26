@@ -40,11 +40,9 @@
 		SELECT animal_code AS animalCode, os_code_animal AS osCodeAnimal, bl_code AS blCode, os_code_kind osCodeKind, animal_breed AS animalBreed, animal_area AS animalArea, animal_id_code AS animalIdCode, animal_weight AS animalWeight, animal_age AS animalAge, animal_enroll_date AS animalEnrollDate FROM t_animal;
 	</select>
 	
-	<!-- 보호소 회원아이디로 보호소이름 조회 -->
-	<select id="selectShelterName" resultType="com.cafe24.iso159.shelter.service.BusinessLicense">
-		SELECT bl.bl_code, bl.bl_shelter_name FROM t_member m 
-		INNER JOIN t_business_license bl 
-		ON m.bl_code = bl.bl_code 
-		WHERE m.m_id = #{mId}
+	<!-- 보호소 통합관리코드로 보호소이름 조회 -->
+	<select id="selectShelterName" resultType="com.cafe24.iso159.shelter.service.BusinessLicense" parameterType="String">
+		SELECT bl_shelter_name AS blShelterName FROM t_business_license
+		WHERE bl_code = #{blCode};
 	</select>	
 </mapper>

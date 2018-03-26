@@ -1,40 +1,20 @@
 package com.cafe24.iso159.animal.service;
 
-public class Animal {
-	private String animalCode;
+public class AnimalAndBusinessLicense {
 	private String osCodeAnimal;
-	private String blCode;
-	private String mShelterId;
 	private String osCodeKind;
 	private String animalBreed;
 	private String animalArea;
 	private String animalIdCode;
 	private int animalWeight;
 	private int animalAge;
+	private String blShelterName;
 	private String animalEnrollDate;
-	public String getAnimalCode() {
-		return animalCode;
-	}
-	public void setAnimalCode(String animalCode) {
-		this.animalCode = animalCode;
-	}
 	public String getOsCodeAnimal() {
 		return osCodeAnimal;
 	}
 	public void setOsCodeAnimal(String osCodeAnimal) {
 		this.osCodeAnimal = osCodeAnimal;
-	}
-	public String getBlCode() {
-		return blCode;
-	}
-	public void setBlCode(String blCode) {
-		this.blCode = blCode;
-	}
-	public String getmShelterId() {
-		return mShelterId;
-	}
-	public void setmShelterId(String mShelterId) {
-		this.mShelterId = mShelterId;
 	}
 	public String getOsCodeKind() {
 		return osCodeKind;
@@ -72,6 +52,12 @@ public class Animal {
 	public void setAnimalAge(int animalAge) {
 		this.animalAge = animalAge;
 	}
+	public String getBlShelterName() {
+		return blShelterName;
+	}
+	public void setBlShelterName(String blShelterName) {
+		this.blShelterName = blShelterName;
+	}
 	public String getAnimalEnrollDate() {
 		return animalEnrollDate;
 	}
@@ -80,9 +66,9 @@ public class Animal {
 	}
 	@Override
 	public String toString() {
-		return "Animal [animalCode=" + animalCode + ", osCodeAnimal=" + osCodeAnimal + ", blCode=" + blCode
-				+ ", mShelterId=" + mShelterId + ", osCodeKind=" + osCodeKind + ", animalBreed=" + animalBreed
-				+ ", animalArea=" + animalArea + ", animalIdCode=" + animalIdCode + ", animalWeight=" + animalWeight
-				+ ", animalAge=" + animalAge + ", animalEnrollDate=" + animalEnrollDate + "]";
+		return "AnimalCommand [osCodeAnimal=" + osCodeAnimal + ", osCodeKind=" + osCodeKind + ", animalBreed="
+				+ animalBreed + ", animalArea=" + animalArea + ", animalIdCode=" + animalIdCode + ", animalWeight="
+				+ animalWeight + ", animalAge=" + animalAge + ", blShelterName=" + blShelterName + ", animalEnrollDate="
+				+ animalEnrollDate + "]";
 	}
 }

@@ -32,11 +32,13 @@ public class AnimalDao {
 		logger.debug("AnimalList is {}", AnimalList);
 		return AnimalList;
 	}
-	//mShelterId로 보호소 통합관리코드 조회
-	public List<BusinessLicense> selectShelterName(String mId) {
+	//bl_code로 보호소 이름조회
+	public BusinessLicense selectShelterName(String blCode) {
 		
 		logger.debug("selectShelterName()메서드 호출");
-		List<BusinessLicense> shelterlist = sqlSessionTemplate.selectList(nameSpace+"selectShelterName");
-		return shelterlist;
+		logger.debug("blcode is {}", blCode);
+		BusinessLicense shelterName = sqlSessionTemplate.selectOne(nameSpace+"selectShelterName", blCode);
+		logger.debug("shelterName is {}", shelterName);
+		return shelterName;
 	}
 }
