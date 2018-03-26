@@ -38,7 +38,9 @@
 						<td>${blf.ofOriginName}.${blf.ofExt}</td>
 						<td>${blf.ofSize}</td>
 						<td>${blf.ofDate}</td>
-						<td><a href="#">다운 로드</a></td>
+						<td>
+							<a href="${pageContext.request.contextPath}/shelter/businessLicenseFileDownload?fileName=${blf.ofSaveName}&fileExt=${blf.ofExt}&ofOriginName=${blf.ofOriginName}">다운 로드</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

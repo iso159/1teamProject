@@ -20,7 +20,7 @@
 		<h1>보호소 대표 신청 거절 폼</h1>
 	</div>
 	<div>
-		<form action="${pageContext.request.contextPath}/shelter/BusinessLicenseDeny" method="POST">
+		<form action="${pageContext.request.contextPath}/shelter/businessLicenseDeny" method="POST">
 			<input type="hidden" name="blCode" value="${blCode}">
 			<table>
 				<tr>

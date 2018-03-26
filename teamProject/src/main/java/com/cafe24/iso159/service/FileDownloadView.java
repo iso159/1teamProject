@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,13 +25,16 @@ public class FileDownloadView extends AbstractView {
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model,
 					HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 맵에 담은 file을 꺼냄
+		logger.debug("renderMergedOutputModel 메서드 호출");
 		File file = (File) model.get("file");
+		String ofOriginName = (String)request.getAttribute("ofOriginName");
+		String fileExt = (String)request.getAttribute("fileExt");
+		logger.debug("renderMergedOutputModel 메서드 file.getName() is {}",file.getName() );		
 		// 생성자를 만들면서 셋팅한 content type을 입력
 		response.setContentType(getContentType());
 		response.setContentLength((int) file.length());
 		response.setHeader("Content-Disposition", "attachment; filename=\"" +
-				java.net.URLEncoder.encode(file.getName(), "utf-8") + "\";");
+				java.net.URLEncoder.encode(ofOriginName + "." + fileExt, "utf-8") + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		OutputStream out = response.getOutputStream();
 		FileInputStream fis = null;

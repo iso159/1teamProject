@@ -2,6 +2,8 @@ package com.cafe24.iso159;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.iso159.shelter.service.BusinessLicense;
 import com.cafe24.iso159.shelter.service.BusinessLicenseCommand;
@@ -24,7 +27,24 @@ public class ShelterController {
 	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterController.class);
 	
-	@RequestMapping(value="/shelter/BusinessLicenseDeny", method=RequestMethod.POST)
+	@RequestMapping(value="/shelter/businessLicenseFileDownload", method=RequestMethod.GET)
+	public ModelAndView downloadBusinessLicense(HttpServletRequest request, HttpServletResponse response
+												, HttpSession session
+												, @RequestParam(value="fileName") String fileName
+												, @RequestParam(value="fileExt") String fileExt
+												, @RequestParam(value="ofOriginName") String ofOriginName) {
+		logger.debug("downloadBusinessLicense(...) 메서드 호출");
+		logger.debug("downloadBusinessLicense(...) 메서드 fileName is {}", fileName);
+		logger.debug("downloadBusinessLicense(...) 메서드 fileExt is {}", fileExt);
+		logger.debug("downloadBusinessLicense(...) 메서드 fileExt is {}", ofOriginName);
+		String realPath = session.getServletContext().getRealPath("/");
+		realPath += "resources/shelterUpload/";
+		logger.debug("downloadBusinessLicense(...) 메서드 realPath is {}", realPath);
+		logger.debug("downloadBusinessLicense(...) 메서드 끝");
+		return shelterService.businessLicenseFileDownload(realPath, fileName, request, fileExt, ofOriginName);
+	}
+	
+	@RequestMapping(value="/shelter/businessLicenseDeny", method=RequestMethod.POST)
 	public String denyBusinessLicense(@RequestParam(value="blCode") String blCode
 									, @RequestParam(value="blShelterDenyReason") String blShelterDenyReason) {
 		logger.debug("denyBusinessLicense(...) 메서드 호출");
@@ -35,7 +55,7 @@ public class ShelterController {
 		return "redirect:/businessLicenseList";
 	}
 	
-	@RequestMapping(value="/shelter/BusinessLicenseDeny")
+	@RequestMapping(value="/shelter/businessLicenseDeny")
 	public String denyBusinessLicense(@RequestParam(value="blCode") String blCode
 									, HttpSession session) {
 		logger.debug("denyBusinessLicense() 메서드 호출");

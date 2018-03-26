@@ -7,12 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Service
 @Transactional
@@ -20,6 +23,41 @@ public class ShelterService {
 	@Autowired
 	ShelterDao shelterDao;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
+	
+	// 보호소 대표 신청 업로드 파일 다운로드
+	public ModelAndView businessLicenseFileDownload(String path, String fileName
+													, HttpServletRequest request, String fileExt, String ofOriginName) {
+		logger.debug("businessLicenseFileDownload(...) 메서드 호출");
+		logger.debug("businessLicenseFileDownload(...) 메서드 path is {}", path);
+		logger.debug("businessLicenseFileDownload(...) 메서드 fileName is {}", fileName);
+		logger.debug("businessLicenseFileDownload(...) 메서드 fileExt is {}", fileExt);
+		shelterDao.businessLicense();
+		// 경로 + 다운받을 파일이름을 file에 입력
+		File file = new File(path+fileName);
+		logger.debug("businessLicenseFileDownload(...) 메서드 file is {}", file);
+		// 파일을 읽을수 없으면 if 블록 실행
+		if(!file.canRead()) {
+			logger.debug("파일이 존재하지 않습니다.");
+			return new ModelAndView("fileDownloadView","file",file);
+		}
+		request.setAttribute("fileExt", fileExt);
+		// 파일명을 request에 매핑
+		request.setAttribute("fileName", fileName);
+		// 원본 파일명을 request에 매핑
+		request.setAttribute("ofOriginName", ofOriginName);
+		// 경로 + 파일명 + 확장자명을 refile에 세팅
+		File reFile = new File(path + fileName + "." + fileExt);
+		logger.debug("businessLicenseFileDownload(...) 메서드 reFile is {}", reFile);
+		// 파일이 존재한다면 if 블록 실행
+		if(file.exists()) {
+			// 확장자명을 더한 파일로 수정
+			file.renameTo(reFile);
+			// request에 확장자명을 더한 파일인 reFile 매핑
+			request.setAttribute("reFile", reFile);
+		}
+		logger.debug("businessLicenseFileDownload(...) 메서드 끝");
+		return new ModelAndView("fileDownloadView","file",reFile);
+	}
 	
 	// 보호소 대표 신청 상태 거절로 수정 및 거절 사유 등록(수정)하는 쿼리문을 접근하는 DAO 메서드 호출 
 	public void modifyBusinessLicenseDeny(String blCode,String blShelterDenyReason) {
@@ -123,7 +161,7 @@ public class ShelterService {
 				// 저장파일명을 toString 메서드로 문자열형태로 입력
 				String storeFileName = uuid.toString();
 				// 확장자까지 포함된 원본 파일명
-				String fullFileName = file.getOriginalFilename();
+				String fullFileName = multipartFile.getOriginalFilename();
 				logger.debug("addBusinessLicense(...) 메서드 fullFileName is {}",fullFileName);
 				// 마지막 .의 위치 값을 입력
 				int pos = fullFileName.indexOf(".");
@@ -135,7 +173,7 @@ public class ShelterService {
 				String ext = fullFileName.substring(pos+1);
 				logger.debug("addBusinessLicense(...) 메서드 ext is {}",ext);
 				// file 사이즈를 저장
-				long size = file.getSize();
+				long size = multipartFile.getSize();
 				logger.debug("addBusinessLicense(...) 메서드 size is {}",size);
 				
 				String ofCode = "of_code_";
