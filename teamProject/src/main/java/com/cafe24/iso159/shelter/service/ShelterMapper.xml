@@ -33,6 +33,16 @@
 		<result column="bl_shelter_deny_reason" property="blShelterDenyReason"/>
 		<result column="bl_shelter_date" property="blShelterDate"/>
 	</resultMap>
+		
+	<!-- 체험자 권한 보호소로 수정하는 쿼리문 -->
+	<update id="updateShelterRight" parameterType="map">
+		UPDATE
+			t_member
+		SET
+			m_right_code=#{mRightCode}
+		WHERE
+			m_id=#{mMemberId}
+	</update>
 	
 	<!-- 보호소 대표 신청 상태 수정 및  거절 사유 등록(수정) 쿼리문 -->
 	<update id="updateBusinessLicenseDeny" parameterType="map">

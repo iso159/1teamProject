@@ -50,8 +50,8 @@
 						<td>${bl.blShelterDate}</td>
 						<td><a href="${pageContext.request.contextPath}/shelter/fileList?blCode=${bl.blCode}">보호소 등록증 확인</a></td>
 						<td>${bl.blShelterDenyReason}</td>
-						<td><a href="${pageContext.request.contextPath}/shelter/BusinessLicenseDeny?blCode=${bl.blCode}">등록 거부</a></td>
-						<td><a href="#">등록 결정</a></td>
+						<td><a href="${pageContext.request.contextPath}/shelter/businessLicenseDeny?blCode=${bl.blCode}">등록 거부</a></td>
+						<td><a href="${pageContext.request.contextPath}/shelter/businessLicenseSet?blCode=${bl.blCode}&mMemberId=${bl.mMemberId}">등록 결정</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

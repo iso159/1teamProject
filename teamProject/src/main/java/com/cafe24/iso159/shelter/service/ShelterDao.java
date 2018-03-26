@@ -16,6 +16,14 @@ public class ShelterDao {
 	private static final Logger logger = LoggerFactory.getLogger(ShelterDao.class);
 	private final String nameSpace = "com.cafe24.iso159.shelter.service.ShelterMapper.";
 	
+	// 체험자 권한 보호소로 수정하는 쿼리문을 접근하는 메서드
+	public void updateShelterRight(Map<String,Object> map) {
+		logger.debug("updateShelterRight(Map<String,Object> map) 메서드 호출");
+		logger.debug("updateShelterRight(Map<String,Object> map) 메서드 map is {}", map);
+		int result = sqlSessionTemplate.update(nameSpace + "updateShelterRight", map);
+		logger.debug("updateShelterRight(Map<String,Object> map) 메서드 끝");
+	}
+	
 	// 보호소 대표 신청 상태 거절로 수정 및 거절 사유 등록(수정)하는 쿼리문을 접근하는 메서드 
 	public void updateBusinessLicenseDeny(Map<String,Object> map) {
 		logger.debug("updateBusinessLicenseDeny(Map<String,Object> map) 메서드 호출");
@@ -24,7 +32,7 @@ public class ShelterDao {
 		logger.debug("updateBusinessLicenseDeny(Map<String,Object> map) 메서드 끝");
 	}
 	
-	// 보호소 대표 신청 상태 신청확인으로 수정하는 쿼리문을 접근하는 메서드
+	// 보호소 대표 신청 상태를 수정하는 쿼리문을 접근하는 메서드
 	public void updateBusinessLicenseOsCodeLicenseStatus(Map<String,Object> map) {
 		logger.debug("updateBusinessLicense(Map<String,Object> map) 메서드 호출");
 		logger.debug("updateBusinessLicense(Map<String,Object> map) 메서드 map is {}", map);

@@ -24,6 +24,28 @@ public class ShelterService {
 	ShelterDao shelterDao;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
 	
+	// 체험자권한을 보호소 대표로 변경 및 보호소 대표 신청 상태 코드를 결정 완료로 수정하는 쿼리문을 접근하는 DAO 메서드 호출
+	public void modifyShelterRight(String blCode, String mMemberId) {
+		logger.debug("modifyShelterRight(String blCode, String mMemberId) 메서드 호출");
+		logger.debug("modifyShelterRight(String blCode, String mMemberId) 메서드 blCode is {}",blCode);
+		logger.debug("modifyShelterRight(String blCode, String mMemberId) 메서드 mMemberId is {}",mMemberId);
+		// 보호소 대표 코드 상수로 입력
+		final String mRightCode = "mr_2_2";
+		// 보호소 대표 신청 코드 결정 완료로 입력
+		final String OsCodeLicenseStatus = "os_business_1_1_3";
+		Map<String,Object> rightMap = new HashMap<String, Object>();
+		rightMap.put("mMemberId", mMemberId);
+		rightMap.put("mRightCode", mRightCode);
+		logger.debug("modifyShelterRight(String blCode, String mMemberId) 메서드 rightMap is {}",rightMap);
+		Map<String,Object> osCodeMap = new HashMap<String,Object>();
+		osCodeMap.put("blCode", blCode);
+		osCodeMap.put("OsCodeLicenseStatus", OsCodeLicenseStatus);
+		logger.debug("modifyShelterRight(String blCode, String mMemberId) 메서드 osCodeMap is {}",osCodeMap);
+		shelterDao.updateShelterRight(rightMap);
+		shelterDao.updateBusinessLicenseOsCodeLicenseStatus(osCodeMap);
+		logger.debug("modifyShelterRight(String blCode, String mMemberId) 메서드 끝");		
+	}
+	
 	// 보호소 대표 신청 업로드 파일 다운로드
 	public ModelAndView businessLicenseFileDownload(String path, String fileName
 													, HttpServletRequest request, String fileExt, String ofOriginName) {

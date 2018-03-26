@@ -27,6 +27,17 @@ public class ShelterController {
 	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterController.class);
 	
+	@RequestMapping(value="/shelter/businessLicenseSet")
+	public String setBusinessLicense(@RequestParam(value="blCode") String blCode
+									, @RequestParam(value="mMemberId") String mMemberId) {
+		logger.debug("setBusinessLicense(...) 메서드 호출");
+		logger.debug("setBusinessLicense(...) 메서드 blCode is {}", blCode);
+		logger.debug("setBusinessLicense(...) 메서드 mMemberId is {}", mMemberId);
+		shelterService.modifyShelterRight(blCode, mMemberId);
+		logger.debug("setBusinessLicense(...) 메서드 끝");
+		return "redirect:/businessLicenseList";
+	}
+	
 	@RequestMapping(value="/shelter/businessLicenseFileDownload", method=RequestMethod.GET)
 	public ModelAndView downloadBusinessLicense(HttpServletRequest request, HttpServletResponse response
 												, HttpSession session
