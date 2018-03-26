@@ -57,4 +57,11 @@ public class AdoptDao {
 		logger.debug("deleteAdopt() 메서드 호출");
 		sqlSessionTemplate.delete(nameSpace + "deleteAdopt", adoptRequestCode);
 	}
+	
+	// 상담내용입력
+	public void updateAdoptRequestAdvice(AdoptRequest adoptRequest) {
+		logger.debug("updateAdoptRequestAdvice() 메서드 호출");
+		logger.debug("updateAdoptRequestAdvice() 메서드 adoptRequest is {}", adoptRequest);
+		sqlSessionTemplate.update(nameSpace + "updateAdoptRequestAdvice", adoptRequest);
+	}
 }

@@ -30,10 +30,7 @@
 			#{ofSize}, 
 			now()
 		)
-			
-			
 	</insert>
-
 
 	<!-- 입양요청 max코드값 조회 쿼리문 -->
 	<select id="selectLastCodeAr" resultType="String">
@@ -44,7 +41,6 @@
 	<select id="selectLastCodeOf" resultType="String">
 		select max(CAST(substring(of_code,9) AS DECIMAL)) as maxcol from t_overall_file
 	</select>
-	
 	
 	<!-- 입양신청 등록 쿼리문 -->
 	<insert id="AdoptRequest"
@@ -114,5 +110,16 @@
 		WHERE 
 			adopt_request_code = #{adoptRequestCode}
 	</delete>
+	
+	<!-- 상담내용입력 쿼리문 -->
+	<update id="updateAdoptRequestAdvice"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
+		UPDATE 
+			t_adopt_request 
+		SET 
+			adopt_request_advice_contents = #{adoptRequestAdviceContents} 
+		WHERE 
+			adopt_request_code = #{adoptRequestCode}
+	</update>
 	
 </mapper>

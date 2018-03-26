@@ -154,4 +154,11 @@ public class AdoptService {
 			List<AdoptRequest> list = adoptDao.selectAdoptRequest();
 			return list;
 		}
+		
+	// 상담내용입력
+		public void ModifyAdoptRequestAdviceContents(AdoptRequest adoptRequest) {
+			logger.debug("ModifyAdoptRequestAdviceContents() 메소드 호출");
+			logger.debug("ModifyAdoptRequestAdviceContents() adoptRequest is {}", adoptRequest);
+			adoptDao.updateAdoptRequestAdvice(adoptRequest);
+		}
 }

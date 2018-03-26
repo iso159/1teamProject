@@ -17,7 +17,7 @@
 </head>
 <body>
 	<h2>입양 리스트</h2>
-	<table class="table table-striped">
+	<table border="1">
 		<thead>
 			<tr>
 				<th>입양코드</th>
@@ -27,7 +27,7 @@
 				<th>입양상태코드</th>
 				<th>입양이유</th>
 				<th>입양신청날짜</th>
-				<th>입양확인</th>
+				<th>파일확인</th>
 				<th>입양취소</th>
 				<th>상담내용</th>
 			</tr>
@@ -38,15 +38,18 @@
 				<td>${aR.adoptRequestCode}</td>
 				<td>${aR.animalCode}</td>
 				<td>${aR.blCode}</td>
-				<td>${aR.mMemberId}</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${aR.adoptRequestCode}">${aR.mMemberId}</a>
+				</td>
 				<td>${aR.osCodeAdopt}</td>
 				<td>${aR.adoptRequestReason}</td>
 				<td>${aR.adoptRequestDate}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/adopt/adoptCheck?adoptRequestCode=${aR.adoptRequestCode}">입양확인</a></td>
-					
+					<a href="${pageContext.request.contextPath}/adopt/adoptCheck?adoptRequestCode=${aR.adoptRequestCode}">파일확인</a>
 				</td>
-				<td><a href="${pageContext.request.contextPath}/adopt/adoptCancle?adoptRequestCode=${aR.adoptRequestCode}">입양취소</a></td>
+				<td>
+					<a href="${pageContext.request.contextPath}/adopt/adoptCancle?adoptRequestCode=${aR.adoptRequestCode}">입양취소</a>
+				</td>
 			</tr>
 			</c:forEach>
 		</tbody>
