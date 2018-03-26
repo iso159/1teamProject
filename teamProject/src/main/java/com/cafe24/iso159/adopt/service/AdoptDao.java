@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sun.javafx.collections.MappingChange.Map;
+
 @Repository
 public class AdoptDao {
 	@Autowired
@@ -47,9 +49,21 @@ public class AdoptDao {
 	}
 	
 	// 입양신청 확인
-	public void updateOsCodeAdopt(String adoptRequestCode) {
+	public void updateOsCodeAdoptRequest(String adoptRequestCode) {
 		logger.debug("updateOsCodeAdopt() 메서드 호출");
-		sqlSessionTemplate.update(nameSpace + "updateOsCodeAdopt", adoptRequestCode);
+		sqlSessionTemplate.update(nameSpace + "updateOsCodeAdopt412", adoptRequestCode);
+	}
+	
+	// 상담등록확인
+	public void updateOsCodeAdoptCounsel(String adoptRequestCode) {
+		logger.debug("updateOsCodeAdoptCounsel() 메서드 호출");
+		sqlSessionTemplate.update(nameSpace + "updateOsCodeAdopt415", adoptRequestCode);
+	}
+	
+	// 입양결정완료
+	public void updateOsCodeAdoptDecide(String adoptRequestCode) {
+		logger.debug("updateOsCodeAdoptDecide() 메서드 호출");
+		sqlSessionTemplate.update(nameSpace + "updateOsCodeAdopt417", adoptRequestCode);
 	}
 	
 	// 입양취소 
@@ -63,5 +77,11 @@ public class AdoptDao {
 		logger.debug("updateAdoptRequestAdvice() 메서드 호출");
 		logger.debug("updateAdoptRequestAdvice() 메서드 adoptRequest is {}", adoptRequest);
 		sqlSessionTemplate.update(nameSpace + "updateAdoptRequestAdvice", adoptRequest);
+	}
+	// 상담내용조회
+	public AdoptRequest selectAdoptCounselList(String adoptRequestCode) {
+		logger.debug("selectAdoptCounselList() 메서드 호출");
+		logger.debug("selectAdoptCounselList() 메서드 adoptRequestCode is {}", adoptRequestCode);
+		return sqlSessionTemplate.selectOne(nameSpace + "selectAdoptCounselList", adoptRequestCode);
 	}
 }

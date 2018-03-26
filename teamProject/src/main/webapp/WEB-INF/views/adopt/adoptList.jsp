@@ -4,6 +4,14 @@
 
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
 <script>
     $(document).ready(function(){
@@ -28,8 +36,11 @@
 				<th>입양이유</th>
 				<th>입양신청날짜</th>
 				<th>파일확인</th>
-				<th>입양취소</th>
+				<th>상담한날짜</th>
 				<th>상담내용</th>
+				<th>결정날짜</th>
+				<th>입양취소</th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -47,6 +58,11 @@
 				<td>
 					<a href="${pageContext.request.contextPath}/adopt/adoptCheck?adoptRequestCode=${aR.adoptRequestCode}">파일확인</a>
 				</td>
+				<td>${aR.adoptRequestAdviceDate}</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/adopt/adoptCounselList?adoptRequestCode=${aR.adoptRequestCode}">상담내용</a>
+				</td>
+				<td>${aR.adoptDecideDate}</td>
 				<td>
 					<a href="${pageContext.request.contextPath}/adopt/adoptCancle?adoptRequestCode=${aR.adoptRequestCode}">입양취소</a>
 				</td>
@@ -54,6 +70,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-		<a href="${pageContext.request.contextPath}/"><button type="button" class="btn btn-success">홈으로</button></a>
+		<a href="${pageContext.request.contextPath}/"><button type="button" class="btn warning">홈으로</button></a>
 </body>
 </html>

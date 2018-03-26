@@ -38,14 +38,22 @@
 	<form id="addForm" action="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${adoptRequestCode}" method="post">
 		<c:forEach var="surveyQuestion" items="${list}">
 				<tr>
-					<td>${surveyQuestion.surveyListQuestion}</td><br>
-					<td><input	type="textarea" cols="100" size="100"
+					<td><input 	type="text" cols="100" size="200" 
+								style="background-color:transparent;border:0"
+								value="<br>${surveyQuestion.surveyListQuestion}<br>"
 								id="adoptRequestAdviceContents"
-								name="adoptRequestAdviceContents"></td><br>
+								name="adoptRequestAdviceContents" readonly>
+					</td><br>
+					<td>
+						<input	type="textarea" cols="100" size="100"
+								id="adoptRequestAdviceContents"
+								name="adoptRequestAdviceContents">
+					</td><br>
 				</tr>
 		</c:forEach>
 		<button id="addBtn" type="button" class="btn btn-info">상담완료</button>
 	</form>
+	
 	
 </body>
 </html>

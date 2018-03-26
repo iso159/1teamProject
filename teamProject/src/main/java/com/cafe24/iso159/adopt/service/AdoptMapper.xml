@@ -81,7 +81,9 @@
 			m_member_id as mMemberId,  
 			os.os_name as osCodeAdopt, 
 			adopt_request_reason as adoptRequestReason,
-			adopt_request_date as adoptRequestDate 
+			adopt_request_date as adoptRequestDate, 
+			adopt_request_advice_date as adoptRequestAdviceDate,
+			adopt_decide_date as adoptDecideDate 
 		FROM 
 			t_adopt_request ar 
 		INNER JOIN 
@@ -92,14 +94,39 @@
 	</select>
 	
 	<!-- 입양신청코드로 조회해서 입양신청-> 입양신청확인 업데이트 쿼리문 -->
-	<update id="updateOsCodeAdopt"
+	<update id="updateOsCodeAdopt412"
 			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
 		UPDATE 
 			t_adopt_request 
 		SET 
-			os_code_adopt = 'os_adopt_4_1_2'
+			os_code_adopt = 'os_adopt_4_1_2' 
 		WHERE 
 			adopt_request_code = #{adoptRequestCode}
+	</update>
+	
+	<!-- 상담내용등록후 입양신청확인 -> 상담진행중 업데이트 쿼리문 -->
+	<update id="updateOsCodeAdopt415"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
+		UPDATE 
+			t_adopt_request 
+		SET 
+			os_code_adopt = 'os_adopt_4_1_5' 
+		WHERE 
+			adopt_request_code = #{adoptRequestCode}
+	
+	</update>
+	
+	<!-- 입양결정 하기위한 상담진행중 -> 입양결정완료 로 업데이트 쿼리문 -->
+	<update id="updateOsCodeAdopt417"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
+		UPDATE 
+			t_adopt_request 
+		SET 
+			os_code_adopt = 'os_adopt_4_1_7', 
+			adopt_decide_date = now() 
+		WHERE 
+			adopt_request_code = #{adoptRequestCode}
+	
 	</update>
 	
 	<!-- 입양취소 쿼리문 -->
@@ -117,9 +144,23 @@
 		UPDATE 
 			t_adopt_request 
 		SET 
-			adopt_request_advice_contents = #{adoptRequestAdviceContents} 
+			adopt_request_advice_contents = #{adoptRequestAdviceContents}, 
+			adopt_request_advice_date = now() 
 		WHERE 
 			adopt_request_code = #{adoptRequestCode}
 	</update>
+	
+	
+	<!-- 상담내용조회 -->
+	<select id="selectAdoptCounselList"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest"
+			resultType="com.cafe24.iso159.adopt.service.AdoptRequest">
+		SELECT 
+			adopt_request_advice_contents as adoptRequestAdviceContents
+		FROM 
+			t_adopt_request 
+		WHERE 
+			adopt_request_code=#{adoptRequestCode}
+	</select>
 	
 </mapper>

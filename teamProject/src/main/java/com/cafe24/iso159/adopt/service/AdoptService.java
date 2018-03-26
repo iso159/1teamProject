@@ -3,12 +3,15 @@ package com.cafe24.iso159.adopt.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -137,9 +140,23 @@ public class AdoptService {
 		
 		
 	// 입양신청확인
-		public void ModifyOsCodeAdopt(String adoptRequestCode) {
-			logger.debug("updateOsCodeAdopt() 메소드 호출");
-			adoptDao.updateOsCodeAdopt(adoptRequestCode);
+		public void ModifyOsCodeAdoptRequest(String adoptRequestCode) {
+			logger.debug("ModifyOsCodeAdoptRequest() 메소드 호출");
+			adoptDao.updateOsCodeAdoptRequest(adoptRequestCode);
+		}
+		
+	// 상담내용확인
+		public void ModifyOsCodeAdoptCounsel(String adoptRequestCode) {
+			logger.debug("ModifyOsCodeAdoptCounsel() 메소드 호출");
+			adoptDao.updateOsCodeAdoptCounsel(adoptRequestCode);
+			
+		}
+		
+	// 입양결정 완료
+		public void ModifyOsCodeAdoptDecide(String adoptRequestCode) {
+			logger.debug("ModifyOsCodeAdoptDecide() 메소드 호출");
+			adoptDao.updateOsCodeAdoptDecide(adoptRequestCode);
+		
 		}
 		
 	// 입양취소
@@ -161,4 +178,19 @@ public class AdoptService {
 			logger.debug("ModifyAdoptRequestAdviceContents() adoptRequest is {}", adoptRequest);
 			adoptDao.updateAdoptRequestAdvice(adoptRequest);
 		}
+		
+	// 상담내용리스트
+		public AdoptRequest listAdoptCounsel(String adoptRequestCode) {
+			logger.debug("listAdoptCounsel() 메소드 호출");
+			logger.debug("listAdoptCounsel() adoptRequestCode is {}", adoptRequestCode);
+	
+			AdoptRequest adoptRequest = new AdoptRequest();
+			AdoptRequest contents = adoptDao.selectAdoptCounselList(adoptRequestCode);
+			adoptRequest.setAdoptRequestAdviceContents(contents.getAdoptRequestAdviceContents());
+			logger.debug("listAdoptCounsel() adoptRequest is {}", adoptRequest);
+			
+			return adoptRequest;
+		
+		}
+		
 }

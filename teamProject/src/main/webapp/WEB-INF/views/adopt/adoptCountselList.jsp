@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,26 +12,29 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
-	<title>입양 메뉴</title>
+
+	<title>회원상담내용 리스트</title>
 </head>
 <body>
 <div class="container">
-		<h2>입양 메뉴</h2>
-			<div class="row">
-				<div class="col-md-4">				
-					<li>
-						<a href="${pageContext.request.contextPath}/adopt/adoptRequest">
-							<button type="submit" id="signUpBtn" class="btn btn-info">입양신청</button>
-						</a>
-					</li>
-					<li>
-						<a href="${pageContext.request.contextPath}/adopt/adoptList">
-						<button type="submit" id="signUpBtn" class="btn btn-info">입양신청 리스트 </button>
-					</li>
-				</div>
-			</div>
-	</div>
+	<h2>회원상담내용 리스트</h2>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>상담내용</th>
+			</tr>
+		</thead>	
+		<tbody>
+		<c:set var="aR" value="${adoptRequest}"/>
+			<tr>
+				<td>
+					${aR.adoptRequestAdviceContents}
+				</td><br>
+			</tr>
+		</tbody>
+	</table><br>
+	<a href="${pageContext.request.contextPath}/adopt/adoptDecide?adoptRequestCode=${aR.adoptRequestCode}"><button type="submit" class="btn danger">입양결정!</button></a>
+	<a href="${pageContext.request.contextPath}/adopt/adoptList"><button type="button" class="btn warning">분양리스트로</button></a><br><br>
+</div>
 </body>
 </html>
-
-	
