@@ -2,7 +2,9 @@ package com.cafe24.iso159.shelter.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -18,6 +20,40 @@ public class ShelterService {
 	@Autowired
 	ShelterDao shelterDao;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
+	
+	// 보호소 대표 신청 상태 거절로 수정 및 거절 사유 등록(수정)하는 쿼리문을 접근하는 DAO 메서드 호출 
+	public void modifyBusinessLicenseDeny(String blCode,String blShelterDenyReason) {
+		logger.debug("modifyBusinessLicenseDeny(String blCode) 메서드 호출");
+		logger.debug("modifyBusinessLicenseDeny(String blCode) 메서드 blCode is {}",blCode);
+		final String osCodeLicenseStatus = "os_business_1_1_4";
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("osCodeLicenseStatus", osCodeLicenseStatus);
+		map.put("blCode", blCode);
+		map.put("blShelterDenyReason", blShelterDenyReason);
+		logger.debug("modifyBusinessLicenseDeny(String blCode) 메서드 map is {}",map);
+		shelterDao.updateBusinessLicenseDeny(map);
+		logger.debug("modifyBusinessLicenseDeny(String blCode) 메서드 끝");
+	}
+	
+	// 보호소 대표 신청 파일리스트 조회 및 상태코드를 수정하는 쿼리문을 접근하는 DAO 메서드 호출
+	public MemberIdAndBusinessLicenseFile getBusinessLicenseFileList(String blCode){
+		logger.debug("getBusinessLicenseFileList(String blCode) 메서드 호출");
+		logger.debug("getBusinessLicenseFileList(String blCode) 메서드 blCode is {}", blCode);
+		Map<String,Object> map = new HashMap<String,Object>();
+		final String OsCodeLicenseStatus = "os_business_1_1_2";
+		// map에 blCode,OsCodeLicenseStatus를 매핑 한다.
+		map.put("blCode", blCode);
+		map.put("OsCodeLicenseStatus", OsCodeLicenseStatus);
+		// map 세팅값 확인
+		logger.debug("getBusinessLicenseFileList(String blCode) 메서드 map is {}",map);
+		// 보호소 대표 신청 상태 코드를 수정하는 쿼리문을 접근하는 DAO 호출
+		shelterDao.updateBusinessLicenseOsCodeLicenseStatus(map);
+		// 보호소 대표 신청 파일 리스트를 조회하는 쿼리문을 접근하는 DAO 호출
+		MemberIdAndBusinessLicenseFile memberIdAndBusinessLicenseFile = shelterDao.selectBusinessLicenseFileList(blCode);
+		logger.debug("getBusinessLicenseFileList(String blCode) 메서드 list is {}", memberIdAndBusinessLicenseFile);
+		logger.debug("getBusinessLicenseFileList(String blCode) 메서드 끝");
+		return memberIdAndBusinessLicenseFile;
+	}
 	
 	// 보호소 신청 전체 쿼리문을 접근하는 DAO 메서드 호출
 	public List<BusinessLicense> getBusinessLicense(){

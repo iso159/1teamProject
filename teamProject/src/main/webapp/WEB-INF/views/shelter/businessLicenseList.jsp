@@ -32,8 +32,9 @@
 					<th>보호소 주소</th>
 					<th>보호소 대표 신청 날짜</th>
 					<th>보호소 등록증 확인</th>
-					<th>보호소 등록 취소</th>
-					<th>보호소 등록 결정</th>
+					<th>거절 사유</th>
+					<th>등록 거절</th>
+					<th>등록 결정</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -47,8 +48,9 @@
 						<td>${bl.blShelterPostcode}</td>
 						<td>${bl.blShelterAddress}</td>
 						<td>${bl.blShelterDate}</td>
-						<td><a href="#">파일 리스트 확인</a></td>
-						<td><a href="#">등록 취소</a></td>
+						<td><a href="${pageContext.request.contextPath}/shelter/fileList?blCode=${bl.blCode}">보호소 등록증 확인</a></td>
+						<td>${bl.blShelterDenyReason}</td>
+						<td><a href="${pageContext.request.contextPath}/shelter/BusinessLicenseDeny?blCode=${bl.blCode}">등록 거부</a></td>
 						<td><a href="#">등록 결정</a></td>
 					</tr>
 				</c:forEach>

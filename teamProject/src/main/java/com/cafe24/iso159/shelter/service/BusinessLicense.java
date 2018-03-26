@@ -8,6 +8,7 @@ public class BusinessLicense {
 	private String blShelterNumber;
 	private String blShelterPostcode;
 	private String blShelterAddress;
+	private String blShelterDenyReason;
 	private String blShelterDate;
 	public String getBlCode() {
 		return blCode;
@@ -51,6 +52,12 @@ public class BusinessLicense {
 	public void setBlShelterAddress(String blShelterAddress) {
 		this.blShelterAddress = blShelterAddress;
 	}
+	public String getBlShelterDenyReason() {
+		return blShelterDenyReason;
+	}
+	public void setBlShelterDenyReason(String blShelterDenyReason) {
+		this.blShelterDenyReason = blShelterDenyReason;
+	}
 	public String getBlShelterDate() {
 		return blShelterDate;
 	}
@@ -62,6 +69,7 @@ public class BusinessLicense {
 		return "BusinessLicense [blCode=" + blCode + ", mMemberId=" + mMemberId + ", osCodeLicenseStatus="
 				+ osCodeLicenseStatus + ", blShelterName=" + blShelterName + ", blShelterNumber=" + blShelterNumber
 				+ ", blShelterPostcode=" + blShelterPostcode + ", blShelterAddress=" + blShelterAddress
-				+ ", blShelterDate=" + blShelterDate + "]";
-	}	
+				+ ", blShelterDenyReason=" + blShelterDenyReason + ", blShelterDate=" + blShelterDate + "]";
+	}
+	
 }

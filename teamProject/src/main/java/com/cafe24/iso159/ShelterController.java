@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.iso159.shelter.service.BusinessLicense;
 import com.cafe24.iso159.shelter.service.BusinessLicenseCommand;
+import com.cafe24.iso159.shelter.service.MemberIdAndBusinessLicenseFile;
 import com.cafe24.iso159.shelter.service.ShelterService;
 
 @Controller
@@ -22,6 +23,39 @@ public class ShelterController {
 	@Autowired
 	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterController.class);
+	
+	@RequestMapping(value="/shelter/BusinessLicenseDeny", method=RequestMethod.POST)
+	public String denyBusinessLicense(@RequestParam(value="blCode") String blCode
+									, @RequestParam(value="blShelterDenyReason") String blShelterDenyReason) {
+		logger.debug("denyBusinessLicense(...) 메서드 호출");
+		logger.debug("denyBusinessLicense(...) 메서드 blCode is {}",blCode);
+		logger.debug("denyBusinessLicense(...) 메서드 blShelterDenyReason is {}",blShelterDenyReason);
+		shelterService.modifyBusinessLicenseDeny(blCode, blShelterDenyReason);
+		logger.debug("denyBusinessLicense(...) 메서드 끝");
+		return "redirect:/businessLicenseList";
+	}
+	
+	@RequestMapping(value="/shelter/BusinessLicenseDeny")
+	public String denyBusinessLicense(@RequestParam(value="blCode") String blCode
+									, HttpSession session) {
+		logger.debug("denyBusinessLicense() 메서드 호출");
+		shelterService.businessLicense();
+		session.setAttribute("blCode", blCode);
+		logger.debug("denyBusinessLicense() 메서드 끝");
+		return "/shelter/businessLicenseDeny";
+	}
+	
+	@RequestMapping(value="/shelter/fileList")
+	public String getBusinessLicenseFileList(@RequestParam(value="blCode") String blCode,
+											HttpSession session) {
+		logger.debug("getBusinessLicenseFileList(...) 메서드 호출");
+		logger.debug("getBusinessLicenseFileList(...) 메서드 blCode is {}", blCode);
+		MemberIdAndBusinessLicenseFile memberIdAndBusinessLicenseFile = shelterService.getBusinessLicenseFileList(blCode);
+		logger.debug("getBusinessLicenseFileList(...) 메서드 memberIdAndBusinessLicenseFile is {}", memberIdAndBusinessLicenseFile);
+		session.setAttribute("memberIdAndBusinessLicenseFile", memberIdAndBusinessLicenseFile);		
+		logger.debug("getBusinessLicenseFileList(...) 메서드 끝");
+		return "/shelter/businessLicenseFileList";
+	}
 	
 	@RequestMapping(value="/businessLicenseList")
 	public String getBusinessLicense(HttpSession session) {
@@ -39,6 +73,7 @@ public class ShelterController {
 		logger.debug("BusinessLicense() 메서드 끝");
 		return "/shelter/shelterMenu";
 	}
+	
 	
 	@RequestMapping(value="/shelter/businessLicenseRequest", method=RequestMethod.GET)
 	public String addBusinessLicense() {

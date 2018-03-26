@@ -4,7 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.shelter.service.ShelterMapper">
 
-	<!-- BusinessLicense맵 -->
+	<!-- MemberIdAndBusinessLicenseFileMap -->
+	<resultMap type="com.cafe24.iso159.shelter.service.MemberIdAndBusinessLicenseFile"
+			   id="MemberIdAndBusinessLicenseFileMap">
+		<id column="m_member_id" property="mMemberId"/>
+		<collection property="businessLicenseFileList" 
+					ofType="com.cafe24.iso159.shelter.service.BusinessLicenseFile">
+			<id column="of_code" property="ofCode"></id>
+			<id column="bl_code" property="blCode"></id>
+			<id column="of_path" property="ofPath"></id>
+			<id column="of_origin_name" property="ofOriginName"></id>
+			<id column="of_save_name" property="ofSaveName"></id>
+			<id column="of_ext" property="ofExt"></id>
+			<id column="of_size" property="ofSize"></id>
+			<id column="of_down_date" property="ofDate"></id>		
+		</collection>
+	</resultMap>
+	
+	<!-- BusinessLicenseMap -->
 	<resultMap type="com.cafe24.iso159.shelter.service.BusinessLicense" id="BusinessLicenseMap">
 		<id column="bl_code" property="blCode"/>
 		<result column="m_member_id" property="mMemberId"/>
@@ -13,9 +30,64 @@
 		<result column="bl_shelter_number" property="blShelterNumber"/>
 		<result column="bl_shelter_postcode" property="blShelterPostcode"/>
 		<result column="bl_shelter_address" property="blShelterAddress"/>
+		<result column="bl_shelter_deny_reason" property="blShelterDenyReason"/>
 		<result column="bl_shelter_date" property="blShelterDate"/>
 	</resultMap>
-
+	
+	<!-- 보호소 대표 신청 상태 수정 및  거절 사유 등록(수정) 쿼리문 -->
+	<update id="updateBusinessLicenseDeny" parameterType="map">
+		UPDATE 
+			t_business_license
+		SET 
+			os_code_license_status=#{osCodeLicenseStatus}
+			, bl_shelter_deny_reason=#{blShelterDenyReason}
+		WHERE bl_code=#{blCode}		
+	</update>	
+	
+	<!-- 보호소 대표 신청 상태 수정 쿼리문 -->
+	<update id="updateBusinessLicenseOsCodeLicenseStatus" parameterType="map">
+		UPDATE 
+			t_business_license 
+		SET os_code_license_status=#{OsCodeLicenseStatus}
+		WHERE bl_code=#{blCode}
+	</update>
+	
+	<!-- 개인 파일리스트 조회 쿼리문 -->
+	<select id="selectBusinessLicenseFileList" parameterType="String" resultMap="MemberIdAndBusinessLicenseFileMap">
+		SELECT
+			m_member_id
+			, of_code
+			, of.bl_code
+			, of_path
+			, of_origin_name
+			, of_save_name
+			, of_ext
+			, of_size
+			, of_down_date
+		FROM t_overall_file of
+		INNER JOIN t_business_license bl
+		ON of.bl_code = bl.bl_code
+		WHERE bl.bl_code = #{blCode}
+	</select>
+	
+	<!-- 보호소 대표 신청 개인 조회 쿼리문 -->
+	<select id="selectOneBusinessLicense" parameterType="Integer" resultMap="BusinessLicenseMap">
+		SELECT 
+			bl_code
+			, m_member_id
+			, os.os_name
+			, bl_shelter_name
+			, bl_shelter_number
+			, bl_shelter_postcode
+			, bl_shelter_address
+			, bl_shelter_date
+		FROM t_business_license bl
+		INNER JOIN t_overall_status os
+		ON bl.os_code_license_status = os.os_code
+		ORDER BY bl_shelter_date DESC
+		WHERE bl_code=#{blCode}
+	</select>
+	
 	<!-- 보호소 대표 신청 전체 리스트 조회 쿼리문 -->
 	<select id="selectAllBusinessLicense" resultMap="BusinessLicenseMap">
 		SELECT 
@@ -26,6 +98,7 @@
 			, bl_shelter_number
 			, bl_shelter_postcode
 			, bl_shelter_address
+			, bl_shelter_deny_reason
 			, bl_shelter_date
 		FROM t_business_license bl
 		INNER JOIN t_overall_status os
