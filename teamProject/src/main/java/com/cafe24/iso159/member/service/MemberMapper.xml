@@ -4,53 +4,151 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.member.service.MemberMapper">
 
-	<!-- 회원등록 -->
+	<!-- MemberAndMemberInfo Map -->
+	<resultMap type="com.cafe24.iso159.member.service.MemberAndMemberInfo"
+		id="MemberJoinMemberInfoMap">
+		<id column="m_id" property="mId" />
+		<collection property="memberInfo"
+			ofType="com.cafe24.iso159.member.service.MemberInfo">
+			<id column="m_info_code" property="mInfoCode" />
+			<result column="m_info_name" property="mInfoName" />
+			<result column="m_info_nickname" property="mInfoNickname" />
+			<result column="m_info_gender" property="mInfoGender" />
+			<result column="m_info_birth" property="mInfoBirth" />
+			<result column="m_info_postcode" property="mInfoPostcode" />
+			<result column="m_info_address" property="mInfoAddress" />
+			<result column="m_info_email" property="mInfoEmail" />
+			<result column="m_info_phone" property="mInfoPhone" />
+			<result column="m_info_join_date" property="mInfoJoindate" />
+		</collection>
+	</resultMap>
+
+	<!-- 회원정보 리스트 전체조회 쿼리 -->
+	<select id="selectMemberList" resultMap="MemberJoinMemberInfoMap">
+		SELECT
+			m.m_info_code
+			,m.m_id
+			,mi.m_info_name
+			,mi.m_info_nickname
+			,mi.m_info_gender
+			,mi.m_info_birth
+			,mi.m_info_postcode
+			,mi.m_info_address
+			,mi.m_info_email
+			,mi.m_info_phone
+			,mi.m_info_join_date
+		FROM t_member m
+		INNER JOIN
+			t_member_info mi
+		ON m.m_info_code = mi.m_info_code
+		ORDER BY mi.m_info_join_date DESC
+	</select>
+
+	<!-- 회원가입 memberInfo -->
 	<insert id="addMemberInfo" parameterType="com.cafe24.iso159.member.service.MemberInfo">
 		INSERT INTO
-		t_member_info (m_info_code, m_info_name, m_info_nickname,m_info_gender, m_info_birth, m_info_postcode, m_info_address, m_info_email, m_info_phone, m_info_join_date) 
-		VALUES (#{mInfoCode}, #{mInfoName}, #{mInfoNickname}, #{mInfoGender}, #{mInfoBirth}, #{mInfoPostcode}, #{mInfoAddress}, #{mInfoEmail}, #{mInfoPhone}, now());
+			t_member_info
+			(m_info_code
+			,m_info_name
+			,m_info_nickname
+			,m_info_gender
+			,m_info_birth
+			,m_info_postcode
+			,m_info_address
+			,m_info_email
+			,m_info_phone
+			,m_info_join_date)
+		VALUES
+			(#{mInfoCode}
+			,#{mInfoName}
+			,#{mInfoNickname}
+			,#{mInfoGender}
+			,#{mInfoBirth}
+			,#{mInfoPostcode}
+			,#{mInfoAddress}
+			,#{mInfoEmail}
+			,#{mInfoPhone}
+			,now());
 	</insert>
 
-	<!-- 회원가입 -->
+	<!-- 회원가입 member -->
 	<insert id="addMember" parameterType="com.cafe24.iso159.member.service.Member">
-		INSERT INTO t_member (m_id,	m_info_code, m_right_code, m_pw) 
-		VALUES (#{mId},	#{mInfoCode}, #{mRightCode}, #{mPw});
+		INSERT INTO t_member
+			(m_id
+			,m_info_code
+			,m_right_code, m_pw)
+		VALUES
+			(#{mId}
+			,#{mInfoCode}
+			,#{mRightCode}
+			,#{mPw});
 	</insert>
 
+	<!-- memberCode 생성 쿼리 -->
 	<select id="selectMemberInfoCodeNumber" resultType="int">
 		SELECT
 		MAX(cast(substring(m_info_code, 13) as DECIMAL))
 		FROM t_member_info
 	</select>
 
-	<select id="selectOneMember" parameterType="int"
-		resultType="com.cafe24.iso159.member.service.MemberInfo">
-		SELECT
-			m_info_code as mInfoCode
-			,m_info_name as mInfoName
-			,m_info_nickname as mInfoNickname
-			,m_info_gender as mInfoGender
-			,m_info_birth as mInfoBirth
-			,m_info_postcode as mInfoPostcode       
-			,m_info_address as mInfoAddress
-			,m_info_email as mInfoEmail
-			,m_info_phone as mInfoPhone
-		FROM member
-		WHERE m_info_code=#{mInfoCode}
-	</select>
-
+	<!-- 로그인시 로그인 정보 조회 쿼리 -->
 	<select id="selectLoginCheck" parameterType="com.cafe24.iso159.member.service.Member"
 		resultType="com.cafe24.iso159.member.service.MemberLoginLevel">
-		SELECT 
-			m.m_id as mId
+		SELECT
+		m.m_id as mId
 			,m.bl_code as blCode
 			,mr.m_right_grade_name as mRightGradeName
 			,mr.m_right_level as mRightLevel
 		FROM t_member m
 		INNER JOIN t_member_right mr
-		ON m.m_right_code =	mr.m_right_code 
+		ON
+			m.m_right_code = mr.m_right_code
 		WHERE m_id = #{mId} AND m_pw=#{mPw}
 	</select>
 
-
+	<!-- 회원 정보 멤버인포 수정 쿼리 -->	
+	<update id="updateMemberInfo" parameterType="com.cafe24.iso159.member.service.MemberInfo">
+		UPDATE 
+			t_member_info SET
+			  m_info_nickname = #{mInfoNickname}
+			, m_info_birth = #{mInfoBirth}
+			, m_info_postcode = #{mInfoPostcode}
+			, m_info_address = #{mInfoAddress}
+			, m_info_email = #{mInfoEmail}
+	 		, m_info_phone = #{mInfoPhone} 
+		WHERE
+			m_info_code = #{mInfoCode};
+	</update>
+	
+	<!-- 회원 정보 멤버 수정 쿼리 -->
+	<update id="updateMember" parameterType="com.cafe24.iso159.member.service.Member">
+		UPDATE
+			t_member SET
+			m_pw = #{mPw}
+		WHERE
+			m_id = #{mId}
+	</update> 	
+	
+	<!-- 회원 하나 검색-->
+	<select id="selectOneMemberInfo" parameterType="String" resultType="com.cafe24.iso159.member.service.MemberInfo">
+		SELECT
+			m_info_name as mInfoName
+			,m_info_nickname as mInfoNickname
+			,m_info_gender as mInfoGender
+			,m_info_birth as mInfoBirth
+			,m_info_postcode as mInfoPostcode
+			,m_info_address as mInfoAddress
+			,m_info_email as mInfoEmail
+			,m_info_phone as mInfoPhone
+		FROM t_member_info
+		WHERE m_info_code=#{mInfoCode}
+	</select>
+	
+	<!-- 회원정보 코드 구하기, 조건은 아이디 -->
+	<select id="selectOneMemberId" parameterType="String" resultType="String">
+		SELECT
+			m_info_code as mInfoCode
+		FROM t_member
+		WHERE m_id=#{mId}
+	</select>
 </mapper>

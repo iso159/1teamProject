@@ -1,15 +1,19 @@
 package com.cafe24.iso159;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cafe24.iso159.member.service.Member;
+import com.cafe24.iso159.member.service.MemberAndMemberInfo;
 import com.cafe24.iso159.member.service.MemberInfo;
 import com.cafe24.iso159.member.service.MemberLoginLevel;
 import com.cafe24.iso159.member.service.MemberService;
@@ -18,7 +22,7 @@ import com.cafe24.iso159.member.service.MemberService;
 public class MemberController {
 
 	@Autowired
-	private MemberService memberService;
+	private MemberService MemberService;
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
@@ -33,23 +37,23 @@ public class MemberController {
 	public String addMember(Member member, MemberInfo memberInfo) {
 		logger.debug("addmember(Member member, MemberInfo memberInfo) 메서드 member is {}", member);
 		logger.debug("addmember(Member member, MemberInfo memberInfo) 메서드 member is {}", memberInfo);
-		memberService.addMember(member, memberInfo);
+		MemberService.addMember(member, memberInfo);
 		return "index";
 	}
-	
+
 	// GET 방식 컨트롤러
-		@RequestMapping(value = "/member/memberAdd", method = RequestMethod.GET)
-		public String addMember() {
-			logger.debug("addmember() 메서드 member is {}");
-			return "member/memberAdd";
-		}
-	
+	@RequestMapping(value = "/member/memberAdd", method = RequestMethod.GET)
+	public String addMember() {
+		logger.debug("addmember() 메서드 member is {}");
+		return "member/memberAdd";
+	}
+
 	// 로그인요청메서드
 	@RequestMapping(value = "/member/login", method = RequestMethod.POST)
 	public String login(Member member, HttpSession session) {
 		logger.debug("login(Member member, HttpSession session) 메서드 member is {}", member);
-		MemberLoginLevel memberLoginLevel = memberService.loginCheck(member);
-		if (memberLoginLevel == null) { 
+		MemberLoginLevel memberLoginLevel = MemberService.loginCheck(member);
+		if (memberLoginLevel == null) {
 			return "redirect:/member/login";
 		}
 		session.setAttribute("loginId", memberLoginLevel.getmId());
@@ -58,7 +62,7 @@ public class MemberController {
 		session.setAttribute("rightLevel", memberLoginLevel.getmRightLevel());
 		return "redirect:/";
 	}
-	
+
 	// 로그인페이지요청
 	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
 	public String login() {
@@ -66,4 +70,41 @@ public class MemberController {
 		return "/member/login";
 	}
 
+	// 리스트 요청
+	@RequestMapping(value = "/member/memberList")
+	public String memberList(HttpSession session) {
+		List<MemberAndMemberInfo> list = MemberService.getMemberList();		
+		session.setAttribute("list", list);
+		logger.debug("memberList(HttpSession session) 메서드 list is {}", list);
+		return "/member/memberList";
+	}
+	
+	// update 요청
+	@RequestMapping(value = "/member/memberModify", method = RequestMethod.POST)
+	public String updateMember(Member member, MemberInfo memberInfo) {
+		MemberService.updateMemberInfo(member, memberInfo);
+		logger.debug("updateMember(Member member, MemberInfo memberInfo) 메서드 member is {}", member);
+		logger.debug("updateMember(Member member, MemberInfo memberInfo) 메서드 memberInfo is {}", memberInfo);
+		return "redirect:/";
+	}
+	 
+	// 회원 수정페이지 요청, 수정할 하나 회원조회
+	@RequestMapping(value = "/member/memberModify", method = RequestMethod.GET)
+	public String memberOneSelect(Model model, HttpSession session, String memberId) {
+		String mLoginId = (String)session.getAttribute("loginId");
+		logger.debug("memberOneSelect(Model model, MemberInfo memberInfo, HttpSession session) 메서드 mLoginId is {}", mLoginId);
+		MemberInfo memberInfoSelect = MemberService.getMemberOne(mLoginId);
+		model.addAttribute("MemberInfo", memberInfoSelect);
+		return "/member/memberModify";
+	}
+	
+/*	
+  @RequestMapping(value = "/member/memberModify", method = RequestMethod.GET)
+ 	public String selectMemberOne(Model model, @RequestParam(value = "mId", required = true) int memberInfo, Object session) {
+ 		model.addAttribute("MemberInfo", MemberService);
+		String id = (String)session.getAttribute("mId");
+		logger.debug("selectMemberOne(Model model, @RequestParam(value = \"mId\", required = true) int memberInfo) 메서드 memberInfo is {}", memberInfo);
+		return "member/memberModify";
+	}
+*/
 }
