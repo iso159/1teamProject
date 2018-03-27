@@ -1,14 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
+	
+	<link rel="stylesheet"	href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 <script>
 	$(document).ready(function() {
 		$.datepicker.regional['ko'] = {
@@ -41,6 +48,7 @@
 		$('#expPeriodCode').click(function() {
 			let expPeriodCode = $('#expPeriodCode').val();
 			if (expPeriodCode === "exp_period_2_5_1") {
+				$("#edate").val('');
 				$('#expPeriodCost').val('50000');
 				$('#expPeriodJournalCount').val('1');
 				$('#expPeriodLevel').val('2');
@@ -56,6 +64,7 @@
 					$("#edate").val(y + "-" + m + "-" + d);
 				});
 			} else if (expPeriodCode === "exp_period_4_7_2") {
+				$("#edate").val('');
 				$('#expPeriodCost').val('70000');
 				$('#expPeriodJournalCount').val('2');
 				$('#expPeriodLevel').val('4');
@@ -71,6 +80,7 @@
 					$("#edate").val(y + "-" + m + "-" + d);
 				});
 			} else if (expPeriodCode === "exp_period_6_7_3") {
+				$("#edate").val('');
 				$('#expPeriodCost').val('90000');
 				$('#expPeriodJournalCount').val('3');
 				$('#expPeriodLevel').val('6');
@@ -86,6 +96,7 @@
 					$("#edate").val(y + "-" + m + "-" + d);
 				});
 			} else if (expPeriodCode === "exp_period_8_11_4") {
+				$("#edate").val('');
 				$('#expPeriodCost').val('110000');
 				$('#expPeriodJournalCount').val('4');
 				$('#expPeriodLevel').val('7');
@@ -101,7 +112,7 @@
 					$("#edate").val(y + "-" + m + "-" + d);
 				});
 			}
-			$('#submit').click(function(){
+			$('#insertForm').click(function(){
 				$("#expadd").submit();
 			});
 		});
@@ -114,6 +125,7 @@
 	<h1>추가</h1>
 	<form id="expadd" name="expadd" action="${pageContext.request.contextPath}/experience/expAdd" method="post">
 	<input type="hidden" name="animalCode" value="${animalCode}">
+	<input type="hidden" name="blCode" value="${blCode}">
 	<div>
 		<select name="expPeriodCode" id="expPeriodCode">
 			<option>---기간 및 가격---</option>
@@ -127,8 +139,8 @@
 	체험 이유 : <input type="text" id="expPurpose" name="expPurpose">
 	
 	시작일 : <input type="text" name="expStartDate" id="sdate" size="10" maxlength="10" value="" /> ~
-	종료일 : <input type="text" name="expEndDate" id="edate" size="10" maxlength="10" value="" />
-	<button type="submit" id="submit">입력</button>
+	종료일 : <input type="text" name="expEndDate" id="edate" size="10" maxlength="10" value="" readonly="readonly"/>
+	<br><button type="button" id="insertForm">입력</button>
 	</form>
 </body>
 </html>

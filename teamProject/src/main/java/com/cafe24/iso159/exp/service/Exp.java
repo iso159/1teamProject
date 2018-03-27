@@ -7,7 +7,7 @@ public class Exp {
 	private String mShelterId;
 	private String blCode;
 	private String expPeriodCode;
-	private String osCodeReserve;
+	private String osCodeExp;
 	private String osCodeCostReturn;
 	private int expJournalCount;
 	private int expCost;
@@ -16,17 +16,16 @@ public class Exp {
 	private String expCheckDate;
 	private String expStartDate;
 	private String expEndDate;
-	
+	private String expModifiedDate;
 	@Override
 	public String toString() {
 		return "Exp [expCode=" + expCode + ", animalCode=" + animalCode + ", mExpId=" + mExpId + ", mShelterId="
-				+ mShelterId + ", blCode=" + blCode + ", expPeriodCode=" + expPeriodCode + ", osCodeReserve="
-				+ osCodeReserve + ", osCodeCostReturn=" + osCodeCostReturn + ", expJournalCount=" + expJournalCount
-				+ ", expCost=" + expCost + ", expPurpose=" + expPurpose + ", expReserveRequestDate="
-				+ expReserveRequestDate + ", expCheckDate=" + expCheckDate + ", expStartDate=" + expStartDate
-				+ ", expEndDate=" + expEndDate + "]";
+				+ mShelterId + ", blCode=" + blCode + ", expPeriodCode=" + expPeriodCode + ", osCodeExp=" + osCodeExp
+				+ ", osCodeCostReturn=" + osCodeCostReturn + ", expJournalCount=" + expJournalCount + ", expCost="
+				+ expCost + ", expPurpose=" + expPurpose + ", expReserveRequestDate=" + expReserveRequestDate
+				+ ", expCheckDate=" + expCheckDate + ", expStartDate=" + expStartDate + ", expEndDate=" + expEndDate
+				+ ", expModifiedDate=" + expModifiedDate + "]";
 	}
-	
 	public String getExpCode() {
 		return expCode;
 	}
@@ -63,11 +62,11 @@ public class Exp {
 	public void setExpPeriodCode(String expPeriodCode) {
 		this.expPeriodCode = expPeriodCode;
 	}
-	public String getOsCodeReserve() {
-		return osCodeReserve;
+	public String getOsCodeExp() {
+		return osCodeExp;
 	}
-	public void setOsCodeReserve(String osCodeReserve) {
-		this.osCodeReserve = osCodeReserve;
+	public void setOsCodeExp(String osCodeExp) {
+		this.osCodeExp = osCodeExp;
 	}
 	public String getOsCodeCostReturn() {
 		return osCodeCostReturn;
@@ -117,4 +116,11 @@ public class Exp {
 	public void setExpEndDate(String expEndDate) {
 		this.expEndDate = expEndDate;
 	}
+	public String getExpModifiedDate() {
+		return expModifiedDate;
+	}
+	public void setExpModifiedDate(String expModifiedDate) {
+		this.expModifiedDate = expModifiedDate;
+	}
+
 }

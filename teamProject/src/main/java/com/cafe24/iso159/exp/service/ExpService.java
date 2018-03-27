@@ -17,9 +17,31 @@ public class ExpService {
 	//디버그용 로거 생성
 	private static final Logger logger = LoggerFactory.getLogger(ExpService.class);
 	
+	
+	//사용자 자신의 체험 정보 리스트 뿌려주는 부분
+	public List<ExpAndAnimal> selectExpOneList(String mExpId) {
+		//호출된곳 확인
+		logger.debug("ExpService.java 호출 {selectExpOneList}.");
+		List<ExpAndAnimal> expAndAnimal = expDao.selectExpOneList(mExpId);
+		logger.debug("selectExpOneList() 메서드 실행 expAndAnimal is {}", expAndAnimal);
+		return expAndAnimal;
+	}
+	
+	//사용자 자신이 신청한 체험 정보 뿌려주는 부분
+	public ExpAndAnimalAndBusinessLicense selectExpOneInfo(String expCode){
+		//호출된곳 확인
+		logger.debug("ExpService.java 호출 {selectExpOneInfo}.");
+		ExpAndAnimalAndBusinessLicense expAndAnimalAndBusinessLicense = expDao.selectExpOneInfo(expCode);
+		logger.debug("selectExpOneInfo() 메서드 실행 expAndAnimalAndBusinessLicense is {}", expAndAnimalAndBusinessLicense);
+		return expAndAnimalAndBusinessLicense;
+	}
+	
 	//체험 신청할때 날짜선택 뿌려주는 부분
 	public List<ExpPeriod> expPeriod() {
+		//호출된곳 확인
+		logger.debug("ExpService.java 호출 {expPeriod}.");
 		List<ExpPeriod> expPeriod = expDao.selectExpPeriod();
+		logger.debug("expPeriod() 메서드 실행 expPeriod is {}", expPeriod);
 		return expPeriod;
 	}
 	
@@ -45,9 +67,8 @@ public class ExpService {
 		addexp.setmExpId(exp.getmExpId());
 		
 		//blCode 값 대입
-		String blCode = expDao.selectAnimalCodeBlCode(exp.getAnimalCode());
-		logger.debug("addExp() 메서드 실행 blCode is {}", blCode);
-		addexp.setBlCode(blCode);
+		logger.debug("addExp() 메서드 실행 blCode is {}", exp.getBlCode());
+		addexp.setBlCode(exp.getBlCode());
 		
 		//epCode 값 대입
 		logger.debug("addExp() 메서드 실행 ExpPeriodCode is {}", exp.getExpPeriodCode());
@@ -55,9 +76,9 @@ public class ExpService {
 		
 		//osCodeReserve 값 대입
 		//신청은 os_exp_reserve_12_1_1 이기 때문에 변수로 생성해서 대입
-		String osCodeReserve = "os_exp_reserve_12_1_1";
-		logger.debug("addExp() 메서드 실행 osCodeReserve is {}", osCodeReserve);
-		addexp.setOsCodeReserve(osCodeReserve);
+		String osCodeExp = "os_exp_exp_12_1_3";
+		logger.debug("addExp() 메서드 실행 osCodeReserve is {}", osCodeExp);
+		addexp.setOsCodeExp(osCodeExp);
 		
 		//osCodeCostReturn 값 대입
 		//책임비는 처음에 받기 때문에 os_cost_13_1_1 로 변수로 생성해서 대입

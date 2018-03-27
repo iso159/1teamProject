@@ -19,8 +19,28 @@ public class ExpDao {
 	//맵퍼 id를 가져올때 사용할 맵퍼 생성
 	private final String nameSpace = "com.cafe24.iso159.exp.service.ExpMapper.";
 	
+	
+	//사용자가 자기가신청한 체험 리스트 보는 코드
+	public List<ExpAndAnimal> selectExpOneList(String mExpId) {
+		//호출된곳 확인
+		logger.debug("ExpDao.java 호출 {selectExpOneList}.");
+		List<ExpAndAnimal> expAndAnimal = sqlSessionTemplate.selectList(nameSpace + "selectExpOneList", mExpId);
+		logger.debug("selectExpOneList() 메서드 실행 expAndAnimal is {}", expAndAnimal);
+		return expAndAnimal;
+	}
+	
+	//사용자가 자기가신청한 체험정보 보는 코드
+	public ExpAndAnimalAndBusinessLicense selectExpOneInfo(String expCode){
+		//호출된곳 확인
+		logger.debug("ExpDao.java 호출 {selectExpOne}.");
+		ExpAndAnimalAndBusinessLicense expAndAnimalAndBusinessLicense = sqlSessionTemplate.selectOne(nameSpace + "selectExpAndAnimalAndBusinessLicenseOneInfo", expCode);
+		logger.debug("selectExpOneInfo() 메서드 실행 expAndAnimalAndBusinessLicense is {}", expAndAnimalAndBusinessLicense);
+		return expAndAnimalAndBusinessLicense;
+	}
+	
 	//expPeriod 목록 띄워주는 코드
 	public List<ExpPeriod> selectExpPeriod() {
+		//호출된곳 확인
 		logger.debug("ExpDao.java 호출 {selectExpPeriod}.");
 		List<ExpPeriod> expPeriod = sqlSessionTemplate.selectList(nameSpace+"selectExpPeriod");
 		logger.debug("selectExpPeriod() 메서드 실행 expPeriod is {}", expPeriod);
@@ -35,13 +55,6 @@ public class ExpDao {
 		int expCode = sqlSessionTemplate.selectOne(nameSpace+"selectExpCode");
 		logger.debug("selectExpCode() 메서드 실행 expCode is {}", expCode+1);
 		return expCode+1;
-	}
-	
-	//AnimalCode를 사용해서 BlCode 구하는 코드
-	public String selectAnimalCodeBlCode(String animalCode) {
-		logger.debug("ExpDao.java 호출 {selectAnimalCodeBlCode}.");
-		String blCode = sqlSessionTemplate.selectOne(nameSpace+"selectAnimalCodeBlCode", animalCode);
-		return blCode;
 	}
 	
 	//exp 입력 코드
