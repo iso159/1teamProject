@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,16 @@ public class ShelterController {
 	@Autowired
 	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterController.class);
+	
+	// 등록 결정된 보호소 리스트를 model에 담아 staffBusinessLicenseList.jsp로 이동되는 서블릿
+	@RequestMapping(value="/shelter/staffBusinessLicenseGet")
+	public String getStaffBusinessLicense(Model model){
+		logger.debug("getStaffBusinessLicense() 메서드 호출");
+		List<BusinessLicense> list = shelterService.getShelterList();
+		model.addAttribute("list", list);
+		logger.debug("getStaffBusinessLicense() 메서드 끝");
+		return "/shelter/staffBusinessLicenseList";
+	}	
 	
 	@RequestMapping(value="/shelter/businessLicenseSet")
 	public String setBusinessLicense(@RequestParam(value="blCode") String blCode
@@ -68,35 +79,38 @@ public class ShelterController {
 	
 	@RequestMapping(value="/shelter/businessLicenseDeny")
 	public String denyBusinessLicense(@RequestParam(value="blCode") String blCode
-									, HttpSession session) {
+									, Model model) {
 		logger.debug("denyBusinessLicense() 메서드 호출");
 		shelterService.businessLicense();
-		session.setAttribute("blCode", blCode);
+		model.addAttribute("blCode", blCode);
 		logger.debug("denyBusinessLicense() 메서드 끝");
 		return "/shelter/businessLicenseDeny";
 	}
 	
+	// 보호소 대표 등록시 업로드한 파일리스트를 담아 businessLicenseFileList.jsp로 이동되는 서블릿 
 	@RequestMapping(value="/shelter/fileList")
 	public String getBusinessLicenseFileList(@RequestParam(value="blCode") String blCode,
-											HttpSession session) {
+											Model model) {
 		logger.debug("getBusinessLicenseFileList(...) 메서드 호출");
 		logger.debug("getBusinessLicenseFileList(...) 메서드 blCode is {}", blCode);
 		MemberIdAndBusinessLicenseFile memberIdAndBusinessLicenseFile = shelterService.getBusinessLicenseFileList(blCode);
 		logger.debug("getBusinessLicenseFileList(...) 메서드 memberIdAndBusinessLicenseFile is {}", memberIdAndBusinessLicenseFile);
-		session.setAttribute("memberIdAndBusinessLicenseFile", memberIdAndBusinessLicenseFile);		
+		model.addAttribute("memberIdAndBusinessLicenseFile", memberIdAndBusinessLicenseFile);		
 		logger.debug("getBusinessLicenseFileList(...) 메서드 끝");
 		return "/shelter/businessLicenseFileList";
 	}
 	
+	// 보호소 대표 등록 신청을한 리스트를 담아 businessLicenseList.jsp로 이동되는 서블릿
 	@RequestMapping(value="/businessLicenseList")
-	public String getBusinessLicense(HttpSession session) {
+	public String getBusinessLicense(Model model) {
 		logger.debug("getBusinessLicense() 메서드 호출");
 		List<BusinessLicense> list = shelterService.getBusinessLicense();
-		session.setAttribute("list", list);
+		model.addAttribute("list", list);
 		logger.debug("getBusinessLicense() 메서드 끝");
 		return "/shelter/businessLicenseList";
 	}
 	
+	// 보호소 메뉴로 이동되는 서블릿
 	@RequestMapping(value="/shelter", method=RequestMethod.GET)
 	public String BusinessLicense() {
 		logger.debug("BusinessLicense() 메서드 호출");
@@ -105,7 +119,7 @@ public class ShelterController {
 		return "/shelter/shelterMenu";
 	}
 	
-	
+	// 보호소 대표 신청 등록폼으로 이동되는 서블릿
 	@RequestMapping(value="/shelter/businessLicenseRequest", method=RequestMethod.GET)
 	public String addBusinessLicense() {
 		logger.debug("addBusinessLicense() 메서드 호출");
@@ -114,6 +128,7 @@ public class ShelterController {
 		return "/shelter/businessLicenseRequest";
 	}
 	
+	// 보호소 대표 신청 등록 폼 데이터 입력후 매핑된 서블릿
 	@RequestMapping(value="/shelter/businessLicenseRequest", method=RequestMethod.POST)
 	public String addBusinessLicense(BusinessLicenseCommand businessLicenseCommand, HttpSession session
 									, @RequestParam(value="multipartFile") MultipartFile file) {

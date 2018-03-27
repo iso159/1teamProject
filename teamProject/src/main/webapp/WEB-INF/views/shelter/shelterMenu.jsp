@@ -28,6 +28,11 @@
 				<button type="button" class="btn btn-warning">대표 보호소 신청 리스트</button>
 			</a>
 		</li>
+		<li class="list-group-item list-group-item-primary">
+			<a href="${pageContext.request.contextPath}/shelter/staffBusinessLicenseGet">
+				<button type="button" class="btn btn-info">직원 신청 보호소 리스트</button>
+			</a>
+		</li>
 	</ul>
 </body>
 </html>

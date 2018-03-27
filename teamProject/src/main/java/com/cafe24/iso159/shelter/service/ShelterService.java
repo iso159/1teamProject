@@ -23,6 +23,18 @@ public class ShelterService {
 	@Autowired
 	ShelterDao shelterDao;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
+	String osCodeLicenseStatus = null;
+	
+	// 등록된 보호소 리스트를 조회하는 쿼리문을 접근하는 selectShelterList DAO 호출
+	public List<BusinessLicense> getShelterList(){
+		logger.debug("getShelterList() 메서드 호출");
+		osCodeLicenseStatus = "os_business_1_1_3";
+		List<BusinessLicense> list = shelterDao.selectShelterList(osCodeLicenseStatus);
+		logger.debug("getShelterList() 메서드 list is {}", list);
+		logger.debug("getShelterList() 메서드 끝");
+		return list;
+	}
+	
 	
 	// 체험자권한을 보호소 대표로 변경 및 보호소 대표 신청 상태 코드를 결정 완료로 수정하는 쿼리문을 접근하는 DAO 메서드 호출
 	public void modifyShelterRight(String blCode, String mMemberId) {
