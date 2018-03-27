@@ -3,7 +3,7 @@ package com.cafe24.iso159.adopt.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.servlet.ModelAndView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,8 @@ public class AdoptService {
 					String ofOriginName = file.getOriginalFilename();
 					// 파일확장자
 					int pos = ofOriginName.lastIndexOf(".");
+					// 원본 파일명의 마지막 . 위치 앞의 원본 파일명을 변수에 입력
+					String originalFileName = ofOriginName.substring(0, pos);
 					String ofExt = ofOriginName.substring(pos+1);
 					// 파일크기
 					long ofSize = file.getSize();
@@ -94,7 +97,7 @@ public class AdoptService {
 					adoptRequestFile.setOfCode(ofCode);
 					adoptRequestFile.setAdoptRequestCode(ArCode);
 					adoptRequestFile.setOfPath(path);
-					adoptRequestFile.setOfOriginName(ofOriginName);
+					adoptRequestFile.setOfOriginName(originalFileName);
 					adoptRequestFile.setOfSaveName(ofSaveName);
 					adoptRequestFile.setOfExt(ofExt);
 					adoptRequestFile.setOfSize(ofSize);
@@ -177,6 +180,47 @@ public class AdoptService {
 			logger.debug("listAdoptFileList() 메소드 호출 adoptRequestCode is {}", adoptRequestCode);
 			List<AdoptRequestFile> list = adoptDao.selectAdoptFileList(adoptRequestCode);
 			return list;
+		}
+		
+	// 입양파일 다운로드
+		public ModelAndView downloadFile(HttpServletRequest request, String path, String ofSaveName, String ofExt, String ofOriginName) {
+			logger.debug("downloadFile() 메소드 호출");
+			logger.debug("downloadFile() 메서드 실행 paht is {}", path);
+			logger.debug("downloadFile() 메서드 실행 fileName is {}", ofSaveName);
+			logger.debug("downloadFile() 메서드 실행 fileName is {}", ofOriginName);
+			
+			// 경로 + 다운받을 파일이름을 file에 입력
+			File file = new File(path+ofSaveName);
+			logger.debug("downloadFile() 메서드 실행 file is {}", file);
+			// 입력한 파일을 읽을수 없다면 if블록실행
+			if(!file.canRead()) {
+				logger.debug("{} 파일을 찾지 못했습니다.",file);
+				return new ModelAndView("fileDownloadView", "file",file);
+			}
+			// 확장자 request에 셋팅
+			request.setAttribute("fileExt", ofExt);
+			// 저장 파일명 request에 셋팅
+			request.setAttribute("fileName", ofSaveName);
+			// 원본 파일명을 request에 매핑
+			request.setAttribute("ofOriginName", ofOriginName);
+			// 확장자명을 더해서 파일 셋팅
+			File reFile = new File(path+ofSaveName+"."+ofExt);
+			logger.debug("downloadFile() 메서드 실행 reFile is {}", reFile);
+
+			try {
+				// 파일이 있다면 if블록실행
+				if(file.exists()) {
+					// 확장자명을 더한 파일명으로 수정
+					file.renameTo(reFile);
+					// 확장자명을 더한 파일을 request에 셋팅
+					request.setAttribute("reFile", reFile);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			return new ModelAndView("fileDownloadView", "file",reFile);
+			
 		}
 		
 	// 상담내용입력

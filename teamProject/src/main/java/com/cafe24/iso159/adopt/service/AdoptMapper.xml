@@ -13,6 +13,7 @@
                 adopt_request_code as adoptRequestCode,
                 of_path as ofPath,
                 of_origin_name as ofOriginName,
+                of_save_name as ofSaveName, 
                 of_ext as ofExt,
                 of_size as ofSize,
                 of_down_date as ofDownDate

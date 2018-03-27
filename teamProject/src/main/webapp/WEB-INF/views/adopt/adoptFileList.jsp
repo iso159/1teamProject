@@ -27,6 +27,7 @@
 				<th>확장자</th>
 				<th>사이즈</th>
 				<th>등록날짜</th>
+				<th>다운로드</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,9 +39,12 @@
 					<td>${aF.ofExt}</td>
 					<td>${aF.ofSize}</td>
 					<td>${aF.ofDownDate}</td>
+					<td>
+						<a href="${pageContext.request.contextPath}/adopt/adoptFileDownload?ofSaveName=${aF.ofSaveName}&ofExt=${aF.ofExt}&ofOriginName=${aF.ofOriginName}">다운로드</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
-	</table>
+	</table><br>
 	<a href="${pageContext.request.contextPath}/adopt/adoptList"><button type="button" id="Btn" class="btn btn-success">상담결정</button></a>
 </body>

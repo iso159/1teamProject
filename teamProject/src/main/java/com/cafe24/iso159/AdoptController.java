@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.iso159.adopt.service.AdoptCommand;
 import com.cafe24.iso159.adopt.service.AdoptRequest;
@@ -18,6 +19,8 @@ import com.cafe24.iso159.survey.service.SurveyService;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -67,8 +70,6 @@ public class AdoptController {
 		path += "resources/adoptUpload/";
 				
 		logger.debug("addAdopt() 메서드 path is {}",path);
-		//logger.debug("fileName :{}",adoptCommand);
-		//logger.debug("filesize :{}",adoptCommand.getFile().size());
 		
 		adoptService.addAdopt(adoptCommand, path, ckfile);
 		return "redirect:/adopt/adoptList";	//입양신청 완료 후 입양리스트로
@@ -88,6 +89,23 @@ public class AdoptController {
 		logger.debug("list is {}", list);
 		model.addAttribute("list", list);
 		return "/adopt/adoptFileList";
+	}
+	
+	// 파일다운로드 요청
+	@RequestMapping(value="/adopt/adoptFileDownload", method = RequestMethod.GET)
+	public ModelAndView downloadAdoptFile(	HttpSession session, HttpServletRequest request, 
+											HttpServletResponse response,								
+											@RequestParam(value="ofSaveName") String ofSaveName, 
+											@RequestParam(value="ofOriginName") String ofOriginName,
+											@RequestParam(value="ofExt") String ofExt) {
+		logger.debug("downloadAdoptFile() 메서드 호출");
+		logger.debug("ofSaveName :{}",ofSaveName);
+		logger.debug("ofOriginName :{}",ofOriginName);
+		logger.debug("ofExt :{}",ofExt);
+		// resource 폴더경로
+		String path = session.getServletContext().getRealPath("/");
+		path += "resources/adoptUpload/";
+		return adoptService.downloadFile(request,path,ofSaveName,ofExt,ofOriginName);
 	}
 
 	// 상담입력페이지 요청
