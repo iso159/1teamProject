@@ -15,8 +15,13 @@
 				<td><input type="hidden" name="osCodeAnimal" value="os_animal_3_1_1"></td>
 			</tr>
 			<tr>
-				<td>동물종류코드:</td>
-				<td><input type="text" name="osCodeKind"></td>
+				<td>동물종류:</td>
+				<td>
+					<select name="osCodeKind">
+						<option value="os_animal_kinds_11_1_1">강아지</option>
+						<option value="os_animal_kinds_11_1_2">고양이</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>동물코드:</td>

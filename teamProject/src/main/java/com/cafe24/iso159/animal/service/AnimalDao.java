@@ -8,9 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.cafe24.iso159.member.service.Member;
-import com.cafe24.iso159.shelter.service.BusinessLicense;
-
 @Repository
 public class AnimalDao {
 	@Autowired
@@ -25,20 +22,10 @@ public class AnimalDao {
 		return sqlSessionTemplate.insert(nameSpace+"insertAnimal", animal); 
 	}
 	//동물 리스트 조회
-	public List<Animal> selectAnimalList(){
-		
+	public List<AnimalCommand> selectAnimalList(){
 		logger.debug("selectAnimalList()메서드 호출");
-		List<Animal> AnimalList = sqlSessionTemplate.selectList(nameSpace+"selectAnimalList");
+		List<AnimalCommand> AnimalList = sqlSessionTemplate.selectList(nameSpace+"selectAnimalList");
 		logger.debug("AnimalList is {}", AnimalList);
 		return AnimalList;
-	}
-	//bl_code로 보호소 이름조회
-	public BusinessLicense selectShelterName(String blCode) {
-		
-		logger.debug("selectShelterName()메서드 호출");
-		logger.debug("blcode is {}", blCode);
-		BusinessLicense shelterName = sqlSessionTemplate.selectOne(nameSpace+"selectShelterName", blCode);
-		logger.debug("shelterName is {}", shelterName);
-		return shelterName;
 	}
 }

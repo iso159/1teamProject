@@ -1,8 +1,8 @@
 package com.cafe24.iso159.animal.service;
 
-public class AnimalAndBusinessLicense {
-	private String osCodeAnimal;
-	private String osCodeKind;
+public class AnimalCommand {
+	private String osName;
+	private String osNameAnimalKind;
 	private String animalBreed;
 	private String animalArea;
 	private String animalIdCode;
@@ -10,17 +10,17 @@ public class AnimalAndBusinessLicense {
 	private int animalAge;
 	private String blShelterName;
 	private String animalEnrollDate;
-	public String getOsCodeAnimal() {
-		return osCodeAnimal;
+	public String getOsName() {
+		return osName;
 	}
-	public void setOsCodeAnimal(String osCodeAnimal) {
-		this.osCodeAnimal = osCodeAnimal;
+	public void setOsName(String osName) {
+		this.osName = osName;
 	}
-	public String getOsCodeKind() {
-		return osCodeKind;
+	public String getOsNameAnimalKind() {
+		return osNameAnimalKind;
 	}
-	public void setOsCodeKind(String osCodeKind) {
-		this.osCodeKind = osCodeKind;
+	public void setOsNameAnimalKind(String osNameAnimalKind) {
+		this.osNameAnimalKind = osNameAnimalKind;
 	}
 	public String getAnimalBreed() {
 		return animalBreed;
@@ -66,7 +66,7 @@ public class AnimalAndBusinessLicense {
 	}
 	@Override
 	public String toString() {
-		return "AnimalCommand [osCodeAnimal=" + osCodeAnimal + ", osCodeKind=" + osCodeKind + ", animalBreed="
+		return "AnimalCommand [osName=" + osName + ", osNameAnimalKind=" + osNameAnimalKind + ", animalBreed="
 				+ animalBreed + ", animalArea=" + animalArea + ", animalIdCode=" + animalIdCode + ", animalWeight="
 				+ animalWeight + ", animalAge=" + animalAge + ", blShelterName=" + blShelterName + ", animalEnrollDate="
 				+ animalEnrollDate + "]";

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cafe24.iso159.animal.service.Animal;
-import com.cafe24.iso159.animal.service.AnimalAndBusinessLicense;
+import com.cafe24.iso159.animal.service.AnimalCommand;
 import com.cafe24.iso159.animal.service.AnimalService;
 
 @Controller
@@ -50,7 +50,7 @@ public class AnimalController {
 	@RequestMapping(value="/animal/animalList", method=RequestMethod.GET)
 	public String animal(HttpSession session, Model model) {
 		logger.debug("animal()메서드 호출");
-		List<Animal> AnimalList = animalservice.listAnimal();
+		List<AnimalCommand> AnimalList = animalservice.listAnimal();
 		model.addAttribute("AnimalList", AnimalList);
 		return "animal/animalList";
 	}
