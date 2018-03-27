@@ -28,6 +28,26 @@ public class ShelterController {
 	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterController.class);
 	
+	// 직원 등록 신청 리스트
+	@RequestMapping(value="/shelter/requestShelterStaffList")
+	public String shelterStaffRequestList() {
+		
+		return "/shelter/shelterMenu";
+	}
+	
+	// 직원 등록 신청 요청을 받아 처리후 리다이렉트해주는 서블릿
+	@RequestMapping(value="/shelter/requestShelterStaff")
+	public String shelterStaffRequest(HttpSession session
+									 , @RequestParam(value="blCode") String blCode) {
+		logger.debug("shelterStaffRequest(...) 메서드 호출");
+		logger.debug("shelterStaffRequest(...) 메서드 blCode is {}", blCode);
+		String loginId = (String)session.getAttribute("loginId");
+		logger.debug("shelterStaffRequest(...) 메서드 loginId is {}", loginId);
+		shelterService.addShelterStaffRequest(blCode, loginId);
+		logger.debug("shelterStaffRequest(...) 메서드 끝");
+		return "redirect:/shelter/requestShelterStaffList";
+	}
+	
 	// 등록 결정된 보호소 리스트를 model에 담아 staffBusinessLicenseList.jsp로 이동되는 서블릿
 	@RequestMapping(value="/shelter/staffBusinessLicenseGet")
 	public String getStaffBusinessLicense(Model model){

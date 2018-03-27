@@ -40,7 +40,7 @@
 						<td>${bl.blShelterPostcode}</td>
 						<td>${bl.blShelterAddress}</td>
 						<td>
-							<a href="#">
+							<a href="${pageContext.request.contextPath}/shelter/requestShelterStaff?blCode=${bl.blCode}">
 								<button type="button">직원신청</button>
 							</a>
 						</td>

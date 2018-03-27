@@ -34,6 +34,20 @@
 		<result column="bl_shelter_date" property="blShelterDate"/>
 	</resultMap>
 	
+	<!-- t_shelter_staff_request테이블의 ssr_code를 잘라서 가장 높은 숫자를 리턴하는 쿼리문 -->
+	<select id="selectSsrCodeNum" resultType="String">
+		SELECT 
+			MAX(CAST(SUBSTRING(ssr_code,10) AS DECIMAL)) 
+		FROM t_shelter_staff_request
+	</select>
+	
+	<!-- 보호소 직원 신청 등록 쿼리문 -->
+	<insert id="insertShelterStaffRequest" parameterType="com.cafe24.iso159.shelter.service.ShelterStaffRequest">
+		INSERT INTO 
+			t_shelter_staff_request (ssr_code, m_id, bl_code, os_code_staff_request, ssr_request_date) 
+		VALUES (#{ssrCode}, #{mId}, #{blCode}, #{osCodeStaffRequest}, now());
+	</insert>
+	
 	<!-- 대표 보호소 목록 리스트 -->
 	<select id="selectShelterList" parameterType="java.lang.String" resultMap="BusinessLicenseMap">
 		SELECT 

@@ -25,7 +25,30 @@ public class ShelterService {
 	private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
 	String osCodeLicenseStatus = null;
 	
-	// 등록된 보호소 리스트를 조회하는 쿼리문을 접근하는 selectShelterList DAO 호출
+	// 보호소 직원 신청 등록 쿼리문을 접근하는 insertShelterStaffRequest DAO 메서드 호출
+	public void addShelterStaffRequest(String blCode,String loginId) {
+		logger.debug("addShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) 메서드 호출");
+		logger.debug("addShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) 메서드 loginId is {}", loginId);
+		logger.debug("addShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) 메서드 blCode is {}", blCode);
+		String ssrCode = "ssr_code_";
+		String ssrCodeNum = shelterDao.selectSsrCodeNum();
+		final String osCodeStaffRequest = "os_shelter_23_1_1";
+		if(ssrCodeNum == null) {
+			ssrCode += 1;
+		}else {
+			ssrCode += ssrCodeNum;
+		}
+		ShelterStaffRequest shelterStaffRequest = new ShelterStaffRequest();
+		shelterStaffRequest.setBlCode(blCode);
+		shelterStaffRequest.setSsrCode(ssrCode);
+		shelterStaffRequest.setmId(loginId);
+		shelterStaffRequest.setOsCodeStaffRequest(osCodeStaffRequest);
+		logger.debug("addShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) 메서드 shelterStaffRequest is {}", shelterStaffRequest);
+		shelterDao.insertShelterStaffRequest(shelterStaffRequest);
+		logger.debug("addShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) 메서드 끝");
+	}
+	
+	// 등록된 보호소 리스트를 조회하는 쿼리문을 접근하는 selectShelterList DAO 메서드 호출
 	public List<BusinessLicense> getShelterList(){
 		logger.debug("getShelterList() 메서드 호출");
 		osCodeLicenseStatus = "os_business_1_1_3";
@@ -46,10 +69,12 @@ public class ShelterService {
 		// 보호소 대표 신청 코드 결정 완료로 입력
 		final String OsCodeLicenseStatus = "os_business_1_1_3";
 		Map<String,Object> rightMap = new HashMap<String, Object>();
+		// 권한 관련 변수 매핑
 		rightMap.put("mMemberId", mMemberId);
 		rightMap.put("mRightCode", mRightCode);
 		logger.debug("modifyShelterRight(String blCode, String mMemberId) 메서드 rightMap is {}",rightMap);
 		Map<String,Object> osCodeMap = new HashMap<String,Object>();
+		// 상태코드 관련 변수 매핑
 		osCodeMap.put("blCode", blCode);
 		osCodeMap.put("OsCodeLicenseStatus", OsCodeLicenseStatus);
 		logger.debug("modifyShelterRight(String blCode, String mMemberId) 메서드 osCodeMap is {}",osCodeMap);

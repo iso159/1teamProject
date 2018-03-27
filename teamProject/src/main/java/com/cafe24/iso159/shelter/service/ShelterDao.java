@@ -16,17 +16,35 @@ public class ShelterDao {
 	private static final Logger logger = LoggerFactory.getLogger(ShelterDao.class);
 	private final String nameSpace = "com.cafe24.iso159.shelter.service.ShelterMapper.";
 	
-	// 상태코드별 보호소 등록 신청 조회 쿼리문 selectShelterList를 접근하는 메서드
+	// t_shelter_staff_request테이블의 ssr_code를 잘라서 가장 높은 숫자를 리턴하는 쿼리문을 접근하는 DAO 메서드
+	public String selectSsrCodeNum() {
+		logger.debug("selectSsrCodeNum() 메서드 호출");
+		String ssrCodeNum = sqlSessionTemplate.selectOne(nameSpace + "selectSsrCodeNum");
+		logger.debug("selectSsrCodeNum() 메서드 ssrCodeNum is {}", ssrCodeNum);
+		logger.debug("selectSsrCodeNum() 메서드 끝");
+		return ssrCodeNum;
+	}
+	
+	// 보호소 직원 신청 쿼리문 insertShelterStaffRequest을 접근하는 DAO 메서드
+	public void insertShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) {
+		logger.debug("insertShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) 메서드 호출");
+		logger.debug("insertShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) 메서드 shelterStaffRequest is {}", shelterStaffRequest);
+		int result = sqlSessionTemplate.insert(nameSpace + "insertShelterStaffRequest", shelterStaffRequest);
+		logger.debug("insertShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) 메서드 result is {}", result);
+		logger.debug("insertShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) 메서드 끝");
+	}
+	
+	// 상태코드별 보호소 등록 신청 조회 쿼리문 selectShelterList를 접근하는 DAO 메서드
 	public List<BusinessLicense> selectShelterList(String osCodeLicenseStatus){
-		logger.debug("selectShelterList() 메서드 호출");
-		logger.debug("selectShelterList() 메서드 osCodeLicenseStatus is {}", osCodeLicenseStatus);
+		logger.debug("selectShelterList(String osCodeLicenseStatus) 메서드 호출");
+		logger.debug("selectShelterList(String osCodeLicenseStatus) 메서드 osCodeLicenseStatus is {}", osCodeLicenseStatus);
 		List<BusinessLicense> list = sqlSessionTemplate.selectList(nameSpace + "selectShelterList", osCodeLicenseStatus);
-		logger.debug("selectShelterList() 메서드 list is {}", list);
-		logger.debug("selectShelterList() 메서드 끝");
+		logger.debug("selectShelterList(String osCodeLicenseStatus) 메서드 list is {}", list);
+		logger.debug("selectShelterList(String osCodeLicenseStatus) 메서드 끝");
 		return list;
 	}
 	
-	// 체험자 권한 보호소로 수정하는 쿼리문을 접근하는 메서드
+	// 체험자 권한 보호소로 수정하는 쿼리문을 접근하는 DAO 메서드
 	public void updateShelterRight(Map<String,Object> map) {
 		logger.debug("updateShelterRight(Map<String,Object> map) 메서드 호출");
 		logger.debug("updateShelterRight(Map<String,Object> map) 메서드 map is {}", map);
@@ -34,7 +52,7 @@ public class ShelterDao {
 		logger.debug("updateShelterRight(Map<String,Object> map) 메서드 끝");
 	}
 	
-	// 보호소 대표 신청 상태 거절로 수정 및 거절 사유 등록(수정)하는 쿼리문을 접근하는 메서드 
+	// 보호소 대표 신청 상태 거절로 수정 및 거절 사유 등록(수정)하는 쿼리문을 접근하는 DAO 메서드 
 	public void updateBusinessLicenseDeny(Map<String,Object> map) {
 		logger.debug("updateBusinessLicenseDeny(Map<String,Object> map) 메서드 호출");
 		logger.debug("updateBusinessLicenseDeny(Map<String,Object> map) 메서드 map is {}",map);
@@ -42,7 +60,7 @@ public class ShelterDao {
 		logger.debug("updateBusinessLicenseDeny(Map<String,Object> map) 메서드 끝");
 	}
 	
-	// 보호소 대표 신청 상태를 수정하는 쿼리문을 접근하는 메서드
+	// 보호소 대표 신청 상태를 수정하는 쿼리문을 접근하는 DAO 메서드
 	public void updateBusinessLicenseOsCodeLicenseStatus(Map<String,Object> map) {
 		logger.debug("updateBusinessLicense(Map<String,Object> map) 메서드 호출");
 		logger.debug("updateBusinessLicense(Map<String,Object> map) 메서드 map is {}", map);
@@ -51,7 +69,7 @@ public class ShelterDao {
 		logger.debug("updateBusinessLicense(Map<String,Object> map) 메서드 끝");
 	}
 	
-	// 개인 파일리스트 조회 쿼리문을 접근하는 메서드
+	// 개인 파일리스트 조회 쿼리문을 접근하는 DAO 메서드
 	public MemberIdAndBusinessLicenseFile selectBusinessLicenseFileList(String blCode){
 		logger.debug("selectBusinessLicenseFileList(String blCode) 메서드 호출");
 		logger.debug("selectBusinessLicenseFileList(String blCode) 메서드 blCode is {}", blCode);
@@ -61,7 +79,7 @@ public class ShelterDao {
 		return memberIdAndBusinessLicenseFile;
 	}
 	
-	// 보호소 대표 신청 전체 리스트 조회 쿼리문을 접근하는 메서드
+	// 보호소 대표 신청 전체 리스트 조회 쿼리문을 접근하는 DAO 메서드
 	public List<BusinessLicense> selectAllBusinessLicense() {
 		logger.debug("selectBusinessLicense() 메서드 호출");
 		List<BusinessLicense> list = sqlSessionTemplate.selectList(nameSpace + "selectAllBusinessLicense");
@@ -70,7 +88,7 @@ public class ShelterDao {
 		return list;
 	}
 	
-	// t_overall_file 테이블의 of_code를 잘라서 가장 높은 숫자를 리턴하는 쿼리문을 접근하는 메서드
+	// t_overall_file 테이블의 of_code를 잘라서 가장 높은 숫자를 리턴하는 쿼리문을 접근하는 DAO 메서드
 	public String selectOfCodeNum() {
 		logger.debug("selectOfCodeNum() 메서드 호출");
 		String result = sqlSessionTemplate.selectOne(nameSpace + "selectOfCodeNum");
