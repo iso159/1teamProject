@@ -167,8 +167,15 @@ public class AdoptService {
 		
 	// 입양신청리스트
 		public List<AdoptRequest> listAdoptRequest(){
-			logger.debug("AdoptRequest<List> listAdoptRequest() 메소드 호출");
+			logger.debug("List<AdoptRequest> listAdoptRequest() 메소드 호출");
 			List<AdoptRequest> list = adoptDao.selectAdoptRequest();
+			return list;
+		}
+		
+	// 입양신청파일 조회
+		public List<AdoptRequestFile> listAdoptFileList(String adoptRequestCode){
+			logger.debug("listAdoptFileList() 메소드 호출 adoptRequestCode is {}", adoptRequestCode);
+			List<AdoptRequestFile> list = adoptDao.selectAdoptFileList(adoptRequestCode);
 			return list;
 		}
 		

@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.iso159.adopt.service.AdoptCommand;
 import com.cafe24.iso159.adopt.service.AdoptRequest;
+import com.cafe24.iso159.adopt.service.AdoptRequestFile;
 import com.cafe24.iso159.adopt.service.AdoptService;
 import com.cafe24.iso159.survey.service.SurveyList;
 import com.cafe24.iso159.survey.service.SurveyService;
@@ -75,12 +76,17 @@ public class AdoptController {
 	}
 	
 	// 파일확인페이지 요청
-	@RequestMapping(value="/adopt/adoptCheck", method = RequestMethod.GET)
-	public String UpdateOsCodeAdopt(HttpSession session,
+	@RequestMapping(value="/adopt/adoptFileCheck", method = RequestMethod.GET)
+	public String UpdateOsCodeAdopt(HttpSession session,Model model,
 				@RequestParam(value="adoptRequestCode") String adoptRequestCode) {
 		logger.debug("UpdateOsCodeAdopt() 메서드 호출");
 		logger.debug("adoptRequestCode is {}", adoptRequestCode);
+		//파일확인클릭시 상태코드 변경
 		adoptService.ModifyOsCodeAdoptRequest(adoptRequestCode);
+		//파일리스트조회
+		List<AdoptRequestFile> list = adoptService.listAdoptFileList(adoptRequestCode);
+		logger.debug("list is {}", list);
+		model.addAttribute("list", list);
 		return "/adopt/adoptFileList";
 	}
 

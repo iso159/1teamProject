@@ -56,7 +56,7 @@
 				<td>${aR.adoptRequestReason}</td>
 				<td>${aR.adoptRequestDate}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/adopt/adoptCheck?adoptRequestCode=${aR.adoptRequestCode}">파일확인</a>
+					<a href="${pageContext.request.contextPath}/adopt/adoptFileCheck?adoptRequestCode=${aR.adoptRequestCode}">파일확인</a>
 				</td>
 				<td>${aR.adoptRequestAdviceDate}</td>
 				<td>

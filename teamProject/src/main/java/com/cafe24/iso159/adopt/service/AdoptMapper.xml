@@ -3,6 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.adopt.service.AdoptMapper">
+	
+	<!-- 파일리스트 -->
+	<select id="selectAdoptFileList"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest"
+			resultType="com.cafe24.iso159.adopt.service.AdoptRequestFile">
+		SELECT
+				of_code as ofCode,
+                adopt_request_code as adoptRequestCode,
+                of_path as ofPath,
+                of_origin_name as ofOriginName,
+                of_ext as ofExt,
+                of_size as ofSize,
+                of_down_date as ofDownDate
+		FROM 	t_overall_file
+		WHERE 	adopt_request_code = #{adoptRequestCode}
+	</select>
 
 	<!-- 파일등록 -->
 	<insert id="insertAdoptFile"
@@ -31,7 +47,7 @@
 			now()
 		)
 	</insert>
-
+	
 	<!-- 입양요청 max코드값 조회 쿼리문 -->
 	<select id="selectLastCodeAr" resultType="String">
 		select max(CAST(substring(adopt_request_code,20) AS DECIMAL)) as maxcol from t_adopt_request

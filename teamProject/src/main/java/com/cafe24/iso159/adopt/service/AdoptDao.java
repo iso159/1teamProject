@@ -54,6 +54,13 @@ public class AdoptDao {
 		sqlSessionTemplate.update(nameSpace + "updateOsCodeAdopt412", adoptRequestCode);
 	}
 	
+	// 입양신청 파일조회
+	public List<AdoptRequestFile> selectAdoptFileList(String adoptRequestCode){
+		logger.debug("selectAdoptFileList() 메서드 호출 adoptRequestCode is {}", adoptRequestCode);
+		List<AdoptRequestFile> list = sqlSessionTemplate.selectList(nameSpace + "selectAdoptFileList", adoptRequestCode);
+		return list;
+	}
+	
 	// 상담등록확인
 	public void updateOsCodeAdoptCounsel(String adoptRequestCode) {
 		logger.debug("updateOsCodeAdoptCounsel() 메서드 호출");
