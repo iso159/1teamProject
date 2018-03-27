@@ -21,14 +21,10 @@ public class AnimalService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AnimalService.class);
 	//동물등록
-	public void addAnimal(Animal animal, HttpSession session){
+	public void addAnimal(Animal animal, String mShelterId, String blCode){
 		logger.debug("addAnimal()메서드 Animal is {}",animal);
-		//세션에서 로그인 아이디를 가져와서 mShelterId에 셋팅
-		String mShelterId = (String)session.getAttribute("loginId");
-		logger.debug("mShelterId is {}", mShelterId);
+		//m_shelterId셋팅
 		animal.setmShelterId(mShelterId);
-		String blCode = (String)session.getAttribute("loginBlCode");
-		logger.debug("blcode is {}", blCode);
 		//bl_code 셋팅
 		animal.setBlCode(blCode);	
 		animaldao.insertAnimal(animal);

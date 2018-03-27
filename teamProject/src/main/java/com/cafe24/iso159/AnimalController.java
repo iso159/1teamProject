@@ -36,7 +36,14 @@ public class AnimalController {
 	public String animalAdd(HttpSession session, Animal animal) {
 		
 		logger.debug("animalAdd()메서드 호출");
-		animalservice.addAnimal(animal, session);
+		//세션에서 로그인 아이디를 가져와서 mShelterId에 셋팅
+		String mShelterId = (String)session.getAttribute("loginId");
+		logger.debug("mShelterId is {}", mShelterId);
+		//세션에서 로그인 blCode를 가져와서 blCode에 셋팅		
+		String blCode = (String)session.getAttribute("loginBlCode");
+		logger.debug("blcode is {}", blCode);
+		
+		animalservice.addAnimal(animal, mShelterId, blCode);
 		return "redirect:/animal/animalList";
 	}
 	//동물리스트
