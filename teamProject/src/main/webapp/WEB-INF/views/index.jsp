@@ -42,6 +42,16 @@
 					<button type="button" class="btn btn-dark">동물</button>
 				</a>
 			</li>
+			<li class="list-group-item list-group-item-dark">
+				<a href="${pageContext.request.contextPath}/item">
+					<button type="button" class="btn btn-danger">상품</button>
+				</a>
+			</li>
+			<li class="list-group-item list-group-item-dark">
+				<a href="${pageContext.request.contextPath}/survey">
+					<button type="button" class="btn btn-link">설문지</button>
+				</a>
+			</li>
 		</ul>
 	</div>
 </body>
