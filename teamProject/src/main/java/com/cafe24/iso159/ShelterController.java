@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cafe24.iso159.member.service.MemberInfo;
 import com.cafe24.iso159.shelter.service.BusinessLicense;
 import com.cafe24.iso159.shelter.service.BusinessLicenseCommand;
 import com.cafe24.iso159.shelter.service.MemberIdAndBusinessLicenseFile;
@@ -29,6 +30,22 @@ public class ShelterController {
 	@Autowired
 	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterController.class);
+	
+	// 직원 신청 회원의 상세정보와 아이디를 model에 담아 shelterStaffRequestInfo.jsp로 포워딩해주는 서블릿
+	@RequestMapping(value="/shelter/requestShelterStaffInfo")
+	public String shelterStaffRequestInfo(Model model
+										, @RequestParam(value="ssrCode") String ssrCode
+										, @RequestParam(value="mId") String mId) {
+		logger.debug("shelterStaffRequestInfo(...) 메서드 호출");
+		logger.debug("shelterStaffRequestInfo(...) 메서드 ssrCode is {}", ssrCode);
+		logger.debug("shelterStaffRequestInfo(...) 메서드 mId is {}", mId);
+		MemberInfo memberInfo = shelterService.modifyShelterStaffRequestOsCodeBySsrCode(ssrCode, mId);
+		logger.debug("shelterStaffRequestInfo(...) 메서드 memberInfo is {}", memberInfo);
+		model.addAttribute("memberInfo",memberInfo);
+		model.addAttribute("mId", mId);
+		logger.debug("shelterStaffRequestInfo(...) 메서드 끝");
+		return "shelter/shelterStaffRequestInfo";
+	}
 	
 	// 직원 신청 개인 조회 리스트를 model에 담아 personalShelterRequestList.jsp로 포워딩해주는 서블릿
 	@RequestMapping(value="/shelter/requestShelterStaffPersonal")

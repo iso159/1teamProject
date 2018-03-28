@@ -16,6 +16,15 @@ public class ShelterDao {
 	private static final Logger logger = LoggerFactory.getLogger(ShelterDao.class);
 	private final String nameSpace = "com.cafe24.iso159.shelter.service.ShelterMapper.";
 	
+	// 직원신청 상태코드가 수정되는 쿼리문 updateShelterStaffRequestOsCodeBySsrCode을 접근하는 DAO 메서드
+	public void updateShelterStaffRequestOsCodeBySsrCode(Map<String,Object> map) {
+		logger.debug("updateShelterStaffRequestOsCodeBySsrCode(Map<String,Object> map) 메서드 호출");
+		logger.debug("updateShelterStaffRequestOsCodeBySsrCode(Map<String,Object> map) 메서드 map is {}", map);
+		int result = sqlSessionTemplate.update(nameSpace + "updateShelterStaffRequestOsCodeBySsrCode", map);
+		logger.debug("updateShelterStaffRequestOsCodeBySsrCode(Map<String,Object> map) 메서드 result is {}", result);
+		logger.debug("updateShelterStaffRequestOsCodeBySsrCode(Map<String,Object> map) 메서드 끝");
+	}
+	
 	// 직원 신청 리스트를 회원 아이디로 조회 쿼리문 selectShelterStaffRequestAndShelterNameByMId을 접근하는 DAO 메서드
 	public List<ShelterStaffRequestAndShelterName> selectShelterStaffRequestAndShelterNameByMId(Map<String,Object> map){
 		logger.debug("selectShelterStaffRequestAndShelterNameByMId(String blCode) 메서드 호출");

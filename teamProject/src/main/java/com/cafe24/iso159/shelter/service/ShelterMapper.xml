@@ -48,6 +48,16 @@
 		</collection>		
 	</resultMap>
 	
+	<!-- 직원 신청 상태코드 수정 쿼리문 -->
+	<update id="updateShelterStaffRequestOsCodeBySsrCode" parameterType="map">
+		UPDATE
+			t_shelter_staff_request
+		SET
+			os_code_staff_request = #{osCodeStaffRequest}
+		WHERE
+			ssr_code = #{ssrCode}
+	</update>
+	
 	<!-- 직원 신청 보호소 코드로 조회 쿼리문 -->
 	<select id="selectShelterStaffRequestAndShelterName" parameterType="map" 
 			resultMap="ShelterStaffRequestJoinShelterNameMap">

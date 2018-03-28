@@ -17,13 +17,35 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cafe24.iso159.member.service.Member;
+import com.cafe24.iso159.member.service.MemberDao;
+import com.cafe24.iso159.member.service.MemberInfo;
+
 @Service
 @Transactional
 public class ShelterService {
 	@Autowired
 	ShelterDao shelterDao;
+	@Autowired
+	MemberDao memberDao;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
 	String osCodeLicenseStatus = null;
+	
+	// 직원신청 상태코드가 수정되는 쿼리문을 접근하는 updateShelterStaffRequestOsCodeBySsrCode DAO 메서드 호출
+	public MemberInfo modifyShelterStaffRequestOsCodeBySsrCode(String ssrCode,String mId) {
+		logger.debug("modifyShelterStaffRequestOsCodeBySsrCode(String ssrCode,String mId) 메서드 호출");
+		logger.debug("modifyShelterStaffRequestOsCodeBySsrCode(String ssrCode,String mId) 메서드 ssrCode is {}",ssrCode);
+		logger.debug("modifyShelterStaffRequestOsCodeBySsrCode(String ssrCode,String mId) 메서드 mId is {}",mId);
+		final String osCodeStaffRequest = "os_shelter_23_1_2";
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("ssrCode", ssrCode);
+		map.put("osCodeStaffRequest", osCodeStaffRequest);
+		shelterDao.updateShelterStaffRequestOsCodeBySsrCode(map);
+		String memberInfoCode = memberDao.selectMemberOneId(mId);
+		MemberInfo memberInfo = memberDao.selectMemberOne(memberInfoCode);
+		logger.debug("modifyShelterStaffRequestOsCodeBySsrCode(String ssrCode,String mId) 메서드 끝");
+		return memberInfo;
+	}
 	
 	// 직원 신청 리스트를 회원 아이디로 조회하는 쿼리문을 접근하는 selectShelterStaffRequestAndShelterNameByMId DAO 메서드 호출
 	public List<ShelterStaffRequestAndShelterName> getShelterStaffRequestAndShelterNameByMId(String mId){

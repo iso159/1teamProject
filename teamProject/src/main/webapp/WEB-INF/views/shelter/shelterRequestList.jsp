@@ -15,6 +15,7 @@
 					<th>신청 상태</th>
 					<th>신청 날짜</th>
 					<th>결정 날짜</th>
+					<th>신청자 상세 정보</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,6 +25,11 @@
 						<td>${c.shelterStaffRequest.osCodeStaffRequest}</td>
 						<td>${c.shelterStaffRequest.ssrRequestDate}</td>
 						<td>${c.shelterStaffRequest.ssrClearDate}</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/shelter/requestShelterStaffInfo?mId=${c.shelterStaffRequest.mId}&ssrCode=${c.shelterStaffRequest.ssrCode}">
+								상세 정보 보기
+							</a>
+						</td>
 					</tr>
 				</c:forEach>				
 			</tbody>
