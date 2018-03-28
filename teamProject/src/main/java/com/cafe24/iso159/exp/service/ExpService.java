@@ -17,6 +17,19 @@ public class ExpService {
 	//디버그용 로거 생성
 	private static final Logger logger = LoggerFactory.getLogger(ExpService.class);
 	
+	//체험 수정
+	public void updateExpOen(Exp exp) {
+		//호출된곳 확인
+		logger.debug("ExpService.java 호출 {updateExpOen}.");
+		logger.debug("updateExpOen() 메서드 실행 exp is {}", exp);
+		expDao.updateExpOen(exp);
+	}
+	
+	//체험 수정 띄우는 부분
+	public Exp selectUpdateExpOne(String expCode) {
+		Exp exp = expDao.selectUpdateExpOne(expCode);
+		return exp;
+	}
 	
 	//사용자 자신의 체험 정보 리스트 뿌려주는 부분
 	public List<ExpAndAnimal> selectExpOneList(String mExpId) {
@@ -76,7 +89,7 @@ public class ExpService {
 		
 		//osCodeReserve 값 대입
 		//신청은 os_exp_reserve_12_1_1 이기 때문에 변수로 생성해서 대입
-		String osCodeExp = "os_exp_exp_12_1_3";
+		String osCodeExp = "os_exp_12_1_3";
 		logger.debug("addExp() 메서드 실행 osCodeReserve is {}", osCodeExp);
 		addexp.setOsCodeExp(osCodeExp);
 		

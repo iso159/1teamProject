@@ -21,24 +21,30 @@
 	<table>
 		<thead>
 			<tr>
-				<td>품종</td>
-				<td>신청한날짜</td>
-				<td>시작 날짜</td>
-				<td>종료 날짜</td>
-				<td>체험 상태</td>
-				<td>상세 정보</td>
+				<th>품종</th>
+				<th>신청한날짜</th>
+				<th>시작 날짜</th>
+				<th>종료 날짜</th>
+				<th>체험 상태</th>
+				<th>상세 정보</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="e" items="${expAndAnimal}">
+			<c:forEach var="a" items="${expAndAnimal}" varStatus="status">
+			<c:forEach var="b" items="${a.animal}">
+			<c:forEach var="c" items="${a.exp}">
+			<c:forEach var="d" items="${a.overallStatus}">
 			<tr>
-				<td>${e.animal.animalBreed}</td>
-				<td>${e.exp.expReserveRequestDate}</td>
-				<td>${e.exp.expStartDate}</td>
-				<td>${e.exp.expEndDate}</td>
-				<td>${e.osName}</td>
-				<td><a href="${pageContext.request.contextPath}/experience/expInfo?expCode=${e.exp.expCode}">정보 확인</a></td>
+				<td>${b.animalBreed}</td>
+				<td>${c.expReserveRequestDate}</td>
+				<td>${c.expStartDate}</td>
+				<td>${c.expEndDate}</td>
+				<td>${d.osName}</td>
+				<td><a href="${pageContext.request.contextPath}/experience/expInfo?expCode=${c.expCode}">정보 확인</a></td>
 			</tr>
+			</c:forEach>
+			</c:forEach>
+			</c:forEach>
 			</c:forEach>
 		</tbody>
 	</table>

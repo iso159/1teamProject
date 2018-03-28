@@ -59,7 +59,7 @@
 	</table>
 	
 	<c:if test="${empty selectExpOneInfo.exp.mShelterId}">
-		<a href="#"><button type="button" style="float: right;">수정</button></a>
+		<a href="${pageContext.request.contextPath}/experience/expModify?expCode=${selectExpOneInfo.exp.expCode}"><button type="button" style="float: right;">수정</button></a>
 	</c:if>
 	
 	<c:choose>

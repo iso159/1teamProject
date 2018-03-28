@@ -48,6 +48,44 @@
 		<result column="bl_shelter_date" property="blShelterDate"/>
 	</resultMap>
 	
+	<resultMap type="com.cafe24.iso159.service.common.OverallStatus" id="OverallStatusVo">
+		<id column="os_code" property="osCode"/>
+		<result column="os_large" property="osLarge"/>
+		<result column="os_large_level" property="osLargeLevel"/>
+		<result column="os_small" property="osSmall"/>
+		<result column="os_small_level" property="osSmallLevel"/>
+		<result column="os_name" property="osName"/>
+		<result column="os_name_level" property="osNameLevel"/>
+	</resultMap>
+	
+	<!-- 체험 수정 -->
+	<update id="updateExpOen" parameterType="com.cafe24.iso159.exp.service.Exp">
+		UPDATE 
+			t_exp 
+		SET 
+			exp_period_code=#{expPeriodCode}, 
+		    exp_journal_count=#{expJournalCount}, 
+		    exp_cost=#{expCost}, 
+		    exp_purpose=#{expPurpose}, 
+		    exp_modified_date=now(), 
+		    exp_start_date=#{expStartDate}, 
+		    exp_end_date=#{expEndDate}
+		WHERE 
+			exp_code=#{expCode}
+	</update>
+	
+	<!-- 체험 수정 정보 띄움 -->
+	<select id="selectUpdateExpOne" parameterType="com.cafe24.iso159.exp.service.Exp">
+		SELECT
+			exp_purpose AS expPurpost, 
+		    exp_start_date AS expStartDate, 
+		    exp_end_date AS expEndDate
+		FROM 
+			t_exp
+		WHERE
+			exp_code = #{expCode}
+	</select>
+	
 	<!-- 체험 상세 정보 -->
 	<resultMap type="com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense" id="selectExpAndAnimalAndBusinessLicenseOneInfoMap">
 		<id column="os_name" property="osName"/>
@@ -59,7 +97,8 @@
 		SELECT 
 			a.animal_breed
 			,a.animal_weight
-			,a.animal_age
+			,a.animal_age 
+			,e.exp_code
 			,e.m_shelter_id
 			,e.exp_journal_count
 			,e.exp_cost
@@ -90,7 +129,7 @@
 	
 	<!-- 체험 신청 후 해당 사용자 신청한 목록 보는 부분 -->
 	<resultMap type="com.cafe24.iso159.exp.service.ExpAndAnimal" id="selectExpOneListMap">
-		<id column="os_name" property="osName"/>
+		<collection property="overallStatus" resultMap="OverallStatusVo"></collection>
 		<collection property="exp" resultMap="ExpVo"></collection>
 		<collection property="animal" resultMap="AnimalVo"></collection>
 	</resultMap>
