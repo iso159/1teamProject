@@ -90,5 +90,19 @@
 			, animal_age=#{animalAge} 
 		WHERE 
 			animal_code=#{animalCode};
-	</update>	
+	</update>
+	<!-- 동물리스트하나 조회하는 select 쿼리문 -->
+	<select id="selectAnimalOne" parameterType="string" resultType="com.cafe24.iso159.animal.service.Animal">
+		SELECT
+			animal_code as animalCode
+			,animal_breed as animalBreed
+			, animal_area as animalArea
+			, animal_id_code as animalIdCode
+			, animal_weight as animalWeight
+			, animal_age as animalAge
+		From 
+			t_animal
+		WHERE
+			animal_code=#{animalCode};
+	</select>	
 </mapper>

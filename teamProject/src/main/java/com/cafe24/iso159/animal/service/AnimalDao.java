@@ -30,9 +30,20 @@ public class AnimalDao {
 	}
 	//동물삭제
 	public void deleteAnimal(String animalCode) {
-		//int값 받아오는지 확인
+		//String값 받아오는지 확인
 		logger.debug("deleteAnimal()메서드 animalCode is {}", animalCode);
 		sqlSessionTemplate.delete(nameSpace+"deleteAnimal",animalCode);
 	}
 	//동물리스트수정
+	public void updateAnimal(Animal animal) {
+		//animal 리스트 확인
+		logger.debug("updateAnimal()메서드 animal is {}", animal);
+		sqlSessionTemplate.update(nameSpace+"updateAnimal", animal);
+	}
+	//동물리스트 한개 조회
+	public Animal selectAnimalOne(String animalCode) {
+		//매개변수 확인
+		logger.debug("selectAnimalOne()메서드 animalCode is {}", animalCode);
+		return sqlSessionTemplate.selectOne(nameSpace+"selectAnimalOne", animalCode);
+	}
 }

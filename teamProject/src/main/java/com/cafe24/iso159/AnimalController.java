@@ -62,4 +62,29 @@ public class AnimalController {
 		animalservice.removeAnimal(animalCode);
 		return "redirect:/animal/animalList";
 	}
+	//동물리스트 수정 GET방식
+	@RequestMapping(value="/animal/animalUpdate", method=RequestMethod.GET)
+	public String animalModify(Model model, @RequestParam(value="animalCode",required=true)String animalCode, HttpSession session) {
+		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트 
+		if(session.getAttribute("loginId")==null) {
+			return "redirect:/member/login";
+		}
+		Animal animal = animalservice.getAnimalOne(animalCode);
+		// 매개변수 animal 값 확인
+		logger.debug("animalModify()메서드 animalCode is {}", animalCode);
+		model.addAttribute("animal", animal);
+		logger.debug("______animalModify()메서드 animal is {}", animal);
+		return "animal/animalUpdate";
+	}
+	//동물리스트 수정 POST방식
+	@RequestMapping(value="/animal/animalUpdate", method = RequestMethod.POST)
+	public String animalModify(Animal animal, HttpSession session) {
+		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
+		if(session.getAttribute("loginId")==null) {
+			return "redirect:/member/login";
+		}
+		logger.debug("animalModify()메서드 animal is {}", animal);
+		animalservice.modifyAnimal(animal);
+		return "redirect:/animal/animalList";
+	}
 }

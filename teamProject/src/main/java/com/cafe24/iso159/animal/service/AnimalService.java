@@ -39,4 +39,18 @@ public class AnimalService {
 		logger.debug("deleteAnimal()메서드 animalId is {}", animalCode);
 		animaldao.deleteAnimal(animalCode);
 	}
+	//동물리스트 수정
+	public void modifyAnimal(Animal animal) {
+		
+		logger.debug("modifyAnimal()메서드 animal is {}", animal);
+		animaldao.updateAnimal(animal);
+	}
+	//동물리스트 한개 조회
+	public Animal getAnimalOne(String animalCode) {
+		logger.debug("getAnimalOne()메서드 animalCode is {}", animalCode);
+		Animal oneAnimal = animaldao.selectAnimalOne(animalCode);
+		//리턴받은 한개 동물리스트 출력
+		logger.debug("getAnimalOne()메서드 oneAnimal is {}", oneAnimal);
+		return oneAnimal;
+	}
 }
