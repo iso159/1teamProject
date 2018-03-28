@@ -90,6 +90,6 @@ public class MemberDao {
 		// 매개변수 member 값 확인
 		logger.debug("memberRemove(Member memberId) 메서드 mId is {}",map);
 		// 아이디가 updateMember인 쿼리를 실행해 member필드의 id와 같은 컬럼 삭제
-		sqlSessionTemplate.update(nameSpace + "memberRemove", map);
+		sqlSessionTemplate.update(nameSpace + "updateMemberRight", map);
 	}
 }

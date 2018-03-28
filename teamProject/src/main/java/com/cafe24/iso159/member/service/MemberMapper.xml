@@ -162,7 +162,7 @@
 	</select>
 	
 	<!-- 회원탈퇴 탈퇴시 권한만 수정되고 회원 정보는 t_member table에 그대로 남는다--> 
-	<update id="memberRemove" parameterType="map">
+	<update id="updateMemberRight" parameterType="map">
 		UPDATE t_member 
 		SET m_right_code = #{mRightCode} 
 		WHERE m_id = #{mId};
