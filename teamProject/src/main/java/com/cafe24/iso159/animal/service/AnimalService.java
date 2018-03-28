@@ -53,4 +53,10 @@ public class AnimalService {
 		logger.debug("getAnimalOne()메서드 oneAnimal is {}", oneAnimal);
 		return oneAnimal;
 	}
+	//동물상세 조회
+	public AnimalCommand detailAnimal(String animalCode) {
+		logger.debug("animalDetail()메서드 animalCode is {}", animalCode);
+		AnimalCommand animalDetail = animaldao.animalDetail(animalCode);
+		return animalDetail;
+	}
 }

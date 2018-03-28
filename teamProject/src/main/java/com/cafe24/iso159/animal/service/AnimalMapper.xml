@@ -104,5 +104,24 @@
 			t_animal
 		WHERE
 			animal_code=#{animalCode};
+	</select>
+	<!-- 동물 상세조회 -->
+	<select id="animalDetail" parameterType="string" resultMap="selectAnimalListMap">
+		SELECT
+			osk.os_name as osNameAnimalKind			
+			, animal_breed
+			, animal_area
+			, animal_id_code
+			, animal_weight 
+			, animal_age
+            , bl.bl_shelter_Name
+			, animal_enroll_date
+			, animal_code 
+		FROM t_animal a
+        INNER JOIN t_overall_status osk
+		ON osk.os_code = a.os_code_kind
+        INNER JOIN t_business_license bl
+		ON a.bl_code = bl.bl_code
+        WHERE animal_code =#{animalCode};
 	</select>	
 </mapper>

@@ -32,7 +32,7 @@
 			<td>${i.osNameAnimalKind}</td>
 			<td>${i.animalBreed}</td>
 			<td>${i.animalArea}</td>
-			<td>${i.animalIdCode}</td>
+			<td><a href="${pageContext.request.contextPath}/animal/animalDetail?animalCode=${i.animalCode}">${i.animalIdCode}</a></td>
 			<td>${i.animalWeight}</td>
 			<td>${i.animalAge}</td>
 			<td>${i.blShelterName}</td>

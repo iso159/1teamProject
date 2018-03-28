@@ -46,4 +46,10 @@ public class AnimalDao {
 		logger.debug("selectAnimalOne()메서드 animalCode is {}", animalCode);
 		return sqlSessionTemplate.selectOne(nameSpace+"selectAnimalOne", animalCode);
 	}
+	//동물 상세조회
+	public AnimalCommand animalDetail(String animalCode) {
+		//매개변수 확인
+		logger.debug("animalDetail()메서드 animalCode is {}", animalCode);
+		return sqlSessionTemplate.selectOne(nameSpace+"animalDetail", animalCode);
+	}
 }
