@@ -16,11 +16,21 @@ public class ShelterDao {
 	private static final Logger logger = LoggerFactory.getLogger(ShelterDao.class);
 	private final String nameSpace = "com.cafe24.iso159.shelter.service.ShelterMapper.";
 	
-	// 직원 신청 보호소 코드로 조회 쿼리문 selectShelterStaffRequestAndShelterNameByBlCode을 접근하는 DAO 메서드
-	public List<ShelterStaffRequest> selectShelterStaffRequestAndShelterNameByBlCode(String blCode) {
+	// 직원 신청 리스트를 회원 아이디로 조회 쿼리문 selectShelterStaffRequestAndShelterNameByMId을 접근하는 DAO 메서드
+	public List<ShelterStaffRequestAndShelterName> selectShelterStaffRequestAndShelterNameByMId(Map<String,Object> map){
+		logger.debug("selectShelterStaffRequestAndShelterNameByMId(String blCode) 메서드 호출");
+		logger.debug("selectShelterStaffRequestAndShelterNameByMId(String blCode) 메서드 map is {}", map);
+		List<ShelterStaffRequestAndShelterName> list = sqlSessionTemplate.selectList(nameSpace + "selectShelterStaffRequestAndShelterName", map);
+		logger.debug("selectShelterStaffRequestAndShelterNameByMId(String blCode) 메서드 list is {}", list);
+		logger.debug("selectShelterStaffRequestAndShelterNameByMId(String blCode) 메서드 끝");
+		return list;
+	}
+	
+	// 직원 신청 리스트를 보호소 코드로 조회 쿼리문 selectShelterStaffRequestAndShelterNameByBlCode을 접근하는 DAO 메서드
+	public List<ShelterStaffRequestAndShelterName> selectShelterStaffRequestAndShelterNameByBlCode(Map<String,Object> map) {
 		logger.debug("selectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 호출");
-		logger.debug("selectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 blCode is {}", blCode);
-		List<ShelterStaffRequest> list = sqlSessionTemplate.selectList(nameSpace + "selectShelterStaffRequestAndShelterNameByBlCode", blCode);
+		logger.debug("selectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 map is {}", map);
+		List<ShelterStaffRequestAndShelterName> list = sqlSessionTemplate.selectList(nameSpace + "selectShelterStaffRequestAndShelterName", map);
 		logger.debug("selectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 list is {}", list);
 		logger.debug("selectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 끝");
 		return list;

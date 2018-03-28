@@ -42,21 +42,21 @@
 			<id column="ssr_code" property="ssrCode"/>
 			<result column="m_id" property="mId"/>
 			<result column="bl_code" property="blCode"/>
-			<result column="os_code_staff_request" property="osCodeStaffRequest"/>
+			<result column="os_name" property="osCodeStaffRequest"/>
 			<result column="ssr_request_date" property="ssrRequestDate"/>
 			<result column="ssr_clear_date" property="ssrClearDate"/>
 		</collection>		
 	</resultMap>
 	
 	<!-- 직원 신청 보호소 코드로 조회 쿼리문 -->
-	<select id="selectShelterStaffRequestAndShelterNameByBlCode" parameterType="String" 
+	<select id="selectShelterStaffRequestAndShelterName" parameterType="map" 
 			resultMap="ShelterStaffRequestJoinShelterNameMap">
 		SELECT
 			ssr_code
 			, m_id
-			, bl.bl_code
+			, ssr.bl_code
             , bl.bl_shelter_name
-			, os_code_staff_request
+			, os.os_name
 			, ssr_request_date
 			, ssr_clear_date
 		FROM
@@ -65,8 +65,18 @@
 			t_business_license bl
 		ON
 			ssr.bl_code = bl.bl_code
-		WHERE
-			bl.bl_code=#{blCode}
+		INNER JOIN
+			t_overall_status os
+		ON
+			ssr.os_code_staff_request = os.os_code
+		<if test="blCode!=null">
+			WHERE
+				bl.bl_code=#{blCode}
+		</if>
+		<if test="mId!=null">
+			WHERE
+				m_id=#{mId}
+		</if>
 	</select>
 	
 	<!-- t_shelter_staff_request테이블의 ssr_code를 잘라서 가장 높은 숫자를 리턴하는 쿼리문 -->

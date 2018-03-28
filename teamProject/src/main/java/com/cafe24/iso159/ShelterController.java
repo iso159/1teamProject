@@ -22,6 +22,7 @@ import com.cafe24.iso159.shelter.service.BusinessLicenseCommand;
 import com.cafe24.iso159.shelter.service.MemberIdAndBusinessLicenseFile;
 import com.cafe24.iso159.shelter.service.ShelterService;
 import com.cafe24.iso159.shelter.service.ShelterStaffRequest;
+import com.cafe24.iso159.shelter.service.ShelterStaffRequestAndShelterName;
 
 @Controller
 public class ShelterController {
@@ -29,15 +30,27 @@ public class ShelterController {
 	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterController.class);
 	
+	// 직원 신청 개인 조회 리스트를 model에 담아 personalShelterRequestList.jsp로 포워딩해주는 서블릿
+	@RequestMapping(value="/shelter/requestShelterStaffPersonal")
+	public String personalRequestShelterStaff(Model model, HttpSession session) {
+		logger.debug("personalRequestShelterStaff(...) 메서드 호출");
+		String mId = (String)session.getAttribute("loginId");
+		logger.debug("personalRequestShelterStaff(...) 메서드 mId is {}", mId);
+		List<ShelterStaffRequestAndShelterName> list = shelterService.getShelterStaffRequestAndShelterNameByMId(mId);
+		model.addAttribute("list", list);
+		logger.debug("personalRequestShelterStaff(...) 메서드 끝");
+		return "shelter/personalShelterRequestList";
+	}
+	
 	// 직원 등록 신청 보호소 대표별 리스트를 model에 담아 businessLicenseRequestList.jsp로 포워딩해주는 서블릿
 	@RequestMapping(value="/shelter/requestShelterStaffList")
 	public String shelterStaffRequestList(Model model, HttpSession session) {
 		logger.debug("shelterStaffRequestList(...) 메서드 호출");
 		String blCode = (String)session.getAttribute("loginBlCode");
-		List<ShelterStaffRequest> list = shelterService.getselectShelterStaffRequestAndShelterNameByBlCode(blCode);
+		List<ShelterStaffRequestAndShelterName> list = shelterService.getselectShelterStaffRequestAndShelterNameByBlCode(blCode);
 		model.addAttribute("list",list);
 		logger.debug("shelterStaffRequestList(...) 메서드 끝");
-		return "/shelter/ShelterRequestList";
+		return "shelter/shelterRequestList";
 	}
 	
 	// 직원 등록 신청 요청을 받아 처리후 requestShelterStaffList.jsp로 리다이렉트해주는 서블릿
@@ -60,7 +73,7 @@ public class ShelterController {
 		List<BusinessLicense> list = shelterService.getShelterList();
 		model.addAttribute("list", list);
 		logger.debug("getStaffBusinessLicense() 메서드 끝");
-		return "/shelter/staffBusinessLicenseList";
+		return "shelter/staffBusinessLicenseList";
 	}	
 	
 	@RequestMapping(value="/shelter/businessLicenseSet")
@@ -109,7 +122,7 @@ public class ShelterController {
 		shelterService.businessLicense();
 		model.addAttribute("blCode", blCode);
 		logger.debug("denyBusinessLicense() 메서드 끝");
-		return "/shelter/businessLicenseDeny";
+		return "shelter/businessLicenseDeny";
 	}
 	
 	// 보호소 대표 등록시 업로드한 파일리스트를 담아 businessLicenseFileList.jsp로 이동되는 서블릿 
@@ -122,7 +135,7 @@ public class ShelterController {
 		logger.debug("getBusinessLicenseFileList(...) 메서드 memberIdAndBusinessLicenseFile is {}", memberIdAndBusinessLicenseFile);
 		model.addAttribute("memberIdAndBusinessLicenseFile", memberIdAndBusinessLicenseFile);		
 		logger.debug("getBusinessLicenseFileList(...) 메서드 끝");
-		return "/shelter/businessLicenseFileList";
+		return "shelter/businessLicenseFileList";
 	}
 	
 	// 보호소 대표 등록 신청을한 리스트를 담아 businessLicenseList.jsp로 이동되는 서블릿
@@ -132,7 +145,7 @@ public class ShelterController {
 		List<BusinessLicense> list = shelterService.getBusinessLicense();
 		model.addAttribute("list", list);
 		logger.debug("getBusinessLicense() 메서드 끝");
-		return "/shelter/businessLicenseList";
+		return "shelter/businessLicenseList";
 	}
 	
 	// 보호소 메뉴로 이동되는 서블릿
@@ -141,7 +154,7 @@ public class ShelterController {
 		logger.debug("BusinessLicense() 메서드 호출");
 		shelterService.businessLicense();
 		logger.debug("BusinessLicense() 메서드 끝");
-		return "/shelter/shelterMenu";
+		return "shelter/shelterMenu";
 	}
 	
 	// 보호소 대표 신청 등록폼으로 이동되는 서블릿
@@ -150,7 +163,7 @@ public class ShelterController {
 		logger.debug("addBusinessLicense() 메서드 호출");
 		shelterService.businessLicense();
 		logger.debug("addBusinessLicense() 메서드 끝");
-		return "/shelter/businessLicenseRequest";
+		return "shelter/businessLicenseRequest";
 	}
 	
 	// 보호소 대표 신청 등록 폼 데이터 입력후 매핑된 서블릿

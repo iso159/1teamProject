@@ -25,11 +25,25 @@ public class ShelterService {
 	private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
 	String osCodeLicenseStatus = null;
 	
+	// 직원 신청 리스트를 회원 아이디로 조회하는 쿼리문을 접근하는 selectShelterStaffRequestAndShelterNameByMId DAO 메서드 호출
+	public List<ShelterStaffRequestAndShelterName> getShelterStaffRequestAndShelterNameByMId(String mId){
+		logger.debug("getShelterStaffRequestAndShelterNameByMId(String mId) 메서드 호출");
+		logger.debug("getShelterStaffRequestAndShelterNameByMId(String mId) 메서드 mId is {}", mId);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("mId", mId);
+		List<ShelterStaffRequestAndShelterName> list = shelterDao.selectShelterStaffRequestAndShelterNameByMId(map);
+		logger.debug("getShelterStaffRequestAndShelterNameByMId(String mId) 메서드 list is {}", list);
+		logger.debug("getShelterStaffRequestAndShelterNameByMId(String mId) 메서드 끝");
+		return list;
+	}
+	
 	// 직원 신청 리스트를 보호소 코드로 조회하는 쿼리문을 접근하는 selectShelterStaffRequestByBlCode DAO 메서드 호출
-	public List<ShelterStaffRequest> getselectShelterStaffRequestAndShelterNameByBlCode(String blCode){
+	public List<ShelterStaffRequestAndShelterName> getselectShelterStaffRequestAndShelterNameByBlCode(String blCode){
 		logger.debug("getselectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 호출");
 		logger.debug("getselectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 blCode is {}", blCode);
-		List<ShelterStaffRequest> list = shelterDao.selectShelterStaffRequestAndShelterNameByBlCode(blCode);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("blCode", blCode);
+		List<ShelterStaffRequestAndShelterName> list = shelterDao.selectShelterStaffRequestAndShelterNameByBlCode(map);
 		logger.debug("getselectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 list is {}", list);
 		logger.debug("getselectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 끝");
 		return list;

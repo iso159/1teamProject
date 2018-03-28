@@ -38,6 +38,11 @@
 				<button type="button" class="btn btn-success">직원 신청 리스트</button>
 			</a>
 		</li>
+		<li class="list-group-item list-group-item-primary">
+			<a href="${pageContext.request.contextPath}/shelter/requestShelterStaffPersonal">
+				<button type="button" class="btn btn-success">직원 신청 개인 조회</button>
+			</a>
+		</li>
 	</ul>
 </body>
 </html>
