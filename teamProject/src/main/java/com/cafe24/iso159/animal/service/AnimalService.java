@@ -33,4 +33,10 @@ public class AnimalService {
 		
 		return AnimalList;
 	}
+	
+	//동물삭제
+	public void removeAnimal(String animalCode) {
+		logger.debug("deleteAnimal()메서드 animalId is {}", animalCode);
+		animaldao.deleteAnimal(animalCode);
+	}
 }

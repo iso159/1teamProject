@@ -37,8 +37,8 @@
 			<td>${i.animalAge}</td>
 			<td>${i.blShelterName}</td>
 			<td>${i.animalEnrollDate}</td>
-			<td><a href="#">수정</a></td>
-			<td><a href="#">삭제</a></td>
+			<td><a href="${pageContext.request.contextPath}/animal/animalUpdate">수정</a></td>
+			<td><a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}">삭제</a></td>
 		</tr>
 		</c:forEach>
 	</tbody>

@@ -14,6 +14,7 @@
 		<result column="animal_age" property="animalAge"/>
 		<result column="bl_shelter_name" property="blShelterName"/>
 		<result column="animal_enroll_date" property="animalEnrollDate"/>
+		<result column="animal_code" property="animalCode"/>
 	</resultMap>
 	
 	<!-- 동물등록 -->
@@ -59,7 +60,8 @@
 			, animal_weight 
 			, animal_age
             , bl.bl_shelter_Name
-			, animal_enroll_date 
+			, animal_enroll_date
+			, animal_code 
 		FROM t_animal a
 		INNER JOIN t_overall_status os
 		ON os.os_code = a.os_code_animal
@@ -67,5 +69,26 @@
 		ON osk.os_code = a.os_code_kind
         INNER JOIN t_business_license bl
 		ON a.bl_code = bl.bl_code
-	</select>	
+	</select>
+	
+	<!-- 동물리스트 삭제 -->
+	<delete id="deleteAnimal" parameterType="String">
+		DELETE 
+			FROM t_animal 
+			WHERE animal_code=#{animalCode};
+	</delete>
+	
+	<!-- 동물리스트 수정 -->
+	<update id="updateAnimal" parameterType="com.cafe24.iso159.animal.service.Animal">
+		UPDATE 
+			t_animal 
+		SET 
+			animal_breed=#{animalBreed}
+			, animal_area=#{animalArea}
+			, animal_id_code=#{animalIdCode}
+			, animal_weight=#{animalWeight}
+			, animal_age=#{animalAge} 
+		WHERE 
+			animal_code=#{animalCode};
+	</update>	
 </mapper>

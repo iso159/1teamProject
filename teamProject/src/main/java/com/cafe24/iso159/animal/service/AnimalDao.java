@@ -28,4 +28,11 @@ public class AnimalDao {
 		logger.debug("AnimalList is {}", AnimalList);
 		return AnimalList;
 	}
+	//동물삭제
+	public void deleteAnimal(String animalCode) {
+		//int값 받아오는지 확인
+		logger.debug("deleteAnimal()메서드 animalCode is {}", animalCode);
+		sqlSessionTemplate.delete(nameSpace+"deleteAnimal",animalCode);
+	}
+	//동물리스트수정
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.iso159.animal.service.Animal;
 import com.cafe24.iso159.animal.service.AnimalCommand;
@@ -53,5 +54,12 @@ public class AnimalController {
 		List<AnimalCommand> AnimalList = animalservice.listAnimal();
 		model.addAttribute("AnimalList", AnimalList);
 		return "animal/animalList";
+	}
+	
+	//동물리스트 삭제
+	@RequestMapping(value="/animal/animalDelete", method=RequestMethod.GET)
+	public String animalRemove(@RequestParam(value="animalCode")String animalCode) {
+		animalservice.removeAnimal(animalCode);
+		return "redirect:/animal/animalList";
 	}
 }

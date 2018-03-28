@@ -10,6 +10,8 @@ public class AnimalCommand {
 	private int animalAge;
 	private String blShelterName;
 	private String animalEnrollDate;
+	private String animalCode;
+	
 	public String getOsName() {
 		return osName;
 	}
@@ -64,11 +66,17 @@ public class AnimalCommand {
 	public void setAnimalEnrollDate(String animalEnrollDate) {
 		this.animalEnrollDate = animalEnrollDate;
 	}
+	public String getAnimalCode() {
+		return animalCode;
+	}
+	public void setAnimalCode(String animalCode) {
+		this.animalCode = animalCode;
+	}
 	@Override
 	public String toString() {
 		return "AnimalCommand [osName=" + osName + ", osNameAnimalKind=" + osNameAnimalKind + ", animalBreed="
 				+ animalBreed + ", animalArea=" + animalArea + ", animalIdCode=" + animalIdCode + ", animalWeight="
 				+ animalWeight + ", animalAge=" + animalAge + ", blShelterName=" + blShelterName + ", animalEnrollDate="
-				+ animalEnrollDate + "]";
+				+ animalEnrollDate + ", animalCode=" + animalCode + "]";
 	}
 }
