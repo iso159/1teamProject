@@ -86,7 +86,7 @@ public class MemberDao {
 		return checkMemberId;	
 	}
 	// member 회원삭제
-	public void memberRemove(Map<String, Object> map) {
+	public void updateMemberRight(Map<String, Object> map) {
 		// 매개변수 member 값 확인
 		logger.debug("memberRemove(Member memberId) 메서드 mId is {}",map);
 		// 아이디가 updateMember인 쿼리를 실행해 member필드의 id와 같은 컬럼 삭제
