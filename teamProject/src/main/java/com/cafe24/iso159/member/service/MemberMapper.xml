@@ -5,8 +5,7 @@
 <mapper namespace="com.cafe24.iso159.member.service.MemberMapper">
 
 	<!-- MemberAndMemberInfo Map -->
-	<resultMap type="com.cafe24.iso159.member.service.MemberAndMemberInfo"
-		id="MemberJoinMemberInfoMap">
+	<resultMap type="com.cafe24.iso159.member.service.MemberAndMemberInfo" id="MemberJoinMemberInfoMap">
 		<id column="m_id" property="mId" />
 		<collection property="memberInfo"
 			ofType="com.cafe24.iso159.member.service.MemberInfo">
@@ -37,11 +36,14 @@
 			,mi.m_info_email
 			,mi.m_info_phone
 			,mi.m_info_join_date
-		FROM t_member m
+		FROM 
+			t_member m
 		INNER JOIN
 			t_member_info mi
-		ON m.m_info_code = mi.m_info_code
-		ORDER BY mi.m_info_join_date DESC
+		ON 
+			m.m_info_code = mi.m_info_code
+		ORDER BY 
+			mi.m_info_join_date DESC
 	</select>
 
 	<!-- 회원가입 memberInfo -->
@@ -73,7 +75,8 @@
 
 	<!-- 회원가입 member -->
 	<insert id="addMember" parameterType="com.cafe24.iso159.member.service.Member">
-		INSERT INTO t_member
+		INSERT INTO 
+			t_member
 			(m_id
 			,m_info_code
 			,m_right_code, m_pw)
@@ -88,24 +91,28 @@
 	<select id="selectMemberInfoCodeNumber" resultType="int">
 		SELECT
 		MAX(cast(substring(m_info_code, 13) as DECIMAL))
-		FROM t_member_info
+		FROM 
+			t_member_info
 	</select>
 
 	<!-- 로그인시 로그인 정보 조회 쿼리 -->
 	<select id="selectLoginCheck" parameterType="com.cafe24.iso159.member.service.Member"
 		resultType="com.cafe24.iso159.member.service.MemberLoginLevel">
 		SELECT
-		m.m_id as mId
+			m.m_id as mId
 			,m.bl_code as blCode
 			,mr.m_right_grade_name as mRightGradeName
 			,mr.m_right_level as mRightLevel
-		FROM t_member m
-		INNER JOIN t_member_right mr
+		FROM 
+			t_member m
+		INNER JOIN 
+			t_member_right mr
 		ON
 			m.m_right_code = mr.m_right_code
-		WHERE m_id = #{mId} AND m_pw=#{mPw}
+		WHERE 
+			m_id = #{mId} AND m_pw=#{mPw}
 	</select>
-
+	
 	<!-- 회원 정보 멤버인포 수정 쿼리 -->	
 	<update id="updateMemberInfo" parameterType="com.cafe24.iso159.member.service.MemberInfo">
 		UPDATE 
@@ -140,8 +147,10 @@
 			,m_info_address as mInfoAddress
 			,m_info_email as mInfoEmail
 			,m_info_phone as mInfoPhone
-		FROM t_member_info
-		WHERE m_info_code=#{mInfoCode}
+		FROM 
+			t_member_info
+		WHERE 
+			m_info_code=#{mInfoCode}
 	</select>
 	
 	<!-- 회원정보 코드 구하기, 조건은 아이디 -->
@@ -151,4 +160,13 @@
 		FROM t_member
 		WHERE m_id=#{mId}
 	</select>
+	
+	<!-- 회원탈퇴 탈퇴시 권한만 수정되고 회원 정보는 t_member table에 그대로 남는다--> 
+	<update id="memberRemove" parameterType="map">
+		UPDATE t_member 
+		SET m_right_code = #{mRightCode} 
+		WHERE m_id = #{mId};
+	</update>
+	
+	
 </mapper>

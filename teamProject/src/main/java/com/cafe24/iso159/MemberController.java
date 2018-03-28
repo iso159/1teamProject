@@ -16,6 +16,7 @@ import com.cafe24.iso159.member.service.Member;
 import com.cafe24.iso159.member.service.MemberAndMemberInfo;
 import com.cafe24.iso159.member.service.MemberInfo;
 import com.cafe24.iso159.member.service.MemberLoginLevel;
+import com.cafe24.iso159.member.service.MemberRight;
 import com.cafe24.iso159.member.service.MemberService;
 
 @Controller
@@ -98,13 +99,13 @@ public class MemberController {
 		return "/member/memberModify";
 	}
 	
-/*	
-  @RequestMapping(value = "/member/memberModify", method = RequestMethod.GET)
- 	public String selectMemberOne(Model model, @RequestParam(value = "mId", required = true) int memberInfo, Object session) {
- 		model.addAttribute("MemberInfo", MemberService);
-		String id = (String)session.getAttribute("mId");
-		logger.debug("selectMemberOne(Model model, @RequestParam(value = \"mId\", required = true) int memberInfo) 메서드 memberInfo is {}", memberInfo);
-		return "member/memberModify";
+	// /member/memberRemove get방식으로 요청시 memberRemove(Member member) 메소드 호출됨
+	@RequestMapping(value="/member/memberRemove", method = RequestMethod.GET)
+	public String memberRemove(HttpSession session) {
+		logger.debug("memberRemove(Member member, HttpSession session) 메서드");
+		String mLoginId = (String)session.getAttribute("loginId");
+		logger.debug("memberOneSelect(Model model, MemberInfo memberInfo, HttpSession session) 메서드 mLoginId is {}", mLoginId);
+		MemberService.removeMember(mLoginId);
+		return "redirect:/";
 	}
-*/
 }

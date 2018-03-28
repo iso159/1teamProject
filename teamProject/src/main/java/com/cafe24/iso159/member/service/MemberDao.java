@@ -1,6 +1,7 @@
 package com.cafe24.iso159.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -31,9 +32,9 @@ public class MemberDao {
 
 	// m_code 만들기위해 호출 dao
 	public int selectMemberInfoCodeNumber() {
-		logger.debug("addMemberCodeNumber(int member) 메서드 member");
+		logger.debug("addMemberCodeNumber() 메서드 member");
 		int result = sqlSessionTemplate.selectOne(nameSpace + "selectMemberInfoCodeNumber");
-		logger.debug("addMemberCodeNumber(int member) 메서드 result is {}", result);
+		logger.debug("addMemberCodeNumber() 메서드 result is {}", result);
 		return result;
 	}
 
@@ -82,7 +83,13 @@ public class MemberDao {
 		logger.debug("selectMemberOneId(String mId) 메서드 memberId is {}", memberId);
 		String checkMemberId = sqlSessionTemplate.selectOne(nameSpace + "selectOneMemberId", memberId);
 		logger.debug("selectMemberOneId(String memberId) 메서드 memberId is {}", memberId);
-		return checkMemberId;
-		
+		return checkMemberId;	
+	}
+	// member 회원삭제
+	public void memberRemove(Map<String, Object> map) {
+		// 매개변수 member 값 확인
+		logger.debug("memberRemove(Member memberId) 메서드 mId is {}",map);
+		// 아이디가 updateMember인 쿼리를 실행해 member필드의 id와 같은 컬럼 삭제
+		sqlSessionTemplate.update(nameSpace + "memberRemove", map);
 	}
 }

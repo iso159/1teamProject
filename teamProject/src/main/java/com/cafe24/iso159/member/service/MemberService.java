@@ -1,6 +1,8 @@
 package com.cafe24.iso159.member.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,4 +75,14 @@ public class MemberService {
 		logger.debug("getMemberOne(Member member) 메서드 memberInfo is {}",memberInfo);
 		return memberInfo;
 	}
+	// member 테이블 삭제
+		public void removeMember(String memberId) {
+			logger.debug("removeMember(String mId) 메서드 mId is {}",memberId);
+			final String mRightCode = "mr_3_3";
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("mRightCode", mRightCode);
+			map.put("mId", memberId);
+			logger.debug("removeMember(String mId) 메서드 map is {}",map);
+			memberDao.memberRemove(map);
+		}
 }
