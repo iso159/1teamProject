@@ -31,20 +31,14 @@
 		</thead>
 		<tbody>
 			<c:forEach var="a" items="${expAndAnimal}" varStatus="status">
-			<c:forEach var="b" items="${a.animal}">
-			<c:forEach var="c" items="${a.exp}">
-			<c:forEach var="d" items="${a.overallStatus}">
 			<tr>
-				<td>${b.animalBreed}</td>
-				<td>${c.expReserveRequestDate}</td>
-				<td>${c.expStartDate}</td>
-				<td>${c.expEndDate}</td>
-				<td>${d.osName}</td>
-				<td><a href="${pageContext.request.contextPath}/experience/expInfo?expCode=${c.expCode}">정보 확인</a></td>
+				<td>${a.animal.animalBreed}</td>
+				<td>${a.exp.expReserveRequestDate}</td>
+				<td>${a.exp.expStartDate}</td>
+				<td>${a.exp.expEndDate}</td>
+				<td>${a.overallStatus.osName}</td>
+				<td><a href="${pageContext.request.contextPath}/experience/expInfo?expCode=${a.exp.expCode}">정보 확인</a></td>
 			</tr>
-			</c:forEach>
-			</c:forEach>
-			</c:forEach>
 			</c:forEach>
 		</tbody>
 	</table>
