@@ -33,7 +33,7 @@
 			</tr>
 		</tbody>
 	</table><br>
-	<a href="${pageContext.request.contextPath}/adopt/adoptDecide?adoptRequestCode=${aR.adoptRequestCode}"><button type="submit" class="btn danger">입양결정!</button></a>
+	<a href="${pageContext.request.contextPath}/adopt/adoptDecide?adoptRequestCode=${aR.adoptRequestCode}&animalCode=${aR.animalCode}"><button type="submit" class="btn danger">입양결정!</button></a>
 	<a href="${pageContext.request.contextPath}/adopt/adoptList"><button type="button" class="btn warning">분양리스트로</button></a><br><br>
 </div>
 </body>

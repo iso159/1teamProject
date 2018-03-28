@@ -29,10 +29,10 @@
 		<thead>
 			<tr>
 				<th>입양코드</th>
-				<th>동물코드</th>
-				<th>보호소코드</th>
 				<th>회원아이디</th>
 				<th>입양상태코드</th>
+				<th>동물코드</th>
+				<th>동물상태</th>
 				<th>입양이유</th>
 				<th>입양신청날짜</th>
 				<th>파일확인</th>
@@ -46,25 +46,25 @@
 		<tbody>
 			<c:forEach var="aR" items="${list}">
 			<tr>
-				<td>${aR.adoptRequestCode}</td>
-				<td>${aR.animalCode}</td>
-				<td>${aR.blCode}</td>
+				<td>${aR.adoptRequest.adoptRequestCode}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${aR.adoptRequestCode}">${aR.mMemberId}</a>
+					<a href="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}">${aR.adoptRequest.mMemberId}</a>
 				</td>
-				<td>${aR.osCodeAdopt}</td>
-				<td>${aR.adoptRequestReason}</td>
-				<td>${aR.adoptRequestDate}</td>
+				<td>${aR.adoptRequest.osCodeAdopt}</td>
+				<td>${aR.adoptRequest.animalCode}</td>
+				<td>${aR.osCodeAnimal}</td>
+				<td>${aR.adoptRequest.adoptRequestReason}</td>
+				<td>${aR.adoptRequest.adoptRequestDate}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/adopt/adoptFileCheck?adoptRequestCode=${aR.adoptRequestCode}">파일확인</a>
+					<a href="${pageContext.request.contextPath}/adopt/adoptFileCheck?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}">파일확인</a>
 				</td>
-				<td>${aR.adoptRequestAdviceDate}</td>
+				<td>${aR.adoptRequest.adoptRequestAdviceDate}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/adopt/adoptCounselList?adoptRequestCode=${aR.adoptRequestCode}">상담내용</a>
+					<a href="${pageContext.request.contextPath}/adopt/adoptCounselList?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}&animalCode=${aR.adoptRequest.animalCode}">상담내용</a>
 				</td>
-				<td>${aR.adoptDecideDate}</td>
+				<td>${aR.adoptRequest.adoptDecideDate}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/adopt/adoptCancle?adoptRequestCode=${aR.adoptRequestCode}">입양취소</a>
+					<a href="${pageContext.request.contextPath}/adopt/adoptCancle?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}">입양취소</a>
 				</td>
 			</tr>
 			</c:forEach>

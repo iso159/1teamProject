@@ -156,22 +156,25 @@ public class AdoptService {
 		}
 		
 	// 입양결정 완료
-		public void ModifyOsCodeAdoptDecide(String adoptRequestCode) {
+		public void ModifyOsCodeAdoptDecide(String adoptRequestCode, String animalCode) {
 			logger.debug("ModifyOsCodeAdoptDecide() 메소드 호출");
 			adoptDao.updateOsCodeAdoptDecide(adoptRequestCode);
-		
+			adoptDao.updateOsCodeAnimal(animalCode);
 		}
 		
 	// 입양취소
 		public void removeAdopt(String adoptRequestCode) {
 			logger.debug("removeAdopt() 메소드 호출");
+			// 1. 파일삭제
+			adoptDao.deleteAdoptFile(adoptRequestCode);
+			// 2. 입양취소 
 			adoptDao.deleteAdopt(adoptRequestCode);
 		}
 		
 	// 입양신청리스트
-		public List<AdoptRequest> listAdoptRequest(){
+		public List<AdoptRequestAndOsCodeAnimal> listAdoptRequest(){
 			logger.debug("List<AdoptRequest> listAdoptRequest() 메소드 호출");
-			List<AdoptRequest> list = adoptDao.selectAdoptRequest();
+			List<AdoptRequestAndOsCodeAnimal> list = adoptDao.selectAdoptRequest();
 			return list;
 		}
 		
@@ -230,7 +233,7 @@ public class AdoptService {
 			adoptDao.updateAdoptRequestAdvice(adoptRequest);
 		}
 		
-	// 상담내용리스트
+	// 상담내용조회
 		public AdoptRequest listAdoptCounsel(String adoptRequestCode) {
 			logger.debug("listAdoptCounsel() 메소드 호출");
 			logger.debug("listAdoptCounsel() adoptRequestCode is {}", adoptRequestCode);

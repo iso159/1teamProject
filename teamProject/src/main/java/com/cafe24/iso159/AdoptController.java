@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.iso159.adopt.service.AdoptCommand;
 import com.cafe24.iso159.adopt.service.AdoptRequest;
+import com.cafe24.iso159.adopt.service.AdoptRequestAndOsCodeAnimal;
 import com.cafe24.iso159.adopt.service.AdoptRequestFile;
 import com.cafe24.iso159.adopt.service.AdoptService;
 import com.cafe24.iso159.survey.service.SurveyList;
@@ -32,9 +33,6 @@ public class AdoptController {
 	
 	@Autowired
 	private AdoptService adoptService;
-	private AdoptCommand adoptCommand;
-	private AdoptRequest adoptRequest;
-	private SurveyList surveyList;
 	@Autowired
 	private SurveyService surveyService;
 	
@@ -125,7 +123,7 @@ public class AdoptController {
 		return "/adopt/adoptCounsel";
 	}
 	
-	// 상담완료 후 리스트로
+	// 상담완료 후 입양리스트로
 	@RequestMapping(value="/adopt/adoptCounsel", method = RequestMethod.POST)
 	public String ModifyAdoptRequestAdviceContents(HttpSession session, AdoptRequest adoptRequest,
 							@RequestParam(value="adoptRequestCode") String adoptRequestCode) {
@@ -134,23 +132,29 @@ public class AdoptController {
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
+		// 상담내용입력
 		adoptService.ModifyAdoptRequestAdviceContents(adoptRequest);
+		// 입양신청확인 상태코드 -> 상담완료
 		adoptService.ModifyOsCodeAdoptCounsel(adoptRequest.getAdoptRequestCode());
 		logger.debug("ModifyAdoptRequestAdviceContents() 메서드 호출 adoptRequest is {}",adoptRequest);
 		return "redirect:/adopt/adoptList";
 	}
-	// 상담내용 리스트
+	// 상담내용 조회
 	@RequestMapping(value="/adopt/adoptCounselList", method = RequestMethod.GET)
 	public String selectAdoptCounselList(HttpSession session,Model model,
-					@RequestParam(value="adoptRequestCode") String adoptRequestCode) {
+					@RequestParam(value="adoptRequestCode") String adoptRequestCode,
+					@RequestParam(value="animalCode") String animalCode) {
 		logger.debug("selectAdoptCounselList() 메서드 호출");
+		logger.debug("selectAdoptCounselList() 메서드 호출 animalCode is {}", animalCode);
 		// 세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
-		
+		// 상담내용조회
 		AdoptRequest adoptRequest = adoptService.listAdoptCounsel(adoptRequestCode);
+		// 입양코드와 동물코드를 담는다
 		adoptRequest.setAdoptRequestCode(adoptRequestCode);
+		adoptRequest.setAnimalCode(animalCode);
 		logger.debug("selectAdoptCounselList() adoptRequest is {}", adoptRequest);
 		model.addAttribute("adoptRequest", adoptRequest); 
 		return "/adopt/adoptCountselList";
@@ -159,14 +163,19 @@ public class AdoptController {
 	// 입양결정
 	@RequestMapping(value="/adopt/adoptDecide", method = RequestMethod.GET)
 	public String ModifyAdoptDecide(HttpSession session, 
-										@RequestParam(value="adoptRequestCode") String adoptRequestCode) {
+										@RequestParam(value="adoptRequestCode") String adoptRequestCode,
+										@RequestParam(value="animalCode") String animalCode) {
 		logger.debug("ModifyAdoptDecide() 메서드 호출");
 		logger.debug("ModifyAdoptDecide() 메서드 호출 adoptRequestCode is {}", adoptRequestCode);
+		logger.debug("ModifyAdoptDecide() 메서드 호출 animalCode is {}", animalCode);
 		// 세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
-		adoptService.ModifyOsCodeAdoptDecide(adoptRequestCode);
+		// 상담진행중 -> 입양완료로 상태코드 업데이트
+		// 체험동물 -> 입양동물로 상태코드 업데이트
+		adoptService.ModifyOsCodeAdoptDecide(adoptRequestCode, animalCode);
+		
 		return "redirect:/adopt/adoptList";
 	}
 	
@@ -187,7 +196,8 @@ public class AdoptController {
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
-		List<AdoptRequest> list = adoptService.listAdoptRequest();
+		List<AdoptRequestAndOsCodeAnimal> list = adoptService.listAdoptRequest();
+		logger.debug("selectAdoptRequestList(HttpSession httpSession) 메서드 list count is {}",list.size());
 		model.addAttribute("list", list);
 		return "/adopt/adoptList";
 	}

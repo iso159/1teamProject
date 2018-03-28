@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sun.javafx.collections.MappingChange.Map;
 
 @Repository
 public class AdoptDao {
@@ -41,10 +40,10 @@ public class AdoptDao {
 	
 	
 	// 입양신청조회
-	public List<AdoptRequest> selectAdoptRequest(){
-		logger.debug("List<AdoptRequest> selectAdoptRequest() 메서드 호출");
-		List<AdoptRequest> list = sqlSessionTemplate.selectList(nameSpace + "selectAdoptRequest");
-		logger.debug("list is {}", list);
+	public List<AdoptRequestAndOsCodeAnimal> selectAdoptRequest(){
+		logger.debug("List<AdoptRequestAndOsCodeAnimal> selectAdoptRequest() 메서드 호출");
+		List<AdoptRequestAndOsCodeAnimal> list = sqlSessionTemplate.selectList(nameSpace + "selectAdoptRequest");
+		logger.debug("List<AdoptRequestAndOsCodeAnimal> selectAdoptRequest() list.size() is {}", list.size());
 		return list;
 	}
 	
@@ -71,6 +70,17 @@ public class AdoptDao {
 	public void updateOsCodeAdoptDecide(String adoptRequestCode) {
 		logger.debug("updateOsCodeAdoptDecide() 메서드 호출");
 		sqlSessionTemplate.update(nameSpace + "updateOsCodeAdopt417", adoptRequestCode);
+	}
+	
+	// 동물상태코드 수정
+	public void updateOsCodeAnimal(String animalCode) {
+		logger.debug("updateOsCodeAnimal() 메서드 호출 animalCode is {}", animalCode);
+		sqlSessionTemplate.update(nameSpace + "updateOsCodeAnimal", animalCode);
+	}
+	// 파일삭제 
+	public void deleteAdoptFile(String adoptRequestCode) {
+		logger.debug("deleteAdoptFile() 메서드 호출");
+		sqlSessionTemplate.delete(nameSpace + "deleteAdoptFile", adoptRequestCode);
 	}
 	
 	// 입양취소 

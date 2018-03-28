@@ -89,26 +89,54 @@
 	</insert>
 	
 	<!-- 입양신청한 조회 리스트 -->
+	<resultMap 	type="com.cafe24.iso159.adopt.service.AdoptRequestAndOsCodeAnimal" 
+				id="selectAdoptRequestMap">
+		<id column="adopt_request_code" property="adoptRequestCode"/>
+		<result column="osCodeAnimal" property="osCodeAnimal"/>
+		<collection property="adoptRequest" ofType="com.cafe24.iso159.adopt.service.AdoptRequest">
+			<id column="adopt_request_code" property="adoptRequestCode"/>
+			<result column="m_member_id" property="mMemberId"/>
+			<result column="osCodeAdopt" property="osCodeAdopt"/>
+			<result column="animal_code" property="animalCode"/>			
+			<result column="adopt_request_reason" property="adoptRequestReason"/>
+			<result column="adopt_request_date" property="adoptRequestDate"/>
+			<result column="adopt_request_advice_date" property="adoptRequestAdviceDate"/>
+			<result column="adopt_decide_date" property="adoptDecideDate"/>
+		</collection>
+		
+	</resultMap>
 	<select id="selectAdoptRequest"
-			resultType="com.cafe24.iso159.adopt.service.AdoptRequest">
+			resultMap="selectAdoptRequestMap">
 		SELECT 
-			adopt_request_code as adoptRequestCode, 
-			animal_code as animalCode, 
-			bl_code as blCode, 
-			m_member_id as mMemberId,  
-			os.os_name as osCodeAdopt, 
-			adopt_request_reason as adoptRequestReason,
-			adopt_request_date as adoptRequestDate, 
-			adopt_request_advice_date as adoptRequestAdviceDate,
-			adopt_decide_date as adoptDecideDate 
+			ar.adopt_request_code, 
+			ar.m_member_id,  
+			os1.os_name as osCodeAdopt, 
+            ar.animal_code, 
+            os2.os_name as osCodeAnimal,
+            ar.adopt_request_reason,
+			ar.adopt_request_date, 
+			ar.adopt_request_advice_date,
+			ar.adopt_decide_date 
+			
 		FROM 
 			t_adopt_request ar 
-		INNER JOIN 
-			t_overall_status os 
+		
+        INNER JOIN 
+			t_overall_status os1
 		ON 
-			os.os_code = ar.os_code_adopt 
+			os1.os_code = ar.os_code_adopt 
+        INNER JOIN
+			t_animal a
+		ON	
+			ar.animal_code = a.animal_code
+        INNER JOIN
+			t_overall_status os2
+		ON
+			os2.os_code = a.os_code_animal
+		
 		ORDER BY ar.adopt_request_date DESC
 	</select>
+	
 	
 	<!-- 입양신청코드로 조회해서 입양신청-> 입양신청확인 업데이트 쿼리문 -->
 	<update id="updateOsCodeAdopt412"
@@ -145,6 +173,26 @@
 			adopt_request_code = #{adoptRequestCode}
 	
 	</update>
+	
+	<!-- 입양결정시 동물상태코드(체험동물->입양동물) 업데이트 -->
+	<update id="updateOsCodeAnimal"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
+		UPDATE 
+			t_animal 
+		SET 
+			os_code_animal = 'os_animal_3_1_4' 
+		WHERE 
+			animal_code = #{animalCode}
+	</update>
+	
+	<!-- 파일삭제 쿼리문 -->
+	<delete id="deleteAdoptFile"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
+		DELETE FROM 
+			t_overall_file 
+		WHERE 
+			adopt_request_code = #{adoptRequestCode}
+	</delete>
 	
 	<!-- 입양취소 쿼리문 -->
 	<delete id="deleteAdopt"
