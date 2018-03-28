@@ -33,6 +33,11 @@
 				<button type="button" class="btn btn-info">직원 신청 보호소 리스트</button>
 			</a>
 		</li>
+		<li class="list-group-item list-group-item-primary">
+			<a href="${pageContext.request.contextPath}/shelter/requestShelterStaffList">
+				<button type="button" class="btn btn-success">직원 신청 리스트</button>
+			</a>
+		</li>
 	</ul>
 </body>
 </html>

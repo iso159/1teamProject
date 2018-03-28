@@ -34,6 +34,41 @@
 		<result column="bl_shelter_date" property="blShelterDate"/>
 	</resultMap>
 	
+	<!-- ShelterStaffRequestJoinShelterNameMap -->
+	<resultMap type="com.cafe24.iso159.shelter.service.ShelterStaffRequestAndShelterName" 
+				id="ShelterStaffRequestJoinShelterNameMap">
+		<id column="bl_shelter_name" property="blShelterName"/>
+		<collection property="shelterStaffRequest" ofType="com.cafe24.iso159.shelter.service.ShelterStaffRequest">
+			<id column="ssr_code" property="ssrCode"/>
+			<result column="m_id" property="mId"/>
+			<result column="bl_code" property="blCode"/>
+			<result column="os_code_staff_request" property="osCodeStaffRequest"/>
+			<result column="ssr_request_date" property="ssrRequestDate"/>
+			<result column="ssr_clear_date" property="ssrClearDate"/>
+		</collection>		
+	</resultMap>
+	
+	<!-- 직원 신청 보호소 코드로 조회 쿼리문 -->
+	<select id="selectShelterStaffRequestAndShelterNameByBlCode" parameterType="String" 
+			resultMap="ShelterStaffRequestJoinShelterNameMap">
+		SELECT
+			ssr_code
+			, m_id
+			, bl.bl_code
+            , bl.bl_shelter_name
+			, os_code_staff_request
+			, ssr_request_date
+			, ssr_clear_date
+		FROM
+			t_shelter_staff_request ssr
+		INNER JOIN
+			t_business_license bl
+		ON
+			ssr.bl_code = bl.bl_code
+		WHERE
+			bl.bl_code=#{blCode}
+	</select>
+	
 	<!-- t_shelter_staff_request테이블의 ssr_code를 잘라서 가장 높은 숫자를 리턴하는 쿼리문 -->
 	<select id="selectSsrCodeNum" resultType="String">
 		SELECT 

@@ -21,6 +21,7 @@ import com.cafe24.iso159.shelter.service.BusinessLicense;
 import com.cafe24.iso159.shelter.service.BusinessLicenseCommand;
 import com.cafe24.iso159.shelter.service.MemberIdAndBusinessLicenseFile;
 import com.cafe24.iso159.shelter.service.ShelterService;
+import com.cafe24.iso159.shelter.service.ShelterStaffRequest;
 
 @Controller
 public class ShelterController {
@@ -28,14 +29,18 @@ public class ShelterController {
 	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterController.class);
 	
-	// 직원 등록 신청 리스트
+	// 직원 등록 신청 보호소 대표별 리스트를 model에 담아 businessLicenseRequestList.jsp로 포워딩해주는 서블릿
 	@RequestMapping(value="/shelter/requestShelterStaffList")
-	public String shelterStaffRequestList() {
-		
-		return "/shelter/shelterMenu";
+	public String shelterStaffRequestList(Model model, HttpSession session) {
+		logger.debug("shelterStaffRequestList(...) 메서드 호출");
+		String blCode = (String)session.getAttribute("loginBlCode");
+		List<ShelterStaffRequest> list = shelterService.getselectShelterStaffRequestAndShelterNameByBlCode(blCode);
+		model.addAttribute("list",list);
+		logger.debug("shelterStaffRequestList(...) 메서드 끝");
+		return "/shelter/ShelterRequestList";
 	}
 	
-	// 직원 등록 신청 요청을 받아 처리후 리다이렉트해주는 서블릿
+	// 직원 등록 신청 요청을 받아 처리후 requestShelterStaffList.jsp로 리다이렉트해주는 서블릿
 	@RequestMapping(value="/shelter/requestShelterStaff")
 	public String shelterStaffRequest(HttpSession session
 									 , @RequestParam(value="blCode") String blCode) {

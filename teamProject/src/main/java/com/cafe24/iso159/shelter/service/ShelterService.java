@@ -25,6 +25,16 @@ public class ShelterService {
 	private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
 	String osCodeLicenseStatus = null;
 	
+	// 직원 신청 리스트를 보호소 코드로 조회하는 쿼리문을 접근하는 selectShelterStaffRequestByBlCode DAO 메서드 호출
+	public List<ShelterStaffRequest> getselectShelterStaffRequestAndShelterNameByBlCode(String blCode){
+		logger.debug("getselectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 호출");
+		logger.debug("getselectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 blCode is {}", blCode);
+		List<ShelterStaffRequest> list = shelterDao.selectShelterStaffRequestAndShelterNameByBlCode(blCode);
+		logger.debug("getselectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 list is {}", list);
+		logger.debug("getselectShelterStaffRequestAndShelterNameByBlCode(String blCode) 메서드 끝");
+		return list;
+	}
+	
 	// 보호소 직원 신청 등록 쿼리문을 접근하는 insertShelterStaffRequest DAO 메서드 호출
 	public void addShelterStaffRequest(String blCode,String loginId) {
 		logger.debug("addShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) 메서드 호출");
