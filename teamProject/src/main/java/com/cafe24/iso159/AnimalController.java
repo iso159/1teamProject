@@ -35,7 +35,10 @@ public class AnimalController {
 	//동물등록
 	@RequestMapping(value="/animal/animalList", method=RequestMethod.POST)
 	public String animalAdd(HttpSession session, Animal animal) {
-		
+		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
+		if(session.getAttribute("loginId")==null) {
+			return "redirect:/member/login";
+		}
 		logger.debug("animalAdd()메서드 호출");
 		//세션에서 로그인 아이디를 가져와서 mShelterId에 셋팅
 		String mShelterId = (String)session.getAttribute("loginId");
