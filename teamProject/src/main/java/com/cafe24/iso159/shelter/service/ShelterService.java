@@ -238,10 +238,21 @@ public class ShelterService {
 		return memberIdAndBusinessLicenseFile;
 	}
 	
+	// mMemberId와 같은 보호소 대표 신청 조회 쿼리문을 접근하는 DAO 메서드 호출
+	public List<BusinessLicense> getBusinessLicenseOne(String mMemberId){
+		logger.debug("getBusinessLicenseOne(String mMemberId) 메서드 호출");
+		logger.debug("getBusinessLicenseOne(String mMemberId) 메서드 mMemberId is {}", mMemberId);
+		List<BusinessLicense> list = shelterDao.selectBusinessLicense(mMemberId);
+		logger.debug("getBusinessLicenseOne(String mMemberId) 메서드 list is {}", list);
+		logger.debug("getBusinessLicenseOne(String mMemberId) 메서드 끝");
+		return list;
+	}
+	
 	// 보호소 신청 전체 쿼리문을 접근하는 DAO 메서드 호출
 	public List<BusinessLicense> getBusinessLicense(){
 		logger.debug("getBusinessLicense() 메서드 호출");
-		List<BusinessLicense> list = shelterDao.selectAllBusinessLicense();
+		String mMemberId = null;
+		List<BusinessLicense> list = shelterDao.selectBusinessLicense(mMemberId);
 		logger.debug("getBusinessLicense() 메서드 list is {}", list);
 		logger.debug("getBusinessLicense() 메서드 끝");
 		return list;

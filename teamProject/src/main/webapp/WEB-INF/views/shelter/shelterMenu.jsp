@@ -25,7 +25,12 @@
 		</li>
 		<li class="list-group-item list-group-item-primary">
 			<a href="${pageContext.request.contextPath}/businessLicenseList">
-				<button type="button" class="btn btn-warning">대표 보호소 신청 리스트</button>
+				<button type="button" class="btn btn-info">대표 보호소 신청 리스트</button>
+			</a>
+		</li>
+		<li class="list-group-item list-group-item-primary">
+			<a href="${pageContext.request.contextPath}/businessLicenseListPersonal">
+				<button type="button" class="btn btn-danger">대표 보호소 신청 개인 조회</button>
 			</a>
 		</li>
 		<li class="list-group-item list-group-item-primary">
@@ -40,7 +45,7 @@
 		</li>
 		<li class="list-group-item list-group-item-primary">
 			<a href="${pageContext.request.contextPath}/shelter/requestShelterStaffPersonal">
-				<button type="button" class="btn btn-success">직원 신청 개인 조회</button>
+				<button type="button" class="btn btn-danger">직원 신청 개인 조회</button>
 			</a>
 		</li>
 	</ul>

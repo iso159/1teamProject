@@ -179,6 +179,19 @@ public class ShelterController {
 		return "shelter/businessLicenseFileList";
 	}
 	
+	// 보호소 대표 등록 신청을한 개인 조회 리스트를 담아 personalBusinessLicenseList.jsp로 이동되는 서블릿
+	@RequestMapping(value="/businessLicenseListPersonal")
+	public String getPersonalBusinessLicense(Model model, HttpSession session) {
+		logger.debug("getPersonalBusinessLicense() 메서드 호출");
+		String mMemberId = (String)session.getAttribute("loginId");
+		logger.debug("getPersonalBusinessLicense() 메서드 mMemberId is {}", mMemberId);
+		List<BusinessLicense> list = shelterService.getBusinessLicenseOne(mMemberId);
+		logger.debug("getPersonalBusinessLicense() 메서드 list is {}", list);
+		model.addAttribute("list", list);		
+		logger.debug("getPersonalBusinessLicense() 메서드 끝");
+		return "shelter/personalBusinessLicenseList";
+	}
+	
 	// 보호소 대표 등록 신청을한 리스트를 담아 businessLicenseList.jsp로 이동되는 서블릿
 	@RequestMapping(value="/businessLicenseList")
 	public String getBusinessLicense(Model model) {

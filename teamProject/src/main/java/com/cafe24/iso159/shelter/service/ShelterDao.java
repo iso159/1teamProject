@@ -109,9 +109,9 @@ public class ShelterDao {
 	}
 	
 	// 보호소 대표 신청 전체 리스트 조회 쿼리문을 접근하는 DAO 메서드
-	public List<BusinessLicense> selectAllBusinessLicense() {
+	public List<BusinessLicense> selectBusinessLicense(String mMemberId) {
 		logger.debug("selectBusinessLicense() 메서드 호출");
-		List<BusinessLicense> list = sqlSessionTemplate.selectList(nameSpace + "selectAllBusinessLicense");
+		List<BusinessLicense> list = sqlSessionTemplate.selectList(nameSpace + "selectBusinessLicense",mMemberId);
 		logger.debug("selectBusinessLicense() 메서드 list is {}",list);
 		logger.debug("selectBusinessLicense() 메서드 끝");
 		return list;
