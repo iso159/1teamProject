@@ -19,6 +19,23 @@ public class AnimalService {
 	//동물등록
 	public void addAnimal(Animal animal, String mShelterId, String blCode){
 		logger.debug("addAnimal()메서드 Animal is {}",animal);
+		//마지막코드 숫자값을 저장
+		String lastNum = animaldao.selectLastCode();
+		logger.debug("lastCode is {}", lastNum);
+		
+		//마지막 animal_code 코드
+		String animalCode = "animal_code_";
+		int lastAnimalNum=1;
+		
+		if(lastNum == null) {
+			animalCode += lastAnimalNum;  
+		}else {
+			lastAnimalNum += Integer.parseInt(lastNum);
+			animalCode += lastAnimalNum;
+		}
+		logger.debug("AnimalCode is {}", animalCode);
+		//animalCode셋팅
+		animal.setAnimalCode(animalCode);
 		//m_shelterId셋팅
 		animal.setmShelterId(mShelterId);
 		//bl_code 셋팅

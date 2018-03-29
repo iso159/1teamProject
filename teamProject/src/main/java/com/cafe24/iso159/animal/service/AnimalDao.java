@@ -21,6 +21,10 @@ public class AnimalDao {
 		logger.debug("insertAnimal()메서드 animal is {}", animal);		
 		return sqlSessionTemplate.insert(nameSpace+"insertAnimal", animal); 
 	}
+	//max코드값 조회
+		public String selectLastCode() {
+			return sqlSessionTemplate.selectOne(nameSpace+"selectLastCode");
+		}
 	//동물 리스트 조회
 	public List<AnimalCommand> selectAnimalList(){
 		logger.debug("selectAnimalList()메서드 호출");

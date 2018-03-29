@@ -24,10 +24,6 @@
 				</td>
 			</tr>
 			<tr>
-				<td>동물코드:</td>
-				<td><input type="text" name="animalCode"></td>
-			</tr>
-			<tr>
 				<td>품종:</td>
 				<td><input type="text" name="animalBreed"></td>
 			</tr>

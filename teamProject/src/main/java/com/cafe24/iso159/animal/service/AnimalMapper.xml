@@ -49,6 +49,11 @@
 			);
 	</insert>
 	
+	<!-- 동물등록 max코드값 조회쿼리문 -->
+	<select id="selectLastCode" resultType="String">
+		select max(CAST(substring(animal_code,13) AS DECIMAL)) as maxcol from t_animal
+	</select>
+	
 	<!-- 동물 리스트 전체조회-->
 	<select id="selectAnimalList" resultMap="selectAnimalListMap">
 		SELECT
