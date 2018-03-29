@@ -22,7 +22,7 @@ public class MemberDao {
 	public void addMember(Member member) {
 		logger.debug("addMember(Member member) 메서드member is {}", member);
 		sqlSessionTemplate.insert(nameSpace + "addMember", member);
-	}
+	} 
 
 	// 회원관리 정보 memberinfo dao
 	public void addMemberInfo(MemberInfo memberInfo) {

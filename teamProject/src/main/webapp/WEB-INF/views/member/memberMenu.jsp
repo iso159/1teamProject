@@ -31,7 +31,7 @@
 						<button type="button" id="signUpBtn" class="btn btn-info"> 회원 수정</button>
 				</a>
 				</div>
-			</div>
+			</div> 
 	</div>
 </body>
 </html>

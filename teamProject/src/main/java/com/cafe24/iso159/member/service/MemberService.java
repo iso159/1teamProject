@@ -83,6 +83,6 @@ public class MemberService {
 			map.put("mRightCode", mRightCode);
 			map.put("mId", memberId);
 			logger.debug("removeMember(String mId) 메서드 map is {}",map);
-			memberDao.memberRemove(map);
+			memberDao.updateMemberRight(map);
 		}
 }

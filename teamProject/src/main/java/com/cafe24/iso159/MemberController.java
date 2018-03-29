@@ -63,7 +63,7 @@ public class MemberController {
 		session.setAttribute("rightLevel", memberLoginLevel.getmRightLevel());
 		return "redirect:/";
 	}
-
+ 
 	// 로그인페이지요청
 	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
 	public String login() {
