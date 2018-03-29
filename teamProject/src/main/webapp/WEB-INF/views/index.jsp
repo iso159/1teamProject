@@ -14,45 +14,69 @@
 	<title>Home</title>
 </head>
 <body>
-	<div>
-		<h1> 기능 </h1>
-		<ul class="list-group">
-			<li class="list-group-item list-group-item-white">
-				<a href="${pageContext.request.contextPath}/member/memberMenu">
-					<button type="button" class="btn btn-white">회원</button>
-				</a>
-			</li>
-			<li class="list-group-item list-group-item-info">
-				<a href="${pageContext.request.contextPath}/shelter">
-					<button type="button" class="btn btn-info">보호소</button>
-				</a>
-			</li>
-			<li class="list-group-item list-group-item-primary">
-				<a href="${pageContext.request.contextPath}/exp">
-					<button type="button" class="btn btn-primary">체험</button>
-				</a>
-			</li>
-			<li class="list-group-item list-group-item-warning">
-				<a href="${pageContext.request.contextPath}/adopt">
-					<button type="button" class="btn btn-warning">입양</button>
-				</a>
-			</li>
-			<li class="list-group-item list-group-item-dark">
-				<a href="${pageContext.request.contextPath}/animal/animalList">
-					<button type="button" class="btn btn-dark">동물</button>
-				</a>
-			</li>
-			<li class="list-group-item list-group-item-danger">
-				<a href="${pageContext.request.contextPath}/goods/goodsMenu">
-					<button type="button" class="btn btn-danger">상품</button>
-				</a>
-			</li>
-			<li class="list-group-item list-group-item-link">
-				<a href="${pageContext.request.contextPath}/survey">
-					<button type="button" class="btn btn-link">설문지</button>
-				</a>
-			</li>
-		</ul>
+	<!-- top 부분 시작-->
+	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
+	<!-- top 부분 끝-->
+	
+	<!-- 메인 화면  -->
+	<!-- 메인 화면 내용 부분 -->
+	<div class="container">
+	<!-- 내용 입력 부분 -->
+
+	<!-- 팀원소개 시작 : Staff 1 -->
+	<section>
+	  <div data-layout="_r">
+	    <div data-layout="ch8 ec4">
+	      <img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" alt="" data-theme="_is1">
+	      <p class="MOD_STAFF_Name" data-theme="_bb1">John Smith</p>
+	      <p class="MOD_STAFF_Positon">Position</p>
+	      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+	    </div>
+	    <div data-layout="ch8 ec4">
+	      <img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" alt="" data-theme="_is1">
+	      <p class="MOD_STAFF_Name" data-theme="_bb1">Jane Smith</p>
+	      <p class="MOD_STAFF_Positon">Position</p>
+	      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+	    </div>
+	    <div data-layout="ch8 ec4">
+	      <img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" alt="" data-theme="_is1">
+	      <p class="MOD_STAFF_Name" data-theme="_bb1">John Smith</p>
+	      <p class="MOD_STAFF_Positon">Position</p>
+	      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+	    </div>
+	    <div data-layout="ch8 ec4">
+	      <img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" alt="" data-theme="_is1">
+	      <p class="MOD_STAFF_Name" data-theme="_bb1">Jane Smith</p>
+	      <p class="MOD_STAFF_Positon">Position</p>
+	      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+	    </div>
+	     <div data-layout="ch8 ec4">
+	      <img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" alt="" data-theme="_is1">
+	      <p class="MOD_STAFF_Name" data-theme="_bb1">Jane Smith</p>
+	      <p class="MOD_STAFF_Positon">Position</p>
+	      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+	    </div>
+	  </div>
+	</section>
+	<!-- 팀원소개 끝 : Staff 1 -->
+
+	<!-- 메인내용 시작 : Text | Text -->
+	<section>
+	  <div data-layout="_r">
+	    <div data-layout="ch-half">
+	    
+		</div>
+	  </div>
+	</section>
+	<!-- 메인내용 끝 : Text | Text -->
+
+	<!-- 내용 입력 부분 끝 -->
 	</div>
+	<!-- 메인 화면 내용 부분 끝 -->
+	
+	<!-- 메인화면 끝 -->
+	<!-- foot 부분 시작 -->
+	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
+	<!-- foot 부분 끝 -->
 </body>
 </html>
