@@ -1,5 +1,7 @@
 package com.cafe24.iso159;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -20,30 +22,37 @@ public class GoodsController {
 
 	// GET 방식 컨트롤러
 	@RequestMapping(value = "/goods/goodsMenu", method = RequestMethod.GET)
-	public String member() {
+	public String goods() {
 		return "goods/goodsMenu";
 	}
 
-	//상품등록 페이지로 이동
-	@RequestMapping(value="/goods/goodsAdd", method=RequestMethod.GET)
+	// 상품등록 페이지로 이동
+	@RequestMapping(value = "/goods/goodsAdd", method = RequestMethod.GET)
 	public String goodsAdd(HttpSession session) {
-		if(session.getAttribute("loginId")==null) {
-			return "redirect:/member/login";
+		if (session.getAttribute("loginId") == null) {
+			return "redirect:/goods/login";
 		}
 		return "goods/goodsAdd";
 	}
-	
-	//상품등록 요청
-	@RequestMapping(value="/goods/goodsAdd",method = RequestMethod.POST)
+
+	// 상품등록 요청
+	@RequestMapping(value = "/goods/goodsAdd", method = RequestMethod.POST)
 	public String goodsAdd(HttpSession session, Goods goods) {
-		logger.debug("goodsAdd(HttpSession session, Goods goods) 메서드 호출",goods);
-		//세션에서 로그인 아이디를 가져와서 mShelterId에 셋팅
-		String mAdminId = (String)session.getAttribute("loginId");
+		logger.debug("goodsAdd(HttpSession session, Goods goods) 메서드 호출", goods);
+		String mAdminId = (String) session.getAttribute("loginId");
 		logger.debug("goodsAdd(HttpSession session, Goods goods) 메서드 is mAdminId {}", mAdminId);
-		//세션에서 로그인 blCode를 가져와서 blCode에 셋팅
-		/*String blCode = (String)session.getAttribute("loginBlCode");*/
 		goods.setmAdminId(mAdminId);
 		goodsService.addGoods(goods);
 		return "index";
+	}
+
+	// 리스트 요청
+	@RequestMapping(value = "/goods/goodsList")
+	public String goodsList(HttpSession session) {
+		logger.debug("goodsList(Model model, HttpSession session) 메서드 호출");
+		List<Goods> list = goodsService.getGoodsList();
+		session.setAttribute("list", list);
+		logger.debug("goodsList(HttpSession session) 메서드 list is {}", list);
+		return "/goods/goodsList";
 	}
 }

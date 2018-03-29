@@ -16,7 +16,7 @@
 			, point_goods_date 
 		FROM t_point_goods;
 	</select> -->
-	<!-- 동물 등록 쿼리 --> 
+	<!-- 상품 등록 쿼리 --> 
 	<insert id="insertGoods" parameterType="com.cafe24.iso159.goods.service.Goods">
 		INSERT INTO t_point_goods 
 			(point_goods_code
@@ -41,5 +41,16 @@
 			t_point_goods
 	</select>
 	
-
+	<!--상품정보 전체 조회 쿼리-->
+	<select id="selectGoodsList" resultType="com.cafe24.iso159.goods.service.Goods">
+		SELECT 
+			point_goods_code as pointGoodsCode
+			, m_admin_id as mAdminId
+			, point_goods_name as pointGoodsName
+			, point_goods_point as pointGoodsPoint
+			, point_goods_desc as pointGoodsDesc
+			, point_goods_date as pointGoodsDate 
+		FROM 
+			t_point_goods;
+	</select>
 </mapper>

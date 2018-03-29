@@ -35,9 +35,9 @@
 			<div class="row">
 				<div class="col-md-4">
 					<label for="code">아이디</label>
-					<input id="userId" class="form-control" type="text"  name="mId" value="login" >
+					<input id="userId" class="form-control" type="text"  name="mId" value="m_02" > <br>
 					<label for="title">비밀번호</label> 
-					<input id="userPw" class="form-control" type="password"  name="mPw" value="1234">
+					<input id="userPw" class="form-control" type="password"  name="mPw" value="1234"> <br>
 					<button type="submit" id="loginBtn" class="btn btn-info">로그인</button>
 				</div>
 			</div>

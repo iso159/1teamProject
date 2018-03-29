@@ -37,7 +37,7 @@ public class MemberService {
 		member.setmRightCode(mRightCode);
 		memberDao.addMember(member);
 	}
-
+	//회원 로그인 체크
 	public MemberLoginLevel loginCheck(Member member) {
 		logger.debug("loginget(Member member, MemberLoginLevel memberloginlevel) 메서드 member is {}", member);
 		logger.debug("loginget(Member member, MemberLoginLevel memberloginlevel) 메서드 member is {}", member);
@@ -45,6 +45,7 @@ public class MemberService {
 		return memberLoginLevel;
 	}
 	
+	// 상품 리스트 전체 조회
 	public List<MemberAndMemberInfo> getMemberList() {
 		// 전체 회원 조회 메서드 호출 후 리턴
 		logger.debug("getMemberList() 메서드 호출");
@@ -53,7 +54,6 @@ public class MemberService {
 		logger.debug("getMemberList() 메서드 list is {}", list);
 		// 리턴받은 리스트 출력
 		return list;
-
 	}
 
 	// 회원 정보 수정 member service

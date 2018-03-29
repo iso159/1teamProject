@@ -28,30 +28,25 @@
 					<th>상품 코드</th>
 					<th>상품 이름</th>
 					<th>상품 포인트</th>
+					<th>상품 정보</th>
+					<th>관리자 아이디</th>
 					<th>상품 등록날짜</th>
-					<th>상품 관리자</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="m" items="${list}">
+				<c:forEach var="g" items="${list}">
 					<tr>
-						<td>${m.mId}</td>
-						<td>${m.memberInfo.mInfoName}</td>
-						<td>${m.memberInfo.mInfoNickname}</td>
-						<td>${m.memberInfo.mInfoGender}</td>
-						<td>${m.memberInfo.mInfoBirth}</td>
-						<td>${m.memberInfo.mInfoPostcode}</td>
-						<td>${m.memberInfo.mInfoAddress}</td>
-						<td>${m.memberInfo.mInfoEmail}</td>
-						<td>${m.memberInfo.mInfoPhone}</td>
-						<td>${m.memberInfo.mInfoJoindate}</td>
-						<td><a href="${pageContext.request.contextPath}/member/memberModify?mId=${m.mId}">수정</a></td>
-						<td><a href="${pageContext.request.contextPath}/member/memberRemove?mId=${m.mId}">삭제</a></td>
+						<td>${g.pointGoodsCode}</td>
+						<td>${g.mAdminId}</td>
+						<td>${g.pointGoodsName}</td>
+						<td>${g.pointGoodsPoint}</td>
+						<td>${g.pointGoodsDesc}</td>
+						<td>${g.pointGoodsDate}</td>
+						<td><a href="${pageContext.request.contextPath}/goods/goodsModify?pointGoodsCode=${g.pointGoodsCode}">수정</a></td>
+						<td><a href="${pageContext.request.contextPath}/goods/goodsRemove?pointGoodsCode=${g.pointGoodsCode}">삭제</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		
-		
 </body>
 </html>
