@@ -35,11 +35,8 @@
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <!-- 
-            호스팅시 db 연결	
-        <property name="url" 
-        		  value="jdbc:mysql://localhost:3306/iso159?useUnicode=true&amp;characterEncoding=euckr"/>
-         -->
+        <!-- <property name="url" 
+        		  value="jdbc:mysql://localhost:3306/iso159?useUnicode=true&amp;characterEncoding=euckr"/> -->        
         <property name="url" 
         		  value="jdbc:mysql://183.111.100.230:3306/iso159?useUnicode=true&amp;characterEncoding=euckr"/>
         <property name="username" value="iso159"/>
