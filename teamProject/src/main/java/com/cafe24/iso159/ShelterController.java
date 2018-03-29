@@ -31,6 +31,16 @@ public class ShelterController {
 	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterController.class);
 	
+	// 직원 신청 회원의 상태를 수정해 shelterRequestList.jsp로 리다이렉트 해주는 서블릿
+	@RequestMapping(value="/shelter/shelterStaffDeny")
+	public String denyShelterStaff(@RequestParam(value="ssrCode") String ssrCode) {
+		logger.debug("denyShelterStaff(...) 메서드 호출");
+		logger.debug("denyShelterStaff(...) 메서드 ssrCode is {}", ssrCode);
+		shelterService.modifyShelterStaffRequestOsCodeDenyBySsrCode(ssrCode);
+		logger.debug("denyShelterStaff(...) 메서드 끝");
+		return "redirect:/shelter/requestShelterStaffList";
+	}
+	
 	// 직원 신청 회원의 상태와 권한을 수정해 shelterRequestList.jsp로 리다이렉트 해주는 서블릿
 	@RequestMapping(value="/shelter/shelterStaffAllow")
 	public String allowShelterStaff(@RequestParam(value="mId") String mId
@@ -94,7 +104,7 @@ public class ShelterController {
 		logger.debug("shelterStaffRequest(...) 메서드 loginId is {}", loginId);
 		shelterService.addShelterStaffRequest(blCode, loginId);
 		logger.debug("shelterStaffRequest(...) 메서드 끝");
-		return "redirect:/shelter/requestShelterStaffList";
+		return "redirect:/shelter/requestShelterStaffPersonal";
 	}
 	
 	// 등록 결정된 보호소 리스트를 model에 담아 staffBusinessLicenseList.jsp로 이동되는 서블릿

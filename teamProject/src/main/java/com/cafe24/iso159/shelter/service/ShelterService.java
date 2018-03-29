@@ -31,6 +31,19 @@ public class ShelterService {
 	private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
 	String osCodeLicenseStatus = null;
 	
+	// 직원 신청 상태코드를 요청거부로 수정쿼리문을 접근하는 updateShelterStaffRequestOsCodeBySsrCode DAO 메서드 호출
+	public void modifyShelterStaffRequestOsCodeDenyBySsrCode(String ssrCode) {
+		logger.debug("modifyShelterStaffRequestOsCodeDenyBySsrCode(String ssrCode) 메서드 호출");
+		logger.debug("modifyShelterStaffRequestOsCodeDenyBySsrCode(String ssrCode) 메서드 ssrCode is {}", ssrCode);
+		final String osCodeStaffRequest = "os_shelter_23_1_4";
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("ssrCode", ssrCode);
+		map.put("osCodeStaffRequest", osCodeStaffRequest);
+		logger.debug("modifyShelterStaffRequestOsCodeDenyBySsrCode(String ssrCode) 메서드 map is {}", map);
+		shelterDao.updateShelterStaffRequestOsCodeBySsrCode(map);
+		logger.debug("modifyShelterStaffRequestOsCodeDenyBySsrCode(String ssrCode) 메서드 끝");
+	}
+	
 	// 직원 신청 상태코드를 결정완료로 수정(updateShelterStaffRequestOsCodeBySsrCode) 및 회원 권한 수정(updateMemberRight) DAO 메서드 호출
 	public void modifyShelterStaffRequestOsCodeAllowBySsrCode(String ssrCode,String mId) {
 		logger.debug("modifyShelterStaffRequestOsCodeAllowBySsrCode(String ssrCode,String mId) 메서드 호출");
@@ -41,6 +54,8 @@ public class ShelterService {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("ssrCode", ssrCode);
 		map.put("osCodeStaffRequest", osCodeStaffRequest);
+		// 결정완료 수정 확인후 동적쿼리로 날짜 업데이트를 위한 매핑
+		map.put("allowStaffRequest","success");
 		map.put("mRightCode", memberRight);
 		map.put("mId", mId);
 		logger.debug("modifyShelterStaffRequestOsCodeAllowBySsrCode(String ssrCode,String mId) 메서드 map is {}", map);
@@ -49,6 +64,8 @@ public class ShelterService {
 		logger.debug("modifyShelterStaffRequestOsCodeAllowBySsrCode(String ssrCode,String mId) 메서드 끝");
 	}
 	
+	
+	
 	// 직원신청 상태코드가 수정되는 쿼리문을 접근하는 updateShelterStaffRequestOsCodeBySsrCode DAO 메서드 호출
 	public MemberInfo modifyShelterStaffRequestOsCodeBySsrCode(String ssrCode,String mId, String osCodeStaffRequest) {
 		logger.debug("modifyShelterStaffRequestOsCodeBySsrCode(...) 메서드 호출");
@@ -56,12 +73,12 @@ public class ShelterService {
 		logger.debug("modifyShelterStaffRequestOsCodeBySsrCode(...) 메서드 mId is {}",mId);
 		logger.debug("modifyShelterStaffRequestOsCodeBySsrCode(...) 메서드 osCodeStaffRequest is {}",osCodeStaffRequest);
 		Map<String,Object> map = new HashMap<String, Object>();
-		if(!osCodeStaffRequest.equals("결정완료")) {
+		if(osCodeStaffRequest.equals("요청중")) {
 			osCodeStaffRequest = "os_shelter_23_1_2";
 			map.put("ssrCode", ssrCode);
 			map.put("osCodeStaffRequest", osCodeStaffRequest);
 			shelterDao.updateShelterStaffRequestOsCodeBySsrCode(map);
-		}				
+		}
 		String memberInfoCode = memberDao.selectMemberOneId(mId);
 		MemberInfo memberInfo = memberDao.selectMemberOne(memberInfoCode);
 		logger.debug("modifyShelterStaffRequestOsCodeBySsrCode(...) 메서드 끝");
@@ -99,11 +116,13 @@ public class ShelterService {
 		logger.debug("addShelterStaffRequest(ShelterStaffRequest shelterStaffRequest) 메서드 blCode is {}", blCode);
 		String ssrCode = "ssr_code_";
 		String ssrCodeNum = shelterDao.selectSsrCodeNum();
+		int ssrCodePlus = 1;
 		final String osCodeStaffRequest = "os_shelter_23_1_1";
 		if(ssrCodeNum == null) {
 			ssrCode += 1;
 		}else {
-			ssrCode += ssrCodeNum;
+			ssrCodePlus += Integer.parseInt(ssrCodeNum);
+			ssrCode += ssrCodePlus;
 		}
 		ShelterStaffRequest shelterStaffRequest = new ShelterStaffRequest();
 		shelterStaffRequest.setBlCode(blCode);

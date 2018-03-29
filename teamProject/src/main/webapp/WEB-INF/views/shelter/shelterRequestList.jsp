@@ -23,6 +23,7 @@
 			<tbody>
 				<c:forEach var="c" items="${list}">
 					<tr>
+						<c:set var="osCode" value="${c.shelterStaffRequest.osCodeStaffRequest}"></c:set>
 						<td>${c.shelterStaffRequest.mId}</td>
 						<td>${c.shelterStaffRequest.osCodeStaffRequest}</td>
 						<td>${c.shelterStaffRequest.ssrRequestDate}</td>
@@ -33,14 +34,18 @@
 							</a>
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/shelter/shelterStaffAllow?mId=${c.shelterStaffRequest.mId}&ssrCode=${c.shelterStaffRequest.ssrCode}">
-								등록 결정
-							</a>
+							<c:if test="${osCode eq '요청중' or osCode eq '요청확인'}">								
+									<a href="${pageContext.request.contextPath}/shelter/shelterStaffAllow?mId=${c.shelterStaffRequest.mId}&ssrCode=${c.shelterStaffRequest.ssrCode}">
+										등록 결정
+									</a>						
+							</c:if>
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/shelter/shelterStaffDeny?ssrCode=${c.shelterStaffRequest.ssrCode}">
-								등록 거부
-							</a>
+							<c:if test="${osCode eq '요청중' or osCode eq '요청확인'}">							
+									<a href="${pageContext.request.contextPath}/shelter/shelterStaffDeny?ssrCode=${c.shelterStaffRequest.ssrCode}">
+										등록 거부
+									</a>								
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>				

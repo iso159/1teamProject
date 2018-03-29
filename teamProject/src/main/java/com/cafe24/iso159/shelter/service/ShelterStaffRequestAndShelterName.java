@@ -1,8 +1,15 @@
 package com.cafe24.iso159.shelter.service;
 
 public class ShelterStaffRequestAndShelterName {
+	private String primaryCode;
 	private String blShelterName;
 	private ShelterStaffRequest shelterStaffRequest;
+	public String getPrimaryCode() {
+		return primaryCode;
+	}
+	public void setPrimaryCode(String primaryCode) {
+		this.primaryCode = primaryCode;
+	}
 	public String getBlShelterName() {
 		return blShelterName;
 	}
@@ -17,8 +24,8 @@ public class ShelterStaffRequestAndShelterName {
 	}
 	@Override
 	public String toString() {
-		return "ShelterStaffRequestAndShelterName [blShelterName=" + blShelterName + ", shelterStaffRequest="
-				+ shelterStaffRequest + "]";
+		return "ShelterStaffRequestAndShelterName [primaryCode=" + primaryCode + ", blShelterName=" + blShelterName
+				+ ", shelterStaffRequest=" + shelterStaffRequest + "]";
 	}
 	
 }

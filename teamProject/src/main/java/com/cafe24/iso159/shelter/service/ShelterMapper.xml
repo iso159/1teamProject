@@ -37,7 +37,8 @@
 	<!-- ShelterStaffRequestJoinShelterNameMap -->
 	<resultMap type="com.cafe24.iso159.shelter.service.ShelterStaffRequestAndShelterName" 
 				id="ShelterStaffRequestJoinShelterNameMap">
-		<id column="bl_shelter_name" property="blShelterName"/>
+		<id column="ssr_code" property="primaryCode"/>
+		<result column="bl_shelter_name" property="blShelterName"/>
 		<collection property="shelterStaffRequest" ofType="com.cafe24.iso159.shelter.service.ShelterStaffRequest">
 			<id column="ssr_code" property="ssrCode"/>
 			<result column="m_id" property="mId"/>
@@ -54,6 +55,9 @@
 			t_shelter_staff_request
 		SET
 			os_code_staff_request = #{osCodeStaffRequest}
+		<if test="allowStaffRequest != null">
+			, ssr_clear_date = now()
+		</if>
 		WHERE
 			ssr_code = #{ssrCode}
 	</update>
