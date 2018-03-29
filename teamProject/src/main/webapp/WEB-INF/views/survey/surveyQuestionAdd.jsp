@@ -1,0 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+
+<html>
+<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
+<script>
+		$(function() {
+		     $('#surveyQBtn').click(function(){
+		    	 $('#frmTest').submit();
+		     });
+		});
+
+</script>
+
+</script>
+	<title>설문지내용</title>
+</head>
+<body>
+	<h2>설문지 질문 등록</h2>
+	<c:set var="surveyCode" value="${surveyCode}"/>
+	<form id="frmTest" action="${pageContext.request.contextPath}/survey/surveyQuestionAdd" method="post" >
+			<table id="surveyQuestionTable" border="1" style="width:500px;">
+			    <tr>
+			        <td><input type="text" id="surveyCode" name="surveyCode" value="${surveyCode}" readonly/></td>
+			        <td>
+			        	<input 	type="text" id="surveyListQuestion" 
+			        			name="surveyListQuestion" 
+			        			placeholder="질문내용"
+			        			cols="100" size="100"/>
+			        </td>
+			        <td style="width:50px;"></td>
+			    </tr>
+			</table>
+			<button type="button" id="surveyQBtn">설문지 질문등록</button>
+		</form>
+
+	<h2>등록된 질문 리스트 </h2>	
+		<table border="1">
+			<thead>
+				<tr>
+					<th>설문지코드</th>
+					<th>질문 내용</th>
+					<th>등록날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="surveyList" items="${list}">
+				<tr>
+					<td>${surveyList.surveyCode}</td>
+					<td>${surveyList.surveyListQuestion}</td>
+					<td>
+						${surveyList.surveyListDate}
+					</td>
+					
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+</body>
+</html>

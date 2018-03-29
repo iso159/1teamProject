@@ -72,10 +72,15 @@ public class AdoptDao {
 		sqlSessionTemplate.update(nameSpace + "updateOsCodeAdopt417", adoptRequestCode);
 	}
 	
-	// 동물상태코드 수정
+	// 동물상태코드 체험동물->입양동물 수정
 	public void updateOsCodeAnimal(String animalCode) {
 		logger.debug("updateOsCodeAnimal() 메서드 호출 animalCode is {}", animalCode);
 		sqlSessionTemplate.update(nameSpace + "updateOsCodeAnimal", animalCode);
+	}
+	// 동물상태코드 체험동물로 수정
+	public void updateOsCodeAnimal312(String animalCode) {
+		logger.debug("updateOsCodeAnimal312() 메서드 호출 animalCode is {}", animalCode);
+		sqlSessionTemplate.update(nameSpace + "updateOsCodeAnimal312", animalCode);
 	}
 	// 파일삭제 
 	public void deleteAdoptFile(String adoptRequestCode) {

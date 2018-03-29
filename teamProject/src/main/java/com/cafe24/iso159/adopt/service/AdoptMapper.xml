@@ -137,7 +137,6 @@
 		ORDER BY ar.adopt_request_date DESC
 	</select>
 	
-	
 	<!-- 입양신청코드로 조회해서 입양신청-> 입양신청확인 업데이트 쿼리문 -->
 	<update id="updateOsCodeAdopt412"
 			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
@@ -184,6 +183,19 @@
 		WHERE 
 			animal_code = #{animalCode}
 	</update>
+	
+	<!-- 입양취소시 동물상태코드 체험동물로 업데이트 쿼리문 -->
+	<update id="updateOsCodeAnimal312"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
+		UPDATE 
+			t_animal 
+		SET 
+			os_code_animal = 'os_animal_3_1_2' 
+		WHERE 
+			animal_code = #{animalCode}
+	
+	</update>
+	
 	
 	<!-- 파일삭제 쿼리문 -->
 	<delete id="deleteAdoptFile"

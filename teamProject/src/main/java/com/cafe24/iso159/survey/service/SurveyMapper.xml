@@ -4,6 +4,102 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.survey.service.SurveyMapper">
 
+	<!-- 설문지추가 max코드값 조회 쿼리문 -->
+	<select id="selectLastSurveyCode" resultType="String">
+		select max(CAST(substring(survey_code,13) AS DECIMAL)) as maxcol from t_survey
+	</select>
+	
+	<!-- 설문지질문 추가 max코드값 조회 쿼리문 -->
+	<select id="selectLastSurveyListCode" resultType="String">
+		select max(CAST(substring(survey_list_code, 18) AS DECIMAL)) as maxcol from t_survey_list
+	</select>
+	
+	<!-- 설문지 조회 select 쿼리문 -->
+	<select id="selectSurveyList"
+			resultType="com.cafe24.iso159.survey.service.Survey">
+		SELECT 
+			survey_code as surveyCode, 
+			m_admin_id as mAdminId, 
+			survey_enroll_date as surveyEnrollDate, 
+			survey_name as surveyName, 
+			survey_point as surveyPoint 
+		FROM 
+			t_survey	
+	</select>
+	
+	<!-- 설문지등록 쿼리문 -->
+	<insert id="insertSurvey"
+			parameterType="com.cafe24.iso159.survey.service.Survey">
+	
+		INSERT INTO 
+			t_survey 
+			(
+				survey_code, 
+				m_admin_id, 
+				survey_enroll_date, 
+				survey_name, 
+				survey_point
+			) 
+		VALUES 
+			(
+				#{surveyCode}, 
+				#{mAdminId}, 
+				now(), 
+				#{surveyName}, 
+				#{surveyPoint}
+			)	
+	</insert>
+	
+	<!-- 설문지 질문 조회 쿼리문 -->
+	<select id="selectSurveyListList"
+			resultType="com.cafe24.iso159.survey.service.SurveyList">
+		SELECT 
+			survey_list_code as surveyListCode,
+			survey_code as surveyCode,
+			m_admin_id as mAdminId,
+			survey_list_question as surveyListQuestion,
+			survey_list_date as surveyListDate 
+		FROM 
+			t_survey_list
+	</select>
+	
+	<!-- 설문지코드로 설문지질문 조회 쿼리문 -->
+	<select id="selectSurveyListListBySurveyCode"
+			parameterType="com.cafe24.iso159.survey.service.SurveyList"
+			resultType="com.cafe24.iso159.survey.service.SurveyList">
+		SELECT 
+			survey_list_code as surveyListCode,
+			survey_code as surveyCode,
+			m_admin_id as mAdminId,
+			survey_list_question as surveyListQuestion,
+			survey_list_date as surveyListDate 
+		FROM 
+			t_survey_list
+		WHERE
+			survey_code = #{surveyCode}
+	</select>
+	<!-- 설문지 질문 등록 -->
+	<insert id="insertSurveyList"
+			parameterType="com.cafe24.iso159.survey.service.SurveyList">
+		INSERT INTO 
+			t_survey_list 
+				(
+				survey_list_code, 
+				survey_code, 
+				m_admin_id, 
+				survey_list_question, 
+				survey_list_date
+				) 
+			VALUES 
+				(
+				#{surveyListCode}, 
+				#{surveyCode}, 
+				#{mAdminId}, 
+				#{surveyListQuestion}, 
+				now()
+				)
+	</insert>
+	
 	<!-- 상담질문20개 조회 리스트 -->
 	<select id="selectSurveyCounselList"
 			resultType="com.cafe24.iso159.survey.service.SurveyList">

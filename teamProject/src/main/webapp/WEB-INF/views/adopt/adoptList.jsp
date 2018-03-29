@@ -64,7 +64,7 @@
 				</td>
 				<td>${aR.adoptRequest.adoptDecideDate}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/adopt/adoptCancle?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}">입양취소</a>
+					<a href="${pageContext.request.contextPath}/adopt/adoptCancle?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}&animalCode=${aR.adoptRequest.animalCode}">입양취소</a>
 				</td>
 			</tr>
 			</c:forEach>

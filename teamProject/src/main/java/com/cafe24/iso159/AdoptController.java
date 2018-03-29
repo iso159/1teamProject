@@ -182,9 +182,12 @@ public class AdoptController {
 	// 입양취소
 	@RequestMapping(value="/adopt/adoptCancle", method = RequestMethod.GET)
 	public String removeAdopt(HttpSession session,
-				@RequestParam(value="adoptRequestCode") String adoptRequestCode) {
+				@RequestParam(value="adoptRequestCode") String adoptRequestCode,
+				@RequestParam(value="animalCode") String animalCode) {
 		logger.debug("removeAdopt() 메소드 호출");
-		adoptService.removeAdopt(adoptRequestCode);
+		logger.debug("removeAdopt() 메소드 호출 adoptRequestCode is {}", adoptRequestCode);
+		logger.debug("removeAdopt() 메소드 호출 animalCode is {}", animalCode);
+		adoptService.removeAdopt(adoptRequestCode, animalCode);
 		return "redirect:/adopt/adoptList";
 	}
 	
