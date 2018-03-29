@@ -31,15 +31,29 @@ public class ShelterController {
 	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(ShelterController.class);
 	
+	// 직원 신청 회원의 상태와 권한을 수정해 shelterRequestList.jsp로 리다이렉트 해주는 서블릿
+	@RequestMapping(value="/shelter/shelterStaffAllow")
+	public String allowShelterStaff(@RequestParam(value="mId") String mId
+									, @RequestParam(value="ssrCode") String ssrCode) {
+		logger.debug("allowShelterStaff(...) 메서드 호출");
+		logger.debug("allowShelterStaff(...) 메서드 mId is {}", mId);
+		logger.debug("allowShelterStaff(...) 메서드 ssrCode is {}", ssrCode);
+		shelterService.modifyShelterStaffRequestOsCodeAllowBySsrCode(ssrCode, mId);
+		logger.debug("allowShelterStaff(...) 메서드 끝");
+		return "redirect:/shelter/requestShelterStaffList";
+	}
+	
 	// 직원 신청 회원의 상세정보와 아이디를 model에 담아 shelterStaffRequestInfo.jsp로 포워딩해주는 서블릿
 	@RequestMapping(value="/shelter/requestShelterStaffInfo")
 	public String shelterStaffRequestInfo(Model model
 										, @RequestParam(value="ssrCode") String ssrCode
-										, @RequestParam(value="mId") String mId) {
+										, @RequestParam(value="mId") String mId
+										, @RequestParam(value="osCodeStaffRequest") String osCodeStaffRequest) {
 		logger.debug("shelterStaffRequestInfo(...) 메서드 호출");
 		logger.debug("shelterStaffRequestInfo(...) 메서드 ssrCode is {}", ssrCode);
 		logger.debug("shelterStaffRequestInfo(...) 메서드 mId is {}", mId);
-		MemberInfo memberInfo = shelterService.modifyShelterStaffRequestOsCodeBySsrCode(ssrCode, mId);
+		logger.debug("shelterStaffRequestInfo(...) 메서드 osCodeStaffRequest is {}", osCodeStaffRequest);
+		MemberInfo memberInfo = shelterService.modifyShelterStaffRequestOsCodeBySsrCode(ssrCode, mId, osCodeStaffRequest);
 		logger.debug("shelterStaffRequestInfo(...) 메서드 memberInfo is {}", memberInfo);
 		model.addAttribute("memberInfo",memberInfo);
 		model.addAttribute("mId", mId);

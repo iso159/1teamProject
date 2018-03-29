@@ -16,6 +16,8 @@
 					<th>신청 날짜</th>
 					<th>결정 날짜</th>
 					<th>신청자 상세 정보</th>
+					<th>직원 등록 결정</th>
+					<th>직원 등록 거부</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,8 +28,18 @@
 						<td>${c.shelterStaffRequest.ssrRequestDate}</td>
 						<td>${c.shelterStaffRequest.ssrClearDate}</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/shelter/requestShelterStaffInfo?mId=${c.shelterStaffRequest.mId}&ssrCode=${c.shelterStaffRequest.ssrCode}">
+							<a href="${pageContext.request.contextPath}/shelter/requestShelterStaffInfo?mId=${c.shelterStaffRequest.mId}&ssrCode=${c.shelterStaffRequest.ssrCode}&osCodeStaffRequest=${c.shelterStaffRequest.osCodeStaffRequest}">
 								상세 정보 보기
+							</a>
+						</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/shelter/shelterStaffAllow?mId=${c.shelterStaffRequest.mId}&ssrCode=${c.shelterStaffRequest.ssrCode}">
+								등록 결정
+							</a>
+						</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/shelter/shelterStaffDeny?ssrCode=${c.shelterStaffRequest.ssrCode}">
+								등록 거부
 							</a>
 						</td>
 					</tr>
