@@ -58,17 +58,13 @@
 		</tbody>
 	</table>
 	
-	<c:if test="${empty selectExpOneInfo.exp.mShelterId}">
-		<a href="${pageContext.request.contextPath}/experience/expModify?expCode=${selectExpOneInfo.exp.expCode}"><button type="button" style="float: right;">수정</button></a>
-	</c:if>
-	
 	<c:choose>
 	<c:when test="${selectExpOneInfo.osName eq '체험 완료'}">
 	</c:when>
 	<c:when test="${selectExpOneInfo.osName eq '체험 진행중'}">
 	</c:when>
 	<c:otherwise>
-		<a href="#"><button type="button" style="float: right;">삭제</button></a>
+		<a href="${pageContext.request.contextPath}/experience/deleteExp?expCode=${selectExpOneInfo.exp.expCode}"><button type="button" style="float: right;">삭제</button></a>
 	</c:otherwise>
 	</c:choose>
 </body>

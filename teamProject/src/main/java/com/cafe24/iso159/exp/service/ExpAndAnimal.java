@@ -1,7 +1,5 @@
 package com.cafe24.iso159.exp.service;
 
-import java.util.List;
-
 import com.cafe24.iso159.animal.service.Animal;
 import com.cafe24.iso159.service.common.OverallStatus;
 

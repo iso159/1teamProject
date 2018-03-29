@@ -19,18 +19,12 @@ public class ExpDao {
 	//맵퍼 id를 가져올때 사용할 맵퍼 생성
 	private final String nameSpace = "com.cafe24.iso159.exp.service.ExpMapper.";
 	
-	//체험 수정
-	public void updateExpOen(Exp exp) {
+	//체험신청자 체험 삭제
+	public void deleteExpOne(String expCode) {
 		//호출된곳 확인
-		logger.debug("ExpDao.java 호출 {updateExpOen}.");
-		logger.debug("updateExpOen() 메서드 실행 exp is {}", exp);
-		sqlSessionTemplate.update(nameSpace + "updateExpOen", exp);
-	}
-	
-	//체험 수정 띄워주는 부분
-	public Exp selectUpdateExpOne(String expCode) {
-		Exp exp = sqlSessionTemplate.selectOne(nameSpace + "selectUpdateExpOne", expCode);
-		return exp;
+		logger.debug("ExpDao.java 호출 {deleteExpOne}.");
+		logger.debug("deleteExpOne() 메서드 실행 expCode is {}", expCode);
+		sqlSessionTemplate.delete(nameSpace + "deleteExpOne", expCode);
 	}
 	
 	//사용자가 자기가신청한 체험 리스트 보는 코드
@@ -41,7 +35,6 @@ public class ExpDao {
 		logger.debug("selectExpOneList() 메서드 실행 expAndAnimal is {}", expAndAnimal);
 		return expAndAnimal;
 	}
-	
 	
 	//사용자가 자기가신청한 체험정보 보는 코드
 	public ExpAndAnimalAndBusinessLicense selectExpOneInfo(String expCode){

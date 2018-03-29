@@ -58,33 +58,13 @@
 		<result column="os_name_level" property="osNameLevel"/>
 	</resultMap>
 	
-	<!-- 체험 수정 -->
-	<update id="updateExpOen" parameterType="com.cafe24.iso159.exp.service.Exp">
-		UPDATE 
+	<!-- 체험 삭제 -->
+	<delete id="deleteExpOne" parameterType="String">
+		DELETE FROM 
 			t_exp 
-		SET 
-			exp_period_code=#{expPeriodCode}, 
-		    exp_journal_count=#{expJournalCount}, 
-		    exp_cost=#{expCost}, 
-		    exp_purpose=#{expPurpose}, 
-		    exp_modified_date=now(), 
-		    exp_start_date=#{expStartDate}, 
-		    exp_end_date=#{expEndDate}
 		WHERE 
-			exp_code=#{expCode}
-	</update>
-	
-	<!-- 체험 수정 정보 띄움 -->
-	<select id="selectUpdateExpOne" parameterType="com.cafe24.iso159.exp.service.Exp">
-		SELECT
-			exp_purpose AS expPurpost, 
-		    exp_start_date AS expStartDate, 
-		    exp_end_date AS expEndDate
-		FROM 
-			t_exp
-		WHERE
-			exp_code = #{expCode}
-	</select>
+			exp_code= #{expCode}
+	</delete>
 	
 	<!-- 체험 상세 정보 -->
 	<resultMap type="com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense" id="selectExpAndAnimalAndBusinessLicenseOneInfoMap">
@@ -153,6 +133,8 @@
 			e.os_code_exp = os.os_code
 		WHERE 
 			e.m_exp_id = #{mExpId}
+		ORDER BY 
+			exp_reserve_request_date DESC
 	</select>
 	
 	<!-- 체험 신청할때 날짜선택 뿌려주는 부분 -->

@@ -17,18 +17,12 @@ public class ExpService {
 	//디버그용 로거 생성
 	private static final Logger logger = LoggerFactory.getLogger(ExpService.class);
 	
-	//체험 수정
-	public void updateExpOen(Exp exp) {
+	//체험신청자 체험 삭제
+	public void deleteExpOne(String expCode) {
 		//호출된곳 확인
-		logger.debug("ExpService.java 호출 {updateExpOen}.");
-		logger.debug("updateExpOen() 메서드 실행 exp is {}", exp);
-		expDao.updateExpOen(exp);
-	}
-	
-	//체험 수정 띄우는 부분
-	public Exp selectUpdateExpOne(String expCode) {
-		Exp exp = expDao.selectUpdateExpOne(expCode);
-		return exp;
+		logger.debug("ExpService.java 호출 {deleteExpOne}.");
+		logger.debug("deleteExpOne() 메서드 실행 expCode is {}", expCode);
+		expDao.deleteExpOne(expCode);
 	}
 	
 	//사용자 자신의 체험 정보 리스트 뿌려주는 부분

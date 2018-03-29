@@ -29,29 +29,13 @@ public class ExpController {
 	private ExpService expService;
 	private static final Logger logger = LoggerFactory.getLogger(ExpController.class);
 	
-	//체험 수정 띄우는 부분 /experience/expModify 을 get 방식으로 호출할때 발생
-	@RequestMapping(value = "/experience/expModify", method = RequestMethod.GET)
-	public String ModifyExpOneinfo(Model model,@RequestParam(value="expCode") String expCode) {
-		logger.debug("ExpController 호출 {ModifyExpOneinfo.GET}.");
-		//expCode 확인
-		logger.debug("ModifyExpOneinfo.GET 메서드 expCode is {}",expCode);
-		//expPerido /기간선택 가능하도록 보여줌
-		List<ExpPeriod> expPerido = expService.expPeriod();
-		logger.debug("ModifyExpOneinfo.GET 메서드 expPerido is {}",expPerido);
-		model.addAttribute("addAttribute", expPerido);
-		//전에 입력했던 자료를 보여줌
-		Exp exp = expService.selectUpdateExpOne(expCode);
-		logger.debug("ModifyExpOneinfo.GET 메서드 exp is {}",exp);
-		model.addAttribute("exp", exp);
-		return "/experience/expModify";
-	}
-	
-	// 체험 수정 /experience/expModify 을 POST 방식으로 호출할때 발생
-	@RequestMapping(value = "/experience/expModify", method = RequestMethod.POST)
-	public String ModifyExpOen(Exp exp) {
-		logger.debug("ExpController 호출 {ModifyExpOen.POST}.");
-		logger.debug("ModifyExpOen.POST 메서드 exp is {}",exp);
-		expService.updateExpOen(exp);
+	// 체험신청자 체험 삭제
+	@RequestMapping(value = "/experience/deleteExp", method = RequestMethod.GET)
+	public String deleteExpOne(@RequestParam(value="expCode") String expCode) {
+		logger.debug("ExpController 호출 {deleteExpOne.get}.");
+		//넘어온 expCode 값 확인
+		logger.debug("deleteExpOne().get 메서드 expCode is {}",expCode);
+		expService.deleteExpOne(expCode);
 		return "redirect:/experience/expList";
 	}
 	
