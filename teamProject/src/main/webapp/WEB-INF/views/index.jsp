@@ -43,7 +43,7 @@
 				</a>
 			</li>
 			<li class="list-group-item list-group-item-danger">
-				<a href="${pageContext.request.contextPath}/item">
+				<a href="${pageContext.request.contextPath}/goods/goodsMenu">
 					<button type="button" class="btn btn-danger">상품</button>
 				</a>
 			</li>
