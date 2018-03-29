@@ -1,5 +1,7 @@
 package com.cafe24.iso159.exp.service;
 
+import com.cafe24.iso159.service.common.OverallStatus;
+
 public class Exp {
 	private String expCode;
 	private String animalCode;
@@ -17,15 +19,7 @@ public class Exp {
 	private String expStartDate;
 	private String expEndDate;
 	private String expModifiedDate;
-	@Override
-	public String toString() {
-		return "Exp [expCode=" + expCode + ", animalCode=" + animalCode + ", mExpId=" + mExpId + ", mShelterId="
-				+ mShelterId + ", blCode=" + blCode + ", expPeriodCode=" + expPeriodCode + ", osCodeExp=" + osCodeExp
-				+ ", osCodeCostReturn=" + osCodeCostReturn + ", expJournalCount=" + expJournalCount + ", expCost="
-				+ expCost + ", expPurpose=" + expPurpose + ", expReserveRequestDate=" + expReserveRequestDate
-				+ ", expCheckDate=" + expCheckDate + ", expStartDate=" + expStartDate + ", expEndDate=" + expEndDate
-				+ ", expModifiedDate=" + expModifiedDate + "]";
-	}
+	private String osName;
 	public String getExpCode() {
 		return expCode;
 	}
@@ -122,5 +116,20 @@ public class Exp {
 	public void setExpModifiedDate(String expModifiedDate) {
 		this.expModifiedDate = expModifiedDate;
 	}
-
+	public String getOsName() {
+		return osName;
+	}
+	public void setOsName(String osName) {
+		this.osName = osName;
+	}
+	@Override
+	public String toString() {
+		return "Exp [expCode=" + expCode + ", animalCode=" + animalCode + ", mExpId=" + mExpId + ", mShelterId="
+				+ mShelterId + ", blCode=" + blCode + ", expPeriodCode=" + expPeriodCode + ", osCodeExp=" + osCodeExp
+				+ ", osCodeCostReturn=" + osCodeCostReturn + ", expJournalCount=" + expJournalCount + ", expCost="
+				+ expCost + ", expPurpose=" + expPurpose + ", expReserveRequestDate=" + expReserveRequestDate
+				+ ", expCheckDate=" + expCheckDate + ", expStartDate=" + expStartDate + ", expEndDate=" + expEndDate
+				+ ", expModifiedDate=" + expModifiedDate + ", osName=" + osName + "]";
+	}
+	
 }

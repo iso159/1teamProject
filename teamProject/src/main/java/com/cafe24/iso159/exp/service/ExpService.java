@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cafe24.iso159.member.service.Member;
+
 @Service
 @Transactional
 public class ExpService {
@@ -17,6 +19,25 @@ public class ExpService {
 	//디버그용 로거 생성
 	private static final Logger logger = LoggerFactory.getLogger(ExpService.class);
 	
+	//해당 보호소 체험자 리스트
+	public List<Exp> selectExpShelterList(String blCode){
+		//호출된곳 확인
+		logger.debug("ExpService.java 호출 {selectExpShelterList}.");
+		logger.debug("selectExpShelterList() 메서드 실행 blCode is {}", blCode);
+		List<Exp> exp = expDao.selectExpShelterList(blCode);
+		logger.debug("selectExpShelterList() 메서드 실행 exp is {}", exp);
+		return exp;
+	}
+	
+	//체험자인지 보호소인지 확인
+	public Member selectMemberCheck(String mId) {
+		//호출된곳 확인
+		logger.debug("ExpService.java 호출 {selectMemberCheck}.");
+		logger.debug("selectMemberCheck() 메서드 실행 mId is {}", mId);
+		Member member = expDao.selectMemberCheck(mId);
+		logger.debug("selectMemberCheck() 메서드 실행 member is {}", member);
+		return member;
+	}
 	//체험신청자 체험 삭제
 	public void deleteExpOne(String expCode) {
 		//호출된곳 확인

@@ -21,6 +21,7 @@ import com.cafe24.iso159.exp.service.ExpAndAnimal;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense;
 import com.cafe24.iso159.exp.service.ExpPeriod;
 import com.cafe24.iso159.exp.service.ExpService;
+import com.cafe24.iso159.member.service.Member;
 
 
 @Controller
@@ -28,6 +29,18 @@ public class ExpController {
 	@Autowired
 	private ExpService expService;
 	private static final Logger logger = LoggerFactory.getLogger(ExpController.class);
+	
+	// 해당 보호소 체험자 리스트
+	@RequestMapping(value = "/experience/expShelterList", method = RequestMethod.GET)
+	public String expshelterList(Model model,@RequestParam(value="blCode") String blCode) {
+		logger.debug("ExpController 호출 {expshelterList.get}.");
+		//넘어온 blCode 값 확인
+		logger.debug("expshelterList().get 메서드 blCode is {}",blCode);
+		List<Exp> exp = expService.selectExpShelterList(blCode);
+		logger.debug("expshelterList().get 메서드 exp is {}",exp);
+		model.addAttribute("exp", exp);
+		return "/experience/expShelterList";
+	}
 	
 	// 체험신청자 체험 삭제
 	@RequestMapping(value = "/experience/deleteExp", method = RequestMethod.GET)
@@ -71,8 +84,14 @@ public class ExpController {
 	
 	// 체험 홈 /experience/expAdd 을 get 방식으로 호출할때 실행
 	@RequestMapping(value = "/exp", method = RequestMethod.GET)
-	public String exp() {
+	public String exp(Model model,HttpSession session) {
 		logger.debug("ExpController 호출 {exp.get}.");
+		String loginId = (String)session.getAttribute("loginId");
+		//넘어온 loginId 값 확인
+		logger.debug("exp().get 메서드 loginId is {}",loginId);
+		Member member = expService.selectMemberCheck(loginId);
+		logger.debug("exp().get 메서드 member is {}",member);
+		model.addAttribute("member", member);
 		return "/experience/exp";
 	}
 	

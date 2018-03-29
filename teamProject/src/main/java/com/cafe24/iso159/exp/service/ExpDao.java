@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.iso159.member.service.Member;
+
 
 @Repository
 public class ExpDao {
@@ -18,6 +20,25 @@ public class ExpDao {
 	private static final Logger logger = LoggerFactory.getLogger(ExpDao.class);
 	//맵퍼 id를 가져올때 사용할 맵퍼 생성
 	private final String nameSpace = "com.cafe24.iso159.exp.service.ExpMapper.";
+	
+	//해당 보호소 체험자 리스트
+	public List<Exp> selectExpShelterList(String blCode) {
+		logger.debug("ExpDao.java 호출 {selectExpShelterList}.");
+		logger.debug("selectExpShelterList() 메서드 실행 blCode is {}", blCode);
+		List<Exp> exp = sqlSessionTemplate.selectList(nameSpace + "selectExpShelterList", blCode);
+		logger.debug("selectExpShelterList() 메서드 실행 exp is {}", exp);
+		return exp;
+	}
+	
+	//체험자인지 보호소인지 확인
+	public Member selectMemberCheck(String mId) {
+		//호출된곳 확인
+		logger.debug("ExpDao.java 호출 {selectMemberCheck}.");
+		logger.debug("selectMemberCheck() 메서드 실행 mId is {}", mId);
+		Member member = sqlSessionTemplate.selectOne(nameSpace + "selectMemberCheck", mId);
+		logger.debug("selectMemberCheck() 메서드 실행 member is {}", member);
+		return member;
+	}
 	
 	//체험신청자 체험 삭제
 	public void deleteExpOne(String expCode) {

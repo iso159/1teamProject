@@ -58,6 +58,34 @@
 		<result column="os_name_level" property="osNameLevel"/>
 	</resultMap>
 	
+	<!-- 해당 보호소 체험자 리스트 -->
+	<select id="selectExpShelterList" parameterType="String" resultType="com.cafe24.iso159.exp.service.Exp">
+		SELECT 
+			e.exp_code AS expCode
+			,e.m_exp_id AS mExpId
+			,e.m_shelter_id AS mShelterId
+			,os.os_name AS osName
+			,e.exp_reserve_request_date AS expReserveRequestDate
+		FROM 
+			t_exp e 
+		INNER JOIN 
+			t_overall_status os 
+		ON 
+			e.os_code_exp = os.os_code
+		WHERE 
+			e.bl_code=#{blCode}
+	</select>
+	
+	<!-- 체험자인지 보호소인지 확인 -->
+	<select id="selectMemberCheck" parameterType="String" resultType="com.cafe24.iso159.member.service.Member">
+		SELECT 
+			bl_code AS blCode
+		FROM 
+			t_member 
+		WHERE 
+			m_id = #{mId}
+	</select>
+	
 	<!-- 체험 삭제 -->
 	<delete id="deleteExpOne" parameterType="String">
 		DELETE FROM 
