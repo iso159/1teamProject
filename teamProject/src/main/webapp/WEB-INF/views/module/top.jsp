@@ -26,8 +26,10 @@
 <header class="MOD_HEADER1">
   <div data-layout="_r">
     <div data-layout="al16 de10" class="MOD_HEADER1_Title">
-      <h1 class="MOD_HEADER1_TextLogo">Company</h1>
-      <p class="MOD_HEADER1_Slogan">Company slogan, byline or additional message</p>
+      <h1 class="MOD_HEADER1_TextLogo">
+      	<a href="${pageContext.request.contextPath}/">보듬 컴퍼니</a>
+      </h1>
+      <p class="MOD_HEADER1_Slogan">유기동물 체험을 통한 분양 활성화 및 사회 기여</p>
     </div>
     <div data-layout="al16 de6" class="MOD_HEADER1_Details">
       <p class="MOD_HEADER1_Phone">Phone: <a href="tel:#">01234 567 8910</a></p>
