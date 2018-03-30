@@ -33,8 +33,19 @@ public class ShelterController {
 	
 	// 직원 신청 회원의 상태를 수정해 shelterRequestList.jsp로 리다이렉트 해주는 서블릿
 	@RequestMapping(value="/shelter/shelterStaffDeny")
-	public String denyShelterStaff(@RequestParam(value="ssrCode") String ssrCode) {
+	public String denyShelterStaff(HttpSession session
+								 , @RequestParam(value="ssrCode") String ssrCode) {
 		logger.debug("denyShelterStaff(...) 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		String rightName = (String)session.getAttribute("rightName");
+		String rightLevel = (String)session.getAttribute("rightLevel");
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}else if(!rightName.equals("보호소")){
+			return "redirect:/";
+		}else if(!rightLevel.equals("2")) {
+			return "redirect:/";
+		}
 		logger.debug("denyShelterStaff(...) 메서드 ssrCode is {}", ssrCode);
 		shelterService.modifyShelterStaffRequestOsCodeDenyBySsrCode(ssrCode);
 		logger.debug("denyShelterStaff(...) 메서드 끝");
@@ -43,9 +54,20 @@ public class ShelterController {
 	
 	// 직원 신청 회원의 상태와 권한을 수정해 shelterRequestList.jsp로 리다이렉트 해주는 서블릿
 	@RequestMapping(value="/shelter/shelterStaffAllow")
-	public String allowShelterStaff(@RequestParam(value="mId") String mId
+	public String allowShelterStaff(HttpSession session
+									, @RequestParam(value="mId") String mId
 									, @RequestParam(value="ssrCode") String ssrCode) {
 		logger.debug("allowShelterStaff(...) 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		String rightName = (String)session.getAttribute("rightName");
+		String rightLevel = (String)session.getAttribute("rightLevel");
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}else if(!rightName.equals("보호소")){
+			return "redirect:/";
+		}else if(!rightLevel.equals("2")) {
+			return "redirect:/";
+		}
 		logger.debug("allowShelterStaff(...) 메서드 mId is {}", mId);
 		logger.debug("allowShelterStaff(...) 메서드 ssrCode is {}", ssrCode);
 		shelterService.modifyShelterStaffRequestOsCodeAllowBySsrCode(ssrCode, mId);
@@ -55,11 +77,21 @@ public class ShelterController {
 	
 	// 직원 신청 회원의 상세정보와 아이디를 model에 담아 shelterStaffRequestInfo.jsp로 포워딩해주는 서블릿
 	@RequestMapping(value="/shelter/requestShelterStaffInfo")
-	public String shelterStaffRequestInfo(Model model
+	public String shelterStaffRequestInfo(HttpSession session, Model model
 										, @RequestParam(value="ssrCode") String ssrCode
 										, @RequestParam(value="mId") String mId
 										, @RequestParam(value="osCodeStaffRequest") String osCodeStaffRequest) {
 		logger.debug("shelterStaffRequestInfo(...) 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		String rightName = (String)session.getAttribute("rightName");
+		String rightLevel = (String)session.getAttribute("rightLevel");
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}else if(!rightName.equals("보호소")){
+			return "redirect:/";
+		}else if(!rightLevel.equals("2")) {
+			return "redirect:/";
+		}
 		logger.debug("shelterStaffRequestInfo(...) 메서드 ssrCode is {}", ssrCode);
 		logger.debug("shelterStaffRequestInfo(...) 메서드 mId is {}", mId);
 		logger.debug("shelterStaffRequestInfo(...) 메서드 osCodeStaffRequest is {}", osCodeStaffRequest);
@@ -77,6 +109,9 @@ public class ShelterController {
 		logger.debug("personalRequestShelterStaff(...) 메서드 호출");
 		String mId = (String)session.getAttribute("loginId");
 		logger.debug("personalRequestShelterStaff(...) 메서드 mId is {}", mId);
+		if(mId==null) {
+			return "redirect:/member/login";
+		}
 		List<ShelterStaffRequestAndShelterName> list = shelterService.getShelterStaffRequestAndShelterNameByMId(mId);
 		model.addAttribute("list", list);
 		logger.debug("personalRequestShelterStaff(...) 메서드 끝");
@@ -87,6 +122,16 @@ public class ShelterController {
 	@RequestMapping(value="/shelter/requestShelterStaffList")
 	public String shelterStaffRequestList(Model model, HttpSession session) {
 		logger.debug("shelterStaffRequestList(...) 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		String rightName = (String)session.getAttribute("rightName");
+		String rightLevel = (String)session.getAttribute("rightLevel");
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}else if(!rightName.equals("보호소")){
+			return "redirect:/";
+		}else if(!rightLevel.equals("2")) {
+			return "redirect:/";
+		}
 		String blCode = (String)session.getAttribute("loginBlCode");
 		List<ShelterStaffRequestAndShelterName> list = shelterService.getselectShelterStaffRequestAndShelterNameByBlCode(blCode);
 		model.addAttribute("list",list);
@@ -102,6 +147,9 @@ public class ShelterController {
 		logger.debug("shelterStaffRequest(...) 메서드 blCode is {}", blCode);
 		String loginId = (String)session.getAttribute("loginId");
 		logger.debug("shelterStaffRequest(...) 메서드 loginId is {}", loginId);
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}		
 		shelterService.addShelterStaffRequest(blCode, loginId);
 		logger.debug("shelterStaffRequest(...) 메서드 끝");
 		return "redirect:/shelter/requestShelterStaffPersonal";
@@ -109,8 +157,12 @@ public class ShelterController {
 	
 	// 등록 결정된 보호소 리스트를 model에 담아 staffBusinessLicenseList.jsp로 이동되는 서블릿
 	@RequestMapping(value="/shelter/staffBusinessLicenseGet")
-	public String getStaffBusinessLicense(Model model){
+	public String getStaffBusinessLicense(HttpSession session, Model model){
 		logger.debug("getStaffBusinessLicense() 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}
 		List<BusinessLicense> list = shelterService.getShelterList();
 		model.addAttribute("list", list);
 		logger.debug("getStaffBusinessLicense() 메서드 끝");
@@ -118,14 +170,22 @@ public class ShelterController {
 	}	
 	
 	@RequestMapping(value="/shelter/businessLicenseSet")
-	public String setBusinessLicense(@RequestParam(value="blCode") String blCode
+	public String setBusinessLicense(HttpSession session
+									, @RequestParam(value="blCode") String blCode
 									, @RequestParam(value="mMemberId") String mMemberId) {
 		logger.debug("setBusinessLicense(...) 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		String rightName = (String)session.getAttribute("rightName");
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}else if(!rightName.equals("관리자")){
+			return "redirect:/";
+		}
 		logger.debug("setBusinessLicense(...) 메서드 blCode is {}", blCode);
 		logger.debug("setBusinessLicense(...) 메서드 mMemberId is {}", mMemberId);
 		shelterService.modifyShelterRight(blCode, mMemberId);
 		logger.debug("setBusinessLicense(...) 메서드 끝");
-		return "redirect:/businessLicenseList";
+		return "redirect:/businessLicenseRequestList";
 	}
 	
 	@RequestMapping(value="/shelter/businessLicenseFileDownload", method=RequestMethod.GET)
@@ -146,20 +206,35 @@ public class ShelterController {
 	}
 	
 	@RequestMapping(value="/shelter/businessLicenseDeny", method=RequestMethod.POST)
-	public String denyBusinessLicense(@RequestParam(value="blCode") String blCode
+	public String denyBusinessLicense(HttpSession session
+									, @RequestParam(value="blCode") String blCode
 									, @RequestParam(value="blShelterDenyReason") String blShelterDenyReason) {
 		logger.debug("denyBusinessLicense(...) 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		String rightName = (String)session.getAttribute("rightName");
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}else if(!rightName.equals("관리자")){
+			return "redirect:/";
+		}
 		logger.debug("denyBusinessLicense(...) 메서드 blCode is {}",blCode);
 		logger.debug("denyBusinessLicense(...) 메서드 blShelterDenyReason is {}",blShelterDenyReason);
 		shelterService.modifyBusinessLicenseDeny(blCode, blShelterDenyReason);
 		logger.debug("denyBusinessLicense(...) 메서드 끝");
-		return "redirect:/businessLicenseList";
+		return "redirect:/businessLicenseRequestList";
 	}
 	
 	@RequestMapping(value="/shelter/businessLicenseDeny")
-	public String denyBusinessLicense(@RequestParam(value="blCode") String blCode
-									, Model model) {
+	public String denyBusinessLicense(HttpSession session, Model model
+									, @RequestParam(value="blCode") String blCode) {
 		logger.debug("denyBusinessLicense() 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		String rightName = (String)session.getAttribute("rightName");
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}else if(!rightName.equals("관리자")){
+			return "redirect:/";
+		}
 		shelterService.businessLicense();
 		model.addAttribute("blCode", blCode);
 		logger.debug("denyBusinessLicense() 메서드 끝");
@@ -168,9 +243,16 @@ public class ShelterController {
 	
 	// 보호소 대표 등록시 업로드한 파일리스트를 담아 businessLicenseFileList.jsp로 이동되는 서블릿 
 	@RequestMapping(value="/shelter/fileList")
-	public String getBusinessLicenseFileList(@RequestParam(value="blCode") String blCode,
-											Model model) {
+	public String getBusinessLicenseFileList(HttpSession session, Model model
+											, @RequestParam(value="blCode") String blCode) {
 		logger.debug("getBusinessLicenseFileList(...) 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		String rightName = (String)session.getAttribute("rightName");
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}else if(!rightName.equals("관리자")){
+			return "redirect:/";
+		}
 		logger.debug("getBusinessLicenseFileList(...) 메서드 blCode is {}", blCode);
 		MemberIdAndBusinessLicenseFile memberIdAndBusinessLicenseFile = shelterService.getBusinessLicenseFileList(blCode);
 		logger.debug("getBusinessLicenseFileList(...) 메서드 memberIdAndBusinessLicenseFile is {}", memberIdAndBusinessLicenseFile);
@@ -183,6 +265,10 @@ public class ShelterController {
 	@RequestMapping(value="/businessLicenseListPersonal")
 	public String getPersonalBusinessLicense(Model model, HttpSession session) {
 		logger.debug("getPersonalBusinessLicense() 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}
 		String mMemberId = (String)session.getAttribute("loginId");
 		logger.debug("getPersonalBusinessLicense() 메서드 mMemberId is {}", mMemberId);
 		List<BusinessLicense> list = shelterService.getBusinessLicenseOne(mMemberId);
@@ -192,14 +278,21 @@ public class ShelterController {
 		return "shelter/personalBusinessLicenseList";
 	}
 	
-	// 보호소 대표 등록 신청을한 리스트를 담아 businessLicenseList.jsp로 이동되는 서블릿
-	@RequestMapping(value="/businessLicenseList")
-	public String getBusinessLicense(Model model) {
+	// 보호소 대표 등록 신청을한 리스트를 담아 businessLicenseRequestList.jsp로 이동되는 서블릿
+	@RequestMapping(value="/businessLicenseRequestList")
+	public String getBusinessLicense(Model model, HttpSession session) {
 		logger.debug("getBusinessLicense() 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		String rightName = (String)session.getAttribute("rightName");
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}else if(!rightName.equals("관리자")){
+			return "redirect:/";
+		}
 		List<BusinessLicense> list = shelterService.getBusinessLicense();
 		model.addAttribute("list", list);
 		logger.debug("getBusinessLicense() 메서드 끝");
-		return "shelter/businessLicenseList";
+		return "shelter/businessLicenseRequestList";
 	}
 	
 	// 보호소 메뉴로 이동되는 서블릿
@@ -213,8 +306,13 @@ public class ShelterController {
 	
 	// 보호소 대표 신청 등록폼으로 이동되는 서블릿
 	@RequestMapping(value="/shelter/businessLicenseRequest", method=RequestMethod.GET)
-	public String addBusinessLicense() {
+	public String addBusinessLicense(HttpSession session) {
 		logger.debug("addBusinessLicense() 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		logger.debug("addBusinessLicense() 메서드 loginId is {}", loginId);
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}
 		shelterService.businessLicense();
 		logger.debug("addBusinessLicense() 메서드 끝");
 		return "shelter/businessLicenseRequest";
@@ -224,17 +322,17 @@ public class ShelterController {
 	@RequestMapping(value="/shelter/businessLicenseRequest", method=RequestMethod.POST)
 	public String addBusinessLicense(BusinessLicenseCommand businessLicenseCommand, HttpSession session
 									, @RequestParam(value="multipartFile") MultipartFile file) {
-		if(session.getAttribute("loginId")==null) {
+		String loginId = (String)session.getAttribute("loginId");
+		if(loginId==null) {
 			return "redirect:/member/login";
 		}
 		logger.debug("addBusinessLicense(...) 메서드 businessLicense is {}",businessLicenseCommand);
 		logger.debug("addBusinessLicense(...) 메서드 multipartFile is {}",file);
-		String loginId = (String)session.getAttribute("loginId");
 		businessLicenseCommand.setmMemberId(loginId);
 		String path = session.getServletContext().getRealPath("/");
 		path += "resources/shelterUpload/";
 		logger.debug("addBusinessLicense(...) 메서드 path is {}",path);
 		shelterService.addBusinessLicense(businessLicenseCommand, path, file);
-		return "redirect:/businessLicenseList";
+		return "redirect:/businessLicenseRequestList";
 	}
 }
