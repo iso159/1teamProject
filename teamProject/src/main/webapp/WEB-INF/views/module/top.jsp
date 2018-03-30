@@ -63,10 +63,10 @@
         <rect y="24" width="30" height="6"/>
         <rect y="12" width="30" height="6"/>
       </svg>
-      <ul class="AP_Menu_List">
+      <ul class="AP_Menu_List" style="height: 458px; overflow: hidden;">
         <li>
           <a href="#" data-theme="_bgp">회원</a>
-          <ul>
+          <ul style="height: 0px; overflow: hidden">
             <li>
               <a href="${pageContext.request.contextPath}/member/memberAdd" data-theme="_bgpd">회원가입</a>
             </li>
@@ -149,7 +149,7 @@
           </ul>
         </li>
          <li>
-          <a href="${pageContext.request.contextPath}/animal/animalList" data-theme="_bgp">동물</a>
+          <a href="#" data-theme="_bgp">동물</a>
         	<ul>
             <li>
               <a href="${pageContext.request.contextPath}/animal/animalAdd" data-theme="_bgpd">동물등록</a>

@@ -50,4 +50,4 @@
 </footer>
 <!-- END MODULE AREA 6: Footer 2 -->
 
-<script src="assets/js/index.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
