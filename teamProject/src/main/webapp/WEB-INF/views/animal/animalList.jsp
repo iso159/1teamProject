@@ -9,7 +9,19 @@
 </head>
 <body>
 <h2>유기동물 리스트</h2>
-<table>
+<!-- 조건검색 -->
+	<form ID="selectForm" action="${pageContext.request.contextPath}/animal/animalCategory" method="post">
+		<select name="AnimalCategory">
+			<option value="animal_area">지역</option>
+			<option value="animal_breed">품종</option>
+			<option value="animal_id_code">동물식별코드</option>
+			<option value="animal_enroll_date">등록날짜</option>
+			<option value="bl.bl_shelter_name">보호소이름</option>
+		</select>
+		<input type="text" id="selectName" name="selectName">
+		<button type="submit">검색</button>
+	</form>
+	<table>
 	<thead>
 		<tr>
 			<td>동물상태</td>		
@@ -42,7 +54,7 @@
 		</tr>
 		</c:forEach>
 	</tbody>
-</table>
+	</table>
 <a href="${pageContext.request.contextPath}/animal/animalAdd">동물등록</a>
 <a href="${pageContext.request.contextPath}/"><button type="button" class="btn btn-success">홈으로</button></a>
 </body>

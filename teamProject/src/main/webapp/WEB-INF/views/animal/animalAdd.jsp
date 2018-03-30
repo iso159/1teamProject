@@ -4,26 +4,6 @@
 <html>
 <head>
 <script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
-<script>
-	$(document).ready(function(){
-		$('#addBtn').click(function(){
-			//공백이 들어가면 알려준다
-			if($('#animalBreed').val() == ""){
-				$('#Helper').text('품종을 입력해주세요');
-			}else if($('#animalArea').val() == ""){
-				$('#Helper').text('지역을 입력해주세요');
-			}else if($('#animalIdCode').val() == ""){
-				$('#Helper').text('동물식별코드를 입력해주세요');
-			}else if($('#animalWeight').val() == ""){
-				$('#Helper').text('체중을 입력해주세요');
-			}else if($('#animalAge').val() == ""){
-				$('#Helper').text('나이를 입력해주세요');
-			}else {
-	              $('#addForm').submit();
-	          }
-		});
-	});
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 </head>
@@ -73,5 +53,25 @@
 			</tr>
 		</table>
 	</form>
+	<script>
+		$(document).ready(function(){
+			$('#addBtn').click(function(){
+				//공백이 들어가면 알려준다
+				if($('#animalBreed').val() == ""){
+					$('#Helper').text('품종을 입력해주세요');
+				}else if($('#animalArea').val() == ""){
+					$('#Helper').text('지역을 입력해주세요');
+				}else if($('#animalIdCode').val() == ""){
+					$('#Helper').text('동물식별코드를 입력해주세요');
+				}else if($('#animalWeight').val() == ""){
+					$('#Helper').text('체중을 입력해주세요');
+				}else if($('#animalAge').val() == ""){
+					$('#Helper').text('나이를 입력해주세요');
+				}else {
+		              $('#addForm').submit();
+		          }
+			});
+		});
+	</script>
 </body>
 </html>

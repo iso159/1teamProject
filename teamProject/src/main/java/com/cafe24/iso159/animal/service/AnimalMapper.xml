@@ -75,6 +75,44 @@
         INNER JOIN t_business_license bl
 		ON a.bl_code = bl.bl_code
 	</select>
+	<!-- 조건검색 -->
+	<select id="selectAnimalcategory" parameterType="java.util.Map" resultMap="selectAnimalListMap">
+		SELECT
+			os.os_name
+			,osk.os_name as osNameAnimalKind			
+			, animal_breed
+			, animal_area
+			, animal_id_code
+			, animal_weight 
+			, animal_age
+            , bl.bl_shelter_Name
+			, animal_enroll_date
+			, animal_code 
+		FROM t_animal a
+		INNER JOIN t_overall_status os
+		ON os.os_code = a.os_code_animal
+        INNER JOIN t_overall_status osk
+		ON osk.os_code = a.os_code_kind
+        INNER JOIN t_business_license bl
+		ON a.bl_code = bl.bl_code
+        <choose> 
+        <when test= "AnimalCategory=='animal_area'">
+        WHERE animal_area =#{selectName}
+        </when>
+        <when test="AnimalCategory=='animal_breed'">
+        WHERE animal_breed =#{selectName}
+        </when>
+        <when test="AnimalCategory=='animal_id_code'">
+        WHERE animal_id_code =#{selectName}
+        </when> 
+        <when test="AnimalCategory=='animal_enroll_date'">
+        WHERE animal_enroll_date =#{selectName}
+        </when>
+        <otherwise>
+        WHERE bl.bl_shelter_Name =#{selectName}
+        </otherwise>
+        </choose>
+	</select>
 	
 	<!-- 동물리스트 삭제 -->
 	<delete id="deleteAnimal" parameterType="String">

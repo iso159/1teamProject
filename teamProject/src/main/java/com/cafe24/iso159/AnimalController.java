@@ -66,7 +66,20 @@ public class AnimalController {
 		model.addAttribute("AnimalList", AnimalList);
 		return "animal/animalList";
 	}
-	
+	//동물 조건검색
+	@RequestMapping(value="/animal/animalCategory", method=RequestMethod.POST)
+	public String animalCategory(Model model
+								,@RequestParam(value="AnimalCategory",required=false) String AnimalCategory
+								,@RequestParam(value="selectName",required=false) String selectName) {
+		
+		logger.debug("animalCategory()메서드  is {}", AnimalCategory);
+		logger.debug("animalCategory()메서드 is {}", selectName);
+
+		List<AnimalCommand> selectCategory = animalservice.categoryAnimal(AnimalCategory, selectName);
+		logger.debug("selectCategory is {}", selectCategory);
+		model.addAttribute("AnimalList", selectCategory);
+		return "animal/animalList";
+	}
 	//동물리스트 상세페이지요청
 	@RequestMapping(value="/animal/animalDetail", method=RequestMethod.GET)
 	public String animalDetail(HttpSession session, Model model, @RequestParam(value="animalCode",required=true)String animalCode) {

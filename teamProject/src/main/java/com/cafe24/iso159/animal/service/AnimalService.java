@@ -1,6 +1,8 @@
 package com.cafe24.iso159.animal.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +16,7 @@ public class AnimalService {
 
 	@Autowired
 	private AnimalDao animaldao;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(AnimalService.class);
 	//동물등록
 	public void addAnimal(Animal animal, String mShelterId, String blCode){
@@ -75,5 +77,17 @@ public class AnimalService {
 		logger.debug("animalDetail()메서드 animalCode is {}", animalCode);
 		AnimalCommand animalDetail = animaldao.animalDetail(animalCode);
 		return animalDetail;
+	}
+	//동물 조건검색
+	public List<AnimalCommand> categoryAnimal(String AnimalCategory, String selectName) {
+		logger.debug("categoryAnimal()메서드 selectName is {}", selectName);
+		
+		Map map = new HashMap();
+		map.put("AnimalCategory", AnimalCategory);
+		map.put("selectName", selectName);
+		
+		List<AnimalCommand> categoryAnimal = animaldao.selectCategory(map);
+		logger.debug("categoryAnimal()메서드 categoryAnimal is {}", categoryAnimal);
+		return categoryAnimal;
 	}
 }

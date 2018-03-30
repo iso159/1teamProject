@@ -1,6 +1,7 @@
 package com.cafe24.iso159.animal.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -55,5 +56,13 @@ public class AnimalDao {
 		//매개변수 확인
 		logger.debug("animalDetail()메서드 animalCode is {}", animalCode);
 		return sqlSessionTemplate.selectOne(nameSpace+"animalDetail", animalCode);
+	}
+	
+	//동물조건검색
+	public List<AnimalCommand> selectCategory(Map map) {
+		logger.debug("selectCategory()메서드 selectName is {}", map);
+		List<AnimalCommand> animalCategory = sqlSessionTemplate.selectList(nameSpace+"selectAnimalcategory", map);
+		logger.debug("selectCategory()메서드 animalCategory is {}", animalCategory);
+		return animalCategory;
 	}
 }
