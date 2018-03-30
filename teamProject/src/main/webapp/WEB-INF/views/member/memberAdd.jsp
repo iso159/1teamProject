@@ -8,37 +8,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
 	src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
-<!-- <script>
-	$(document).ready(function() {
-		$('#signUpBtn').click(function() {
-			// 공백 제거
-			let userId = $.trim($('#userId').val());
-			let userPw = $.trim($('#userPw').val());
-			if (userId === "" || userPw === "") {
-				// 공백일경우 경고창
-				alert('공백은 입력할 수 없습니다.');
-				// 텍스트 비움
-				$('#userId').val('');
-				$('#userPw').val('');
-			} else {
-				// 공백이 아닐경우 서브밋
-				$('#signUpForm').submit();
-			}
-		});
-	});
-</script> -->
 <title>회원가입</title>
 </head>
 <body>
+	<!-- top 부분 시작-->
+	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
+	<!-- top 부분 끝-->
 	<!-- 메인 화면  -->
 	<!-- 메인 화면 내용 부분 -->
 	<div class="container">
 		<h2>회원가입</h2>
-		<form id="signUpForm" class="form-inline"
-			action="${pageContext.request.contextPath}/member/memberAdd"
-			method="post">
+		<form id="signUpForm" class="form-inline" action="${pageContext.request.contextPath}/member/memberAdd" method="post">
 			<table>
-
 				<tr>
 					<td>아이디</td>
 					<td><input type="text" name="mId"></td>
