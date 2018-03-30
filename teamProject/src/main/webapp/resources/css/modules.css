@@ -59,8 +59,9 @@ body.modern a:hover {
 body.modern h1 {
   font-weight: 700;
 }
+/*메뉴바*/
 body.modern [data-theme*=_bgp] {
-  background: #2980B9;
+  background: #bfaf93;
   color: white;
   fill: white;
 }
@@ -75,13 +76,14 @@ body.modern [data-theme*=_bgs] {
 body.modern [data-theme*=_bgs] a, body.modern [data-theme*=_bgs] a:hover {
   color: white;
 }
+/*메뉴바*/
 body.modern [data-theme*=_bgpd] {
-  background: #20638f;
+  background: #a08d6b;
   color: white;
   fill: white;
 }
 body.modern [data-theme*=_bgd] {
-  background: #2C3E50;
+  background: #212f3d;
   color: #ECF0F1;
   fill: white;
 }
@@ -92,12 +94,13 @@ body.modern [data-theme*=_bgvd] {
   background: #11181f;
   color: white;
 }
+/*메뉴바*/
 body.modern [data-theme*=_ts1] {
   font-style: italic;
-  color: #2980B9;
+  color: #77684d;
 }
 body.modern [data-theme*=_ts2] {
-  color: #2980B9;
+  color: #77684d;
 }
 body.modern [data-theme*=_ts3] {
   position: relative;
@@ -113,7 +116,7 @@ body.modern [data-theme*=_ts3]:before {
   height: 100%;
   top: 0;
   left: -0.5em;
-  background: #2980B9;
+  background: #77684d;
 }
 body.modern [data-theme*=_ts4] {
   padding: 0.3em 1em;
@@ -124,7 +127,7 @@ body.modern [data-theme*=_bb1] {
   position: relative;
 }
 body.modern [data-theme*=_bb1]:after {
-  border-bottom: 1px solid #2980B9;
+  border-bottom: 1px solid #e2d3c7;
   content: '';
   display: block;
   width: 60%;
@@ -147,7 +150,7 @@ body.modern [data-theme*=_bb2] {
   position: relative;
 }
 body.modern [data-theme*=_bb2]:after {
-  border-bottom: 1px solid #2980B9;
+  border-bottom: 1px solid #e2d3c7;
   content: '';
   display: block;
   width: 100%;
@@ -156,7 +159,7 @@ body.modern [data-theme*=_bb2]:after {
   bottom: -0.4em;
 }
 body.modern [data-theme*=_is1] {
-  border: 6px solid #2980B9;
+  border: 6px solid #e2d3c7;
 }
 body.modern [data-theme*=_is2] {
   border: 4px solid white;
@@ -173,10 +176,10 @@ body.modern header .fb {
   fill: #3b5998;
 }
 body.modern header .tw {
-  fill: #1da1f2;
+  fill: #efd199;
 }
 body.modern header .li {
-  fill: #007bb6;
+  fill: #dbceb6;
 }
 body.modern header .gp {
   fill: #dd5044;
@@ -231,7 +234,7 @@ p {
 }
 
 a.btn, button {
-  background-color: #4d36bd;
+  background-color: #827162;
   color: white;
   text-decoration: none;
   display: inline-block;
