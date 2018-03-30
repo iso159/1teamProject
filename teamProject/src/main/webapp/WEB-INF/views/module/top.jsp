@@ -25,13 +25,15 @@
 <!-- TOP 메인로고 : header1 -->
 <header class="MOD_HEADER1">
   <div data-layout="_r">
-    <div data-layout="al16 de10" class="MOD_HEADER1_Title">
-      <h1 class="MOD_HEADER1_TextLogo">
-      	<a href="${pageContext.request.contextPath}/">보듬 컴퍼니</a>
-      </h1>
-      <p class="MOD_HEADER1_Slogan">유기동물 체험을 통한 분양 활성화 및 사회 기여</p>
+    <div data-layout="al16 de6" class="MOD_HEADER1_Title">
+      <h1 class="MOD_HEADER1_TextLogo"></h1>
     </div>
-    <div data-layout="al16 de6" class="MOD_HEADER1_Details">
+    <div data-layout="al16 de4">
+  		<a href="${pageContext.request.contextPath}/">
+  		<img src="${pageContext.request.contextPath}/resources/img/logoImg1.jpg">
+  		</a>
+  	</div>
+    <div data-layout="al16 de4" class="MOD_HEADER1_Details">
       <p class="MOD_HEADER1_Phone">Phone: <a href="tel:#">01234 567 8910</a></p>
       <!-- Search -->
       <form name="Header1" action="" method="">
