@@ -36,12 +36,6 @@ public class AdoptController {
 	@Autowired
 	private SurveyService surveyService;
 	
-	// 입양메뉴
-	@RequestMapping(value="/adopt", method = RequestMethod.GET)
-	public String addAdopt() {
-		logger.debug("addAdopt() 메서드 호출");
-		return "/adopt/adoptMenu";
-	}
 	
 	// 입양신청 페이지요청
 	@RequestMapping(value="/adopt/adoptRequest", method = RequestMethod.GET)

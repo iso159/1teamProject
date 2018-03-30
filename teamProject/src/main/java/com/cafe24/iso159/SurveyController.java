@@ -100,16 +100,4 @@ public class SurveyController {
 		return "/survey/surveyList";
 	}
 	
-	// 설문지, 설문질문등록 메뉴
-		@RequestMapping(value="/survey", method = RequestMethod.GET)
-		public String survey(HttpSession session) {
-			logger.debug("survey() 메서드 호출");
-			// 세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
-			if(session.getAttribute("loginId")==null) {
-				return "redirect:/member/login";
-			}
-			return "/survey/surveyMenu";
-		}
-		
-	
 }

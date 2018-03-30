@@ -134,12 +134,16 @@
         <li>
           <a href="#" data-theme="_bgp">입양</a>
            <ul>
-            <li>
-              <a href="${pageContext.request.contextPath}/adopt/adoptRequest" data-theme="_bgpd">입양신청</a>
-            </li>
-            <li>
-              <a href="${pageContext.request.contextPath}/adopt/adoptList" data-theme="_bgpd">입양신청리스트</a>
-            </li>
+          	<c:if test="${right eq '체험자'}">
+	            <li>
+	              <a href="${pageContext.request.contextPath}/adopt/adoptRequest" data-theme="_bgpd">입양신청</a>
+	            </li>
+            </c:if>
+            <c:if test="${right eq '관리자' or right eq '보호소'}">
+	            <li>
+	              <a href="${pageContext.request.contextPath}/adopt/adoptList" data-theme="_bgpd">입양신청리스트</a>
+	            </li>
+             </c:if>
           </ul>
         </li>
          <li>
@@ -167,12 +171,14 @@
          <li>
           <a href="#" data-theme="_bgp">설문지</a>
           <ul>
+          <c:if test="${right eq '관리자'}">
             <li>
               <a href="${pageContext.request.contextPath}/survey/surveyAdd" data-theme="_bgpd">설문지등록</a>
             </li>
             <li>
               <a href="${pageContext.request.contextPath}/survey/surveyList" data-theme="_bgpd">설문지조회</a>
             </li>
+          </c:if>
           </ul>
         </li>
         

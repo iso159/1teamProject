@@ -24,7 +24,7 @@
 	<!-- 메인내용 시작 : Text | Text -->
 	<section>
 	  <div data-layout="_r">
-	    <div data-layout="ch-half">
+	    <div>
 	    <!-- 내용 입력 부분 -->
 	    
 	    

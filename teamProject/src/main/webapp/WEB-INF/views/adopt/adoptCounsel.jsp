@@ -32,28 +32,50 @@
 	<title>상담 내용</title>
 </head>
 <body>
-	<h2>상담내용입력</h2>
-	<h5>상담내용</h5>
-	<c:set var="aRC" value="${adoptRequestCode}"/>
-	<form id="addForm" action="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${adoptRequestCode}" method="post">
-		<c:forEach var="surveyQuestion" items="${list}">
-				<tr>
-					<td><input 	type="text" cols="100" size="200" 
-								style="background-color:transparent;border:0"
-								value="<br>${surveyQuestion.surveyListQuestion}<br>"
-								id="adoptRequestAdviceContents"
-								name="adoptRequestAdviceContents" readonly>
-					</td><br>
-					<td>
-						<input	type="textarea" cols="100" size="100"
-								id="adoptRequestAdviceContents"
-								name="adoptRequestAdviceContents">
-					</td><br>
-				</tr>
-		</c:forEach>
-		<button id="addBtn" type="button" class="btn btn-info">상담완료</button>
-	</form>
+	<!-- top 부분 시작-->
+	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
+	<!-- top 부분 끝-->
 	
-	
+	<!-- 메인 화면  -->
+	<!-- 메인 화면 내용 부분 -->
+	<div class="container">
+	<!-- 메인내용 시작 : Text | Text -->
+	<section>
+	  <div data-layout="_r">
+	    <div data-layout="ch-half">
+	    <!-- 내용 입력 부분 -->
+		<h2>상담내용입력</h2>
+		<h5>상담내용</h5>
+		<c:set var="aRC" value="${adoptRequestCode}"/>
+		<form id="addForm" action="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${adoptRequestCode}" method="post">
+			<c:forEach var="surveyQuestion" items="${list}">
+					<tr>
+						<td><input 	type="text" cols="100" size="200" 
+									style="background-color:transparent;border:0"
+									value="<br>${surveyQuestion.surveyListQuestion}<br>"
+									id="adoptRequestAdviceContents"
+									name="adoptRequestAdviceContents" readonly>
+						</td><br>
+						<td>
+							<input	type="textarea" cols="100" size="100"
+									id="adoptRequestAdviceContents"
+									name="adoptRequestAdviceContents">
+						</td><br>
+					</tr>
+			</c:forEach>
+			<button id="addBtn" type="button" class="btn btn-info">상담완료</button>
+		</form>
+		<!-- 내용 입력 부분 끝 -->
+			</div>
+		  </div>
+		</section>
+		<!-- 메인내용 끝 : Text | Text -->
+		</div>
+		<!-- 메인 화면 내용 부분 끝 -->
+		
+		<!-- 메인화면 끝 -->
+		<!-- foot 부분 시작 -->
+		<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
+		<!-- foot 부분 끝 -->
 </body>
 </html>
