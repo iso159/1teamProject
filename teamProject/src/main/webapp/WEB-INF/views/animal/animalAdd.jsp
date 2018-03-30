@@ -7,71 +7,95 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 </head>
-<body>
-	<h2>동물등록폼</h2>
-	<form id="addForm" action="${pageContext.request.contextPath}/animal/animalList" method="post">
-		<table>
-			<tr>
-				<td><!-- 동물상태 --></td>
-				<td><input type="hidden" name="osCodeAnimal" value="os_animal_3_1_1"></td>
-			</tr>
-			<tr>
-				<td>동물종류:</td>
-				<td>
-					<select name="osCodeKind">
-						<option value="os_animal_kinds_11_1_1">강아지</option>
-						<option value="os_animal_kinds_11_1_2">고양이</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>품종:</td>
-				<td><input type="text" id="animalBreed" name="animalBreed"></td>
-			</tr>
-			<tr>
-				<td>지역:</td>
-				<td><input type="text" id="animalArea" name="animalArea"></td>
-			</tr>
-			<tr>
-				<td>동물식별코드:</td>
-				<td><input type="text" id="animalIdCode" name="animalIdCode"></td>
-			</tr>
-			<tr>
-				<td>체중:</td>
-				<td><input type="text" id="animalWeight" name="animalWeight"></td>
-			</tr>
-			<tr>
-				<td>나이:</td>
-				<td><input type="text" id="animalAge" name="animalAge"></td>
-			<tr>
-			<tr>
-				<td></td>
-				<td><span id="Helper"></span></td>
-			</tr>
-			<tr>
-				<td><button id="addBtn" type="button">등록</button></td>
-			</tr>
-		</table>
-	</form>
-	<script>
-		$(document).ready(function(){
-			$('#addBtn').click(function(){
-				//공백이 들어가면 알려준다
-				if($('#animalBreed').val() == ""){
-					$('#Helper').text('품종을 입력해주세요');
-				}else if($('#animalArea').val() == ""){
-					$('#Helper').text('지역을 입력해주세요');
-				}else if($('#animalIdCode').val() == ""){
-					$('#Helper').text('동물식별코드를 입력해주세요');
-				}else if($('#animalWeight').val() == ""){
-					$('#Helper').text('체중을 입력해주세요');
-				}else if($('#animalAge').val() == ""){
-					$('#Helper').text('나이를 입력해주세요');
-				}else {
-		              $('#addForm').submit();
-		          }
+<body class="modern">
+	<!-- top 부분 시작-->
+	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
+	<!-- top 부분 끝-->
+	
+	<!-- 메인 화면  -->
+	<!-- 메인 화면 내용 부분 -->
+	<div class="container">
+	<!-- 메인내용 시작 : Text | Text -->
+	<section>
+	  <div data-layout="_r">
+	    <div>
+	    <!-- 내용 입력 부분 -->
+		<h2>동물등록폼</h2>
+		<form id="addForm" action="${pageContext.request.contextPath}/animal/animalList" method="post">
+			<table>
+				<tr>
+					<td><!-- 동물상태 --></td>
+					<td><input type="hidden" name="osCodeAnimal" value="os_animal_3_1_1"></td>
+				</tr>
+				<tr>
+					<td>동물종류:</td>
+					<td>
+						<select name="osCodeKind">
+							<option value="os_animal_kinds_11_1_1">강아지</option>
+							<option value="os_animal_kinds_11_1_2">고양이</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>품종:</td>
+					<td><input type="text" id="animalBreed" name="animalBreed"></td>
+				</tr>
+				<tr>
+					<td>지역:</td>
+					<td><input type="text" id="animalArea" name="animalArea"></td>
+				</tr>
+				<tr>
+					<td>동물식별코드:</td>
+					<td><input type="text" id="animalIdCode" name="animalIdCode"></td>
+				</tr>
+				<tr>
+					<td>체중:</td>
+					<td><input type="text" id="animalWeight" name="animalWeight"></td>
+				</tr>
+				<tr>
+					<td>나이:</td>
+					<td><input type="text" id="animalAge" name="animalAge"></td>
+				<tr>
+				<tr>
+					<td></td>
+					<td><span id="Helper"></span></td>
+				</tr>
+				<tr>
+					<td><button id="addBtn" type="button">등록</button></td>
+				</tr>
+			</table>
+		</form>
+		<script>
+			$(document).ready(function(){
+				$('#addBtn').click(function(){
+					//공백이 들어가면 알려준다
+					if($('#animalBreed').val() == ""){
+						$('#Helper').text('품종을 입력해주세요');
+					}else if($('#animalArea').val() == ""){
+						$('#Helper').text('지역을 입력해주세요');
+					}else if($('#animalIdCode').val() == ""){
+						$('#Helper').text('동물식별코드를 입력해주세요');
+					}else if($('#animalWeight').val() == ""){
+						$('#Helper').text('체중을 입력해주세요');
+					}else if($('#animalAge').val() == ""){
+						$('#Helper').text('나이를 입력해주세요');
+					}else {
+			              $('#addForm').submit();
+			          }
+				});
 			});
-		});
-	</script>
+		</script>
+	<!-- 내용 입력 부분 끝 -->
+		</div>
+	  </div>
+	</section>
+	<!-- 메인내용 끝 : Text | Text -->
+	</div>
+	<!-- 메인 화면 내용 부분 끝 -->
+	
+	<!-- 메인화면 끝 -->
+	<!-- foot 부분 시작 -->
+	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
+	<!-- foot 부분 끝 -->
 </body>
 </html>
