@@ -65,23 +65,26 @@
       </svg>
       <ul class="AP_Menu_List" style="height: 0px; overflow: hidden;">
         <li>
-          <a href="#" data-theme="_bgp">회원</a>
+        <!-- 회원 로그인 안하면 보이는 카테고리 START -->
+        <c:set var="login" value="${loginId}"></c:set>
+         <a href="#" data-theme="_bgp">회원</a>
+		<c:if test="${empty login}">
+         
           <ul style="height: 0px; overflow: hidden">
-            <li>
-              <a href="${pageContext.request.contextPath}/member/memberAdd" data-theme="_bgpd">회원가입</a>
-            </li>
-            <li>
-              <a href="${pageContext.request.contextPath}/member/login" data-theme="_bgpd">로그인</a>
-            </li>
-            <li>
-              <a href="${pageContext.request.contextPath}/member/memberList" data-theme="_bgpd">회원리스트</a>
-            </li>
-            <li>
-              <a href="${pageContext.request.contextPath}/member/memberModify" data-theme="_bgpd">회원수정</a>
-            </li>
-          </ul>
-        </li>
-       
+            <li><a href="${pageContext.request.contextPath}/member/memberAdd" data-theme="_bgpd">회원가입</a></li>
+            <li><a href="${pageContext.request.contextPath}/member/login" data-theme="_bgpd">로그인</a></li>
+         </c:if>
+		<!-- 회원 로그인 안하면 보이는 카테고리 END -->
+		<!-- 회원  로그인 하면 보이는 카테고리 START -->
+         <c:if test="${!empty login}">
+        <ul style="height: 0px; overflow: hidden">
+            <li><a href="${pageContext.request.contextPath}/member/memberList" data-theme="_bgpd">회원리스트</a></li>
+            <li><a href="${pageContext.request.contextPath}/member/memberModify" data-theme="_bgpd">회원수정</a></li>
+            <li><a href="${pageContext.request.contextPath}/member/memberLogout" data-theme="_bgpd">로그아웃</a></li>
+        </c:if>
+        <!-- 회원 로그인 하면 보이는 카테고리 END -->
+      </ul>
+ 
        	<c:if test="${right eq '입양자'}">
         <li>
           <a href="#" data-theme="_bgp">보호소</a>
@@ -199,13 +202,9 @@
           </ul>
         </li>
         </c:if>
-                
-      </ul>
     </nav>
   </div>
 </section>
 <!-- 기능메뉴 끝: Menu 1 -->
-
-
 </body>
 </html>
