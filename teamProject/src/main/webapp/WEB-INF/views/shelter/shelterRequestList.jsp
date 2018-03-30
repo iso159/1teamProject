@@ -19,7 +19,7 @@
 	  <div data-layout="_r">
 	    <div>
 	    <!-- 내용 입력 부분 -->
-	<h1>보호소 직원 신청 리스트</h1>
+		<h1>보호소 직원 신청 리스트</h1>
 		<table border="1">
 			<thead>
 				<tr>

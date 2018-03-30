@@ -82,6 +82,7 @@
           </ul>
         </li>
        
+       	<c:if test="${right eq '입양자'}">
         <li>
           <a href="#" data-theme="_bgp">보호소</a>
           <ul>
@@ -91,17 +92,15 @@
 	            <li>
 	             	<a href="${pageContext.request.contextPath}/shelter/businessLicenseRequest" data-theme="_bgpd">보호소 대표 신청</a>
 	            </li>
-	            <li>
+	          <li>
 	             	<a href="${pageContext.request.contextPath}/businessLicenseListPersonal" data-theme="_bgpd">보호소 대표 신청 관리</a>
 	            </li>
 	            <li>
 	             	<a href="${pageContext.request.contextPath}/shelter/staffBusinessLicenseGet" data-theme="_bgpd">보호소 직원 신청</a>
 	            </li>
-	            <li>
-              		<a href="${pageContext.request.contextPath}/shelter/requestShelterStaffPersonal" data-theme="_bgpd">보호소 직원 신청 관리</a>
+	            	<a href="${pageContext.request.contextPath}/shelter/requestShelterStaffPersonal" data-theme="_bgpd">보호소 직원 신청 관리</a>
             	</li>
-            </c:if>
-            
+            </c:if>            
             <c:if test="${right eq '관리자'}">
 	            <li>
 	            	<a href="${pageContext.request.contextPath}/businessLicenseRequestList" data-theme="_bgpd">대표 보호소 신청 목록</a>
@@ -115,6 +114,8 @@
             </c:if>
           </ul>
         </li>
+        </c:if>
+        
         <li>
           <a href="#" data-theme="_bgp">체험</a>
            <ul>
@@ -170,6 +171,7 @@
             </li>
           </ul>
         </li>
+        
          <li>
           <a href="#" data-theme="_bgp">설문지</a>
           <ul>
@@ -184,6 +186,18 @@
           </ul>
         </li>
         
+        <c:set var="right" value="${rightName}"></c:set>
+         <c:if test="${right eq '입양자'}">
+        <li>
+          <a href="#" data-theme="_bgp">보호소 진료</a>
+          <ul>
+			<li>
+				<a href="${pageContext.request.contextPath}/shelterListJindan" data-theme="_bgpd">보호소 진료 예약</a>
+			</li>
+          </ul>
+        </li>
+        </c:if>
+                
       </ul>
     </nav>
   </div>
