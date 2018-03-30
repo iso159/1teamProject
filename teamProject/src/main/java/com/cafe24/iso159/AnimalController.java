@@ -25,7 +25,7 @@ public class AnimalController {
 	private static final Logger logger = LoggerFactory.getLogger(AnimalController.class);
 	
 	//동물메뉴
-	@RequestMapping()
+	@RequestMapping(value="/animal/animalMenu", method=RequestMethod.GET)
 	public String animalMenu() {
 		logger.debug("animalMenu()메서드 호출");
 		return "/animal/animalMenu";
