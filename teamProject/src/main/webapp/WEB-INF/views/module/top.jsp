@@ -30,7 +30,7 @@
     </div>
     <div data-layout="al16 de4">
   		<a href="${pageContext.request.contextPath}/">
-  		<img src="${pageContext.request.contextPath}/resources/img/logoImg1.jpg">
+  		<img src="${pageContext.request.contextPath}/resources/img/logoImgJangdeng.JPG">
   		</a>
   	</div>
     <div data-layout="al16 de4" class="MOD_HEADER1_Details">
