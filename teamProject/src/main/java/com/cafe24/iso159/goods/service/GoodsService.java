@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cafe24.iso159.goods.service.Goods;
-
-
+import com.cafe24.iso159.member.service.MemberInfo;
 
 @Service
 @Transactional
@@ -32,11 +31,32 @@ public class GoodsService {
 		goodsDao.insertGoods(goods);
 	}
 	
-	// 상품 리스트 전체 리스트 조회
+	// 상품 리스트 전체 조회
 	public List<Goods> getGoodsList() {
 		logger.debug("getGoodsList() 메서드 호출");
 		List<Goods> list = goodsDao.selectGoodsList();
 		logger.debug("getGoodsList() 메서드 list is {}", list);
 		return list;
 	}
+		
+	// 상품 정보 수정
+	public void updateGoods(Goods goods) {
+		logger.debug("updateGoods(Goods goods) 메서드 goods is {}", goods);
+		goodsDao.updateGoods(goods);		
+	}
+	
+	// 상품 1개 조회해서 업데이트에 사용
+	public Goods getGoodsOne(Goods goods) {
+		logger.debug("getMemberOne(String mLoginId) 메서드 goods", goods);
+		Goods GoodsCode = goodsDao.selectGoodsOne(goods);
+		logger.debug("getMemberOne(String mLoginId) 메서드 GoodsCode", GoodsCode);
+		return GoodsCode;
+	}
+		
+	// 상품 삭제
+	public void removeGoods(String goodsCode) {
+		logger.debug("deleteGoods()메서드 goodsCode is {}", goodsCode);
+		goodsDao.deleteGoods(goodsCode);
+	}
+	
 }

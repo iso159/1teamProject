@@ -20,7 +20,7 @@
 	
 	<!-- 메인 화면  -->
 	<!-- 메인 화면 내용 부분 -->
-	<div class="container">
+	<div class= "container" >
 	<!-- 내용 입력 부분 -->
 
 	<!-- 팀원소개 시작 : Staff 1 -->

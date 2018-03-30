@@ -53,4 +53,45 @@
 		FROM 
 			t_point_goods;
 	</select>
+	
+		<!-- 회원 정보 멤버 수정 쿼리 -->
+	<update id="updateMember" parameterType="com.cafe24.iso159.member.service.Member">
+		UPDATE
+			t_member SET
+			m_pw = #{mPw}
+		WHERE
+			m_id = #{mId}
+	</update>
+	
+	<!-- 상품 수정 쿼리 -->
+	<update id="updateGoods" parameterType="com.cafe24.iso159.goods.service.Goods">
+		UPDATE 
+			t_point_goods 
+		SET 
+			point_goods_name=#{pointGoodsName}
+			, point_goods_point=#{pointGoodsPoint} 
+			, point_goods_desc=#{pointGoodsDesc}
+		WHERE 
+			point_goods_code=#{pointGoodsCode};
+	</update>
+	
+	<!-- 상품 하나 검색 해서 업데이트에 사용 -->
+	<select id="selectOneGoods" parameterType="String" resultType="com.cafe24.iso159.goods.service.Goods">
+		SELECT
+			point_goods_name as pointGoodsName
+			, point_goods_point as pointGoodsPoint
+			, point_goods_desc as pointGoodsDesc
+		FROM
+			t_point_goods
+		WHERE
+			point_goods_code = #{pointGoodsCode}
+	</select>
+	
+	<!-- 상품 리스트 1개 삭제 -->
+	<delete id="deleteGoods" parameterType="String">
+		DELETE FROM 
+			t_point_goods 
+		WHERE 
+			point_goods_code=#{pointGoodsCode};
+	</delete>
 </mapper>

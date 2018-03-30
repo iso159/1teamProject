@@ -8,8 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.iso159.goods.service.Goods;
 import com.cafe24.iso159.goods.service.GoodsService;
@@ -54,5 +56,29 @@ public class GoodsController {
 		session.setAttribute("list", list);
 		logger.debug("goodsList(HttpSession session) 메서드 list is {}", list);
 		return "/goods/goodsList";
+	}
+		
+	// update 요청
+	@RequestMapping(value = "/goods/goodsModify", method = RequestMethod.POST)
+	public String updateGoods(Goods goods) {
+		goodsService.updateGoods(goods);
+		logger.debug("updateGoods(Goods goods) 메서드 goods {}", goods);
+		return "/goods/goodsModify";
+	}
+	
+	// 상품 수정페이지 요청, 수정할 상품조회
+	@RequestMapping(value = "/goods/goodsModify", method = RequestMethod.GET)
+	public String goodsOneSelect(Model model, Goods goods, HttpSession session) {
+		logger.debug("goodsOneSelect(Model model, Goods goods,HttpSession session) 메서드 goods is {}", goods);
+		Goods goodsSelect = goodsService.getGoodsOne(goods);
+		model.addAttribute("Goods", goodsSelect);
+		return "/goods/goodsModify";
+	}
+	
+	// 상품 삭제요청
+	@RequestMapping(value="/goods/goodsRemove", method=RequestMethod.GET)
+	public String goodsRemove(@RequestParam(value="pointGoodsCode")String goodsCode) {
+		goodsService.removeGoods(goodsCode);
+		return "redirect:/goods/goodsList";
 	}
 }
