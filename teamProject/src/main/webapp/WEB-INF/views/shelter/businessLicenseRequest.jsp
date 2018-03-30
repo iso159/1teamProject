@@ -24,7 +24,19 @@
 </script>
 	<title>보호소 신청</title>
 </head>
-<body>
+<body class="modern">
+	<!-- top 부분 시작-->
+	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
+	<!-- top 부분 끝-->
+	
+	<!-- 메인 화면  -->
+	<!-- 메인 화면 내용 부분 -->
+	<div class="container">
+	<!-- 메인내용 시작 : Text | Text -->
+	<section>
+	  <div data-layout="_r">
+	    <div>
+	    <!-- 내용 입력 부분 -->
 	<!-- top 부분 시작-->
 	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
 	<!-- top 부분 끝-->
@@ -72,6 +84,18 @@
 	<!-- 메인내용 끝 : Text | Text -->
 
 	<!-- 내용 입력 부분 끝 -->
+	</div>
+	<!-- 메인 화면 내용 부분 끝 -->
+	
+	<!-- 메인화면 끝 -->
+	<!-- foot 부분 시작 -->
+	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
+	<!-- foot 부분 끝 -->
+  <!-- 내용 입력 부분 끝 -->
+		</div>
+	  </div>
+	</section>
+	<!-- 메인내용 끝 : Text | Text -->
 	</div>
 	<!-- 메인 화면 내용 부분 끝 -->
 	

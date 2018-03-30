@@ -15,7 +15,19 @@
 <script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
 	<title>보호소 직원 신청 상세 정보</title>
 </head>
-<body>
+<body class="modern">
+	<!-- top 부분 시작-->
+	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
+	<!-- top 부분 끝-->
+	
+	<!-- 메인 화면  -->
+	<!-- 메인 화면 내용 부분 -->
+	<div class="container">
+	<!-- 메인내용 시작 : Text | Text -->
+	<section>
+	  <div data-layout="_r">
+	    <div>
+	    <!-- 내용 입력 부분 -->
 	<div>
 		<h1>보호소 직원 신청 상세 정보</h1>
 	</div>
@@ -50,5 +62,17 @@
 			<button type="button">직원 요청 리스트</button>
 		</a>
 	</div>
+	    <!-- 내용 입력 부분 끝 -->
+		</div>
+	  </div>
+	</section>
+	<!-- 메인내용 끝 : Text | Text -->
+	</div>
+	<!-- 메인 화면 내용 부분 끝 -->
+	
+	<!-- 메인화면 끝 -->
+	<!-- foot 부분 시작 -->
+	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
+	<!-- foot 부분 끝 -->
 </body>
 </html>
