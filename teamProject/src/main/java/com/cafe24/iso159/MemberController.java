@@ -74,6 +74,9 @@ public class MemberController {
 	// 리스트 요청
 	@RequestMapping(value = "/member/memberList")
 	public String memberList(HttpSession session) {
+		if (session.getAttribute("loginId") == null) {
+			return "redirect:/goods/login";
+		}
 		List<MemberAndMemberInfo> list = MemberService.getMemberList();		
 		session.setAttribute("list", list);
 		logger.debug("memberList(HttpSession session) 메서드 list is {}", list);
@@ -106,6 +109,14 @@ public class MemberController {
 		String mLoginId = (String)session.getAttribute("loginId");
 		logger.debug("memberRemove(HttpSession session) 메서드 mLoginId is {}", mLoginId);
 		MemberService.removeMember(mLoginId);
+		return "redirect:/";
+	}
+	// 로그아웃 요청
+	@RequestMapping(value = "/member/memberLogout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		logger.debug("로그아웃 확인");
+		// 세션속성 제거 후에 홈으로 리다이렉트
+		session.removeAttribute("loginId");
 		return "redirect:/";
 	}
 }
