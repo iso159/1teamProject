@@ -63,7 +63,7 @@
         <rect y="24" width="30" height="6"/>
         <rect y="12" width="30" height="6"/>
       </svg>
-      <ul class="AP_Menu_List" style="height: 458px; overflow: hidden;">
+      <ul class="AP_Menu_List" style="height: 0px; overflow: hidden;">
         <li>
           <a href="#" data-theme="_bgp">회원</a>
           <ul style="height: 0px; overflow: hidden">
@@ -85,7 +85,7 @@
        	<c:if test="${right eq '입양자'}">
         <li>
           <a href="#" data-theme="_bgp">보호소</a>
-          <ul>
+          <ul style="height: 0px; overflow: hidden">
           	<c:set var="right" value="${rightName}"></c:set>
           	<c:set var="level" value="${rightLevel}"></c:set>
           	<c:if test="${right eq '체험자'}">
@@ -118,7 +118,7 @@
         
         <li>
           <a href="#" data-theme="_bgp">체험</a>
-           <ul>
+           <ul style="height: 0px; overflow: hidden">
             <c:if test="${empty member.blCode}">
             <li>
               <a href="${pageContext.request.contextPath}/experience/expAdd?animalCode=animal_code_01&blCode=bl_code_01" data-theme="_bgpd">체험등록</a>
@@ -136,7 +136,8 @@
         </li>
         <li>
           <a href="#" data-theme="_bgp">입양</a>
-           <ul>
+           <ul style="height: 0px; overflow: hidden">
+           <c:set var="right" value="${rightName}"></c:set>
           	<c:if test="${right eq '체험자'}">
 	            <li>
 	              <a href="${pageContext.request.contextPath}/adopt/adoptRequest" data-theme="_bgpd">입양신청</a>
@@ -151,7 +152,7 @@
         </li>
          <li>
           <a href="#" data-theme="_bgp">동물</a>
-        	<ul>
+        	<ul style="height: 0px; overflow: hidden">
             <li>
               <a href="${pageContext.request.contextPath}/animal/animalAdd" data-theme="_bgpd">동물등록</a>
             </li>
@@ -162,7 +163,7 @@
         </li>
          <li>
           <a href="#" data-theme="_bgp">상품</a>
-           <ul>
+           <ul style="height: 0px; overflow: hidden">
             <li>
               <a href="${pageContext.request.contextPath}/goods/goodsAdd" data-theme="_bgpd">상품등록</a>
             </li>
@@ -174,7 +175,8 @@
         
          <li>
           <a href="#" data-theme="_bgp">설문지</a>
-          <ul>
+          <ul style="height: 0px; overflow: hidden">
+          <c:set var="right" value="${rightName}"></c:set>
           <c:if test="${right eq '관리자'}">
             <li>
               <a href="${pageContext.request.contextPath}/survey/surveyAdd" data-theme="_bgpd">설문지등록</a>
@@ -190,7 +192,7 @@
          <c:if test="${right eq '입양자'}">
         <li>
           <a href="#" data-theme="_bgp">보호소 진료</a>
-          <ul>
+          <ul style="height: 0px; overflow: hidden">
 			<li>
 				<a href="${pageContext.request.contextPath}/shelterListJindan" data-theme="_bgpd">보호소 진료 예약</a>
 			</li>
