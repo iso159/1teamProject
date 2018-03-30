@@ -8,7 +8,8 @@
 		<id column="exp_code" property="expCode"/>
 		<result column="animal_code" property="animalCode"/>
 		<result column="m_exp_id" property="mExpId"/>
-		<result column="m_shelter_id" property="mShelterId"/>
+		<result column="m_shelter_id_accept" property="mShelterIdAccept"/>
+		<result column="m_shelter_id_check" property="mShelterIdCheck"/>
 		<result column="bl_code" property="blCode"/>
 		<result column="exp_period_code" property="expPeriodCode"/>
 		<result column="os_code_exp" property="osCodeExp"/>
@@ -20,6 +21,16 @@
 		<result column="exp_check_date" property="expCheckDate"/>
 		<result column="exp_start_date" property="expStartDate"/>
 		<result column="exp_end_date" property="expEndDate"/>
+	</resultMap>
+	
+	<resultMap type="com.cafe24.iso159.exp.service.ExpPeriod" id="ExpPeriodVo">
+		<id column="exp_period_code" property="expPeriodCode"/>
+		<result column="exp_period_period" property="expPeriodPeriod"/>
+		<result column="exp_period_level" property="expPeriodLevel"/>
+		<result column="exp_period_cost" property="expPeriodCost"/>
+		<result column="exp_period_cost_level" property="expPeriodCostLevel"/>
+		<result column="exp_period_cost_minus" property="expPeriodCostMinus"/>
+		<result column="exp_period_journal_count" property="expPeriodJournalCount"/>
 	</resultMap>
 		
 	<resultMap type="com.cafe24.iso159.animal.service.Animal" id="AnimalVo">
@@ -57,13 +68,99 @@
 		<result column="os_name" property="osName"/>
 		<result column="os_name_level" property="osNameLevel"/>
 	</resultMap>
+
+	<resultMap type="com.cafe24.iso159.member.service.MemberInfo" id="MemberInfoVo">
+		<id column="m_info_code" property="mInfoCode"/>
+		<result column="m_info_name" property="mInfoName"/>
+		<result column="m_info_nickname" property="mInfoNickname"/>
+		<result column="m_info_gender" property="mInfoGender"/>
+		<result column="m_info_birth" property="mInfoBirth"/>
+		<result column="m_info_postcode" property="mInfoPostcode"/>
+		<result column="m_info_address" property="mInfoAddress"/>
+		<result column="m_info_email" property="mInfoEmail"/>
+		<result column="m_info_phone" property="mInfoPhone"/>
+		<result column="m_info_join_date" property="mInfoJoindate"/>
+	</resultMap>
+	
+	<!-- 보호소 체험상세 정보 -->
+	<resultMap type="com.cafe24.iso159.exp.service.ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo" id="selectExpShelterInfoMap">
+		<collection property="exp" resultMap="ExpVo"></collection>
+		<collection property="animal" resultMap="AnimalVo"></collection>
+		<collection property="overallStatus" resultMap="OverallStatusVo"></collection>
+		<collection property="expPeriod" resultMap="ExpPeriodVo"></collection>
+		<collection property="memberInfo" resultMap="MemberInfoVo"></collection>
+	</resultMap>
+	<select id="selectExpShelterInfo" resultMap="selectExpShelterInfoMap" parameterType="String">
+		SELECT 
+			e.m_exp_id
+			,mi.m_info_name
+			,mi.m_info_gender
+			,mi.m_info_birth
+			,mi.m_info_address
+			,mi.m_info_phone
+			,e.m_shelter_id_accept
+			,ep.exp_period_level
+			,os2.os_name AS os_code_exp
+			,os3.os_name AS os_code_cost_return
+			,e.exp_purpose
+			,e.exp_reserve_request_date
+			,e.exp_check_date
+			,e.exp_start_date
+			,e.exp_end_date
+			,os1.os_name
+			,a.animal_id_code
+			,a.animal_breed
+			,a.animal_weight
+			,a.animal_age
+		<!-- m_id 가지고 m_info 정보 가져옴 -->
+		FROM 
+			t_exp e 
+		INNER JOIN 
+			t_member m
+		ON 
+			e.m_exp_id = m.m_id
+		INNER JOIN 
+			t_member_info mi
+		ON 
+			m.m_info_code = mi.m_info_code
+		<!-- m_id 가지고 m_info 정보 가져옴 끝 -->
+		<!-- exp_period_code 찾아가서 exp_period_level 가져옴 -->
+		INNER JOIN 
+			t_exp_period ep
+		ON 
+			e.exp_period_code = ep.exp_period_code
+		<!-- exp_period_code 찾아가서 exp_period_level 가져옴 끝 -->
+		<!-- os_code_exp 찾아가서 os_name 가져옴 -->
+		INNER JOIN 
+			t_overall_status os2
+		ON 
+			e.os_code_exp = os2.os_code
+		INNER JOIN 
+			t_overall_status os3
+		ON 
+			e.os_code_cost_return = os3.os_code
+		<!-- os_code_exp 찾아가서 os_name 가져옴 끝 -->
+		<!-- animal_code 찾아가서 animal 정보 가져옴 -->
+		INNER JOIN 
+			t_animal a
+		ON 
+			e.animal_code = a.animal_code
+		INNER JOIN 
+			t_overall_status os1
+		ON 
+			a.os_code_animal = os1.os_code
+		<!-- animal_code 찾아가서 animal 정보 가져옴 끝 -->
+		WHERE 
+			e.exp_code = 'exp_code_10'
+		
+	</select>
 	
 	<!-- 해당 보호소 체험자 리스트 -->
 	<select id="selectExpShelterList" parameterType="String" resultType="com.cafe24.iso159.exp.service.Exp">
 		SELECT 
 			e.exp_code AS expCode
 			,e.m_exp_id AS mExpId
-			,e.m_shelter_id AS mShelterId
+			,m_shelter_id_accept AS m_shelter_id_accept
 			,os.os_name AS osName
 			,e.exp_reserve_request_date AS expReserveRequestDate
 		FROM 
@@ -96,7 +193,6 @@
 	
 	<!-- 체험 상세 정보 -->
 	<resultMap type="com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense" id="selectExpAndAnimalAndBusinessLicenseOneInfoMap">
-		<id column="os_name" property="osName"/>
 		<collection property="exp" resultMap="ExpVo"></collection>
 		<collection property="animal" resultMap="AnimalVo"></collection>
 		<collection property="businessLicense" resultMap="BusinessLicenseVo"></collection>
@@ -107,7 +203,7 @@
 			,a.animal_weight
 			,a.animal_age 
 			,e.exp_code
-			,e.m_shelter_id
+			,e.m_shelter_id_accept
 			,e.exp_journal_count
 			,e.exp_cost
 			,e.exp_purpose

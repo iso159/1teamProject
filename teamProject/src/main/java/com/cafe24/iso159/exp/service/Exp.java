@@ -1,12 +1,11 @@
 package com.cafe24.iso159.exp.service;
 
-import com.cafe24.iso159.service.common.OverallStatus;
-
 public class Exp {
 	private String expCode;
 	private String animalCode;
 	private String mExpId;
-	private String mShelterId;
+	private String mShelterIdAccept;
+	private String mShelterIdCheck;
 	private String blCode;
 	private String expPeriodCode;
 	private String osCodeExp;
@@ -20,6 +19,17 @@ public class Exp {
 	private String expEndDate;
 	private String expModifiedDate;
 	private String osName;
+	
+	@Override
+	public String toString() {
+		return "Exp [expCode=" + expCode + ", animalCode=" + animalCode + ", mExpId=" + mExpId + ", mShelterIdAccept="
+				+ mShelterIdAccept + ", mShelterIdCheck=" + mShelterIdCheck + ", blCode=" + blCode + ", expPeriodCode="
+				+ expPeriodCode + ", osCodeExp=" + osCodeExp + ", osCodeCostReturn=" + osCodeCostReturn
+				+ ", expJournalCount=" + expJournalCount + ", expCost=" + expCost + ", expPurpose=" + expPurpose
+				+ ", expReserveRequestDate=" + expReserveRequestDate + ", expCheckDate=" + expCheckDate
+				+ ", expStartDate=" + expStartDate + ", expEndDate=" + expEndDate + ", expModifiedDate="
+				+ expModifiedDate + ", osName=" + osName + "]";
+	}
 	public String getExpCode() {
 		return expCode;
 	}
@@ -38,11 +48,17 @@ public class Exp {
 	public void setmExpId(String mExpId) {
 		this.mExpId = mExpId;
 	}
-	public String getmShelterId() {
-		return mShelterId;
+	public String getmShelterIdAccept() {
+		return mShelterIdAccept;
 	}
-	public void setmShelterId(String mShelterId) {
-		this.mShelterId = mShelterId;
+	public void setmShelterIdAccept(String mShelterIdAccept) {
+		this.mShelterIdAccept = mShelterIdAccept;
+	}
+	public String getmShelterIdCheck() {
+		return mShelterIdCheck;
+	}
+	public void setmShelterIdCheck(String mShelterIdCheck) {
+		this.mShelterIdCheck = mShelterIdCheck;
 	}
 	public String getBlCode() {
 		return blCode;
@@ -121,15 +137,6 @@ public class Exp {
 	}
 	public void setOsName(String osName) {
 		this.osName = osName;
-	}
-	@Override
-	public String toString() {
-		return "Exp [expCode=" + expCode + ", animalCode=" + animalCode + ", mExpId=" + mExpId + ", mShelterId="
-				+ mShelterId + ", blCode=" + blCode + ", expPeriodCode=" + expPeriodCode + ", osCodeExp=" + osCodeExp
-				+ ", osCodeCostReturn=" + osCodeCostReturn + ", expJournalCount=" + expJournalCount + ", expCost="
-				+ expCost + ", expPurpose=" + expPurpose + ", expReserveRequestDate=" + expReserveRequestDate
-				+ ", expCheckDate=" + expCheckDate + ", expStartDate=" + expStartDate + ", expEndDate=" + expEndDate
-				+ ", expModifiedDate=" + expModifiedDate + ", osName=" + osName + "]";
 	}
 	
 }

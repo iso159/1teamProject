@@ -44,71 +44,65 @@
 				yearRange: 'c-99:c+99',
 			};
 		$.datepicker.setDefaults($.datepicker.regional['ko']);
-		$('#sdate').datepicker({ minDate: 0});
 		$('#expPeriodCode').click(function() {
 			let expPeriodCode = $('#expPeriodCode').val();
+			$("#edate").val('');
+			$("#sdate").val('');
+			$('#sdate').datepicker({ minDate: 0});
 			if (expPeriodCode === "exp_period_2_5_1") {
-				$("#edate").val('');
 				$('#expPeriodCost').val('50000');
 				$('#expPeriodJournalCount').val('1');
 				$('#expPeriodLevel').val('2');
-				$('#sdate').datepicker({ minDate: 0});
 				$('#sdate').datepicker("option", "onClose", function (selectedDate) {
-					var date2 = $('#sdate').datepicker('getDate');
-					var EndDate = new Date();
+					let date2 = $('#sdate').datepicker('getDate');
+					let EndDate = new Date();
 					EndDate.setDate(date2.getDate() + 1);
-					var d = EndDate.getDate();
-					var m =  EndDate.getMonth();
+					let d = EndDate.getDate();
+					let m =  EndDate.getMonth();
 					m += 1;  // JavaScript months are 0-11
-					var y = EndDate.getFullYear();
+					let y = EndDate.getFullYear();
 					$("#edate").val(y + "-" + m + "-" + d);
 				});
 			} else if (expPeriodCode === "exp_period_4_7_2") {
-				$("#edate").val('');
 				$('#expPeriodCost').val('70000');
 				$('#expPeriodJournalCount').val('2');
 				$('#expPeriodLevel').val('4');
-				$('#sdate').datepicker({ minDate: 0});
 				$('#sdate').datepicker("option", "onClose", function (selectedDate) {
-					var date2 = $('#sdate').datepicker('getDate');
-					var EndDate = new Date();
+					let date2 = $('#sdate').datepicker('getDate');
+					let EndDate = new Date();
 					EndDate.setDate(date2.getDate() + 3);
-					var d = EndDate.getDate();
-					var m =  EndDate.getMonth();
+					let d = EndDate.getDate();
+					let m =  EndDate.getMonth();
 					m += 1;  // JavaScript months are 0-11
-					var y = EndDate.getFullYear();
+					let y = EndDate.getFullYear();
 					$("#edate").val(y + "-" + m + "-" + d);
 				});
 			} else if (expPeriodCode === "exp_period_6_7_3") {
-				$("#edate").val('');
 				$('#expPeriodCost').val('90000');
 				$('#expPeriodJournalCount').val('3');
 				$('#expPeriodLevel').val('6');
-				$('#sdate').datepicker({ minDate: 0});
 				$('#sdate').datepicker("option", "onClose", function (selectedDate) {
-					var date2 = $('#sdate').datepicker('getDate');
-					var EndDate = new Date();
+					let date2 = $('#sdate').datepicker('getDate');
+					let EndDate = new Date();
 					EndDate.setDate(date2.getDate() + 5);
-					var d = EndDate.getDate();
-					var m =  EndDate.getMonth();
+					let d = EndDate.getDate();
+					let m =  EndDate.getMonth();
 					m += 1;  // JavaScript months are 0-11
-					var y = EndDate.getFullYear();
+					let y = EndDate.getFullYear();
 					$("#edate").val(y + "-" + m + "-" + d);
 				});
-			} else if (expPeriodCode === "exp_period_8_11_4") {
-				$("#edate").val('');
+			} else if (expPeriodCode === "exp_period_7_11_4") {
 				$('#expPeriodCost').val('110000');
 				$('#expPeriodJournalCount').val('4');
 				$('#expPeriodLevel').val('7');
-				$('#sdate').datepicker({ minDate: 0});
 				$('#sdate').datepicker("option", "onClose", function (selectedDate) {
-					var date2 = $('#sdate').datepicker('getDate');
-					var EndDate = new Date();
+					let date2 = $('#sdate').datepicker('getDate');
+					let EndDate = new Date();
 					EndDate.setDate(date2.getDate() + 6);
-					var d = EndDate.getDate();
-					var m =  EndDate.getMonth();
+					let d = EndDate.getDate();
+					let m =  EndDate.getMonth();
 					m += 1;  // JavaScript months are 0-11
-					var y = EndDate.getFullYear();
+					let y = EndDate.getFullYear();
 					$("#edate").val(y + "-" + m + "-" + d);
 				});
 			}

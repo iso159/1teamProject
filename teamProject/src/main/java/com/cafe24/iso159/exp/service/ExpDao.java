@@ -21,6 +21,12 @@ public class ExpDao {
 	//맵퍼 id를 가져올때 사용할 맵퍼 생성
 	private final String nameSpace = "com.cafe24.iso159.exp.service.ExpMapper.";
 	
+	//해당 보호소 체험자 정보
+	public ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo selectExpShelterInfo(String expCode) {
+		ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo expShelterInfo = sqlSessionTemplate.selectOne(nameSpace + "selectExpShelterInfo", expCode);
+		return expShelterInfo;
+	}
+	
 	//해당 보호소 체험자 리스트
 	public List<Exp> selectExpShelterList(String blCode) {
 		logger.debug("ExpDao.java 호출 {selectExpShelterList}.");

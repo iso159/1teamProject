@@ -19,6 +19,12 @@ public class ExpService {
 	//디버그용 로거 생성
 	private static final Logger logger = LoggerFactory.getLogger(ExpService.class);
 	
+	//해당 보호소 체험자 정보
+	public ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo selectExpShelterInfo(String expCode) {
+		ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo expShelterInfo = expDao.selectExpShelterInfo(expCode);
+		return expShelterInfo;
+	}
+	
 	//해당 보호소 체험자 리스트
 	public List<Exp> selectExpShelterList(String blCode){
 		//호출된곳 확인

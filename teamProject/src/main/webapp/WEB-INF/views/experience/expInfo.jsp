@@ -25,7 +25,7 @@
 				<td>동물 품종</td>
 				<td>동물 체중</td>
 				<td>동물 나이</td>
-				<c:if test="${!empty selectExpOneInfo.exp.mShelterId}">
+				<c:if test="${!empty selectExpOneInfo.exp.mShelterIdAccept}">
 				<td>보호소 아이디</td>
 				</c:if>
 				<td>체험 상태</td>
@@ -44,8 +44,8 @@
 				<td>${selectExpOneInfo.animal.animalBreed}</td>
 				<td>${selectExpOneInfo.animal.animalWeight}</td>
 				<td>${selectExpOneInfo.animal.animalAge}</td>
-				<c:if test="${!empty selectExpOneInfo.exp.mShelterId}">
-				<td>${selectExpOneInfo.exp.mShelterId}</td>
+				<c:if test="${!empty selectExpOneInfo.exp.mShelterIdAccept}">
+				<td>${selectExpOneInfo.exp.mShelterIdAccept}</td>
 				</c:if>
 				<td>${selectExpOneInfo.osName}</td>
 				<td>${selectExpOneInfo.exp.expJournalCount}</td>

@@ -1,8 +1,6 @@
 package com.cafe24.iso159;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.cafe24.iso159.animal.service.Animal;
 import com.cafe24.iso159.exp.service.Exp;
 import com.cafe24.iso159.exp.service.ExpAndAnimal;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense;
@@ -29,6 +26,15 @@ public class ExpController {
 	@Autowired
 	private ExpService expService;
 	private static final Logger logger = LoggerFactory.getLogger(ExpController.class);
+	
+	//해당 보호소 체험자 정보
+	@RequestMapping(value = "/experience/expShelterInfo", method = RequestMethod.GET)
+	public String expShelterInfo(@RequestParam(value="expCode") String expCode) {
+		logger.debug("ExpController 호출 {expShelterInfo.get}.");
+		logger.debug("expShelterInfo().get 메서드 expCode is {}",expCode);
+		expService.selectExpOneInfo(expCode);
+		return "/experience/expShelterInfo";
+	}
 	
 	// 해당 보호소 체험자 리스트
 	@RequestMapping(value = "/experience/expShelterList", method = RequestMethod.GET)
