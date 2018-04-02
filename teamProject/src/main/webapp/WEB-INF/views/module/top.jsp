@@ -90,9 +90,7 @@
         </c:if>
         <!-- 회원 로그인 하면 보이는 카테고리 END -->
       </ul>
- 
-       	<c:if test="${right eq '입양자'}">
-        <li>
+         <li>
           <a href="#" data-theme="_bgp">보호소</a>
           <ul style="height: 0px; overflow: hidden">
           	<c:set var="right" value="${rightName}"></c:set>
@@ -123,7 +121,6 @@
             </c:if>
           </ul>
         </li>
-        </c:if>
         
         <li>
           <a href="#" data-theme="_bgp">체험</a>
