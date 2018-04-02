@@ -28,12 +28,60 @@
 		<section>
 		<div data-layout="_r">
 			<div data-layout="ch-half">
-				asd
+				<table>
+					<thead>
+						<tr>
+							<th>회원 아이디</th>
+							<th>회원 이름</th>
+							<th>회원 성별</th>
+							<th>회원 생년월일</th>
+							<th>회원 주소</th>
+							<th>회원 핸드폰번호</th>
+							<th>체험 승인자아이디</th>
+							<th>체험 날짜</th>
+							<th>체험 상태</th>
+							<th>체험비 반환상태</th>
+							<th>체험 목적</th>
+							<th>체험 예약 신청 날짜</th>
+							<th>체험 예약 승인 날짜</th>
+							<th>체험 시작 날짜</th>
+							<th>체험 종료 날짜</th>
+							<th>동물 상태</th>
+							<th>동물 코드</th>
+							<th>동물 품종</th>
+							<th>동물 체중</th>
+							<th>동물 나이</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>${ExpOneInfo.exp.mExpId}</th>
+							<th>${ExpOneInfo.memberInfo.mInfoName}</th>
+							<th>${ExpOneInfo.memberInfo.mInfoGender}</th>
+							<th>${ExpOneInfo.memberInfo.mInfoBirth}</th>
+							<th>${ExpOneInfo.memberInfo.mInfoAddress}</th>
+							<th>${ExpOneInfo.memberInfo.mInfoPhone}</th>
+							<th>${ExpOneInfo.exp.mShelterIdAccept}</th>
+							<th>${ExpOneInfo.expPeriod.expPeriodLevel}</th>
+							<th>${ExpOneInfo.exp.osCodeExp}</th>
+							<th>${ExpOneInfo.exp.osCodeCostReturn}</th>
+							<th>${ExpOneInfo.exp.expPurpose}</th>
+							<th>${ExpOneInfo.exp.expReserveRequestDate}</th>
+							<th>${ExpOneInfo.exp.expCheckDate}</th>
+							<th>${ExpOneInfo.exp.expStartDate}</th>
+							<th>${ExpOneInfo.exp.expEndDate}</th>
+							<th>${ExpOneInfo.animal.osCodeAnimal}</th>
+							<th>${ExpOneInfo.animal.animalIdCode}</th>
+							<th>${ExpOneInfo.animal.animalBreed}</th>
+							<th>${ExpOneInfo.animal.animalWeight}</th>
+							<th>${ExpOneInfo.animal.animalAge}</th>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		</section>
 		<!-- 메인내용 끝 : Text | Text -->
-	
 		<!-- 내용 입력 부분 끝 -->
 	</div>
 	<!-- 메인 화면 내용 부분 끝 -->

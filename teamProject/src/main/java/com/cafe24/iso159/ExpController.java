@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cafe24.iso159.exp.service.Exp;
 import com.cafe24.iso159.exp.service.ExpAndAnimal;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense;
+import com.cafe24.iso159.exp.service.ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo;
 import com.cafe24.iso159.exp.service.ExpPeriod;
 import com.cafe24.iso159.exp.service.ExpService;
 import com.cafe24.iso159.member.service.Member;
@@ -29,10 +30,19 @@ public class ExpController {
 	
 	//해당 보호소 체험자 정보
 	@RequestMapping(value = "/experience/expShelterInfo", method = RequestMethod.GET)
-	public String expShelterInfo(@RequestParam(value="expCode") String expCode) {
+	public String expShelterInfo(Model model,@RequestParam(value="expCode") String expCode,HttpSession session) {
 		logger.debug("ExpController 호출 {expShelterInfo.get}.");
 		logger.debug("expShelterInfo().get 메서드 expCode is {}",expCode);
-		expService.selectExpOneInfo(expCode);
+		//체험 리스트에서 체험 코드 가져와서 정보 확인
+		ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo selectExpOneInfo =  expService.selectExpShelterInfo(expCode);
+		logger.debug("expShelterInfo().get 메서드 selectExpOneInfo is {}",selectExpOneInfo);
+		model.addAttribute("ExpOneInfo", selectExpOneInfo);
+		//해당 보호소 체험자 리스트 에서 정보 확인할때 확인자 아이디 등록
+		Exp exp = new Exp();
+		exp.setmShelterIdCheck((String)session.getAttribute("loginId"));
+		logger.debug("expShelterInfo().get 메서드 loginId is {}",(String)session.getAttribute("loginId"));
+		exp.setExpCode(expCode);
+		expService.updateExpmShelterIdCheck(exp);
 		return "/experience/expShelterInfo";
 	}
 	
@@ -86,19 +96,6 @@ public class ExpController {
 		logger.debug("ExpOne().get 메서드 expAndAnimalAndBusinessLicense is {}",expAndAnimalAndBusinessLicense);
 		model.addAttribute("selectExpOneInfo", expAndAnimalAndBusinessLicense);
 		return "/experience/expInfo";
-	}
-	
-	// 체험 홈 /experience/expAdd 을 get 방식으로 호출할때 실행
-	@RequestMapping(value = "/exp", method = RequestMethod.GET)
-	public String exp(Model model,HttpSession session) {
-		logger.debug("ExpController 호출 {exp.get}.");
-		String loginId = (String)session.getAttribute("loginId");
-		//넘어온 loginId 값 확인
-		logger.debug("exp().get 메서드 loginId is {}",loginId);
-		Member member = expService.selectMemberCheck(loginId);
-		logger.debug("exp().get 메서드 member is {}",member);
-		model.addAttribute("member", member);
-		return "/experience/exp";
 	}
 	
 	// 체험 등록 뷰 /experience/expAdd 을 get 방식으로 호출할때 실행

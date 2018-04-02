@@ -21,8 +21,20 @@ public class ExpService {
 	
 	//해당 보호소 체험자 정보
 	public ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo selectExpShelterInfo(String expCode) {
+		//호출된곳 확인
+		logger.debug("ExpService.java 호출 {selectExpShelterInfo}.");
+		logger.debug("selectExpShelterInfo() 메서드 실행 expCode is {}", expCode);
+		//체험 리스트에서 체험 코드 가져와서 정보 확인
 		ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo expShelterInfo = expDao.selectExpShelterInfo(expCode);
+		logger.debug("selectExpShelterInfo() 메서드 실행 expShelterInfo is {}", expShelterInfo);
 		return expShelterInfo;
+	}
+	
+	//해당 보호소 체험자 리스트 에서 정보 확인할때 확인자 아이디 등록
+	public void updateExpmShelterIdCheck(Exp exp) {
+		logger.debug("ExpService.java 호출 {updateExpmShelterIdCheck}.");
+		logger.debug("updateExpmShelterIdCheck() 메서드 실행 exp is {}", exp);
+		expDao.updateExpmShelterIdCheck(exp);
 	}
 	
 	//해당 보호소 체험자 리스트
@@ -35,15 +47,6 @@ public class ExpService {
 		return exp;
 	}
 	
-	//체험자인지 보호소인지 확인
-	public Member selectMemberCheck(String mId) {
-		//호출된곳 확인
-		logger.debug("ExpService.java 호출 {selectMemberCheck}.");
-		logger.debug("selectMemberCheck() 메서드 실행 mId is {}", mId);
-		Member member = expDao.selectMemberCheck(mId);
-		logger.debug("selectMemberCheck() 메서드 실행 member is {}", member);
-		return member;
-	}
 	//체험신청자 체험 삭제
 	public void deleteExpOne(String expCode) {
 		//호출된곳 확인

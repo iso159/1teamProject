@@ -82,6 +82,16 @@
 		<result column="m_info_join_date" property="mInfoJoindate"/>
 	</resultMap>
 	
+	<!-- 보호소 체험 상세정보 볼때 확인자 추가 -->
+	<update id="updateExpmShelterIdCheck" parameterType="com.cafe24.iso159.exp.service.Exp">
+		UPDATE 
+			t_exp 
+		SET 
+			m_shelter_id_check = #{mShelterIdCheck} 
+		WHERE 
+			exp_code = #{expCode}
+	</update>
+	
 	<!-- 보호소 체험상세 정보 -->
 	<resultMap type="com.cafe24.iso159.exp.service.ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo" id="selectExpShelterInfoMap">
 		<collection property="exp" resultMap="ExpVo"></collection>
@@ -107,12 +117,11 @@
 			,e.exp_check_date
 			,e.exp_start_date
 			,e.exp_end_date
-			,os1.os_name
+			,os1.os_name AS os_code_animal
 			,a.animal_id_code
 			,a.animal_breed
 			,a.animal_weight
 			,a.animal_age
-		<!-- m_id 가지고 m_info 정보 가져옴 -->
 		FROM 
 			t_exp e 
 		INNER JOIN 
@@ -123,14 +132,10 @@
 			t_member_info mi
 		ON 
 			m.m_info_code = mi.m_info_code
-		<!-- m_id 가지고 m_info 정보 가져옴 끝 -->
-		<!-- exp_period_code 찾아가서 exp_period_level 가져옴 -->
 		INNER JOIN 
 			t_exp_period ep
 		ON 
 			e.exp_period_code = ep.exp_period_code
-		<!-- exp_period_code 찾아가서 exp_period_level 가져옴 끝 -->
-		<!-- os_code_exp 찾아가서 os_name 가져옴 -->
 		INNER JOIN 
 			t_overall_status os2
 		ON 
@@ -139,8 +144,6 @@
 			t_overall_status os3
 		ON 
 			e.os_code_cost_return = os3.os_code
-		<!-- os_code_exp 찾아가서 os_name 가져옴 끝 -->
-		<!-- animal_code 찾아가서 animal 정보 가져옴 -->
 		INNER JOIN 
 			t_animal a
 		ON 
@@ -149,10 +152,8 @@
 			t_overall_status os1
 		ON 
 			a.os_code_animal = os1.os_code
-		<!-- animal_code 찾아가서 animal 정보 가져옴 끝 -->
 		WHERE 
-			e.exp_code = 'exp_code_10'
-		
+			e.exp_code = #{expCode}
 	</select>
 	
 	<!-- 해당 보호소 체험자 리스트 -->
@@ -160,7 +161,7 @@
 		SELECT 
 			e.exp_code AS expCode
 			,e.m_exp_id AS mExpId
-			,m_shelter_id_accept AS m_shelter_id_accept
+			,m_shelter_id_accept AS mShelterIdAccept
 			,os.os_name AS osName
 			,e.exp_reserve_request_date AS expReserveRequestDate
 		FROM 
@@ -171,16 +172,6 @@
 			e.os_code_exp = os.os_code
 		WHERE 
 			e.bl_code=#{blCode}
-	</select>
-	
-	<!-- 체험자인지 보호소인지 확인 -->
-	<select id="selectMemberCheck" parameterType="String" resultType="com.cafe24.iso159.member.service.Member">
-		SELECT 
-			bl_code AS blCode
-		FROM 
-			t_member 
-		WHERE 
-			m_id = #{mId}
 	</select>
 	
 	<!-- 체험 삭제 -->
@@ -210,7 +201,7 @@
 			,e.exp_reserve_request_date
 			,e.exp_start_date
 			,e.exp_end_date
-			,os.os_name
+			,os.os_name AS os_code_exp
 			,bl.bl_shelter_name
 			,bl.bl_shelter_address 
 		FROM 

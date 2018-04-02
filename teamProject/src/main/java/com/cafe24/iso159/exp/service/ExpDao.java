@@ -23,8 +23,19 @@ public class ExpDao {
 	
 	//해당 보호소 체험자 정보
 	public ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo selectExpShelterInfo(String expCode) {
+		logger.debug("ExpDao.java 호출 {selectExpShelterInfo}.");
+		logger.debug("selectExpShelterInfo() 메서드 실행 expCode is {}", expCode);
+		//체험 리스트에서 체험 코드 가져와서 정보 확인
 		ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo expShelterInfo = sqlSessionTemplate.selectOne(nameSpace + "selectExpShelterInfo", expCode);
+		logger.debug("selectExpShelterInfo() 메서드 실행 expShelterInfo is {}", expShelterInfo);
 		return expShelterInfo;
+	}
+	
+	//해당 보호소 체험자 리스트 에서 정보 확인할때 확인자 아이디 등록
+	public void updateExpmShelterIdCheck(Exp exp) {
+		logger.debug("ExpDao.java 호출 {updateExpmShelterIdCheck}.");
+		logger.debug("updateExpmShelterIdCheck() 메서드 실행 exp is {}", exp);
+		sqlSessionTemplate.update(nameSpace + "updateExpmShelterIdCheck", exp);
 	}
 	
 	//해당 보호소 체험자 리스트

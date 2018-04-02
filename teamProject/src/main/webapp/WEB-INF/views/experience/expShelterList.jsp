@@ -31,7 +31,7 @@
 					<thead>
 						<tr>
 						<td>회원 아이디</td>
-						<td>확인자 아이디</td>
+						<td>승인 아이디</td>
 						<td>체험 상태</td>
 						<td>체험 신청 날짜</td>
 						<td>상세정보</td>
@@ -41,7 +41,7 @@
 						<c:forEach var="e" items="${exp}">
 						<tr>
 						<td>${e.mExpId}</td>
-						<td>${e.mShelterId}</td>
+						<td>${e.mShelterIdAccept}</td>
 						<td>${e.osName}</td>
 						<td>${e.expReserveRequestDate}</td>
 						<td><a href="${pageContext.request.contextPath}/experience/expShelterInfo?expCode=${e.expCode}">상세정보</a></td>

@@ -38,6 +38,7 @@
 				changeMonth: true,
 				changeYear: true,
 				showButtonPanel: true,
+				showOtherMonths: true,
 				yearRange: 'c-99:c+99',
 			};
 		$.datepicker.setDefaults($.datepicker.regional['ko']);
@@ -46,62 +47,79 @@
 			$("#edate").val('');
 			$("#sdate").val('');
 			$('#sdate').datepicker({ minDate: 0});
+			let date1 = new Date();
+			let todayM = date1.getMonth();
 			if (expPeriodCode === "exp_period_2_5_1") {
 				$('#expPeriodCost').val('50000');
 				$('#expPeriodJournalCount').val('1');
 				$('#expPeriodLevel').val('2');
 				$('#sdate').datepicker("option", "onClose", function (selectedDate) {
+					if($('#sdate').val() != ''){
 					let date2 = $('#sdate').datepicker('getDate');
-					console.log(date2 + "date2");
 					let EndDate = new Date();
+					EndDate.setYear(date2.getFullYear());
+					EndDate.setMonth(date2.getMonth());
 					EndDate.setDate(date2.getDate() + 1);
 					let d = EndDate.getDate();
-					let m =  EndDate.getMonth();
+					let m = EndDate.getMonth();
 					m += 1;  // JavaScript months are 0-11
 					let y = EndDate.getFullYear();
 					$("#edate").val(y + "-" + m + "-" + d);
+					}
 				});
 			} else if (expPeriodCode === "exp_period_4_7_2") {
 				$('#expPeriodCost').val('70000');
 				$('#expPeriodJournalCount').val('2');
 				$('#expPeriodLevel').val('4');
 				$('#sdate').datepicker("option", "onClose", function (selectedDate) {
+					if($('#sdate').val() != ''){
 					let date2 = $('#sdate').datepicker('getDate');
 					let EndDate = new Date();
+					EndDate.setYear(date2.getFullYear());
+					EndDate.setMonth(date2.getMonth());
 					EndDate.setDate(date2.getDate() + 3);
 					let d = EndDate.getDate();
-					let m =  EndDate.getMonth();
+					let m = EndDate.getMonth();
 					m += 1;  // JavaScript months are 0-11
 					let y = EndDate.getFullYear();
 					$("#edate").val(y + "-" + m + "-" + d);
+					}
 				});
 			} else if (expPeriodCode === "exp_period_6_7_3") {
 				$('#expPeriodCost').val('90000');
 				$('#expPeriodJournalCount').val('3');
 				$('#expPeriodLevel').val('6');
 				$('#sdate').datepicker("option", "onClose", function (selectedDate) {
+					if($('#sdate').val() != ''){
 					let date2 = $('#sdate').datepicker('getDate');
 					let EndDate = new Date();
+					EndDate.setYear(date2.getFullYear());
+					EndDate.setMonth(date2.getMonth());
 					EndDate.setDate(date2.getDate() + 5);
 					let d = EndDate.getDate();
-					let m =  EndDate.getMonth();
+					let m = EndDate.getMonth();
 					m += 1;  // JavaScript months are 0-11
 					let y = EndDate.getFullYear();
 					$("#edate").val(y + "-" + m + "-" + d);
+					}
 				});
 			} else if (expPeriodCode === "exp_period_7_11_4") {
 				$('#expPeriodCost').val('110000');
 				$('#expPeriodJournalCount').val('4');
 				$('#expPeriodLevel').val('7');
 				$('#sdate').datepicker("option", "onClose", function (selectedDate) {
+					if($('#sdate').val() != ''){
 					let date2 = $('#sdate').datepicker('getDate');
 					let EndDate = new Date();
+					EndDate.setYear(date2.getFullYear());
+					EndDate.setMonth(date2.getMonth());
 					EndDate.setDate(date2.getDate() + 6);
 					let d = EndDate.getDate();
-					let m =  EndDate.getMonth();
+					let m = EndDate.getMonth();
 					m += 1;  // JavaScript months are 0-11
 					let y = EndDate.getFullYear();
 					$("#edate").val(y + "-" + m + "-" + d);
+					}
 				});
 			}
 			$('#insertForm').click(function(){
@@ -142,7 +160,7 @@
 				</div>
 				<input type="hidden" name=expJournalCount id="expPeriodJournalCount">
 				<input type="hidden" name="expCost" id="expPeriodCost">
-				시작일 : <input type="text" name="expStartDate" id="sdate" size="10" maxlength="10" value="" /> ~
+				시작일 : <input type="text" name="expStartDate" id="sdate" size="10" maxlength="10" value="" readonly="readonly"/><br>
 				종료일 : <input type="text" name="expEndDate" id="edate" size="10" maxlength="10" value="" readonly="readonly"/><br>
 				체험 이유 : <input type="text" id="expPurpose" name="expPurpose">
 				<br><button type="button" id="insertForm">입력</button>

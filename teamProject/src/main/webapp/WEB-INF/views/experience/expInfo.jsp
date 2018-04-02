@@ -58,7 +58,7 @@
 							<c:if test="${!empty selectExpOneInfo.exp.mShelterIdAccept}">
 							<td>${selectExpOneInfo.exp.mShelterIdAccept}</td>
 							</c:if>
-							<td>${selectExpOneInfo.osName}</td>
+							<td>${selectExpOneInfo.exp.osCodeExp}</td>
 							<td>${selectExpOneInfo.exp.expJournalCount}</td>
 							<td>${selectExpOneInfo.exp.expCost}</td>
 							<td>${selectExpOneInfo.exp.expPurpose}</td>
@@ -68,7 +68,6 @@
 						</tr>
 					</tbody>
 				</table>
-				
 				<c:choose>
 				<c:when test="${selectExpOneInfo.osName eq '체험 완료'}">
 				</c:when>
