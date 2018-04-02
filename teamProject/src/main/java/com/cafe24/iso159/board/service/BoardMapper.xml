@@ -3,5 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.board.service.BoardMapper">
-
+	
+	<!-- 게시판 글 전체 조회 -->
+	<select id="selectBoardContent" resultType="com.cafe24.iso159.board.service.BoardContent">
+		SELECT 
+			board_content_code as boardContentCode
+			,board_code as boardCode
+			,m_member_id as mMemberId
+			,board_content_title as boardContentTitle
+			,board_content_content as boardContentContent
+			,board_content_date as boardContentDate
+		FROM 
+			t_board_content
+	</select>
 </mapper>
