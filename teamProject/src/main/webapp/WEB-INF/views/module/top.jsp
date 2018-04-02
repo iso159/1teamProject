@@ -128,7 +128,7 @@
         <li>
           <a href="#" data-theme="_bgp">체험</a>
            <ul style="height: 0px; overflow: hidden">
-            <c:if test="${empty member.blCode}">
+            <c:if test="${rightLevel eq '1' or rightLevel eq '3'}">
             <li>
               <a href="${pageContext.request.contextPath}/experience/expAdd?animalCode=animal_code_01&blCode=bl_code_01" data-theme="_bgpd">체험등록</a>
             </li>
@@ -136,9 +136,9 @@
               <a href="${pageContext.request.contextPath}/experience/expList" data-theme="_bgpd">나의체험리스트</a>
             </li>
             </c:if>
-            <c:if test="${!empty member.blCode}">
+            <c:if test="${rightLevel eq '1' or rightLevel eq '2'}">
             <li>
-              <a href="${pageContext.request.contextPath}/experience/expShelterList?blCode=${member.blCode}" data-theme="_bgpd">보호소 체험 리스트</a>
+              <a href="${pageContext.request.contextPath}/experience/expShelterList?blCode=${loginBlCode}" data-theme="_bgpd">보호소 체험 리스트</a>
             </li>
              </c:if>
           </ul>
