@@ -15,6 +15,8 @@
 		<result column="bl_shelter_name" property="blShelterName"/>
 		<result column="animal_enroll_date" property="animalEnrollDate"/>
 		<result column="animal_code" property="animalCode"/>
+		<result column="m_member_id" property="mShelterId"/>
+		<result column="bl_code" property="blCode"/>
 	</resultMap>
 	
 	<!-- 동물등록 -->
@@ -66,7 +68,7 @@
 			, animal_age
             , bl.bl_shelter_Name
 			, animal_enroll_date
-			, animal_code 
+			, animal_code
 		FROM t_animal a
 		INNER JOIN t_overall_status os
 		ON os.os_code = a.os_code_animal
@@ -159,7 +161,9 @@
 			, animal_age
             , bl.bl_shelter_Name
 			, animal_enroll_date
-			, animal_code 
+			, animal_code
+			, bl.m_member_id
+			, bl.bl_code  
 		FROM t_animal a
         INNER JOIN t_overall_status osk
 		ON osk.os_code = a.os_code_kind

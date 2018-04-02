@@ -76,11 +76,9 @@ public class AnimalController {
 	//동물리스트 상세페이지요청
 	@RequestMapping(value="/animal/animalDetail", method=RequestMethod.GET)
 	public String animalDetail(HttpSession session, Model model, @RequestParam(value="animalCode",required=true)String animalCode) {
-		//세션에서 로그인 blCode를 가져와서 blCode에 셋팅		
-		String blCode = (String)session.getAttribute("loginBlCode");
+			
 		AnimalCommand animalDetail =animalservice.detailAnimal(animalCode);
 		model.addAttribute("animalDetail", animalDetail);
-		model.addAttribute("blCode",blCode);
 		return "animal/animalDetail";
 	}
 	//동물리스트 삭제

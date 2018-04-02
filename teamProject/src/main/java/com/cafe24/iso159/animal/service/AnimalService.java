@@ -76,6 +76,7 @@ public class AnimalService {
 	public AnimalCommand detailAnimal(String animalCode) {
 		logger.debug("animalDetail()메서드 animalCode is {}", animalCode);
 		AnimalCommand animalDetail = animaldao.animalDetail(animalCode);
+		logger.debug("animalDetail()메서드 animalDetail is {}", animalDetail);
 		return animalDetail;
 	}
 	//동물 조건검색

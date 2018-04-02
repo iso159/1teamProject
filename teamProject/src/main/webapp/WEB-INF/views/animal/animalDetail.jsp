@@ -31,8 +31,8 @@
 		보호소이름:${animalDetail.blShelterName}<br>
 		등록일자:${animalDetail.animalEnrollDate}<br>
 		
-		<a href="${pageContext.request.contextPath}/experience/expAdd?animalCode=${animalDetail.animalCode}&blCode=${blCode}">체험신청하기</a><br>
-		<a href="${pageContext.request.contextPath}/adopt/adoptRequest?animalCode=${animalDetail.animalCode}">입양신청하기</a><br>
+		<a href="${pageContext.request.contextPath}/experience/expAdd?animalCode=${animalDetail.animalCode}&blCode=${animalDetail.blCode}">체험신청하기</a><br>
+		<a href="${pageContext.request.contextPath}/adopt/adoptRequest?animalCode=${animalDetail.animalCode}&blCode=${animalDetail.blCode}&mShelterId=${animalDetail.mShelterId}">입양신청하기</a><br>
 		
 	<a href="${pageContext.request.contextPath}/"><button type="button" class="btn btn-success">홈으로</button></a>	
 	<!-- 내용 입력 부분 끝 -->

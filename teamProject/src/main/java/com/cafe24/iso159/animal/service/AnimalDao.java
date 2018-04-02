@@ -30,7 +30,7 @@ public class AnimalDao {
 	public List<AnimalCommand> selectAnimalList(){
 		logger.debug("selectAnimalList()메서드 호출");
 		List<AnimalCommand> AnimalList = sqlSessionTemplate.selectList(nameSpace+"selectAnimalList");
-		logger.debug("AnimalList is {}", AnimalList);
+		logger.debug("selectAnimalList()메서드 호출 AnimalList is {}", AnimalList);
 		return AnimalList;
 	}
 	//동물삭제

@@ -11,7 +11,14 @@ public class AnimalCommand {
 	private String blShelterName;
 	private String animalEnrollDate;
 	private String animalCode;
-	
+	private String mShelterId;
+	private String blCode;
+	public String getBlCode() {
+		return blCode;
+	}
+	public void setBlCode(String blCode) {
+		this.blCode = blCode;
+	}
 	public String getOsName() {
 		return osName;
 	}
@@ -72,11 +79,18 @@ public class AnimalCommand {
 	public void setAnimalCode(String animalCode) {
 		this.animalCode = animalCode;
 	}
+	public String getmShelterId() {
+		return mShelterId;
+	}
+	public void setmShelterId(String mShelterId) {
+		this.mShelterId = mShelterId;
+	}
 	@Override
 	public String toString() {
 		return "AnimalCommand [osName=" + osName + ", osNameAnimalKind=" + osNameAnimalKind + ", animalBreed="
 				+ animalBreed + ", animalArea=" + animalArea + ", animalIdCode=" + animalIdCode + ", animalWeight="
 				+ animalWeight + ", animalAge=" + animalAge + ", blShelterName=" + blShelterName + ", animalEnrollDate="
-				+ animalEnrollDate + ", animalCode=" + animalCode + "]";
+				+ animalEnrollDate + ", animalCode=" + animalCode + ", mShelterId=" + mShelterId + ", blCode=" + blCode
+				+ "]";
 	}
 }
