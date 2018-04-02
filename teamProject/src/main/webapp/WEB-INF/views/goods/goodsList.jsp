@@ -28,8 +28,7 @@
 	<div> 
 		<ul class="nav top-menu">
 			<li>
-				<form class="navbar-form"
-					action="${pageContext.request.contextPath}/index?rowPerPage=${rowPerPage}" method="get">
+				<form class="navbar-form" action="${pageContext.request.contextPath}/index?rowPerPage=${rowPerPage}" method="get">
 					<input class="form-control" name="searchWord" placeholder="Search" type="text">
 					<button type="submit" class="btn btn-danger">검색</button>
 				</form>
@@ -38,6 +37,7 @@
 	</div>
 	<!-- 검색 기능 끝 -->
 	<table border=1 class="table table-striped">
+		<c:set var="right" value="${rightName}"></c:set>
 			<thead>
 				<tr>
 					<th>상품 코드</th>
@@ -46,8 +46,10 @@
 					<th>상품 포인트</th>
 					<th>상품 설명</th>
 					<th>상품 등록날짜</th>
+					<c:if test="${right eq '관리자'}">
 					<th>상품 수정</th>
 					<th>상품 삭제</th>
+					</c:if>
 				</tr>
 			</thead>
 			<tbody>
@@ -55,12 +57,14 @@
 					<tr>
 						<td>${g.pointGoodsCode}</td>
 						<td>${g.mAdminId}</td>
-						<td>${g.pointGoodsName}</td>
+						<td><a href="${pageContext.request.contextPath}/goods/goodsDetail?pointGoodsCode=${g.pointGoodsCode}">${g.pointGoodsName}</a></td>
 						<td>${g.pointGoodsPoint}</td>
 						<td>${g.pointGoodsDesc}</td>
 						<td>${g.pointGoodsDate}</td>
+						<c:if test="${right eq '관리자'}">
 						<td><a href="${pageContext.request.contextPath}/goods/goodsModify?pointGoodsCode=${g.pointGoodsCode}">수정</a></td>
 						<td><a href="${pageContext.request.contextPath}/goods/goodsRemove?pointGoodsCode=${g.pointGoodsCode}">삭제</a></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>

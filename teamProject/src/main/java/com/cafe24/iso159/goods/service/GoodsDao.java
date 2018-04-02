@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.cafe24.iso159.member.service.MemberInfo;
+import com.cafe24.iso159.animal.service.AnimalCommand;
 
 @Repository
 public class GoodsDao {
@@ -57,5 +57,12 @@ public class GoodsDao {
 	public void deleteGoods(String goodsCode) {
 		logger.debug("deleteGoods()메서드 goodsCode is {}", goodsCode);
 		sqlSessionTemplate.delete(nameSpace + "deleteGoods", goodsCode);
+	}
+	
+	// 상품 한개 상세조회
+	public Goods goodsDetail(String goodsCode) {
+		//매개변수 확인
+		logger.debug("goodsDetail()메서드 goodsCode is {}", goodsCode);
+		return sqlSessionTemplate.selectOne(nameSpace+"selectGoodsDetail", goodsCode);
 	}
 }

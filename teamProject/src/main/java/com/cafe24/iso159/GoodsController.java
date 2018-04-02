@@ -22,7 +22,7 @@ public class GoodsController {
 	private GoodsService goodsService;
 	private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
 
-	// GET 방식 컨트롤러
+	// Menu
 	@RequestMapping(value = "/goods/goodsMenu", method = RequestMethod.GET)
 	public String goods() {
 		return "goods/goodsMenu";
@@ -45,7 +45,7 @@ public class GoodsController {
 		logger.debug("goodsAdd(HttpSession session, Goods goods) 메서드 is mAdminId {}", mAdminId);
 		goods.setmAdminId(mAdminId);
 		goodsService.addGoods(goods);
-		return "index";
+		return "goods/goodsList";
 	}
 
 	// 리스트 요청
@@ -80,5 +80,13 @@ public class GoodsController {
 	public String goodsRemove(@RequestParam(value="pointGoodsCode")String goodsCode) {
 		goodsService.removeGoods(goodsCode);
 		return "redirect:/goods/goodsList";
+	}
+	//상품 한개 상세페이지요청
+	@RequestMapping(value="/goods/goodsDetail", method=RequestMethod.GET)
+	public String goodsDetail(HttpSession session, Model model, @RequestParam(value="pointGoodsCode",required=true)String goodsCode) {
+			
+		Goods goodsDetail =goodsService.detailGoods(goodsCode);
+		model.addAttribute("goodsDetail", goodsDetail);
+		return "goods/goodsDetail";
 	}
 }

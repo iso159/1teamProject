@@ -3,19 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.goods.service.GoodsMapper">
-<!-- 	
-			회원정보 리스트 전체조회 쿼리
-	<select id="selectMemberList" parameterType="com.cafe24.iso159.goods.service.Goods"
-		resultType="com.cafe24.iso159.goods.service.Goods">
+
+	<!-- 상품 1개 상세 조회쿼리문 -->
+	<select id="selectGoodsDetail" resultType="com.cafe24.iso159.goods.service.Goods">
 		SELECT 
-		point_goods_code
-			, m_admin_id
-			, point_goods_name
-			, point_goods_point
-			, point_goods_desc
-			, point_goods_date 
-		FROM t_point_goods;
-	</select> -->
+			point_goods_code as pointGoodsCode
+			, m_admin_id as mAdminId
+			, point_goods_name as pointGoodsName
+			, point_goods_point as pointGoodsPoint
+			, point_goods_desc as pointGoodsDesc
+			, point_goods_date as pointGoodsDate 
+		FROM 
+			t_point_goods
+		WHERE
+			point_goods_code = #{pointGoodsCode}
+	</select>
+
 	<!-- 상품 등록 쿼리 --> 
 	<insert id="insertGoods" parameterType="com.cafe24.iso159.goods.service.Goods">
 		INSERT INTO t_point_goods 
@@ -36,7 +39,7 @@
 	<!-- 상품등록 Code 생성 쿼리 -->
 	<select id="selectGoodsCodeNumber" resultType="int">
 		SELECT
-		MAX(cast(substring(point_goods_code, 18) as DECIMAL))
+		MAX(cast(substring(point_goods_code, 17) as DECIMAL))
 		FROM 
 			t_point_goods
 	</select>
@@ -93,5 +96,5 @@
 			t_point_goods 
 		WHERE 
 			point_goods_code=#{pointGoodsCode};
-	</delete>
+	</delete>	
 </mapper>

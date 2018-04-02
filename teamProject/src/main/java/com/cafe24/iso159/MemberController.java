@@ -11,12 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.iso159.member.service.Member;
 import com.cafe24.iso159.member.service.MemberAndMemberInfo;
 import com.cafe24.iso159.member.service.MemberInfo;
 import com.cafe24.iso159.member.service.MemberLoginLevel;
-import com.cafe24.iso159.member.service.MemberRight;
 import com.cafe24.iso159.member.service.MemberService;
 
 @Controller
@@ -33,7 +33,7 @@ public class MemberController {
 		return "member/memberMenu";
 	}
 
-	// POST 방식 컨트롤러
+	// POST 방식 회원가입
 	@RequestMapping(value = "/member/memberAdd", method = RequestMethod.POST)
 	public String addMember(Member member, MemberInfo memberInfo) {
 		logger.debug("addmember(Member member, MemberInfo memberInfo) 메서드 member is {}", member);
@@ -42,7 +42,7 @@ public class MemberController {
 		return "index";
 	}
 
-	// GET 방식 컨트롤러
+	// GET 방식 회원가입
 	@RequestMapping(value = "/member/memberAdd", method = RequestMethod.GET)
 	public String addMember() {
 		logger.debug("addmember() 메서드 member is {}");
@@ -77,12 +77,22 @@ public class MemberController {
 		if (session.getAttribute("loginId") == null) {
 			return "redirect:/goods/login";
 		}
-		List<MemberAndMemberInfo> list = MemberService.getMemberList();		
+		List<MemberAndMemberInfo> list = MemberService.getMemberList();
 		session.setAttribute("list", list);
 		logger.debug("memberList(HttpSession session) 메서드 list is {}", list);
 		return "/member/memberList";
 	}
 	
+/*	
+	// 회원 한명 상세정보 조회
+	@RequestMapping(value="/member/memberDetail", method=RequestMethod.GET)
+	public String memberDetail(HttpSession session, Model model, String memberCode) {	
+		Member memberDetail =MemberService.detailMember(memberCode);
+		model.addAttribute("memberDetail", memberDetail);
+		return "member/memberDetail";
+	}
+*/
+
 	// update 요청
 	@RequestMapping(value = "/member/memberModify", method = RequestMethod.POST)
 	public String updateMember(Member member, MemberInfo memberInfo) {
@@ -115,8 +125,7 @@ public class MemberController {
 	@RequestMapping(value = "/member/memberLogout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		logger.debug("로그아웃 확인");
-		// 세션속성 제거 후에 홈으로 리다이렉트
-		session.removeAttribute("loginId");
+		session.invalidate();
 		return "redirect:/";
 	}
 }
