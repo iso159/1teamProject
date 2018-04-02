@@ -167,12 +167,16 @@
             </li>
           </ul>
         </li>
-         <li>
-          <a href="#" data-theme="_bgp">상품</a>
-           <ul style="height: 0px; overflow: hidden">
+		<li>
+		<c:set var="login" value="${loginId}"></c:set>
+		<c:set var="right" value="${rightName}"></c:set>
+			<a href="#" data-theme="_bgp">상품</a>
+			<ul style="height: 0px; overflow: hidden">
+			<c:if test="${right eq '관리자'}">
             <li>
               <a href="${pageContext.request.contextPath}/goods/goodsAdd" data-theme="_bgpd">상품등록</a>
             </li>
+            </c:if>
             <li>
               <a href="${pageContext.request.contextPath}/goods/goodsList" data-theme="_bgpd">상품리스트</a>
             </li>
@@ -212,7 +216,7 @@
            <c:set var="right" value="${rightName}"></c:set>
           	<c:if test="${right eq '체험자'}">
 	            <li>
-	              <a href="${pageContext.request.contextPath}/adopt/adoptRequest" data-theme="_bgpd">내 정보</a>
+	              <a href="${pageContext.request.contextPath}/#" data-theme="_bgpd">내 정보</a>
 	            </li>
             </c:if>
           </ul>
