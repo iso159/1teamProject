@@ -26,7 +26,7 @@
 	<!-- 메인내용 시작 : Text | Text -->
 	<section>
 	  <div data-layout="_r">
-	    <div data-layout="ch-half">
+	    <div>
 	    <!-- 내용 입력 부분 -->
 		<h2>설문지 등록 </h2>
 			<form  id="formSurveySubmit" action="${pageContext.request.contextPath}/survey/surveyAdd" method="post">

@@ -27,6 +27,22 @@
 			t_survey	
 	</select>
 	
+	<!-- 설문지코드로 설문지 조회 쿼리문 -->
+	<select id="selectSurveyListBySurveyCode"
+			parameterType="com.cafe24.iso159.survey.service.Survey"
+			resultType="com.cafe24.iso159.survey.service.Survey">
+		SELECT 
+			survey_code as surveyCode, 
+			m_admin_id as mAdminId, 
+			survey_enroll_date as surveyEnrollDate, 
+			survey_name as surveyName, 
+			survey_point as surveyPoint  
+		FROM 
+			t_survey
+		WHERE 
+			survey_code = #{surveyCode}
+	</select>
+	
 	<!-- 설문지등록 쿼리문 -->
 	<insert id="insertSurvey"
 			parameterType="com.cafe24.iso159.survey.service.Survey">
@@ -115,4 +131,33 @@
 			
 	</select>
 
+	<!-- 설문지 수정 -->
+	<update id="updateSurvey"
+			parameterType="com.cafe24.iso159.survey.service.Survey">
+		UPDATE 
+			t_survey 
+		SET 
+			survey_name = #{surveyName},
+			survey_point = #{surveyPoint}
+		WHERE 
+			survey_code = #{surveyCode}
+	</update>
+	
+	<!-- 설문지 삭제 -->
+	<delete id="deleteSurvey"
+			parameterType="com.cafe24.iso159.survey.service.Survey">
+		DELETE FROM 
+			t_survey 
+		WHERE 
+			survey_code = #{surveyCode}
+	</delete>
+	
+	<!-- 설문지 질문 삭제 -->
+	<delete id="deleteSurveyList"
+		parameterType="com.cafe24.iso159.survey.service.SurveyList">
+		DELETE FROM 
+			t_survey_list 
+		WHERE 
+			survey_list_code = #{surveyListCode}
+	</delete>
 </mapper>

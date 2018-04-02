@@ -83,7 +83,7 @@ public class SurveyService {
 		return list;
 	}
 	
-	// 설문지 질문 조회
+	// 설문지 질문 리스트 조회
 	public List<SurveyList> listSurveyList(){
 		logger.debug("listSurveyList() 메소드 호출");
 		List<SurveyList> list = surveyDao.selectSurveyListList();
@@ -107,8 +107,28 @@ public class SurveyService {
 		return list;
 	}
 	
+	// 설문지 수정
+	public void ModifySurvey(Survey survey,String surveyCode) {
+		logger.debug("ModifySurvey() 메소드 호출 survey is {}", survey);
+		survey.setSurveyCode(surveyCode);
+		surveyDao.updateSurvey(survey);
+	}
+	// 설문지코드로 설문지 조회
+	public Survey listSurveyBySurveyCode(String surveyCode) {
+		logger.debug("listSurveyBySurveyCode() 메소드 호출 surveyCode is {}", surveyCode);
+		Survey survey = surveyDao.selectSurveyListBySurveyCode(surveyCode);
+		return survey;
+	}
 	
+	// 설문지 삭제 
+	public void removeSurvey(String surveyCode) {
+		logger.debug("removeSurvey() 메소드 호출 surveyCode is {}", surveyCode);
+		surveyDao.deleteSurvey(surveyCode);
+	}
 	
-	
-	
+	// 설문지 질문 삭제
+	public void removeSurveyList(String surveyListCode) {
+		logger.debug("removeSurveyList() 메소드 호출 surveyListCode is {}", surveyListCode);
+		surveyDao.deleteSurveyList(surveyListCode);
+	}
 }

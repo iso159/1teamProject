@@ -39,28 +39,34 @@ public class AdoptController {
 	
 	// 입양신청 페이지요청
 	@RequestMapping(value="/adopt/adoptRequest", method = RequestMethod.GET)
-	public String addAdopt(HttpSession session) {
+	public String addAdopt(HttpSession session, Model model) {
 		logger.debug("addAdopt(HttpSession session) 메서드 호출");
 		// 세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
+		String mMemberId = (String) session.getAttribute("loginId");
+		model.addAttribute("mMemberId",mMemberId);
+		logger.debug("addAdopt(HttpSession session) 메서드 호출 mMemberId is {}", mMemberId);
 		return "/adopt/adoptRequest";
 	}
 		
 	// 입양신청 페이지 
 	@RequestMapping(value="/adopt/adoptRequest", method = RequestMethod.POST)
-	public String addAdopt(HttpSession session, AdoptCommand adoptCommand,
+	public String addAdopt(HttpSession session, AdoptCommand adoptCommand, Model model,
 							@RequestParam(value="file") MultipartFile ckfile) {
 		logger.debug("addAdopt() 메서드 호출 adoptCommand is {}", adoptCommand);
 		// 세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
+		//세션에 저장된 Id값을 adoptCommand에 담음
+		String mMemberId = (String) session.getAttribute("loginId");
+		adoptCommand.setmMemberId(mMemberId);
+		model.addAttribute("mMemberId",mMemberId);
 		// resource 폴더경로
 		String path = session.getServletContext().getRealPath("/");
 		path += "resources/adoptUpload/";
-				
 		logger.debug("addAdopt() 메서드 path is {}",path);
 		
 		adoptService.addAdopt(adoptCommand, path, ckfile);
@@ -109,8 +115,8 @@ public class AdoptController {
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
-		
-		List<SurveyList> list = surveyService.listSurveyListCounsel();
+		String surveyCode = "survey_code_1";
+		List<SurveyList> list = surveyService.listSurveyListBySurveyCode(surveyCode);
 		logger.debug("list is {}", list);
 		model.addAttribute("list", list);
 		model.addAttribute("adoptRequestCode",adoptRequestCode);

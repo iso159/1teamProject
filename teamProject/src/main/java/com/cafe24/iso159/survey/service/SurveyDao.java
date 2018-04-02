@@ -43,16 +43,26 @@ public class SurveyDao {
 		logger.debug("selectSurveyList() 메서드 호출");
 		return sqlSessionTemplate.selectList(nameSpace + "selectSurveyList");
 	}
+	// 설문지 수정
+	public void updateSurvey(Survey survey) {
+		logger.debug("updateSurvey() 메서드 호출 survey is {}", survey);
+		sqlSessionTemplate.selectOne(nameSpace + "updateSurvey", survey);
+	}
 	
 	// 설문지코드로 질문조회
-	public List<SurveyList> selectSurveyListListBySurveyCode(String SurveyCode){
+	public List<SurveyList> selectSurveyListListBySurveyCode(String surveyCode){
 		logger.debug("selectSurveyListListBySurveyCode() 메서드 호출");
-		return sqlSessionTemplate.selectList(nameSpace + "selectSurveyListListBySurveyCode", SurveyCode);
+		return sqlSessionTemplate.selectList(nameSpace + "selectSurveyListListBySurveyCode", surveyCode);
 	}
 	// 설문지 질문 조회
 	public List<SurveyList> selectSurveyListList(){
 		logger.debug("selectSurveyListList() 메서드 호출");
 		return sqlSessionTemplate.selectList(nameSpace + "selectSurveyListList");
+	}
+	// 설문지코드로 설문지 조회
+	public Survey selectSurveyListBySurveyCode(String surveyCode) {
+		logger.debug("selectSurveyListBySurveyCode() 메서드 호출");
+		return sqlSessionTemplate.selectOne(nameSpace + "selectSurveyListBySurveyCode", surveyCode);
 	}
 	
 	// 상담질문조회
@@ -61,5 +71,15 @@ public class SurveyDao {
 		List<SurveyList> list = sqlSessionTemplate.selectList(nameSpace + "selectSurveyCounselList");
 		logger.debug("list is {}", list);
 		return list;
+	}
+	// 설문지 삭제
+	public void deleteSurvey(String surveyCode) {
+		logger.debug("deleteSurvey() 메서드 호출 surveyCode is {}",surveyCode);
+		sqlSessionTemplate.delete(nameSpace + "deleteSurvey", surveyCode);
+	}
+	// 설문지 질문 삭제
+	public void deleteSurveyList(String surveyListCode) {
+		logger.debug("deleteSurveyList() 메서드 호출 surveyListCode is {}",surveyListCode);
+		sqlSessionTemplate.delete(nameSpace + "deleteSurveyList", surveyListCode);
 	}
 }

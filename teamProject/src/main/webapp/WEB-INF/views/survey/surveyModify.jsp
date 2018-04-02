@@ -28,40 +28,12 @@
 	  <div data-layout="_r">
 	    <div>
 	    <!-- 내용 입력 부분 -->
-		<h2>설문지 리스트</h2>
-		<table border="1">
-			<thead>
-				<tr>
-					<th>설문지코드</th>
-					<th>관리자아이디</th>
-					<th>설문지이름</th>
-					<th>설문지포인트</th>
-					<th>등록날짜</th>
-					<th>수정</th>
-					<th>삭제</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="survey" items="${list}">
-				<tr>
-					<td>${survey.surveyCode}</td>
-					<td>${survey.mAdminId}</td>
-					<td>
-						<a href="${pageContext.request.contextPath}/survey/surveyQuestionAdd?surveyCode=${survey.surveyCode}">${survey.surveyName}</a>
-					</td>
-					<td>${survey.surveyPoint}</td>
-					<td>${survey.surveyEnrollDate}</td>
-					<td>
-						<a href="${pageContext.request.contextPath}/survey/surveyModify?surveyCode=${survey.surveyCode}">수정</a>
-					</td>
-					<td>
-						<a href="${pageContext.request.contextPath}/survey/surveyDelete?surveyCode=${survey.surveyCode}">삭제</a>
-					</td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-			<a href="${pageContext.request.contextPath}/"><button type="button" class="btn warning">홈으로</button></a>
+		<h2>설문지 수정 화면</h2>
+			<form  action="${pageContext.request.contextPath}/survey/surveyModify?surveyCode=${survey.surveyCode}" method="post">
+				설문지이름 <input type="text" id="surveyName" name="surveyName" value="${survey.surveyName}"><br>
+				포인트 <input type="text" id="surveyPoint" name="surveyPoint" value="${survey.surveyPoint}"><hr>
+				<button type="submit" id="surveyBtn" class="btn btn-info">설문지수정완료</button>
+			</form>
  		 <!-- 내용 입력 부분 끝 -->
 		</div>
 	  </div>

@@ -42,22 +42,21 @@
 	<!-- 메인내용 시작 : Text | Text -->
 	<section>
 	  <div data-layout="_r">
-	    <div data-layout="ch-half">
+	    <div>
 	    <!-- 내용 입력 부분 -->
 		<h2>상담내용입력</h2>
-		<h5>상담내용</h5>
 		<c:set var="aRC" value="${adoptRequestCode}"/>
 		<form id="addForm" action="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${adoptRequestCode}" method="post">
 			<c:forEach var="surveyQuestion" items="${list}">
 					<tr>
-						<td><input 	type="text" cols="100" size="200" 
+						<td><input 	type="textarea" cols="1000" size="5000"
 									style="background-color:transparent;border:0"
 									value="<br>${surveyQuestion.surveyListQuestion}<br>"
 									id="adoptRequestAdviceContents"
 									name="adoptRequestAdviceContents" readonly>
 						</td><br>
 						<td>
-							<input	type="textarea" cols="100" size="100"
+							<input	type="textarea" cols="1000" size="5000"
 									id="adoptRequestAdviceContents"
 									name="adoptRequestAdviceContents">
 						</td><br>

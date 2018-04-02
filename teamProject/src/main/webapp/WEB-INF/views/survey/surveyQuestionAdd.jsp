@@ -36,7 +36,7 @@
 	<!-- 메인내용 시작 : Text | Text -->
 	<section>
 	  <div data-layout="_r">
-	    <div data-layout="ch-half">
+	    <div>
 	    <!-- 내용 입력 부분 -->
 		<h2>설문지 질문 등록</h2>
 		<c:set var="surveyCode" value="${surveyCode}"/>
@@ -63,6 +63,7 @@
 						<th>설문지코드</th>
 						<th>질문 내용</th>
 						<th>등록날짜</th>
+						<th>삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -72,6 +73,9 @@
 						<td>${surveyList.surveyListQuestion}</td>
 						<td>
 							${surveyList.surveyListDate}
+						</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/survey/surveyQuestionDelete?surveyListCode=${surveyList.surveyListCode}&surveyCode=${surveyList.surveyCode}">삭제</a>
 						</td>
 						
 					</tr>

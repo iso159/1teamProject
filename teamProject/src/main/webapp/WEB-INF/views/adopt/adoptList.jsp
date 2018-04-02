@@ -15,9 +15,12 @@
 <script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
 <script>
     $(document).ready(function(){
-        $('#adoptCheck').click(function(){
-        	var selectValue = document.getElementById('selectBox').value;
-        	$('#adoptCheckBtn').submit();
+        $('#counsel').click(function(){
+        	if($("#adoptRequestAdviceDate").value == null){
+        		alert("상담을 하지않았습니다.상담먼저해주세요");
+        		//팝업창띄우고 현재페이지 유지
+        		location.reload();
+        	}
         });
     });
 </script>
@@ -70,9 +73,9 @@
 					<td>
 						<a href="${pageContext.request.contextPath}/adopt/adoptFileCheck?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}">파일확인</a>
 					</td>
-					<td>${aR.adoptRequest.adoptRequestAdviceDate}</td>
+					<td><input id="adoptRequestAdviceDate" value="${aR.adoptRequest.adoptRequestAdviceDate}"></td>
 					<td>
-						<a href="${pageContext.request.contextPath}/adopt/adoptCounselList?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}&animalCode=${aR.adoptRequest.animalCode}">상담내용</a>
+						<a id="counsel" href="${pageContext.request.contextPath}/adopt/adoptCounselList?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}&animalCode=${aR.adoptRequest.animalCode}">상담내용</a>
 					</td>
 					<td>${aR.adoptRequest.adoptDecideDate}</td>
 					<td>
