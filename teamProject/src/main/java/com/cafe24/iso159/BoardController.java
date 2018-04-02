@@ -2,6 +2,8 @@ package com.cafe24.iso159;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,10 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	//게시판 글 등록 페이지로 이동
-	
+	@RequestMapping(value="/board/boardAdd", method=RequestMethod.GET)
+	public String boardAdd(HttpSession session) {
+		return "board/boardAdd";
+	}
 	//게시판 글 등록
 	
 	//게시판리스트

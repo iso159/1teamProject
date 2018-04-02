@@ -42,7 +42,9 @@
 		</tr>
 		</c:forEach>
 	</tbody>
-</table>
+	</table>
+	<a href="${pageContext.request.contextPath}/board/boardAdd">글등록</a><br>
+	<a href="${pageContext.request.contextPath}/"><button type="button" class="btn btn-success">홈으로</button></a>
 <!-- 내용 입력 부분 끝 -->
 		</div>
 	  </div>
