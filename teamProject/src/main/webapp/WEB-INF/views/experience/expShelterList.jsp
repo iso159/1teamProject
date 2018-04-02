@@ -16,27 +16,50 @@
 	<title></title>
 </head>
 <body>
-	<table>
-		<thead>
-			<tr>
-			<td>회원 아이디</td>
-			<td>확인자 아이디</td>
-			<td>체험 상태</td>
-			<td>체험 신청 날짜</td>
-			<td>상세정보</td>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="e" items="${exp}">
-			<tr>
-			<td>${e.mExpId}</td>
-			<td>${e.mShelterId}</td>
-			<td>${e.osName}</td>
-			<td>${e.expReserveRequestDate}</td>
-			<td><a href="${pageContext.request.contextPath}/experience/expShelterInfo?expCode=${e.expCode}">상세정보</a></td>
-			</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	<!-- top 부분 시작-->
+	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
+	<!-- top 부분 끝-->
+	<!-- 메인 화면  -->
+	<!-- 메인 화면 내용 부분 -->
+	<div class= "container" >
+		<!-- 내용 입력 부분 -->
+		<!-- 메인내용 시작 : Text | Text -->
+		<section>
+		<div data-layout="_r">
+			<div data-layout="ch-half">
+				<table>
+					<thead>
+						<tr>
+						<td>회원 아이디</td>
+						<td>확인자 아이디</td>
+						<td>체험 상태</td>
+						<td>체험 신청 날짜</td>
+						<td>상세정보</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="e" items="${exp}">
+						<tr>
+						<td>${e.mExpId}</td>
+						<td>${e.mShelterId}</td>
+						<td>${e.osName}</td>
+						<td>${e.expReserveRequestDate}</td>
+						<td><a href="${pageContext.request.contextPath}/experience/expShelterInfo?expCode=${e.expCode}">상세정보</a></td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		</section>
+		<!-- 메인내용 끝 : Text | Text -->
+	
+		<!-- 내용 입력 부분 끝 -->
+	</div>
+	<!-- 메인 화면 내용 부분 끝 -->
+	<!-- 메인화면 끝 -->
+	<!-- foot 부분 시작 -->
+	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
+	<!-- foot 부분 끝 -->
 </body>
 </html>

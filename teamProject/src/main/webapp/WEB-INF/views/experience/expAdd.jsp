@@ -13,9 +13,6 @@
 	<script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
 	
 	<link rel="stylesheet"	href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 <script>
 	$(document).ready(function() {
 		$.datepicker.regional['ko'] = {
@@ -55,6 +52,7 @@
 				$('#expPeriodLevel').val('2');
 				$('#sdate').datepicker("option", "onClose", function (selectedDate) {
 					let date2 = $('#sdate').datepicker('getDate');
+					console.log(date2 + "date2");
 					let EndDate = new Date();
 					EndDate.setDate(date2.getDate() + 1);
 					let d = EndDate.getDate();
@@ -116,25 +114,50 @@
 <title></title>
 </head>
 <body>
-	<h1>추가</h1>
-	<form id="expadd" name="expadd" action="${pageContext.request.contextPath}/experience/expAdd" method="post">
-	<input type="hidden" name="animalCode" value="${animalCode}">
-	<input type="hidden" name="blCode" value="${blCode}">
-	<div>
-		<select name="expPeriodCode" id="expPeriodCode">
-			<option>---기간 및 가격---</option>
-			<c:forEach var="e" items="${addAttribute}">
-				<option value="${e.expPeriodCode}">기간:${e.expPeriodPeriod},가격:${e.expPeriodCost}</option>
-			</c:forEach>
-		</select>
-	</div>
-	<input type="hidden" name=expJournalCount id="expPeriodJournalCount">
-	<input type="hidden" name="expCost" id="expPeriodCost">
-	체험 이유 : <input type="text" id="expPurpose" name="expPurpose">
+	<!-- top 부분 시작-->
+	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+	<!-- top 부분 끝-->
+	<!-- 메인 화면  -->
+	<!-- 메인 화면 내용 부분 -->
+	<div class= "container" >
+		<!-- 내용 입력 부분 -->
+		<!-- 메인내용 시작 : Text | Text -->
+		<section>
+		<div data-layout="_r">
+			<div data-layout="ch-half">
+				<h1>추가</h1>
+				<form id="expadd" name="expadd" action="${pageContext.request.contextPath}/experience/expAdd" method="post">
+				<input type="hidden" name="animalCode" value="${animalCode}">
+				<input type="hidden" name="blCode" value="${blCode}">
+				<div>
+					<select name="expPeriodCode" id="expPeriodCode">
+						<option>---기간 및 가격---</option>
+						<c:forEach var="e" items="${addAttribute}">
+							<option value="${e.expPeriodCode}">기간:${e.expPeriodPeriod},가격:${e.expPeriodCost}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<input type="hidden" name=expJournalCount id="expPeriodJournalCount">
+				<input type="hidden" name="expCost" id="expPeriodCost">
+				시작일 : <input type="text" name="expStartDate" id="sdate" size="10" maxlength="10" value="" /> ~
+				종료일 : <input type="text" name="expEndDate" id="edate" size="10" maxlength="10" value="" readonly="readonly"/><br>
+				체험 이유 : <input type="text" id="expPurpose" name="expPurpose">
+				<br><button type="button" id="insertForm">입력</button>
+				</form>
+			</div>
+		</div>
+		</section>
+		<!-- 메인내용 끝 : Text | Text -->
 	
-	시작일 : <input type="text" name="expStartDate" id="sdate" size="10" maxlength="10" value="" /> ~
-	종료일 : <input type="text" name="expEndDate" id="edate" size="10" maxlength="10" value="" readonly="readonly"/>
-	<br><button type="button" id="insertForm">입력</button>
-	</form>
+		<!-- 내용 입력 부분 끝 -->
+	</div>
+	<!-- 메인 화면 내용 부분 끝 -->
+	<!-- 메인화면 끝 -->
+	<!-- foot 부분 시작 -->
+	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
+	<!-- foot 부분 끝 -->
 </body>
 </html>
