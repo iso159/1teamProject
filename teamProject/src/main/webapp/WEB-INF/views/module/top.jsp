@@ -34,7 +34,7 @@
   		</a>
   	</div>
     <div data-layout="al16 de4" class="MOD_HEADER1_Details">
-      <p class="MOD_HEADER1_Phone">Phone: <a href="tel:#">01234 567 8910</a></p>
+      <p class="MOD_HEADER1_Phone">Phone: <a href="tel:#">010-1234-5678</a></p>
       <!-- Search -->
       <form name="Header1" action="" method="">
         <input id="MOD_HEADER1_Search" class="MOD_HEADER1_Search" type="search" placeholder="Search"></input>
@@ -68,7 +68,9 @@
       <ul class="AP_Menu_List" style="height: 0px; overflow: hidden;">
         <li>
         <!-- 회원 로그인 안하면 보이는 카테고리 START -->
+        
         <c:set var="login" value="${loginId}"></c:set>
+        <c:set var="right" value="${rightName}"></c:set>
          <a href="#" data-theme="_bgp">회원</a>
 		<c:if test="${empty login}">
          
@@ -80,7 +82,9 @@
 		<!-- 회원  로그인 하면 보이는 카테고리 START -->
          <c:if test="${!empty login}">
         <ul style="height: 0px; overflow: hidden">
+        <c:if test="${right eq '관리자'}">
             <li><a href="${pageContext.request.contextPath}/member/memberList" data-theme="_bgpd">회원리스트</a></li>
+            </c:if>
             <li><a href="${pageContext.request.contextPath}/member/memberModify" data-theme="_bgpd">회원수정</a></li>
             <li><a href="${pageContext.request.contextPath}/member/memberLogout" data-theme="_bgpd">로그아웃</a></li>
         </c:if>
@@ -204,6 +208,19 @@
           </ul>
         </li>
         </c:if>
+        
+		<li>
+          <a href="#" data-theme="_bgp">마이페이지</a>
+           <ul style="height: 0px; overflow: hidden">
+           <c:set var="right" value="${rightName}"></c:set>
+          	<c:if test="${right eq '체험자'}">
+	            <li>
+	              <a href="${pageContext.request.contextPath}/adopt/adoptRequest" data-theme="_bgpd">내 정보</a>
+	            </li>
+            </c:if>
+          </ul>
+        </li>
+        
     </nav>
   </div>
 </section>
