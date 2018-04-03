@@ -14,15 +14,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
 <script>
-    $(document).ready(function(){
-        $('#counsel').click(function(){
-        	if($("#adoptRequestAdviceDate").value == null){
-        		alert("상담을 하지않았습니다.상담먼저해주세요");
-        		//팝업창띄우고 현재페이지 유지
-        		location.reload();
-        	}
-        });
-    });
 </script>
 	<title>입양리스트</title>
 </head>
@@ -72,6 +63,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="aR" items="${list}">
+				<c:set var="date" value="${aR.adoptRequest.adoptRequestAdviceDate}"></c:set>
 				<tr>
 					<td>${aR.adoptRequest.adoptRequestCode}</td>
 					<td>
@@ -85,10 +77,12 @@
 					<td>
 						<a href="${pageContext.request.contextPath}/adopt/adoptFileCheck?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}">파일확인</a>
 					</td>
-					<td><input id="adoptRequestAdviceDate" value="${aR.adoptRequest.adoptRequestAdviceDate}"></td>
-					<td>
-						<a id="counsel" href="${pageContext.request.contextPath}/adopt/adoptCounselList?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}&animalCode=${aR.adoptRequest.animalCode}">상담내용</a>
-					</td>
+					<td>${aR.adoptRequest.adoptRequestAdviceDate}</td>
+						<td>
+							<c:if test="${!empty date}">
+								<a id="linkCurrentPage" href="${pageContext.request.contextPath}/adopt/adoptCounselList?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}&animalCode=${aR.adoptRequest.animalCode}">상담내용</a>
+							</c:if>
+						</td>
 					<td>${aR.adoptRequest.adoptDecideDate}</td>
 					<td>
 						<a href="${pageContext.request.contextPath}/adopt/adoptCancle?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}&animalCode=${aR.adoptRequest.animalCode}">입양취소</a>
