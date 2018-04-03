@@ -40,6 +40,18 @@
 	    <div>
 	    <!-- 내용 입력 부분 -->
 		<h2>입양 리스트</h2>
+		<!-- 조건검색 -->
+		<form id="selectForm" action="${pageContext.request.contextPath}/adopt/adoptlCategory" method="post">
+			<select name="OsCategory" id="selectOsCode">
+				<option value="os_adopt_4_1_1">입양신청</option>
+				<option value="os_adopt_4_1_2">입양신청완료</option>
+				<option value="os_adopt_4_1_5">상담진행중</option>
+				<option value="os_adopt_4_1_7">입양완료</option>
+				<option value="os_adopt_4_1_8">입양거절</option>
+			</select>
+			<button type="submit">검색</button>
+		</form>
+		<!-- 리스트 -->
 		<table border="1">
 			<thead>
 				<tr>

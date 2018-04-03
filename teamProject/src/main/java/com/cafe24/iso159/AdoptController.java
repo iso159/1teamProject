@@ -14,6 +14,7 @@ import com.cafe24.iso159.adopt.service.AdoptRequest;
 import com.cafe24.iso159.adopt.service.AdoptRequestAndOsCodeAnimal;
 import com.cafe24.iso159.adopt.service.AdoptRequestFile;
 import com.cafe24.iso159.adopt.service.AdoptService;
+import com.cafe24.iso159.animal.service.AnimalCommand;
 import com.cafe24.iso159.survey.service.SurveyList;
 import com.cafe24.iso159.survey.service.SurveyService;
 
@@ -39,15 +40,24 @@ public class AdoptController {
 	
 	// 입양신청 페이지요청
 	@RequestMapping(value="/adopt/adoptRequest", method = RequestMethod.GET)
-	public String addAdopt(HttpSession session, Model model) {
+	public String addAdopt(	HttpSession session, Model model, 
+							@RequestParam(value="animalCode") String animalCode,
+							@RequestParam(value="blCode") String blCode,
+							@RequestParam(value="mShelterId") String mShelterId) {
 		logger.debug("addAdopt(HttpSession session) 메서드 호출");
 		// 세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
+		logger.debug("addAdopt() 메서드 호출 animalCode is {}",animalCode);
+		logger.debug("addAdopt() 메서드 호출 blCode is {}",blCode);
+		logger.debug("addAdopt() 메서드 호출 mShelterId is {}",mShelterId);
 		String mMemberId = (String) session.getAttribute("loginId");
 		model.addAttribute("mMemberId",mMemberId);
-		logger.debug("addAdopt(HttpSession session) 메서드 호출 mMemberId is {}", mMemberId);
+		model.addAttribute("animalCode",animalCode);
+		model.addAttribute("blCode",blCode);
+		model.addAttribute("mShelterId",mShelterId);
+		logger.debug("addAdopt() 메서드 호출 mMemberId is {}", mMemberId);
 		return "/adopt/adoptRequest";
 	}
 		
@@ -189,6 +199,17 @@ public class AdoptController {
 		logger.debug("removeAdopt() 메소드 호출 animalCode is {}", animalCode);
 		adoptService.removeAdopt(adoptRequestCode, animalCode);
 		return "redirect:/adopt/adoptList";
+	}
+	
+	//입양신청 상태코드 조건검색
+	@RequestMapping(value="/adopt/adoptlCategory", method=RequestMethod.POST)
+	public String adoptCategory(Model model
+								,@RequestParam(value="OsCategory",required=false) String OsCategory) {
+		logger.debug("adoptCategory()메서드 OsCategory is {}", OsCategory);
+		List<AdoptCommand> list = adoptService.CategoryAdopt(OsCategory);
+		logger.debug("옵션선택 list is {}", list);
+		model.addAttribute("list", list);
+		return "/adopt/adoptList";
 	}
 	
 	// 입양리스트

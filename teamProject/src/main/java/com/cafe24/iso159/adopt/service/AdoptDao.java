@@ -1,6 +1,7 @@
 package com.cafe24.iso159.adopt.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -44,6 +45,14 @@ public class AdoptDao {
 		logger.debug("List<AdoptRequestAndOsCodeAnimal> selectAdoptRequest() 메서드 호출");
 		List<AdoptRequestAndOsCodeAnimal> list = sqlSessionTemplate.selectList(nameSpace + "selectAdoptRequest");
 		logger.debug("List<AdoptRequestAndOsCodeAnimal> selectAdoptRequest() list.size() is {}", list.size());
+		return list;
+	}
+	
+	// 입양신청 조회
+	public List<AdoptCommand> selectAdoptCategory(Map map){
+		logger.debug("List<AdoptCommand> selectAdoptCategory() 메서드 호출 map is {}",map);
+		List<AdoptCommand> list = sqlSessionTemplate.selectList(nameSpace + "selectAdoptCategory", map);
+		logger.debug("List<AdoptCommand> selectAdoptCategory() 메서드 호출 list is {}",list);
 		return list;
 	}
 	

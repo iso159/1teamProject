@@ -54,7 +54,9 @@
 				    </tr>
 				</table>
 				<button type="button" id="surveyQBtn">설문지 질문등록</button>
+				<a href="${pageContext.request.contextPath}/survey/surveyList"><button type="button" class="btn info">설문지조회</button></a>
 			</form>
+			
 	
 		<h2>등록된 질문 리스트 </h2>	
 			<table border="1">

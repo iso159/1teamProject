@@ -148,6 +148,16 @@ public class AdoptService {
 			adoptDao.updateOsCodeAdoptRequest(adoptRequestCode);
 		}
 		
+	// 입양상태코드 검색
+		public List<AdoptCommand> CategoryAdopt(String OsCategory){
+			logger.debug("CategoryAdopt() 메소드 호출 OsCategory is {}",OsCategory);
+			Map map = new HashMap();
+			map.put("OsCategory", OsCategory);
+			List<AdoptCommand> list = adoptDao.selectAdoptCategory(map);
+			logger.debug("CategoryAdopt()메서드 list is {}", list);
+			return list;
+		}
+		
 	// 상담내용확인
 		public void ModifyOsCodeAdoptCounsel(String adoptRequestCode) {
 			logger.debug("ModifyOsCodeAdoptCounsel() 메소드 호출");

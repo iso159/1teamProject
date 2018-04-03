@@ -31,7 +31,7 @@
 		<h2>설문지 등록 </h2>
 			<form  id="formSurveySubmit" action="${pageContext.request.contextPath}/survey/surveyAdd" method="post">
 				설문지이름 <input type="text" id="surveyName" name="surveyName"><br>
-				포인트 <input type="text" id="surveyPoint" name="surveyPoint"><hr>
+				포인트	<input type="text" id="surveyPoint" name="surveyPoint"><hr>
 				<button type="submit" id="surveyBtn" class="btn btn-info">설문지 등록</button>
 			</form>
 			

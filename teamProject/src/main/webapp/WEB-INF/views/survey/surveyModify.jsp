@@ -34,6 +34,7 @@
 				포인트 <input type="text" id="surveyPoint" name="surveyPoint" value="${survey.surveyPoint}"><hr>
 				<button type="submit" id="surveyBtn" class="btn btn-info">설문지수정완료</button>
 			</form>
+			<a href="${pageContext.request.contextPath}/survey/surveyList"><button type="button" class="btn info">설문지조회</button></a>
  		 <!-- 내용 입력 부분 끝 -->
 		</div>
 	  </div>
