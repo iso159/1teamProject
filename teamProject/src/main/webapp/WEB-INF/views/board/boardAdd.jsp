@@ -20,7 +20,7 @@
 	    <div>
 	    <!-- 내용 입력 부분 -->
 	<h2>게시판 글 등록</h2>
-	<a href="${pageContext.request.contextPath}/board/boardGroupAdd">글종류 추가하기</a>
+	<a href="${pageContext.request.contextPath}/board/boardGroupList">글종류 추가하기</a>
 	<form id="boardContentAdd" action="${pageContext.request.contextPath}/board/boardList" method="post">
 	글종류:<select name="boardCode">
 			<option value="board_code_01">체험후기</option>
