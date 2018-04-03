@@ -215,7 +215,7 @@
           <c:set var="right" value="${rightName}"></c:set>
           <c:if test="${right eq '회원'}">
             <li>
-              <a href="${pageContext.request.contextPath}/#" data-theme="_bgpd">보호소 진료 예약</a>
+              <a href="${pageContext.request.contextPath}/jindan/jindanShelterList" data-theme="_bgpd">보호소 진료 예약</a>
             </li>
           </c:if>
           </ul>
