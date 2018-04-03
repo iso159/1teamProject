@@ -28,7 +28,7 @@
 		<result column="os_name" property="osCodeLicenseStatus"/>
 		<result column="bl_shelter_name" property="blShelterName"/>
 		<result column="bl_shelter_number" property="blShelterNumber"/>
-		<result column="bl_shelter_postcode" property="blShelterPostcode"/>
+		<result column="bl_shelter_reg_number" property="blShelterRegNumber"/>
 		<result column="bl_shelter_address" property="blShelterAddress"/>
 		<result column="bl_shelter_deny_reason" property="blShelterDenyReason"/>
 		<result column="bl_shelter_date" property="blShelterDate"/>
@@ -113,7 +113,7 @@
 			bl_code
 			, bl_shelter_name
 			, bl_shelter_number
-			, bl_shelter_postcode
+			, bl_shelter_reg_number
 			, bl_shelter_address
 		FROM
 			t_business_license
@@ -130,7 +130,8 @@
 		UPDATE
 			t_member
 		SET
-			m_right_code=#{mRightCode}
+			bl_code=#{blCode}
+			, m_right_code=#{mRightCode}
 		WHERE
 			m_id=#{mMemberId}
 	</update>
@@ -179,7 +180,7 @@
 			, os.os_name
 			, bl_shelter_name
 			, bl_shelter_number
-			, bl_shelter_postcode
+			, bl_shelter_reg_number
 			, bl_shelter_address
 			, bl_shelter_date
 		FROM t_business_license bl
@@ -197,7 +198,7 @@
 			, os.os_name
 			, bl_shelter_name
 			, bl_shelter_number
-			, bl_shelter_postcode
+			, bl_shelter_reg_number
 			, bl_shelter_address
 			, bl_shelter_deny_reason
 			, bl_shelter_date
@@ -214,9 +215,9 @@
 	<!-- 보호소 대표 신청 쿼리문 -->
 	<insert id="insertBusinessLicense" parameterType="com.cafe24.iso159.shelter.service.BusinessLicense">
 		INSERT INTO 
-			t_business_license (bl_code, m_member_id, os_code_license_status, bl_shelter_name,bl_shelter_number, bl_shelter_postcode, bl_shelter_address, bl_shelter_date) 
+			t_business_license (bl_code, m_member_id, os_code_license_status, bl_shelter_name,bl_shelter_number, bl_shelter_reg_number, bl_shelter_address, bl_shelter_date) 
 		VALUES 
-			(#{blCode}, #{mMemberId}, #{osCodeLicenseStatus}, #{blShelterName}, #{blShelterNumber}, #{blShelterPostcode}, #{blShelterAddress}, now());
+			(#{blCode}, #{mMemberId}, #{osCodeLicenseStatus}, #{blShelterName}, #{blShelterNumber}, #{blShelterRegNumber}, #{blShelterAddress}, now());
 	</insert>
 		
 	<!-- t_overall_file 테이블의 of_code를 잘라서 가장 높은 숫자를 리턴 -->

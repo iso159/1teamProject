@@ -8,7 +8,7 @@ public class BusinessLicenseCommand {
 	private String mMemberId;
 	private String blShelterName;
 	private String blShelterNumber;
-	private String blShelterPostcode;
+	private String blShelterRegNumber;
 	private String blShelterAddress;
 	private List<MultipartFile> multipartFile;
 	public String getmMemberId() {
@@ -29,11 +29,11 @@ public class BusinessLicenseCommand {
 	public void setBlShelterNumber(String blShelterNumber) {
 		this.blShelterNumber = blShelterNumber;
 	}
-	public String getBlShelterPostcode() {
-		return blShelterPostcode;
+	public String getBlShelterRegNumber() {
+		return blShelterRegNumber;
 	}
-	public void setBlShelterPostcode(String blShelterPostcode) {
-		this.blShelterPostcode = blShelterPostcode;
+	public void setBlShelterRegNumber(String blShelterRegNumber) {
+		this.blShelterRegNumber = blShelterRegNumber;
 	}
 	public String getBlShelterAddress() {
 		return blShelterAddress;
@@ -50,9 +50,7 @@ public class BusinessLicenseCommand {
 	@Override
 	public String toString() {
 		return "BusinessLicenseCommand [mMemberId=" + mMemberId + ", blShelterName=" + blShelterName
-				+ ", blShelterNumber=" + blShelterNumber + ", blShelterPostcode=" + blShelterPostcode
+				+ ", blShelterNumber=" + blShelterNumber + ", blShelterRegNumber=" + blShelterRegNumber
 				+ ", blShelterAddress=" + blShelterAddress + ", multipartFile=" + multipartFile + "]";
-	}
-
-	
+	}	
 }

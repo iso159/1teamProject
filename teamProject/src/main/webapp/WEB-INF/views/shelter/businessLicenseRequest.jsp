@@ -10,11 +10,11 @@
 			// 폼의 값들에 공백을 지움
 			let shelterName = $.trim($('#shelterName').val());
 			let shelterNum = $.trim($('#shelterNum').val());
-			let shelterPost = $.trim($('#shelterPost').val());
+			let shelterRegNumber = $.trim($('#shelterRegNumber').val());
 			let shelterAddr = $.trim($('#shelterAddr').val());
 			
 			// 공백 유효성 검사
-			if(shelterName==="" | shelterNum==="" | shelterPost==="" | shelterAddr===""){
+			if(shelterName==="" | shelterNum==="" | shelterRegNumber==="" | shelterAddr===""){
 				alert("공백은 입력할 수 없습니다.");
 			}else{
 				$('#businessLicenseRequestForm').submit();
@@ -52,8 +52,8 @@
 				<td><input type="text" name="blShelterNumber" id="shelterNum"></td>
 			</tr>
 			<tr>
-				<td>보호소 우편번호</td>
-				<td><input type="text" name="blShelterPostcode" id="shelterPost"></td>
+				<td>보호소 등록 번호</td>
+				<td><input type="text" name="blShelterRegNumber" id="shelterRegNumber"></td>
 			</tr>
 			<tr>
 				<td>보호소 주소</td>

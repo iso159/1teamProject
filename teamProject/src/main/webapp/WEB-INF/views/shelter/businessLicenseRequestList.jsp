@@ -26,7 +26,6 @@
 	<!-- 메인내용 시작 : Text | Text -->
 	<section>
 	  <div data-layout="_r">
-	    <div data-layout="ch-half">
 	    <!-- 내용 입력 부분 -->
 	<div>
 		<h1>보호소 대표 신청 리스트</h1>
@@ -40,7 +39,7 @@
 					<th>신청 상태</th>
 					<th>보호소 명</th>
 					<th>보호소 전화번호</th>
-					<th>보호소 우편번호</th>
+					<th>보호소 등록번호</th>
 					<th>보호소 주소</th>
 					<th>보호소 대표 신청 날짜</th>
 					<th>보호소 등록증 확인</th>
@@ -58,18 +57,18 @@
 						<td>${bl.osCodeLicenseStatus}</td>
 						<td>${bl.blShelterName}</td>
 						<td>${bl.blShelterNumber}</td>
-						<td>${bl.blShelterPostcode}</td>
+						<td>${bl.blShelterRegNumber}</td>
 						<td>${bl.blShelterAddress}</td>
 						<td>${bl.blShelterDate}</td>
 						<td><a href="${pageContext.request.contextPath}/shelter/fileList?blCode=${bl.blCode}">보호소 등록증 확인</a></td>
 						<td>${bl.blShelterDenyReason}</td>
 						<td>
-							<c:if test="${osCode eq '신청중' or osCode eq '신청확인'}">
+							<c:if test="${osCode eq '신청확인'}">
 								<a href="${pageContext.request.contextPath}/shelter/businessLicenseSet?blCode=${bl.blCode}&mMemberId=${bl.mMemberId}">등록 결정</a>
 							</c:if>
 						</td>
 						<td>
-							<c:if test="${osCode eq '신청중' or osCode eq '신청확인'}">
+							<c:if test="${osCode eq '신청확인'}">
 								<a href="${pageContext.request.contextPath}/shelter/businessLicenseDeny?blCode=${bl.blCode}">등록 거부</a>
 							</c:if>
 						</td>						
@@ -79,7 +78,6 @@
 		</table>
 	</div>
   <!-- 내용 입력 부분 끝 -->
-		</div>
 	  </div>
 	</section>
 	<!-- 메인내용 끝 : Text | Text -->

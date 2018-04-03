@@ -39,7 +39,7 @@
 					<th>신청 상태</th>
 					<th>보호소 명</th>
 					<th>보호소 전화번호</th>
-					<th>보호소 우편번호</th>
+					<th>보호소 등록번호</th>
 					<th>보호소 주소</th>
 					<th>보호소 대표 신청 날짜</th>
 					<th>거절 사유</th>
@@ -52,7 +52,7 @@
 						<td>${bl.osCodeLicenseStatus}</td>
 						<td>${bl.blShelterName}</td>
 						<td>${bl.blShelterNumber}</td>
-						<td>${bl.blShelterPostcode}</td>
+						<td>${bl.blShelterRegNumber}</td>
 						<td>${bl.blShelterAddress}</td>
 						<td>${bl.blShelterDate}</td>
 						<td>${bl.blShelterDenyReason}</td>

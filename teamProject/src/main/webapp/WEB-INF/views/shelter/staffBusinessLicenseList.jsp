@@ -38,7 +38,7 @@
 					<th>보호소 코드</th>
 					<th>보호소 명</th>
 					<th>보호소 전화번호</th>
-					<th>보호소 우편번호</th>
+					<th>보호소 등록번호</th>
 					<th>보호소 주소</th>
 					<th>보호소 직원 신청</th>
 				</tr>
@@ -49,7 +49,7 @@
 						<td>${bl.blCode}</td>
 						<td>${bl.blShelterName}</td>
 						<td>${bl.blShelterNumber}</td>
-						<td>${bl.blShelterPostcode}</td>
+						<td>${bl.blShelterRegNumber}</td>
 						<td>${bl.blShelterAddress}</td>
 						<td>
 							<a href="${pageContext.request.contextPath}/shelter/requestShelterStaff?blCode=${bl.blCode}">

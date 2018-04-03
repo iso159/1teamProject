@@ -158,6 +158,7 @@ public class ShelterService {
 		// 권한 관련 변수 매핑
 		rightMap.put("mMemberId", mMemberId);
 		rightMap.put("mRightCode", mRightCode);
+		rightMap.put("blCode", blCode);
 		logger.debug("modifyShelterRight(String blCode, String mMemberId) 메서드 rightMap is {}",rightMap);
 		Map<String,Object> osCodeMap = new HashMap<String,Object>();
 		// 상태코드 관련 변수 매핑
@@ -293,13 +294,13 @@ public class ShelterService {
 		String mMemberId = businessLicenseCommand.getmMemberId();
 		String blShelterName = businessLicenseCommand.getBlShelterName();
 		String blShelterNumber = businessLicenseCommand.getBlShelterNumber();
-		String blShelterPostcode = businessLicenseCommand.getBlShelterPostcode();
+		String blShelterRegNumber = businessLicenseCommand.getBlShelterRegNumber();
 		String blShelterAddress = businessLicenseCommand.getBlShelterAddress();
 		
 		businessLicense.setmMemberId(mMemberId);
 		businessLicense.setBlShelterName(blShelterName);
 		businessLicense.setBlShelterNumber(blShelterNumber);
-		businessLicense.setBlShelterPostcode(blShelterPostcode);
+		businessLicense.setBlShelterRegNumber(blShelterRegNumber);
 		businessLicense.setBlShelterAddress(blShelterAddress);
 		// 초기 상태 세팅
 		businessLicense.setOsCodeLicenseStatus(osCodeLicenseStatus);

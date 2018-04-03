@@ -6,7 +6,7 @@ public class BusinessLicense {
 	private String osCodeLicenseStatus;
 	private String blShelterName;
 	private String blShelterNumber;
-	private String blShelterPostcode;
+	private String blShelterRegNumber;
 	private String blShelterAddress;
 	private String blShelterDenyReason;
 	private String blShelterDate;
@@ -40,11 +40,11 @@ public class BusinessLicense {
 	public void setBlShelterNumber(String blShelterNumber) {
 		this.blShelterNumber = blShelterNumber;
 	}
-	public String getBlShelterPostcode() {
-		return blShelterPostcode;
+	public String getBlShelterRegNumber() {
+		return blShelterRegNumber;
 	}
-	public void setBlShelterPostcode(String blShelterPostcode) {
-		this.blShelterPostcode = blShelterPostcode;
+	public void setBlShelterRegNumber(String blShelterRegNumber) {
+		this.blShelterRegNumber = blShelterRegNumber;
 	}
 	public String getBlShelterAddress() {
 		return blShelterAddress;
@@ -68,7 +68,7 @@ public class BusinessLicense {
 	public String toString() {
 		return "BusinessLicense [blCode=" + blCode + ", mMemberId=" + mMemberId + ", osCodeLicenseStatus="
 				+ osCodeLicenseStatus + ", blShelterName=" + blShelterName + ", blShelterNumber=" + blShelterNumber
-				+ ", blShelterPostcode=" + blShelterPostcode + ", blShelterAddress=" + blShelterAddress
+				+ ", blShelterRegNumber=" + blShelterRegNumber + ", blShelterAddress=" + blShelterAddress
 				+ ", blShelterDenyReason=" + blShelterDenyReason + ", blShelterDate=" + blShelterDate + "]";
 	}
 	
