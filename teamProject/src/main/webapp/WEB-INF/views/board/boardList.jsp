@@ -24,7 +24,7 @@
 <table>
 	<thead>
 	<tr>
-	<!-- <td>번호</td> -->
+	<td>번호</td>
 	<td>분류</td>
 	<td>글제목</td>
 	<td>작성자</td>
@@ -34,7 +34,7 @@
 	<tbody>
 		<c:forEach var="i" items="${boardContent}">
 		<tr>
-		
+		<td>${i.boardNumber}</td>
 		<td>${i.boardCode}</td>
 		<td>${i.boardContentTitle}</td>
 		<td>${i.mMemberId}</td>
@@ -45,7 +45,7 @@
 	</table>
 	<a href="${pageContext.request.contextPath}/board/boardAdd">글등록</a><br>
 	<a href="${pageContext.request.contextPath}/"><button type="button" class="btn btn-success">홈으로</button></a>
-<!-- 내용 입력 부분 끝 -->
+	<!-- 내용 입력 부분 끝 -->
 		</div>
 	  </div>
 	</section>

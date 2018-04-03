@@ -3,11 +3,35 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.board.service.BoardMapper">
+
+	<!-- 게시판 글 등록 -->
+	<insert id="insertBoard" parameterType="com.cafe24.iso159.board.service.BoardContent">
+		INSERT INTO
+			 t_board_content 
+			 (
+			 	board_content_code
+			 	, board_code
+			 	, m_member_id
+			 	, board_content_title
+			 	, board_content_content
+			 	, board_content_date
+ 			) 
+ 			VALUES 
+ 			(
+ 				#{boardContentCode}
+ 				, #{boardCode}
+ 				, #{mMemberId}
+ 				, #{boardContentTitle}
+ 				, #{boardContentContent}
+ 				, now()
+			)
+	</insert>
 	
 	<!-- 게시판 글 전체 조회 -->
 	<select id="selectBoardContent" resultType="com.cafe24.iso159.board.service.BoardContent">
 		SELECT 
-			board_content_code as boardContentCode
+			substring(board_content_code, 20) as boardNumber 
+			,board_content_code as boardContentCode
 			,board_code as boardCode
 			,m_member_id as mMemberId
 			,board_content_title as boardContentTitle
@@ -15,5 +39,15 @@
 			,board_content_date as boardContentDate
 		FROM 
 			t_board_content
+	</select>
+	
+	<!-- 게시판 글 총갯수 구하기 -->
+	<select id="boardCount" resultType="String">
+		SELECT COUNT(*) FROM t_board_content
+	</select>
+	
+	<!-- 게시판등록 max코드값 조회 쿼리문 -->
+	<select id="selectLastCode" resultType="String">
+		select max(CAST(substring(board_content_code, 20) AS DECIMAL)) as maxcol from t_board_content
 	</select>
 </mapper>

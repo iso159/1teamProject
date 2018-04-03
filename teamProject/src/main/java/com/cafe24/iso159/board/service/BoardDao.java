@@ -17,9 +17,15 @@ public class BoardDao {
 	
 	private final String nameSpace = "com.cafe24.iso159.board.service.BoardMapper.";
 	//게시판 글 등록
+	public int insertboardCount(BoardContent boardcontent) {
+		logger.debug("insertBoardCotent()메서드 boardcontent is {}", boardcontent);
+		return sqlSessionTemplate.insert(nameSpace+"insertBoard", boardcontent);
+	}
 	
-	//게시판 글 총 갯수 조회
-	
+	//max코드값 조회
+	public String selectLastCode() {
+		return sqlSessionTemplate.selectOne(nameSpace+"selectLastCode");
+	}
 	//게시판 리스트 조회
 	public List<BoardContent> selectBoardContent(){
 		logger.debug("selectBoardContent()메서드 호출");

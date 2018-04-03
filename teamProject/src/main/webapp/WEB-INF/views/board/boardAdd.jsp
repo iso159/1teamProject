@@ -25,9 +25,9 @@
 			<option value="board_code_01">체험후기</option>
 			<option value="board_code_02">입양후기</option>
 		</select><br>
-	글제목:<input type="text" id="boarContentTitle" name="boarContentTitle"><br>
+	글제목:<input type="text" id="boardContentTitle" name="boardContentTitle"><br>
 	글내용:<br>
-	<textarea rows="20" cols="50" id="boarContentContent" name="boarContentContent"></textarea><br>
+	<textarea rows="20" cols="50" id="boardContentContent" name="boardContentContent"></textarea><br>
 	<button id="addBtn" type="submit">등록</button>
 	</form>
 	<!-- 내용 입력 부분 끝 -->
