@@ -16,6 +16,16 @@ public class ShelterDao {
 	private static final Logger logger = LoggerFactory.getLogger(ShelterDao.class);
 	private final String nameSpace = "com.cafe24.iso159.shelter.service.ShelterMapper.";
 	
+	// 대표 보호소 정보 조회 쿼리문 selectOneBusinessLicense을 접근하는 DAO 메서드
+	public BusinessLicense selectOneBusinessLicense(String blCode) {
+		logger.debug("selectOneBusinessLicense(String blCode) 메서드 호출");
+		logger.debug("selectOneBusinessLicense(String blCode) 메서드 blCode is {}", blCode);
+		BusinessLicense businessLicense = sqlSessionTemplate.selectOne(nameSpace + "selectOneBusinessLicense", blCode);
+		logger.debug("selectOneBusinessLicense(String blCode) 메서드 businessLicense is {}", businessLicense);
+		logger.debug("selectOneBusinessLicense(String blCode) 메서드 끝");
+		return businessLicense;
+	}
+	
 	// 직원신청 상태코드가 수정되는 쿼리문 updateShelterStaffRequestOsCodeBySsrCode을 접근하는 DAO 메서드
 	public void updateShelterStaffRequestOsCodeBySsrCode(Map<String,Object> map) {
 		logger.debug("updateShelterStaffRequestOsCodeBySsrCode(Map<String,Object> map) 메서드 호출");

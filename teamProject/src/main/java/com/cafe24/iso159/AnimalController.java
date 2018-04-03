@@ -1,9 +1,17 @@
 package com.cafe24.iso159;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.net.URL;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.cxf.io.CachedOutputStream;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +24,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cafe24.iso159.animal.service.Animal;
 import com.cafe24.iso159.animal.service.AnimalCommand;
 import com.cafe24.iso159.animal.service.AnimalService;
+import com.cafe24.iso159.shelter.service.BusinessLicense;
+import com.cafe24.iso159.shelter.service.ShelterService;
 
 @Controller
 public class AnimalController {
 	
 	@Autowired
 	private AnimalService animalservice;
+	@Autowired
+	private ShelterService shelterService;
 	private static final Logger logger = LoggerFactory.getLogger(AnimalController.class);
 	
 	//동물등록 페이지로 이동
@@ -34,7 +46,7 @@ public class AnimalController {
 	}
 	
 	//동물등록
-	@RequestMapping(value="/animal/animalList", method=RequestMethod.POST)
+	@RequestMapping(value="/animal/animalAdd", method=RequestMethod.POST)
 	public String animalAdd(HttpSession session, Animal animal) {
 		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
@@ -111,5 +123,57 @@ public class AnimalController {
 		logger.debug("animalModify()메서드 animal is {}", animal);
 		animalservice.modifyAnimal(animal);
 		return "redirect:/animal/animalList";
+	}
+	
+	// 보호소 등록코드별 보호 유기동물리스트 api
+	@RequestMapping(value = "/animal/yugiAnimalList", method = RequestMethod.POST)
+	public void shelterAnimalList(HttpServletResponse response, HttpSession session) throws IOException {
+		logger.debug("shelterAnimalList(...) 메서드 호출");
+		String blCode = (String)session.getAttribute("loginBlCode");
+		if(blCode == null) {
+			return;
+		}
+		BusinessLicense businessLicense = shelterService.getOneBusinessLicense(blCode);
+		String careRegNo = businessLicense.getBlShelterRegNumber();
+		logger.debug("shelterAnimalList(...) 메서드 businessLicense is {}", businessLicense);
+		logger.debug("shelterAnimalList(...) 메서드 careRegNo is {}", careRegNo);
+		if(careRegNo==null) {
+			return;
+		}
+		response.setContentType("text/html; charset=utf-8");
+		String addr = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?ServiceKey=";
+		String serviceKey = "7s3CsUFyR%2F1QMd5tktqM%2BnUw9gAEPUtI0GIsuGWxEUOJHwZP9NVTLOoMOKmVtZH0SmDPuv5Gg78SA94B%2BLMQsQ%3D%3D";
+		String parameter = "";
+		
+		URL url = null;
+		CachedOutputStream bos = null;
+		InputStream in = null;
+		
+		
+		parameter = parameter + "&" + "upr_cd=6450000";
+		parameter = parameter + "&" + "org_cd=4640000";
+		parameter = parameter + "&" + "care_reg_no=" + careRegNo;
+		parameter = parameter + "&" + "upkind=417000";
+		parameter = parameter + "&" + "_type=json";
+		
+		addr = addr + serviceKey + parameter;
+		
+		url = new URL(addr);
+		in = url.openStream();
+		bos = new CachedOutputStream();
+		IOUtils.copy(in, bos);
+		in.close();
+		bos.close();
+		
+		String data = bos.getOut().toString();
+		
+		PrintWriter out = response.getWriter();
+		out.println(data);
+		logger.debug("data is {}", data);
+		logger.debug("addr is {}", addr);
+		JSONObject json = new JSONObject();
+		json.put("data", data);
+		
+		logger.debug("shelterAnimalList(...) 메서드 끝");
 	}
 }

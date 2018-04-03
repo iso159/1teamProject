@@ -89,25 +89,32 @@
             <li><a href="${pageContext.request.contextPath}/member/memberLogout" data-theme="_bgpd">로그아웃</a></li>
         </c:if>
         <!-- 회원 로그인 하면 보이는 카테고리 END -->
-      </ul>
+      	</ul>
          <li>
           <a href="#" data-theme="_bgp">보호소</a>
           <ul style="height: 0px; overflow: hidden">
           	<c:set var="right" value="${rightName}"></c:set>
           	<c:set var="level" value="${rightLevel}"></c:set>
-          	<c:if test="${right eq '체험자'}">
+          	<c:if test="${right eq '체험자' or right eq '보호소'}">
+          		<c:if test="${right eq '체험자'}">
 	            <li>
 	             	<a href="${pageContext.request.contextPath}/shelter/businessLicenseRequest" data-theme="_bgpd">보호소 대표 신청</a>
 	            </li>
-	          <li>
+	            </c:if>
+	            <c:if test="${right eq '체험자' or right eq '보호소'}">
+	          	<li>
 	             	<a href="${pageContext.request.contextPath}/businessLicenseListPersonal" data-theme="_bgpd">보호소 대표 신청 관리</a>
 	            </li>
+	            </c:if>
+	            <c:if test="${right eq '체험자'}">
 	            <li>
 	             	<a href="${pageContext.request.contextPath}/shelter/staffBusinessLicenseGet" data-theme="_bgpd">보호소 직원 신청</a>
 	            </li>
+	            </c:if>
 	            	<a href="${pageContext.request.contextPath}/shelter/requestShelterStaffPersonal" data-theme="_bgpd">보호소 직원 신청 관리</a>
             	</li>
-            </c:if>            
+            </c:if>
+                     
             <c:if test="${right eq '관리자'}">
 	            <li>
 	            	<a href="${pageContext.request.contextPath}/businessLicenseRequestList" data-theme="_bgpd">대표 보호소 신청 목록</a>
@@ -115,6 +122,9 @@
             </c:if>
             
             <c:if test="${right eq '보호소' and level eq '2'}">  
+            	<li>
+	             	<a href="${pageContext.request.contextPath}/businessLicenseListPersonal" data-theme="_bgpd">보호소 대표 신청 관리</a>
+	            </li>
 				<li>
 					<a href="${pageContext.request.contextPath}/shelter/requestShelterStaffList" data-theme="_bgpd">직원 신청 목록</a>
 				</li>

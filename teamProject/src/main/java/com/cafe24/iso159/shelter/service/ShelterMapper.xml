@@ -173,7 +173,7 @@
 	</select>
 	
 	<!-- 보호소 대표 신청 개인 조회 쿼리문 -->
-	<select id="selectOneBusinessLicense" parameterType="Integer" resultMap="BusinessLicenseMap">
+	<select id="selectOneBusinessLicense" parameterType="String" resultMap="BusinessLicenseMap">
 		SELECT 
 			bl_code
 			, m_member_id
@@ -186,8 +186,8 @@
 		FROM t_business_license bl
 		INNER JOIN t_overall_status os
 		ON bl.os_code_license_status = os.os_code
-		ORDER BY bl_shelter_date DESC
-		WHERE bl_code=#{blCode}
+		WHERE bl.bl_code=#{blCode}
+		ORDER BY bl_shelter_date DESC		
 	</select>
 	
 	<!-- 보호소 대표 신청 리스트 조회 쿼리문 -->

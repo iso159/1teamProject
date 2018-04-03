@@ -31,6 +31,16 @@ public class ShelterService {
 	private static final Logger logger = LoggerFactory.getLogger(ShelterService.class);
 	String osCodeLicenseStatus = null;
 	
+	// 대표 보호소 정보를 조회하는 쿼리문을 접근하는 selectOneBusinessLicense DAO 메서드 호출
+	public BusinessLicense getOneBusinessLicense(String blCode) {
+		logger.debug("getOneBusinessLicense(String blCode) 메서드 호출");
+		logger.debug("getOneBusinessLicense(String blCode) 메서드 blCode is {}", blCode);
+		BusinessLicense businessLicense = shelterDao.selectOneBusinessLicense(blCode);
+		logger.debug("getOneBusinessLicense(String blCode) 메서드 businessLicense is {}", businessLicense);
+		logger.debug("getOneBusinessLicense(String blCode) 메서드 끝");
+		return businessLicense;
+	}
+	
 	// 직원 신청 상태코드를 요청거부로 수정쿼리문을 접근하는 updateShelterStaffRequestOsCodeBySsrCode DAO 메서드 호출
 	public void modifyShelterStaffRequestOsCodeDenyBySsrCode(String ssrCode) {
 		logger.debug("modifyShelterStaffRequestOsCodeDenyBySsrCode(String ssrCode) 메서드 호출");

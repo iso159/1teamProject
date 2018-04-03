@@ -5,6 +5,66 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var itemSize;
+		var animalArray;
+		$.ajax({
+			url:'yugiAnimalList',
+			type:'post',
+			dataType:'json',
+			success: function(msg){
+				itemSize = Object.keys(msg.response.body.items.item).length;
+				for(let i=0; i<itemSize; i++){
+					let divTag = '<div data-layout="ch8 ec4"> <img class="MOD_STAFF_Picture" src="'+ msg.response.body.items.item[i].filename + '" alt="" data-theme="_is1">';
+				    divTag += '<p class="MOD_STAFF_Name" data-theme="_bb1"> <a href="">'+ msg.response.body.items.item[i].noticeNo + '</a></p>';
+				    divTag += '<p class="MOD_STAFF_Positon">' + msg.response.body.items.item[i].kindCd + '</p>';
+				    divTag += '<p> 동물 나이' + msg.response.body.items.item[i].age + '</p>';
+				    divTag += '<p> 보호소 위치 : ' + msg.response.body.items.item[i].careAddr + '</p>';
+				    divTag += '<p> 보호소 명 : ' + msg.response.body.items.item[i].careNm + '</p>';
+				    divTag += '<p> 보호소 전화번호 : ' +  msg.response.body.items.item[i].careTel + '</p>';
+				    divTag += '<p> 체중 : ' +  msg.response.body.items.item[i].weight + '</p>';
+				    divTag += '<p> <a href="${pageContext.request.contextPath}/animal/animalAdd">동물등록</a></p></div>'
+					$('#animalList').append(divTag);
+				}
+			}
+		});
+		$('#upkind').change(function(){
+			var selectUpkind = $('#upkind').val();
+			$.ajax({
+				url:'yugiAnimalList',
+				type:'post',
+				dataType:'json',
+				data: selectUpkind,
+				success: function(msg){
+					itemSize = Object.keys(msg.response.body.items.item).length;
+					$('#animalList').empty();
+					for(let i=0; i<itemSize; i++){
+						let divTag = '<div data-layout="ch8 ec4"> <img class="MOD_STAFF_Picture" src="'+ msg.response.body.items.item[i].filename + '" alt="" data-theme="_is1">';
+					    divTag += '<p class="MOD_STAFF_Name" data-theme="_bb1"> <a href="">'+ msg.response.body.items.item[i].noticeNo + '</a></p>';
+					    divTag += '<p class="MOD_STAFF_Positon">' + msg.response.body.items.item[i].kindCd + '</p>';
+					    divTag += '<p> 동물 나이' + msg.response.body.items.item[i].age + '</p>';
+					    divTag += '<p> 보호소 위치 : ' + msg.response.body.items.item[i].careAddr + '</p>';
+					    divTag += '<p> 보호소 명 : ' + msg.response.body.items.item[i].careNm + '</p>';
+					    divTag += '<p> 보호소 전화번호 : ' +  msg.response.body.items.item[i].careTel + '</p>';
+					    divTag += '<p> 체중 : ' +  msg.response.body.items.item[i].weight + '</p>';
+					    divTag += '<p> 동물 등록 : <a href="${pageContext.request.contextPath}/animal/animalAdd?">동물등록</a></p></div>'
+						$('#animalList').append(divTag);
+					}
+				}
+			});
+		});
+	});
+</script>
 <title>유기동물 리스트</title>
 </head>
 <body class="modern">
@@ -16,12 +76,9 @@
 	<!-- 메인 화면 내용 부분 -->
 	<div class="container">
 	<!-- 메인내용 시작 : Text | Text -->
-	<section>
-	  <div data-layout="_r">
-	    <div>
-	    <!-- 내용 입력 부분 -->
-	<h2>유기동물 리스트</h2>
+	<h2>유기동물 리스트</h2>	
 	<!-- 조건검색 -->
+	<section>
 		<form ID="selectForm" action="${pageContext.request.contextPath}/animal/animalCategory" method="post">
 			<select name="AnimalCategory">
 				<option value="animal_area">지역</option>
@@ -33,42 +90,24 @@
 			<input type="text" id="selectName" name="selectName">
 			<button type="submit">검색</button>
 		</form>
-		<table>
-		<thead>
-			<tr>
-				<td>동물상태</td>		
-				<td>동물종류</td>
-				<td>품종</td>
-				<td>지역</td>
-				<td>동물식별코드</td>
-				<td>체중</td>
-				<td>나이</td>
-				<td>보호소이름</td>
-				<td>등록일자</td>
-				<td>수정</td>
-				<td>삭제</td>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="i" items="${AnimalList}">		
-			<tr>
-				<td>${i.osName}</td>
-				<td>${i.osNameAnimalKind}</td>
-				<td>${i.animalBreed}</td>
-				<td>${i.animalArea}</td>
-				<td><a href="${pageContext.request.contextPath}/animal/animalDetail?animalCode=${i.animalCode}">${i.animalIdCode}</a></td>
-				<td>${i.animalWeight}</td>
-				<td>${i.animalAge}</td>
-				<td>${i.blShelterName}</td>
-				<td>${i.animalEnrollDate}</td>
-				<td><a href="${pageContext.request.contextPath}/animal/animalUpdate?animalCode=${i.animalCode}">수정</a></td>
-				<td><a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}">삭제</a></td>
-			</tr>
+	  	<div data-layout="_r" id="animalList">
+	  		<c:forEach var="i" items="${AnimalList}">		
+				<div data-layout="ch8 ec4">
+					<img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" alt="" data-theme="_is1">
+					<p class="MOD_STAFF_Name" data-theme="_bb1"><a href="${pageContext.request.contextPath}/animal/animalDetail?animalCode=${i.animalCode}">${i.animalIdCode}</a></p>
+					<p class="MOD_STAFF_Positon">${i.osNameAnimalKind} ${i.animalBreed}</p>
+					<p>동물 나이 : ${i.animalAge}</p>					
+					<p>보호소 위치 : ${i.animalArea}</p>
+					<p>보호소 명 : ${i.blShelterName}</p>
+					<p>동물 상태 : ${i.osName}</p>				
+					<p>동물 체중 : ${i.animalWeight}</p>		
+					<p>동물 등록날짜 : ${i.animalEnrollDate}</p>
+					<p>동물 수정 : <a href="${pageContext.request.contextPath}/animal/animalUpdate?animalCode=${i.animalCode}">수정</a></p>
+					<p>동물 삭제: <a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}">삭제</a></p>				
+				</div>
 			</c:forEach>
-		</tbody>
-		</table>
-	<a href="${pageContext.request.contextPath}/animal/animalAdd">동물등록</a>
-	<a href="${pageContext.request.contextPath}/"><button type="button" class="btn btn-success">홈으로</button></a>
+	    <div>
+	    <!-- 내용 입력 부분 -->
 	<!-- 내용 입력 부분 끝 -->
 		</div>
 	  </div>

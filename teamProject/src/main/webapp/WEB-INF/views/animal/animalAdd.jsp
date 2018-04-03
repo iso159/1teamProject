@@ -21,7 +21,7 @@
 	    <div>
 	    <!-- 내용 입력 부분 -->
 		<h2>동물등록폼</h2>
-		<form id="addForm" action="${pageContext.request.contextPath}/animal/animalList" method="post">
+		<form id="addForm" action="${pageContext.request.contextPath}/animal/animalAdd" method="post">
 			<table>
 				<tr>
 					<td><!-- 동물상태 --></td>

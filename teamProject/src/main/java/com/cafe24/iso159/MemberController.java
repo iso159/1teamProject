@@ -57,10 +57,18 @@ public class MemberController {
 		if (memberLoginLevel == null) {
 			return "redirect:/member/login";
 		}
-		session.setAttribute("loginId", memberLoginLevel.getmId());
-		session.setAttribute("loginBlCode", memberLoginLevel.getBlCode());
-		session.setAttribute("rightName", memberLoginLevel.getmRightGradeName());
-		session.setAttribute("rightLevel", memberLoginLevel.getmRightLevel());
+		String loginId = memberLoginLevel.getmId();
+		String loginBlCode = memberLoginLevel.getBlCode();
+		String rightName = memberLoginLevel.getmRightName();
+		String rightLevel = memberLoginLevel.getmRightLevel();
+		logger.debug("login(Member member, HttpSession session) 메서드 loginId is {}", loginId);
+		logger.debug("login(Member member, HttpSession session) 메서드 loginBlCode is {}", loginBlCode);
+		logger.debug("login(Member member, HttpSession session) 메서드 rightName is {}", rightName);
+		logger.debug("login(Member member, HttpSession session) 메서드 rightLevel is {}", rightLevel);
+		session.setAttribute("loginId", loginId);
+		session.setAttribute("loginBlCode", loginBlCode);
+		session.setAttribute("rightName", rightName);
+		session.setAttribute("rightLevel", rightLevel);
 		return "redirect:/";
 	}
  
