@@ -45,7 +45,30 @@
 		ORDER BY 
 			mi.m_info_join_date DESC
 	</select>
-
+	
+<!-- 	
+	회원 한명 상세정보 보여주기
+	<select id="memberDetail" parameterType="string" resultMap="MemberJoinMemberInfoMap">
+		SELECT 
+			m.m_id
+			, mi.m_info_name
+			, mi.m_info_nickname
+			, mi.m_info_gender
+			, mi.m_info_birth
+			, mi.m_info_postcode
+			, mi.m_info_address
+			, mi.m_info_email
+			, mi.m_info_phone
+			, mi.m_info_join_date FROM t_member m 
+		INNER JOIN
+			t_member_info mi
+		ON
+			m.m_info_code = mi.m_info_code
+		WHERE
+		m.m_info_code = #{mInfoCode}
+	</select>
+ -->
+ 
 	<!-- 회원가입 memberInfo -->
 	<insert id="addMemberInfo" parameterType="com.cafe24.iso159.member.service.MemberInfo">
 		INSERT INTO
@@ -101,7 +124,7 @@
 		SELECT
 			m.m_id as mId
 			,m.bl_code as blCode
-			,mr.m_right_grade_name as mRightGradeName
+			,mr.m_right_name as mRightName
 			,mr.m_right_level as mRightLevel
 		FROM 
 			t_member m
@@ -167,6 +190,4 @@
 		SET m_right_code = #{mRightCode} 
 		WHERE m_id = #{mId};
 	</update>
-	
-	
 </mapper>
