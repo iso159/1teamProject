@@ -8,17 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>게시판그룹추가</h2>
-	<form id="boardGroupAdd" action="${pageContext.request.contextPath}/board/boardGroupAdd" method="post">
-	게시판 그룹이름:<input type="text" id="boardName" name="boardName">
-	<button type="submit">이름등록</button>
-	</form>
-	
-	<%-- <%@include file="views/board/boardGroupList.jsp" %> --%>
-	
-	<%-- 게시판 그룹이름 리스트
+	게시판 그룹이름 리스트
 	<c:forEach var="i" items="${board}">
 		<div>${i.boardName}</div>
-	</c:forEach> --%>	
+	</c:forEach>
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cafe24.iso159.board.service.Board;
 import com.cafe24.iso159.board.service.BoardContent;
 import com.cafe24.iso159.board.service.BoardService;
 
@@ -43,6 +44,27 @@ public class BoardController {
 		logger.debug("BoardAdd()메서드 mId is {}", mId);
 		boardservice.addBoard(boardcontent, mId);
 		return "redirect:/board/boardList";
+	}
+	//게시판 그룹등록 페이지로 이동
+	@RequestMapping(value="/board/boardGroupAdd", method=RequestMethod.GET)
+	public String BoardAdd() {
+		return "board/boardGroupAdd";
+	}
+	//게시판 그룹등록
+	@RequestMapping(value="board/boardGroupAdd", method=RequestMethod.POST)
+	public String BoardGroupAdd(Board board, HttpSession session) {
+		logger.debug("BoardGroupAdd()메서드 호출");
+		String mAdminId = (String)session.getAttribute("loginId");
+		boardservice.addBoardGroup(board, mAdminId);
+		return "redirect:/board/boardGroupList";
+	}
+	//게시판 그룹리스트
+	@RequestMapping(value="board/boardGroupList", method=RequestMethod.GET)
+	public String BoardGroupList(Model model) {
+		logger.debug("BoardGroupList()메서드 호출");
+		List<Board> board = boardservice.listBoard();
+		model.addAttribute("board", board);
+		return "board/boardGroupList";
 	}
 	//게시판리스트
 	@RequestMapping(value="/board/boardList", method=RequestMethod.GET)

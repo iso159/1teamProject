@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cafe24.iso159.BoardController;
-
 @Service
 @Transactional
 public class BoardService {
@@ -28,7 +26,32 @@ public class BoardService {
 		logger.debug("lastNumber is {}", lastNumber);
 		
 		//마지막 board_content_code 코드
-		String boardCode = "board_content_code_";
+		String boardContentCode = "board_content_code_";
+		int lastBoardNum = 1;
+		if(lastNumber == null) {
+			boardContentCode += lastBoardNum;  
+		}else {
+			lastBoardNum += Integer.parseInt(lastNumber);
+			boardContentCode += lastBoardNum;
+		}
+		logger.debug("boardCode is {}", boardContentCode);
+
+		//boardContentCode 셋팅
+		boardcontent.setBoardContentCode(boardContentCode);
+		
+		//mMemberId 셋팅
+		boardcontent.setmMemberId(mId);
+		boardDao.insertboardContent(boardcontent);
+	}
+	//게시판 그룹등록
+	public void addBoardGroup(Board board, String mAdminId) {
+		logger.debug("addBoard()메서드", mAdminId);
+		//마지막코드 숫자값을 저장
+		String lastNumber = boardDao.selectLastBoardNum();
+		logger.debug("lastNumber is {}", lastNumber);
+		
+		//마지막 board_content_code 코드
+		String boardCode = "board_code_";
 		int lastBoardNum = 1;
 		if(lastNumber == null) {
 			boardCode += lastBoardNum;  
@@ -37,18 +60,22 @@ public class BoardService {
 			boardCode += lastBoardNum;
 		}
 		logger.debug("boardCode is {}", boardCode);
-
-		//boardCode 셋팅
-		boardcontent.setBoardContentCode(boardCode);
+		board.setBoardCode(boardCode);
 		
-		//mMemberId 셋팅
-		boardcontent.setmMemberId(mId);
-		boardDao.insertboardCount(boardcontent);
+		//mAdminId 셋팅
+		board.setmAdminId(mAdminId);
+		boardDao.insertBoard(board);
 	}
 	//게시판리스트
 	public List<BoardContent> listBoardContent(){
 		logger.debug("listBoardContent()메서드 호출");
 		List<BoardContent> boardContent = boardDao.selectBoardContent();
 		return boardContent;
+	}
+	//게시판 그룹리스트
+	public List<Board> listBoard(){
+		logger.debug("listBoard()메서드 호출");
+		List<Board> board = boardDao.selectBoard(); 
+		return board;
 	}
 }
