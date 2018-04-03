@@ -69,9 +69,9 @@
 					</tbody>
 				</table>
 				<c:choose>
-				<c:when test="${selectExpOneInfo.osName eq '체험 완료'}">
+				<c:when test="${selectExpOneInfo.exp.osCodeExp eq '체험 완료'}">
 				</c:when>
-				<c:when test="${selectExpOneInfo.osName eq '체험 진행중'}">
+				<c:when test="${selectExpOneInfo.exp.osCodeExp eq '체험 진행중'}">
 				</c:when>
 				<c:otherwise>
 					<a href="${pageContext.request.contextPath}/experience/deleteExp?expCode=${selectExpOneInfo.exp.expCode}"><button type="button" style="float: right;">삭제</button></a>

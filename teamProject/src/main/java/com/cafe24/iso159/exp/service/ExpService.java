@@ -1,6 +1,7 @@
 package com.cafe24.iso159.exp.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cafe24.iso159.member.service.Member;
+import com.cafe24.iso159.animal.service.Animal;
 
 @Service
 @Transactional
@@ -18,6 +19,27 @@ public class ExpService {
 	private ExpDao expDao;
 	//디버그용 로거 생성
 	private static final Logger logger = LoggerFactory.getLogger(ExpService.class);
+	
+	// 보호소 체험진행,종료시 동물,체험 상태 변경
+	public void progressionAnimalAndExpUpdate(Map<String, Object> map) {
+		//호출된곳 확인
+		logger.debug("ExpService.java 호출 {progressionAnimalAndExpUpdate}.");
+		logger.debug("progressionAnimalAndExpUpdate() 메서드 실행 map is {}", map);
+		// 보호소 체험진행,종료시 동물 상태 변경
+		Animal animal = (Animal)map.get("animal");
+		expDao.progressionAnimalUpdate(animal);
+		// 보호소 체험진행,종료시 동물 상태 변경
+		Exp exp = (Exp)map.get("exp");
+		expDao.progressionExpUpdate(exp);
+	}
+	
+	//보호소 체험 신청 현황 수정
+	public void updateOsExp(Exp exp) {
+		//호출된곳 확인
+		logger.debug("ExpService.java 호출 {updateOsExp}.");
+		logger.debug("updateOsExp() 메서드 실행 exp is {}", exp);
+		expDao.updateOsExp(exp);
+	}
 	
 	//해당 보호소 체험자 정보
 	public ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo selectExpShelterInfo(String expCode) {
@@ -30,10 +52,13 @@ public class ExpService {
 		return expShelterInfo;
 	}
 	
-	//해당 보호소 체험자 리스트 에서 정보 확인할때 확인자 아이디 등록
+	//해당 보호소 체험자 리스트 에서 정보 확인할때 확인자 아이디,체험 상태 등록
 	public void updateExpmShelterIdCheck(Exp exp) {
 		logger.debug("ExpService.java 호출 {updateExpmShelterIdCheck}.");
 		logger.debug("updateExpmShelterIdCheck() 메서드 실행 exp is {}", exp);
+		// 체험 상태 변경
+		String osCodeExp = "os_exp_12_1_4";
+		exp.setOsCodeExp(osCodeExp);
 		expDao.updateExpmShelterIdCheck(exp);
 	}
 	

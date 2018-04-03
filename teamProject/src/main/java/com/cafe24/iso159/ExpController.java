@@ -1,6 +1,8 @@
 package com.cafe24.iso159;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cafe24.iso159.animal.service.Animal;
 import com.cafe24.iso159.exp.service.Exp;
 import com.cafe24.iso159.exp.service.ExpAndAnimal;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo;
 import com.cafe24.iso159.exp.service.ExpPeriod;
 import com.cafe24.iso159.exp.service.ExpService;
-import com.cafe24.iso159.member.service.Member;
 
 
 @Controller
@@ -27,6 +29,49 @@ public class ExpController {
 	@Autowired
 	private ExpService expService;
 	private static final Logger logger = LoggerFactory.getLogger(ExpController.class);
+	
+	// 보호소 체험진행,종료시 동물 상태 변경
+	@RequestMapping(value = "/experience/animalUpdate", method = RequestMethod.GET)
+	public String progressionAnimalUpdate(@RequestParam(value="animalCode") String animalCode,
+										@RequestParam(value="expCode") String expCode,
+										@RequestParam(value="osCodeAnimal") String osCodeAnimal,
+										@RequestParam(value="osCodeExp") String osCodeExp) {
+		logger.debug("ExpController 호출 {animalUpdate.get}.");
+		logger.debug("animalUpdate().get 메서드 animalCode is {}",animalCode);
+		logger.debug("animalUpdate().get 메서드 expCode is {}",expCode);
+		logger.debug("animalUpdate().get 메서드 osCodeAnimal is {}",osCodeAnimal);
+		logger.debug("animalUpdate().get 메서드 osCodeExp is {}",osCodeExp);
+		// animalCode 가져와서 체험 진행,종료시 동물상태 변경
+		Animal animal = new Animal();
+		animal.setAnimalCode(animalCode);
+		animal.setOsCodeAnimal(osCodeAnimal);
+		// expCode 가져와서 체험 진행,종료시 체험상태 변경
+		Exp exp = new Exp();
+		exp.setExpCode(expCode);
+		exp.setOsCodeExp(osCodeExp);
+		// animal, exp 각각 map에 담아서 넘김
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("animal", animal);
+		map.put("exp", exp);
+		expService.progressionAnimalAndExpUpdate(map);
+		return "redirect:/experience/expShelterList";
+	}
+	
+	//해당 보호소 체험 예약 상태 진행
+	@RequestMapping(value = "/experience/updateOsExp", method = RequestMethod.GET)
+	public String checkOsExp(@RequestParam(value="osCodeExp") String osCodeExp,@RequestParam(value="expCode") String expCode,HttpSession session) {
+		logger.debug("ExpController 호출 {checkOsExp.get}.");
+		logger.debug("checkOsExp().get 메서드 osCodeExp is {}",osCodeExp);
+		logger.debug("checkOsExp().get 메서드 expCode is {}",expCode);
+		String loginId = (String)session.getAttribute("loginId");
+		logger.debug("checkOsExp().get 메서드 loginId is {}",loginId);
+		Exp exp = new Exp();
+		exp.setmShelterIdAccept(loginId);
+		exp.setExpCode(expCode);
+		exp.setOsCodeExp(osCodeExp);
+		expService.updateOsExp(exp);
+		return "redirect:/experience/expShelterList";
+	}
 	
 	//해당 보호소 체험자 정보
 	@RequestMapping(value = "/experience/expShelterInfo", method = RequestMethod.GET)
@@ -37,7 +82,7 @@ public class ExpController {
 		ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo selectExpOneInfo =  expService.selectExpShelterInfo(expCode);
 		logger.debug("expShelterInfo().get 메서드 selectExpOneInfo is {}",selectExpOneInfo);
 		model.addAttribute("ExpOneInfo", selectExpOneInfo);
-		//해당 보호소 체험자 리스트 에서 정보 확인할때 확인자 아이디 등록
+		//해당 보호소 체험자 리스트 에서 정보 확인할때 확인자 아이디 ,체험 상태 등록
 		Exp exp = new Exp();
 		exp.setmShelterIdCheck((String)session.getAttribute("loginId"));
 		logger.debug("expShelterInfo().get 메서드 loginId is {}",(String)session.getAttribute("loginId"));
@@ -48,11 +93,12 @@ public class ExpController {
 	
 	// 해당 보호소 체험자 리스트
 	@RequestMapping(value = "/experience/expShelterList", method = RequestMethod.GET)
-	public String expshelterList(Model model,@RequestParam(value="blCode") String blCode) {
+	public String expshelterList(Model model,HttpSession session) {
 		logger.debug("ExpController 호출 {expshelterList.get}.");
-		//넘어온 blCode 값 확인
-		logger.debug("expshelterList().get 메서드 blCode is {}",blCode);
-		List<Exp> exp = expService.selectExpShelterList(blCode);
+		//blCode 값 확인
+		String loginBlCode = (String)session.getAttribute("loginBlCode");
+		logger.debug("expshelterList().get 메서드 blCode is {}",loginBlCode);
+		List<Exp> exp = expService.selectExpShelterList(loginBlCode);
 		logger.debug("expshelterList().get 메서드 exp is {}",exp);
 		model.addAttribute("exp", exp);
 		return "/experience/expShelterList";

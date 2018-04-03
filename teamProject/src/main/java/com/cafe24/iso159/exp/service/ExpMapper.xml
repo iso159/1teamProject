@@ -82,12 +82,47 @@
 		<result column="m_info_join_date" property="mInfoJoindate"/>
 	</resultMap>
 	
+	<!-- 보호소 체험진행,종료시 체험 상태 변경 -->
+	<update id="progressionExpUpdate" parameterType="com.cafe24.iso159.exp.service.Exp">
+		UPDATE 
+			t_exp 
+		SET 
+			os_code_exp=#{osCodeExp}
+		WHERE 
+			exp_code=#{expCode}
+	</update>
+	
+	<!-- 보호소 체험진행,종료시 동물 상태 변경 -->
+	<update id="progressionAnimalUpdate" parameterType="com.cafe24.iso159.animal.service.Animal">
+		UPDATE 
+			t_animal 
+		SET 
+			os_code_animal=#{osCodeAnimal} 
+		WHERE 
+			animal_code=#{animalCode}
+	</update>
+	
+	<!-- 보호소 체험 신청 현황 수정 -->
+	<update id="updateOsExp" parameterType="com.cafe24.iso159.exp.service.Exp">
+		UPDATE 
+			t_exp 
+		SET 
+			<if test= 'osCodeExp.equals("os_exp_12_1_5")'>
+			m_shelter_id_accept=#{mShelterIdAccept}, 
+			</if>
+			os_code_exp=#{osCodeExp} 
+		WHERE 
+			exp_code=#{expCode}
+	</update>
+	
+	
 	<!-- 보호소 체험 상세정보 볼때 확인자 추가 -->
 	<update id="updateExpmShelterIdCheck" parameterType="com.cafe24.iso159.exp.service.Exp">
 		UPDATE 
 			t_exp 
 		SET 
-			m_shelter_id_check = #{mShelterIdCheck} 
+			m_shelter_id_check = #{mShelterIdCheck}, 
+			os_code_exp = #{osCodeExp}
 		WHERE 
 			exp_code = #{expCode}
 	</update>
@@ -102,7 +137,9 @@
 	</resultMap>
 	<select id="selectExpShelterInfo" resultMap="selectExpShelterInfoMap" parameterType="String">
 		SELECT 
-			e.m_exp_id
+			e.exp_code
+			,e.animal_code
+			,e.m_exp_id
 			,mi.m_info_name
 			,mi.m_info_gender
 			,mi.m_info_birth

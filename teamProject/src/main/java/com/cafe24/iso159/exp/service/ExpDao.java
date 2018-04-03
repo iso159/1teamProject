@@ -1,6 +1,7 @@
 package com.cafe24.iso159.exp.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.iso159.animal.service.Animal;
 import com.cafe24.iso159.member.service.Member;
 
 
@@ -21,6 +23,26 @@ public class ExpDao {
 	//맵퍼 id를 가져올때 사용할 맵퍼 생성
 	private final String nameSpace = "com.cafe24.iso159.exp.service.ExpMapper.";
 	
+	// 보호소 체험진행,종료시 체험 상태 변경
+	public void progressionExpUpdate(Exp exp) {
+		logger.debug("ExpDao.java 호출 {progressionExpUpdate}.");
+		logger.debug("progressionExpUpdate() 메서드 실행 exp is {}", exp);
+		sqlSessionTemplate.update(nameSpace + "progressionExpUpdate", exp);
+	}
+	
+	// 보호소 체험진행,종료시 동물 상태 변경
+	public void progressionAnimalUpdate(Animal animal) {
+		logger.debug("ExpDao.java 호출 {progressionAnimalUpdate}.");
+		logger.debug("progressionAnimalUpdate() 메서드 실행 animal is {}", animal);
+		sqlSessionTemplate.update(nameSpace + "progressionAnimalUpdate", animal);
+	}
+	
+	//보호소 체험 신청 현황 수정
+	public void updateOsExp(Exp exp) {
+		logger.debug("ExpDao.java 호출 {updateOsExp}.");
+		logger.debug("updateOsExp() 메서드 실행 exp is {}", exp);
+		sqlSessionTemplate.update(nameSpace + "updateOsExp", exp);
+	}
 	//해당 보호소 체험자 정보
 	public ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo selectExpShelterInfo(String expCode) {
 		logger.debug("ExpDao.java 호출 {selectExpShelterInfo}.");
@@ -31,7 +53,7 @@ public class ExpDao {
 		return expShelterInfo;
 	}
 	
-	//해당 보호소 체험자 리스트 에서 정보 확인할때 확인자 아이디 등록
+	//해당 보호소 체험자 리스트 에서 정보 확인할때 확인자 아이디 ,체험 상태 등록
 	public void updateExpmShelterIdCheck(Exp exp) {
 		logger.debug("ExpDao.java 호출 {updateExpmShelterIdCheck}.");
 		logger.debug("updateExpmShelterIdCheck() 메서드 실행 exp is {}", exp);
