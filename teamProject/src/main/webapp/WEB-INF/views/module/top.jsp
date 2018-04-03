@@ -208,30 +208,18 @@
           </ul>
         </li>
         
-        <c:set var="right" value="${rightName}"></c:set>
-         <c:if test="${right eq '입양자'}">
-        <li>
-          <a href="#" data-theme="_bgp">보호소 진료</a>
+         <li>
+          <a href="#" data-theme="_bgp">진단</a>
           <ul style="height: 0px; overflow: hidden">
-			<li>
-				<a href="${pageContext.request.contextPath}/shelterListJindan" data-theme="_bgpd">보호소 진료 예약</a>
-			</li>
+          <c:set var="login" value="${loginId}"></c:set>
+          <c:set var="right" value="${rightName}"></c:set>
+          <c:if test="${right eq '회원'}">
+            <li>
+              <a href="${pageContext.request.contextPath}/#" data-theme="_bgpd">보호소 진료 예약</a>
+            </li>
+          </c:if>
           </ul>
-        </li>
-        </c:if>
-        
-		<li>
-          <a href="#" data-theme="_bgp">마이페이지</a>
-           <ul style="height: 0px; overflow: hidden">
-           <c:set var="right" value="${rightName}"></c:set>
-          	<c:if test="${right eq '체험자'}">
-	            <li>
-	              <a href="${pageContext.request.contextPath}/#" data-theme="_bgpd">내 정보</a>
-	            </li>
-            </c:if>
-          </ul>
-        </li>
-        
+         </li>
     </nav>
   </div>
 </section>
