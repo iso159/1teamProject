@@ -290,15 +290,12 @@ label {
 }
 input {
   width: 100%;
-  max-width: 18rem;
   font-size: 1em;
   font-family: sans-serif;
 }
 
 textarea {
   width: 100%;
-  height: 12em;
-  max-width: 18rem;
   font-size: 1em;
   font-family: sans-serif;
 }

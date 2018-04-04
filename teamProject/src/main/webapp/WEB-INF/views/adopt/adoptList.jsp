@@ -29,7 +29,7 @@
 	<!-- 메인내용 시작 : Text | Text -->
 	<section>
 	  <div data-layout="_r">
-	    <div>
+	    <div class="col-md-12">
 	    <!-- 내용 입력 부분 -->
 		<h2>입양 리스트</h2>
 		<!-- 조건검색 -->

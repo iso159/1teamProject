@@ -39,28 +39,26 @@
 	<!-- 메인 화면  -->
 	<!-- 메인 화면 내용 부분 -->
 	<div class="container">
-<div class="col-md-9 .col-md-push-3">
+<div class="col-md-12">
     <div>  
     	<c:set var="aRC" value="${adoptRequestCode}"/>
-        <form role="form-control" action="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${adoptRequestCode}" method="post">
+        <form id="addForm" role="form-control" action="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${adoptRequestCode}" method="post">
         <br style="clear:both">
-                    <h3 style="margin-bottom: 25px; text-align: center;">상담내용</h3>
+                    <h3 text-align: center;" style="margin-bottom: 25px">상담내용</h3>
     				<c:forEach var="surveyQuestion" items="${list}">
     				<div class="form-group">
 						<input  type="textarea" 
 								class="form-control"
 								value="<br>${surveyQuestion.surveyListQuestion}<br>"
 								id="adoptRequestAdviceContents"
-								name="adoptRequestAdviceContents" readonly
-								>
+								name="adoptRequestAdviceContents" readonly>
 					</div>
 					<div class="form-group">
-						<input 	type="textarea" 
+						<input 	type="text" 
 								class="form-control" 
 								placeholder="질문에 답해주세요" 
 								id="adoptRequestAdviceContents"
-								name="adoptRequestAdviceContents"
-								>
+								name="adoptRequestAdviceContents">
 					</div>
 		</c:forEach>
 		<button id="addBtn" type="button" class="btn btn-primary pull-right">상담완료</button>			
