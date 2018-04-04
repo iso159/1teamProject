@@ -23,6 +23,37 @@ public class ExpDao {
 	//맵퍼 id를 가져올때 사용할 맵퍼 생성
 	private final String nameSpace = "com.cafe24.iso159.exp.service.ExpMapper.";
 	
+	//동물반환완료 클릭시 os_code수정
+	public void updateCostIoOsCode(CostIo costIo) {
+		logger.debug("ExpDao.java 호출 {updateCostIoOsCode}.");
+		logger.debug("updateCostIoOsCode() 메서드 실행 costIo is {}", costIo);
+		sqlSessionTemplate.update(nameSpace + "updateCostIoOsCode", costIo);
+	}
+	
+	// exp_code로 costIoCode 검색
+	public String selectFindCostIoCode(CostIo costIo) {
+		logger.debug("ExpDao.java 호출 {selectFindCostIoCode}.");
+		logger.debug("selectFindCostIoCode() 메서드 실행 costIo is {}", costIo);
+		String costIoCode = sqlSessionTemplate.selectOne(nameSpace + "selectFindCostIoCode", costIo);
+		logger.debug("selectFindCostIoCode() 메서드 실행 costIoCode is {}", costIoCode);
+		return costIoCode;
+	}
+	
+	//동물지급완료 클릭시 cose_io생성
+	public void addCostIo(CostIo costIo) {
+		logger.debug("ExpDao.java 호출 {addCostIo}.");
+		logger.debug("addCostIo() 메서드 실행 costIo is {}", costIo);
+		sqlSessionTemplate.insert(nameSpace + "addCostIo", costIo);
+	}
+	
+	// cost_io_code PK값 구하는 부분
+	public int selectCostIoCode() {
+		logger.debug("ExpDao.java 호출 {selectCostIoCode}.");
+		int costIoCode = sqlSessionTemplate.selectOne(nameSpace + "selectCostIoCode");
+		logger.debug("selectCostIoCode() 메서드 실행 costIoCode is {}", costIoCode+1);
+		return costIoCode+1;
+	}
+	
 	// 보호소 체험진행,종료시 체험 상태 변경
 	public void progressionExpUpdate(Exp exp) {
 		logger.debug("ExpDao.java 호출 {progressionExpUpdate}.");
@@ -51,6 +82,14 @@ public class ExpDao {
 		ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo expShelterInfo = sqlSessionTemplate.selectOne(nameSpace + "selectExpShelterInfo", expCode);
 		logger.debug("selectExpShelterInfo() 메서드 실행 expShelterInfo is {}", expShelterInfo);
 		return expShelterInfo;
+	}
+	
+	//해당 보호소 체험자 리스트 에서 정보 확인할때 체험 상태 확인
+	public Exp updateExpOsNameCheck(Exp exp) {
+		logger.debug("ExpDao.java 호출 {updateExpOsNameCheck}.");
+		logger.debug("updateExpOsNameCheck() 메서드 실행 exp is {}", exp);
+		Exp checkExp = sqlSessionTemplate.selectOne(nameSpace + "updateExpOsNameCheck", exp);
+		return checkExp;
 	}
 	
 	//해당 보호소 체험자 리스트 에서 정보 확인할때 확인자 아이디 ,체험 상태 등록

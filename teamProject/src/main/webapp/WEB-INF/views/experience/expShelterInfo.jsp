@@ -62,7 +62,7 @@
 							<th>${ExpOneInfo.memberInfo.mInfoAddress}</th>
 							<th>${ExpOneInfo.memberInfo.mInfoPhone}</th>
 							<th>${ExpOneInfo.exp.mShelterIdAccept}</th>
-							<th>${ExpOneInfo.expPeriod.expPeriodLevel}</th>
+							<th>${ExpOneInfo.expPeriod.expPeriodLevel}일</th>
 							<th>${ExpOneInfo.exp.osCodeExp}</th>
 							<th>${ExpOneInfo.exp.osCodeCostReturn}</th>
 							<th>${ExpOneInfo.exp.expPurpose}</th>
@@ -80,13 +80,17 @@
 				</table>
 			</div>
 		</div>
+		<c:if test="${ExpOneInfo.exp.osCodeExp eq '예약 신청' or ExpOneInfo.exp.osCodeExp eq '예약 확인'}">
 		<a href="${pageContext.request.contextPath}/experience/updateOsExp?osCodeExp=os_exp_12_1_5&expCode=${ExpOneInfo.exp.expCode}"><button>체험 수락</button></a>
+		</c:if>
+		<c:if test="${ExpOneInfo.exp.osCodeExp eq '예약 신청' or ExpOneInfo.exp.osCodeExp eq '예약 확인' or ExpOneInfo.exp.osCodeExp eq '예약 완료'}">
 		<a href="${pageContext.request.contextPath}/experience/updateOsExp?osCodeExp=os_exp_12_1_6&expCode=${ExpOneInfo.exp.expCode}"><button>체험 거절</button></a>
-		<c:if test="${ExpOneInfo.animal.osCodeAnimal eq '체험가능동물' and ExpOneInfo.exp.osCodeExp eq '예약완료'}">
-		<a href="${pageContext.request.contextPath}/experience/animalUpdate?osCodeAnimal=os_animal_3_1_3&animalCode=${ExpOneInfo.exp.animalCode}&expCode=${ExpOneInfo.exp.expCode}&osCodeExp=os_exp_12_1_1"><button>동물 지급 완료</button></a>
+		</c:if>
+		<c:if test="${ExpOneInfo.animal.osCodeAnimal eq '체험가능동물' and ExpOneInfo.exp.osCodeExp eq '예약 완료'}">
+		<a href="${pageContext.request.contextPath}/experience/animalUpdate?osCodeAnimal=os_animal_3_1_3&animalCode=${ExpOneInfo.exp.animalCode}&expCode=${ExpOneInfo.exp.expCode}&osCodeExp=os_exp_12_1_1&osCode=os_cost_13_1_1&expCost=${ExpOneInfo.exp.expCost}"><button>동물 지급 완료</button></a>
 		</c:if>
 		<c:if test="${ExpOneInfo.animal.osCodeAnimal eq '체험중인동물' and ExpOneInfo.exp.osCodeExp eq '체험 진행중'}">
-		<a href="${pageContext.request.contextPath}/experience/animalUpdate?osCodeAnimal=os_animal_3_1_2&animalCode=${ExpOneInfo.exp.animalCode}&expCode=${ExpOneInfo.exp.expCode}&osCodeExp=os_exp_12_1_2"><button>동물 반환 완료</button></a>
+		<a href="${pageContext.request.contextPath}/experience/animalUpdate?osCodeAnimal=os_animal_3_1_2&animalCode=${ExpOneInfo.exp.animalCode}&expCode=${ExpOneInfo.exp.expCode}&osCodeExp=os_exp_12_1_2&osCode=os_cost_13_1_2&expCost=1"><button>동물 반환 완료</button></a>
 		</c:if>
 		</section>
 		<!-- 메인내용 끝 : Text | Text -->

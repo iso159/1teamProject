@@ -82,6 +82,39 @@
 		<result column="m_info_join_date" property="mInfoJoindate"/>
 	</resultMap>
 	
+	<!-- 동물반환완료 클릭시 os_code수정 -->
+	<update id="updateCostIoOsCode" parameterType="com.cafe24.iso159.exp.service.CostIo">
+		UPDATE 
+			t_cost_io 
+		SET 
+			os_code=#{osCode}
+		WHERE 
+			cost_io_code=#{costIoCode}
+	</update>
+	
+	<!-- exp_code로 costIoCode 검색 -->
+	<select id="selectFindCostIoCode" parameterType="com.cafe24.iso159.exp.service.CostIo" resultType="String">
+		SELECT 
+			cost_io_code
+		FROM 
+			t_cost_io 
+		WHERE 
+			exp_code=#{expCode}
+	</select>
+	
+	<!-- 동물지급완료 클릭시 cose_io생성 -->
+	<insert id="addCostIo" parameterType="com.cafe24.iso159.exp.service.CostIo">
+		INSERT INTO 
+			t_cost_io (cost_io_code, exp_code, os_code, cost_io_cost) 
+		VALUES 
+			(#{costIoCode}, #{expCode}, #{osCode}, #{costIoCost})
+	</insert>
+	
+	<!-- cost_io_code PK값 구하는 부분 -->
+	<select id="selectCostIoCode" resultType="int">
+		SELECT MAX(CAST(SUBSTRING(cost_io_code,14) AS DECIMAL)) FROM t_cost_io
+	</select>
+	
 	<!-- 보호소 체험진행,종료시 체험 상태 변경 -->
 	<update id="progressionExpUpdate" parameterType="com.cafe24.iso159.exp.service.Exp">
 		UPDATE 
@@ -109,14 +142,28 @@
 		SET 
 			<if test= 'osCodeExp.equals("os_exp_12_1_5")'>
 			m_shelter_id_accept=#{mShelterIdAccept}, 
+			exp_check_date = #{expCheckDate},
 			</if>
 			os_code_exp=#{osCodeExp} 
 		WHERE 
 			exp_code=#{expCode}
 	</update>
 	
+	<!-- 보호소 체험 상세정보 볼때 체험상태 확인 -->
+	<select id="updateExpOsNameCheck" parameterType="com.cafe24.iso159.exp.service.Exp" resultType="com.cafe24.iso159.exp.service.Exp">
+		SELECT 
+			os.os_name AS osName
+		FROM 
+			t_exp e 
+		INNER JOIN 
+			t_overall_status os 
+		ON 
+			e.os_code_exp = os.os_code 
+		WHERE 
+			e.exp_code = #{expCode}
+	</select>
 	
-	<!-- 보호소 체험 상세정보 볼때 확인자 추가 -->
+	<!-- 보호소 체험 상세정보 볼때 확인자,체험상태 추가 -->
 	<update id="updateExpmShelterIdCheck" parameterType="com.cafe24.iso159.exp.service.Exp">
 		UPDATE 
 			t_exp 
@@ -140,6 +187,7 @@
 			e.exp_code
 			,e.animal_code
 			,e.m_exp_id
+			,e.exp_cost
 			,mi.m_info_name
 			,mi.m_info_gender
 			,mi.m_info_birth

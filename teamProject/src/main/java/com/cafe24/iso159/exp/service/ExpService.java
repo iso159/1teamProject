@@ -1,8 +1,11 @@
 package com.cafe24.iso159.exp.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,22 @@ public class ExpService {
 		// 보호소 체험진행,종료시 동물 상태 변경
 		Exp exp = (Exp)map.get("exp");
 		expDao.progressionExpUpdate(exp);
+		// costIo 생성
+		CostIo costIo = (CostIo)map.get("costIo");
+		// expCost를 이용해서 분기 생성
+		if(costIo.getCostIoCost() != 1) {
+			//costIoCode코드 생성 및 대입
+			int costIoCodenum = expDao.selectCostIoCode();
+			String costIocode = "cost_io_code_" + costIoCodenum;
+			logger.debug("progressionAnimalAndExpUpdate() 메서드 실행 costIocode is {}", costIocode);
+			costIo.setCostIoCode(costIocode);
+			logger.debug("progressionAnimalAndExpUpdate() 메서드 실행 costIo is {}", costIo);
+			expDao.addCostIo(costIo);
+		}else {
+			String costIoCode = expDao.selectFindCostIoCode(costIo);
+			costIo.setCostIoCode(costIoCode);
+			expDao.updateCostIoOsCode(costIo);
+		}
 	}
 	
 	//보호소 체험 신청 현황 수정
@@ -38,6 +57,14 @@ public class ExpService {
 		//호출된곳 확인
 		logger.debug("ExpService.java 호출 {updateOsExp}.");
 		logger.debug("updateOsExp() 메서드 실행 exp is {}", exp);
+		// 체험 수락 날짜 입력
+		// 오늘 날짜 생성
+		Date today = new Date();
+		// 날짜 입력 폼 생성
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		// 날짜 입력
+		logger.debug("updateOsExp() 메서드 실행 date.format(today) is {}", date.format(today));
+		exp.setExpCheckDate(date.format(today));
 		expDao.updateOsExp(exp);
 	}
 	
@@ -56,10 +83,14 @@ public class ExpService {
 	public void updateExpmShelterIdCheck(Exp exp) {
 		logger.debug("ExpService.java 호출 {updateExpmShelterIdCheck}.");
 		logger.debug("updateExpmShelterIdCheck() 메서드 실행 exp is {}", exp);
-		// 체험 상태 변경
-		String osCodeExp = "os_exp_12_1_4";
-		exp.setOsCodeExp(osCodeExp);
-		expDao.updateExpmShelterIdCheck(exp);
+		// 체험 상태 확인
+		Exp checkExp = expDao.updateExpOsNameCheck(exp);
+		if(checkExp.getOsName().equals("예약 신청")) {
+			// 체험 상태 변경
+			String osCodeExp = "os_exp_12_1_4";
+			exp.setOsCodeExp(osCodeExp);
+			expDao.updateExpmShelterIdCheck(exp);
+		}
 	}
 	
 	//해당 보호소 체험자 리스트
@@ -143,8 +174,8 @@ public class ExpService {
 		addexp.setOsCodeExp(osCodeExp);
 		
 		//osCodeCostReturn 값 대입
-		//책임비는 처음에 받기 때문에 os_cost_13_1_1 로 변수로 생성해서 대입
-		String osCodeCostReturn = "os_cost_13_1_1";
+		//책임비는 os_cost_return_24_1_2 로 변수로 생성해서 대입
+		String osCodeCostReturn = "os_cost_return_24_1_2";
 		logger.debug("addExp() 메서드 실행 osCodeCostReturn is {}", osCodeCostReturn);
 		addexp.setOsCodeCostReturn(osCodeCostReturn);
 		

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.iso159.animal.service.Animal;
+import com.cafe24.iso159.exp.service.CostIo;
 import com.cafe24.iso159.exp.service.Exp;
 import com.cafe24.iso159.exp.service.ExpAndAnimal;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense;
@@ -35,12 +36,16 @@ public class ExpController {
 	public String progressionAnimalUpdate(@RequestParam(value="animalCode") String animalCode,
 										@RequestParam(value="expCode") String expCode,
 										@RequestParam(value="osCodeAnimal") String osCodeAnimal,
-										@RequestParam(value="osCodeExp") String osCodeExp) {
+										@RequestParam(value="osCodeExp") String osCodeExp,
+										@RequestParam(value="osCode") String osCode,
+										@RequestParam(value="expCost") String expCost) {
 		logger.debug("ExpController 호출 {animalUpdate.get}.");
 		logger.debug("animalUpdate().get 메서드 animalCode is {}",animalCode);
 		logger.debug("animalUpdate().get 메서드 expCode is {}",expCode);
 		logger.debug("animalUpdate().get 메서드 osCodeAnimal is {}",osCodeAnimal);
 		logger.debug("animalUpdate().get 메서드 osCodeExp is {}",osCodeExp);
+		logger.debug("animalUpdate().get 메서드 osCode is {}",osCode);
+		logger.debug("animalUpdate().get 메서드 expCost is {}",expCost);
 		// animalCode 가져와서 체험 진행,종료시 동물상태 변경
 		Animal animal = new Animal();
 		animal.setAnimalCode(animalCode);
@@ -53,6 +58,12 @@ public class ExpController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("animal", animal);
 		map.put("exp", exp);
+		// costIo 생성
+		CostIo costIo = new CostIo();
+		costIo.setOsCode(osCode);
+		costIo.setExpCode(expCode);
+		costIo.setCostIoCost(Integer.parseInt(expCost));
+		map.put("costIo", costIo);
 		expService.progressionAnimalAndExpUpdate(map);
 		return "redirect:/experience/expShelterList";
 	}
