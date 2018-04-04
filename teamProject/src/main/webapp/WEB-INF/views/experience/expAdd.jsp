@@ -85,7 +85,7 @@
 					$("#edate").val(y + "-" + m + "-" + d);
 					}
 				});
-			} else if (expPeriodCode === "exp_period_6_7_3") {
+			} else if (expPeriodCode === "exp_period_6_9_3") {
 				$('#expPeriodCost').val('90000');
 				$('#expPeriodJournalCount').val('3');
 				$('#expPeriodLevel').val('6');
