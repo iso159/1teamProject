@@ -1,14 +1,18 @@
 package com.cafe24.iso159.animal.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
@@ -19,8 +23,29 @@ public class AnimalService {
 
 	private static final Logger logger = LoggerFactory.getLogger(AnimalService.class);
 	//동물등록
-	public void addAnimal(Animal animal, String mShelterId, String blCode){
-		logger.debug("addAnimal()메서드 Animal is {}",animal);
+	public void addAnimal(AnimalAndFile animalAndFile, String mShelterId, String blCode, String path, MultipartFile file){
+		logger.debug("addAnimal()메서드 animalAndFile is {}",animalAndFile);
+		// 동물정보 변수에 입력
+		String animalIdCode = animalAndFile.getAnimalIdCode();
+		String animalAge = animalAndFile.getAnimalAge();
+		String animalWeight = animalAndFile.getAnimalWeight();
+		String animalArea = animalAndFile.getAnimalArea();
+		String animalBreed = animalAndFile.getAnimalBreed();
+		String osCodeAnimal = animalAndFile.getOsCodeAnimal();
+		String animalImagePath = animalAndFile.getAnimalImagePath();
+		String osCodeKind = "os_animal_kinds_11_1_1";
+		
+		// 변수를 객체의 필드에 세팅
+		Animal animal = new Animal();		
+		animal.setAnimalIdCode(animalIdCode);
+		animal.setAnimalAge(animalAge);
+		animal.setAnimalWeight(animalWeight);
+		animal.setAnimalArea(animalArea);
+		animal.setAnimalBreed(animalBreed);
+		animal.setOsCodeAnimal(osCodeAnimal);
+		animal.setAnimalImagePath(animalImagePath);
+		animal.setOsCodeKind(osCodeKind);
+		
 		//마지막코드 숫자값을 저장
 		String lastNum = animaldao.selectLastCode();
 		logger.debug("lastCode is {}", lastNum);
@@ -41,14 +66,68 @@ public class AnimalService {
 		//m_shelterId셋팅
 		animal.setmShelterId(mShelterId);
 		//bl_code 셋팅
-		animal.setBlCode(blCode);	
+		animal.setBlCode(blCode);
+		// 파일이 비어있지않다면 if 블록 실행
+		if(!file.isEmpty()) {
+			// 랜덤아이디 생성
+			UUID uuid = UUID.randomUUID();
+			// 저장파일명을 toString 메서드로 문자열형태로 입력
+			String storeFileName = uuid.toString();
+			String fullFileName = file.getOriginalFilename();
+			logger.debug("addAnimal(...) 메서드 fullFileName is {}",fullFileName);
+			// 마지막 .의 위치 값을 입력
+			int pos = fullFileName.indexOf(".");
+			logger.debug("addAnimal(...) 메서드 pos is {}",pos);
+			// 원본 파일명의 마지막 . 위치 앞의 원본 파일명을 변수에 입력
+			String originalFileName = fullFileName.substring(0, pos);
+			logger.debug("addAnimal(...) 메서드 originalFileName is {}",originalFileName);
+			// 원본 파일명의 마지막 . 위치 뒤의 확장자를 ext 변수에 입력
+			String ext = fullFileName.substring(pos+1);
+			logger.debug("addAnimal(...) 메서드 ext is {}",ext);
+			// file 사이즈를 저장
+			long size = file.getSize();
+			logger.debug("addAnimal(...) 메서드 size is {}",size);
+			
+			File temp = new File(path);
+			if(!temp.exists()) {
+				// 디렉토리가 없을경우 디렉토리 생성
+				temp.mkdirs();
+				logger.debug("addAnimal(...) 메서드 디렉토리 생성 성공");
+			}
+			
+			animal.setAnimalImagePath(storeFileName+"."+ext);
+			File temp2 = new File(path+storeFileName+"."+ext);
+			logger.debug("addAnimal(...) 메서드 temp2 is {}",temp2);
+			
+			try {
+				// 원본 파일을 빈 파일에 복사
+				file.transferTo(temp2);
+			} catch (IllegalStateException e) {
+				// IllegalStateException 예외 발생시 처리
+				e.printStackTrace();
+				if(temp.delete()) {
+					logger.debug("addAnimal(...) 메서드 {} 파일 삭제 성공",temp);
+				}else {
+					logger.debug("addAnimal(...) 메서드 {} 파일 삭제 실패",temp);
+				}
+			} catch (IOException e) {
+				// IOException 예외 발생시 처리
+				e.printStackTrace();
+				if(temp.delete()) {
+					logger.debug("addAnimal(...) 메서드 {} 파일 삭제 성공",temp);
+				}else {
+					logger.debug("addAnimal(...) 메서드 {} 파일 삭제 실패",temp);
+				}
+			}
+		}
 		animaldao.insertAnimal(animal);
 		
 	}
 	//동물리스트
-	public List<AnimalCommand> listAnimal() {
-		logger.debug("listAnimal()메서드 호출");
-		List<AnimalCommand> AnimalList = animaldao.selectAnimalList();
+	public List<AnimalCommand> listAnimal(String blCode) {
+		logger.debug("listAnimal(String blCode)메서드 호출");
+		logger.debug("listAnimal(String blCode)메서드 호출 blCode is {}", blCode);
+		List<AnimalCommand> AnimalList = animaldao.selectAnimalList(blCode);
 		
 		return AnimalList;
 	}

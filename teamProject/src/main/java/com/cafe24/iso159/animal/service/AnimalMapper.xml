@@ -17,6 +17,7 @@
 		<result column="animal_code" property="animalCode"/>
 		<result column="m_member_id" property="mShelterId"/>
 		<result column="bl_code" property="blCode"/>
+		<result column="animal_image_path" property="animalImagePath"></result>
 	</resultMap>
 	
 	<!-- 동물등록 -->
@@ -34,7 +35,8 @@
 				animal_id_code, 
 				animal_weight, 
 				animal_age, 
-				animal_enroll_date) 
+				animal_enroll_date,
+				animal_image_path) 
 			VALUES 
 			(
 				#{animalCode}, 
@@ -47,7 +49,8 @@
 				#{animalIdCode}, 
 				#{animalWeight}, 
 				#{animalAge},
-				now()
+				now(),
+				#{animalImagePath}
 			);
 	</insert>
 	
@@ -57,7 +60,7 @@
 	</select>
 	
 	<!-- 동물 리스트 전체조회-->
-	<select id="selectAnimalList" resultMap="selectAnimalListMap">
+	<select id="selectAnimalList" parameterType="String" resultMap="selectAnimalListMap">
 		SELECT
 			os.os_name
 			,osk.os_name as osNameAnimalKind			
@@ -69,6 +72,7 @@
             , bl.bl_shelter_Name
 			, animal_enroll_date
 			, animal_code
+			, animal_image_path
 		FROM t_animal a
 		INNER JOIN t_overall_status os
 		ON os.os_code = a.os_code_animal
@@ -76,6 +80,9 @@
 		ON osk.os_code = a.os_code_kind
         INNER JOIN t_business_license bl
 		ON a.bl_code = bl.bl_code
+		<if test="_parameter!=null">
+			WHERE bl.bl_code=#{blCode}
+		</if>
 	</select>
 	<!-- 조건검색 -->
 	<select id="selectAnimalcategory" parameterType="java.util.Map" resultMap="selectAnimalListMap">

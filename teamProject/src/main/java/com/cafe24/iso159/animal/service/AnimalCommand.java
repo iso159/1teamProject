@@ -6,19 +6,14 @@ public class AnimalCommand {
 	private String animalBreed;
 	private String animalArea;
 	private String animalIdCode;
-	private int animalWeight;
-	private int animalAge;
+	private String animalWeight;
+	private String animalAge;
 	private String blShelterName;
 	private String animalEnrollDate;
 	private String animalCode;
 	private String mShelterId;
 	private String blCode;
-	public String getBlCode() {
-		return blCode;
-	}
-	public void setBlCode(String blCode) {
-		this.blCode = blCode;
-	}
+	private String animalImagePath;
 	public String getOsName() {
 		return osName;
 	}
@@ -49,16 +44,16 @@ public class AnimalCommand {
 	public void setAnimalIdCode(String animalIdCode) {
 		this.animalIdCode = animalIdCode;
 	}
-	public int getAnimalWeight() {
+	public String getAnimalWeight() {
 		return animalWeight;
 	}
-	public void setAnimalWeight(int animalWeight) {
+	public void setAnimalWeight(String animalWeight) {
 		this.animalWeight = animalWeight;
 	}
-	public int getAnimalAge() {
+	public String getAnimalAge() {
 		return animalAge;
 	}
-	public void setAnimalAge(int animalAge) {
+	public void setAnimalAge(String animalAge) {
 		this.animalAge = animalAge;
 	}
 	public String getBlShelterName() {
@@ -85,12 +80,25 @@ public class AnimalCommand {
 	public void setmShelterId(String mShelterId) {
 		this.mShelterId = mShelterId;
 	}
+	public String getBlCode() {
+		return blCode;
+	}
+	public void setBlCode(String blCode) {
+		this.blCode = blCode;
+	}
+	public String getAnimalImagePath() {
+		return animalImagePath;
+	}
+	public void setAnimalImagePath(String animalImagePath) {
+		this.animalImagePath = animalImagePath;
+	}
 	@Override
 	public String toString() {
 		return "AnimalCommand [osName=" + osName + ", osNameAnimalKind=" + osNameAnimalKind + ", animalBreed="
 				+ animalBreed + ", animalArea=" + animalArea + ", animalIdCode=" + animalIdCode + ", animalWeight="
 				+ animalWeight + ", animalAge=" + animalAge + ", blShelterName=" + blShelterName + ", animalEnrollDate="
 				+ animalEnrollDate + ", animalCode=" + animalCode + ", mShelterId=" + mShelterId + ", blCode=" + blCode
-				+ "]";
+				+ ", animalImagePath=" + animalImagePath + "]";
 	}
+	
 }

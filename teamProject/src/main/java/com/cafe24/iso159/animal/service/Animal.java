@@ -9,9 +9,10 @@ public class Animal {
 	private String animalBreed;
 	private String animalArea;
 	private String animalIdCode;
-	private int animalWeight;
-	private int animalAge;
+	private String animalWeight;
+	private String animalAge;
 	private String animalEnrollDate;
+	private String animalImagePath;
 	public String getAnimalCode() {
 		return animalCode;
 	}
@@ -60,16 +61,16 @@ public class Animal {
 	public void setAnimalIdCode(String animalIdCode) {
 		this.animalIdCode = animalIdCode;
 	}
-	public int getAnimalWeight() {
+	public String getAnimalWeight() {
 		return animalWeight;
 	}
-	public void setAnimalWeight(int animalWeight) {
+	public void setAnimalWeight(String animalWeight) {
 		this.animalWeight = animalWeight;
 	}
-	public int getAnimalAge() {
+	public String getAnimalAge() {
 		return animalAge;
 	}
-	public void setAnimalAge(int animalAge) {
+	public void setAnimalAge(String animalAge) {
 		this.animalAge = animalAge;
 	}
 	public String getAnimalEnrollDate() {
@@ -78,11 +79,19 @@ public class Animal {
 	public void setAnimalEnrollDate(String animalEnrollDate) {
 		this.animalEnrollDate = animalEnrollDate;
 	}
+	public String getAnimalImagePath() {
+		return animalImagePath;
+	}
+	public void setAnimalImagePath(String animalImagePath) {
+		this.animalImagePath = animalImagePath;
+	}
 	@Override
 	public String toString() {
 		return "Animal [animalCode=" + animalCode + ", osCodeAnimal=" + osCodeAnimal + ", blCode=" + blCode
 				+ ", mShelterId=" + mShelterId + ", osCodeKind=" + osCodeKind + ", animalBreed=" + animalBreed
 				+ ", animalArea=" + animalArea + ", animalIdCode=" + animalIdCode + ", animalWeight=" + animalWeight
-				+ ", animalAge=" + animalAge + ", animalEnrollDate=" + animalEnrollDate + "]";
+				+ ", animalAge=" + animalAge + ", animalEnrollDate=" + animalEnrollDate + ", animalImagePath="
+				+ animalImagePath + "]";
 	}
+	
 }
