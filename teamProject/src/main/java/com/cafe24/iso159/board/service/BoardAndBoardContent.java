@@ -1,9 +1,17 @@
 package com.cafe24.iso159.board.service;
 
 public class BoardAndBoardContent {
+	private String boardCode;
 	private String boardName;
-
 	private BoardContent boardcontent;
+	
+	public String getBoardCode() {
+		return boardCode;
+	}
+
+	public void setBoardCode(String boardCode) {
+		this.boardCode = boardCode;
+	}
 
 	public String getBoardName() {
 		return boardName;
@@ -23,6 +31,7 @@ public class BoardAndBoardContent {
 
 	@Override
 	public String toString() {
-		return "BoardAndBoardContent [boardName=" + boardName + ", boardcontent=" + boardcontent + "]";
+		return "BoardAndBoardContent [boardCode=" + boardCode + ", boardName=" + boardName + ", boardcontent="
+				+ boardcontent + "]";
 	}
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cafe24.iso159.board.service.Board;
+import com.cafe24.iso159.board.service.BoardAndBoardContent;
 import com.cafe24.iso159.board.service.BoardContent;
 import com.cafe24.iso159.board.service.BoardService;
 
@@ -70,8 +71,9 @@ public class BoardController {
 	@RequestMapping(value="/board/boardList", method=RequestMethod.GET)
 	public String Board(Model model) {
 		logger.debug("Board()메서드 호출");
-		List<BoardContent> boardContent = boardservice.listBoardContent();
-		model.addAttribute("boardContent", boardContent);
+		List<BoardAndBoardContent> boardlist = boardservice.listBoardContent();
+		logger.debug("Board()메서드 boardlist is {}", boardlist);
+		model.addAttribute("boardlist", boardlist);
 		return "board/boardList";
 	}
 }

@@ -4,7 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.board.service.BoardMapper">
 	<!-- 게시판리스트 띄우는 맵퍼 -->
-	
+	<resultMap type="com.cafe24.iso159.board.service.BoardAndBoardContent" id="selectBoardListMap">
+		<id column="board_code" property="boardCode"/>
+		<result column="board_name" property="boardName"/>
+		<collection property="boardcontent" ofType="com.cafe24.iso159.board.service.BoardContent">
+			<id column="board_content_code" property="boardContentCode"/>
+			<result column="boardNumber" property="boardNumber"/>
+			<result column="m_member_id" property="mMemberId"/>
+			<result column="board_content_title" property="boardContentTitle"/>
+			<result column="board_content_content" property="boardContentContent"/>
+			<result column="board_content_date" property="boardContentDate"/>
+		</collection>	
+	</resultMap>
 	<!-- 게시판 글 등록 -->
 	<insert id="insertBoardContent" parameterType="com.cafe24.iso159.board.service.BoardContent">
 		INSERT INTO
@@ -47,17 +58,20 @@
 	</insert>
 	
 	<!-- 게시판 글 전체 조회 -->
-	<select id="selectBoardContent" resultType="com.cafe24.iso159.board.service.BoardContent">
+	<select id="selectBoardContent" resultMap="selectBoardListMap">
 		SELECT 
 			substring(board_content_code, 20) as boardNumber 
-			,board_content_code as boardContentCode
-			,board_code as boardCode
-			,m_member_id as mMemberId
-			,board_content_title as boardContentTitle
-			,board_content_content as boardContentContent
-			,board_content_date as boardContentDate
+			,board_content_code
+			,b.board_name 
+			,m_member_id
+			,board_content_title
+			,board_content_content 
+			,board_content_date 
 		FROM 
-			t_board_content
+			t_board_content bc
+		INNER JOIN 
+			t_board b
+		ON bc.board_code = b.board_code
 	</select>
 	
 	<!-- 게시판 그룹이름 리스트 조회 -->

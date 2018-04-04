@@ -23,8 +23,8 @@
 	<a href="${pageContext.request.contextPath}/board/boardGroupList">글종류 추가하기</a>
 	<form id="boardContentAdd" action="${pageContext.request.contextPath}/board/boardList" method="post">
 	글종류:<select name="boardCode">
-			<option value="board_code_01">체험후기</option>
-			<option value="board_code_02">입양후기</option>
+			<option value="board_code_1">체험후기</option>
+			<option value="board_code_2">입양후기</option>
 		</select><br>
 	글제목:<input type="text" id="boardContentTitle" name="boardContentTitle"><br>
 	글내용:<br>

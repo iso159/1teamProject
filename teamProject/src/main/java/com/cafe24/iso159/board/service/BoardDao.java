@@ -42,9 +42,9 @@ public class BoardDao {
 		return sqlSessionTemplate.selectOne(nameSpace+"selectLastCode");
 	}
 	//게시판 리스트 조회
-	public List<BoardContent> selectBoardContent(){
+	public List<BoardAndBoardContent> selectBoardContent(){
 		logger.debug("selectBoardContent()메서드 호출");
-		List<BoardContent> BoardContent = sqlSessionTemplate.selectList(nameSpace+"selectBoardContent");
+		List<BoardAndBoardContent> BoardContent = sqlSessionTemplate.selectList(nameSpace+"selectBoardContent");
 		logger.debug("selectBoardContent()메서드 BoardContent is {}", BoardContent);
 		return BoardContent;
 	}

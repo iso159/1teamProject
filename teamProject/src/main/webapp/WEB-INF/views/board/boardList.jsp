@@ -32,13 +32,13 @@
 	</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="i" items="${boardContent}">
+		<c:forEach var="i" items="${boardlist}">
 		<tr>
-		<td>${i.boardNumber}</td>
-		<td>${i.boardCode}</td>
-		<td>${i.boardContentTitle}</td>
-		<td>${i.mMemberId}</td>
-		<td>${i.boardContentDate}</td>
+		<td>${i.boardcontent.boardNumber}</td>
+		<td>${i.boardName}</td>
+		<td>${i.boardcontent.boardContentTitle}</td>
+		<td>${i.boardcontent.mMemberId}</td>
+		<td>${i.boardcontent.boardContentDate}</td>
 		</tr>
 		</c:forEach>
 	</tbody>

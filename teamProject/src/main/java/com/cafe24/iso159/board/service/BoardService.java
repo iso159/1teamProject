@@ -67,9 +67,10 @@ public class BoardService {
 		boardDao.insertBoard(board);
 	}
 	//게시판리스트
-	public List<BoardContent> listBoardContent(){
+	public List<BoardAndBoardContent> listBoardContent(){
 		logger.debug("listBoardContent()메서드 호출");
-		List<BoardContent> boardContent = boardDao.selectBoardContent();
+		List<BoardAndBoardContent> boardContent = boardDao.selectBoardContent();
+		logger.debug("listBoardContent()메서드 boardContent is {}", boardContent);
 		return boardContent;
 	}
 	//게시판 그룹리스트
