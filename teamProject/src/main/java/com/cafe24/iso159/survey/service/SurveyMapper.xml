@@ -154,10 +154,19 @@
 	
 	<!-- 설문지 질문 삭제 -->
 	<delete id="deleteSurveyList"
-		parameterType="com.cafe24.iso159.survey.service.SurveyList">
+			parameterType="com.cafe24.iso159.survey.service.SurveyList">
 		DELETE FROM 
 			t_survey_list 
 		WHERE 
 			survey_list_code = #{surveyListCode}
+	</delete>
+	
+	<!-- 설문지코드로 설문지질문 삭제 -->
+	<delete id="deleteSurveyListBySurveyCode"
+			parameterType="com.cafe24.iso159.survey.service.Survey">
+		DELETE FROM 
+			t_survey_list 
+		WHERE 
+			survey_code  = #{surveyCode}
 	</delete>
 </mapper>

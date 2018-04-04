@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import com.cafe24.iso159.survey.service.SurveyList;
 import com.cafe24.iso159.survey.service.SurveyService;
 
 @Controller
+@Transactional
 public class SurveyController {
 	private static final Logger logger = LoggerFactory.getLogger(SurveyController.class);
 	@Autowired
@@ -156,6 +158,17 @@ public class SurveyController {
 		logger.debug("DeleteSurveyQuestion() GET 메서드 호출 surveyCode is {}",surveyCode);
 		surveyService.removeSurveyList(surveyListCode);
 		return "redirect:/survey/surveyList";
+	}
+	
+	// 회원이 설문조사 하는 화면 요청
+	@RequestMapping(value="/survey/surveyMemberAdd", method = RequestMethod.GET)
+	public String addSurveyMember(HttpSession session) {
+		logger.debug("addSurveyMember() GET 메서드 호출");
+		// 세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
+		if(session.getAttribute("loginId")==null) {
+			return "redirect:/member/login";
+		}
+		return "/survey/surveyMember";
 	}
 	
 }

@@ -82,4 +82,9 @@ public class SurveyDao {
 		logger.debug("deleteSurveyList() 메서드 호출 surveyListCode is {}",surveyListCode);
 		sqlSessionTemplate.delete(nameSpace + "deleteSurveyList", surveyListCode);
 	}
+	// 설문지질문삭제 설문지코드로
+	public void deleteSurveyListBySurveyCode(String surveyCode) {
+		logger.debug("deleteSurveyListBySurveyCode() 메서드 호출 surveyCode is {}",surveyCode);
+		sqlSessionTemplate.delete(nameSpace + "deleteSurveyListBySurveyCode", surveyCode);
+	}
 }

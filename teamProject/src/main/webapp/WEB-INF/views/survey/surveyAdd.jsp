@@ -13,6 +13,24 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#surveyBtn').click(function(){
+        	// 공백들어갈시 팝업창으로 알려줌
+        	let surveyName = $.trim($('#surveyName').val());
+        	let surveyPoint = $.trim($('#surveyPoint').val());
+	          if(surveyName == "" ||surveyPoint == ""){
+	        	  alert('입력되지 않은 사항이 있습니다. 모두 입력해주세요');
+	        	  // 텍스트비움
+	        	  $('#surveyName').val('');
+	        	  $('#surveyPoint').val('');
+	          }else {
+	              $('#formSurveySubmit').submit();
+	          }
+        });
+    });
+</script>
+	
 	<title>설문지</title>
 </head>
 <body class="modern">
@@ -29,10 +47,10 @@
 	    <div>
 	    <!-- 내용 입력 부분 -->
 		<h2>설문지 등록 </h2>
-			<form  id="formSurveySubmit" action="${pageContext.request.contextPath}/survey/surveyAdd" method="post">
+			<form  id="formSurveySubmit" name="actionTag" action="${pageContext.request.contextPath}/survey/surveyAdd" method="post">
 				설문지이름 <input type="text" id="surveyName" name="surveyName"><br>
 				포인트	<input type="text" id="surveyPoint" name="surveyPoint"><hr>
-				<button type="submit" id="surveyBtn" class="btn btn-info">설문지 등록</button>
+				<button type="button" id="surveyBtn" class="btn btn-info">설문지 등록</button>
 			</form>
 			
 		<h2>설문지 리스트 </h2>	

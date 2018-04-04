@@ -123,6 +123,9 @@ public class SurveyService {
 	// 설문지 삭제 
 	public void removeSurvey(String surveyCode) {
 		logger.debug("removeSurvey() 메소드 호출 surveyCode is {}", surveyCode);
+		// 1. 설문지코드로 설문지 질문삭제
+		surveyDao.deleteSurveyListBySurveyCode(surveyCode);
+		// 2. 설문지 삭제
 		surveyDao.deleteSurvey(surveyCode);
 	}
 	

@@ -48,12 +48,11 @@
 				        	<input 	type="text" id="surveyListQuestion" 
 				        			name="surveyListQuestion" 
 				        			placeholder="질문내용"
-				        			cols="100" size="100"/>
+				        			cols="100" size="200"/>
 				        </td>
-				        <td style="width:50px;"></td>
+				        <td><button type="button" id="surveyQBtn">설문지 질문등록</button></td>
 				    </tr>
 				</table>
-				<button type="button" id="surveyQBtn">설문지 질문등록</button>
 				<a href="${pageContext.request.contextPath}/survey/surveyList"><button type="button" class="btn info">설문지조회</button></a>
 			</form>
 			
