@@ -133,8 +133,21 @@ public class AnimalService {
 	}
 	
 	//동물삭제
-	public void removeAnimal(String animalCode) {
+	public void removeAnimal(String animalCode, String animalImagePath,String path) {
+		logger.debug("deleteAnimal()메서드 호출");
 		logger.debug("deleteAnimal()메서드 animalId is {}", animalCode);
+		logger.debug("deleteAnimal()메서드 animalImagePath is {}", animalImagePath);
+		logger.debug("deleteAnimal()메서드 path is {}", path);
+		if(path!=null) {
+			File temp = new File(path+animalImagePath);
+			if(temp.exists()) {
+				if(temp.delete()) {
+					logger.debug("파일 삭제 성공");
+				}else {
+					logger.debug("파일 삭제 실패");
+				}
+			}
+		}
 		animaldao.deleteAnimal(animalCode);
 	}
 	//동물리스트 수정

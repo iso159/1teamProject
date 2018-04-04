@@ -120,7 +120,12 @@
 					<p>동물 체중 : ${i.animalWeight}</p>		
 					<p>동물 등록날짜 : ${i.animalEnrollDate}</p>
 					<p>동물 수정 : <a href="${pageContext.request.contextPath}/animal/animalUpdate?animalCode=${i.animalCode}">수정</a></p>
-					<p>동물 삭제: <a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}">삭제</a></p>				
+					<c:if test="${!empty path and flag eq 'http'}">
+						<p>동물 삭제: <a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}">삭제</a></p>
+					</c:if>
+					<c:if test="${!empty path and flag ne 'http'}">
+						<p>동물 삭제: <a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}&animalImagePath=${i.animalImagePath}">삭제</a></p>
+					</c:if>				
 				</div>
 			</c:forEach>
 	    <div>

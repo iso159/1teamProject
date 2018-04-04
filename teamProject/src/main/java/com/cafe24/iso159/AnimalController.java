@@ -125,8 +125,19 @@ public class AnimalController {
 	}
 	//동물리스트 삭제
 	@RequestMapping(value="/animal/animalDelete", method=RequestMethod.GET)
-	public String animalRemove(@RequestParam(value="animalCode")String animalCode) {
-		animalservice.removeAnimal(animalCode);
+	public String animalRemove(HttpSession session
+								, @RequestParam(value="animalCode")String animalCode
+								, @RequestParam(value="animalImagePath", defaultValue="") String animalImagePath) {
+		logger.debug("animalRemove(...) 메서드 호출");
+		logger.debug("animalRemove(...) 메서드 animalCode is {}", animalCode);
+		logger.debug("animalRemove(...) 메서드 animalImagePath is {}", animalImagePath);
+		String path=null;
+		if(!animalImagePath.equals("")) {
+			path = session.getServletContext().getRealPath("/");
+			path += "resources/animalUpload/";
+		}
+		logger.debug("animalRemove(...) 메서드 path is {}", path);
+		animalservice.removeAnimal(animalCode, animalImagePath, path);
 		return "redirect:/animal/animalList";
 	}
 	//동물리스트 수정 GET방식
