@@ -21,6 +21,7 @@ import com.cafe24.iso159.exp.service.Exp;
 import com.cafe24.iso159.exp.service.ExpAndAnimal;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo;
+import com.cafe24.iso159.exp.service.ExpJournal;
 import com.cafe24.iso159.exp.service.ExpPeriod;
 import com.cafe24.iso159.exp.service.ExpService;
 
@@ -142,16 +143,48 @@ public class ExpController {
 		return "/experience/expList";
 	}
 	
+	// 체험 일지 작성
+	@RequestMapping(value = "/experience/expJournalAdd", method = RequestMethod.POST)
+	public String expJournalAdd(ExpJournal expJournal,HttpSession session) {
+		logger.debug("ExpController 호출 {expJournalAdd.get}.");
+		//넘어온 expCode 값 확인
+		logger.debug("expJournalAdd().get 메서드 expJournal is {}",expJournal);
+		// loginId 를 통해서 입력 아이디 값 받음
+		String loginId = (String)session.getAttribute("loginId");
+		logger.debug("expJournalAdd().get 메서드 loginId is {}",loginId);
+		expJournal.setmExpId(loginId);
+		expService.addExpJournal(expJournal);
+		return "redirect:/experience/expList";
+	}
+	
+	// 체험 일지 작성 폼으로
+	@RequestMapping(value = "/experience/expJournalAdd", method = RequestMethod.GET)
+	public String expJournalAdd(Model model,@RequestParam(value="expCode") String expCode) {
+		logger.debug("ExpController 호출 {expJournalAdd.get}.");
+		//넘어온 expCode 값 확인
+		logger.debug("expJournalAdd().get 메서드 expCode is {}",expCode);
+		// 체험 일지 작성을 위해서 expCode 를 보냄
+		model.addAttribute("expCode", expCode);
+		return "/experience/expJournalAdd";
+	}
+	
 	// 체험 개인 정보 /experience/expInfo 을 get 방식으로 호출할때 발생
 	@RequestMapping(value = "/experience/expInfo", method = RequestMethod.GET)
 	public String ExpOne(Model model,@RequestParam(value="expCode") String expCode) {
 		logger.debug("ExpController 호출 {ExpOne.get}.");
 		//넘어온 expCode 값 확인
 		logger.debug("ExpOne().get 메서드 expCode is {}",expCode);
-		//expCode으로 체험 상세정보 받아옴
-		ExpAndAnimalAndBusinessLicense expAndAnimalAndBusinessLicense = expService.selectExpOneInfo(expCode);
-		logger.debug("ExpOne().get 메서드 expAndAnimalAndBusinessLicense is {}",expAndAnimalAndBusinessLicense);
+		//expCode으로 체험 상세정보,체험일지 작성횟수 확인 받아옴
+		Map<String, Object> map = expService.selectExpOneInfo(expCode);
+		logger.debug("ExpOne().get 메서드 map is {}",map);
+		ExpAndAnimalAndBusinessLicense expAndAnimalAndBusinessLicense = (ExpAndAnimalAndBusinessLicense)map.get("expAndAnimalAndBusinessLicense");
+		int count = (Integer)map.get("count");
+		// 체험 상세정보
 		model.addAttribute("selectExpOneInfo", expAndAnimalAndBusinessLicense);
+		// 체험일지 작성 횟수 확인
+		model.addAttribute("count", count);
+		//체험일지 작성필요여부 확인
+		
 		return "/experience/expInfo";
 	}
 	

@@ -23,11 +23,35 @@ public class ExpDao {
 	//맵퍼 id를 가져올때 사용할 맵퍼 생성
 	private final String nameSpace = "com.cafe24.iso159.exp.service.ExpMapper.";
 	
-	//동물반환완료 클릭시 os_code수정
+	//체험일지 작성
+	public void addExpJournal(ExpJournal expJournal) {
+		logger.debug("ExpDao.java 호출 {addExpJournal}.");
+		logger.debug("addExpJournal() 메서드 실행 expJournal is {}", expJournal);
+		sqlSessionTemplate.insert(nameSpace + "addExpJournal", expJournal);
+	}
+	
+	//exp_journal_code PK값 구하는 부분
+	public int selectExpJournalCode() {
+		logger.debug("ExpDao.java 호출 {selectExpJournalCode}.");
+		int expJournalCode = sqlSessionTemplate.selectOne(nameSpace + "selectExpJournalCode");
+		logger.debug("selectExpJournalCode() 메서드 실행 expJournalCode is {}", expJournalCode+1);
+		return expJournalCode+1;
+	}
+	
+	// 동물반환완료 클릭시 os_code수정
 	public void updateCostIoOsCode(CostIo costIo) {
 		logger.debug("ExpDao.java 호출 {updateCostIoOsCode}.");
 		logger.debug("updateCostIoOsCode() 메서드 실행 costIo is {}", costIo);
 		sqlSessionTemplate.update(nameSpace + "updateCostIoOsCode", costIo);
+	}
+	
+	// 체험일지 작성 횟수 확인
+	public int selectExpCodeCountFind(String expCode) {
+		logger.debug("ExpDao.java 호출 {selectExpCodeCountFind}.");
+		logger.debug("selectExpCodeCountFind() 메서드 실행 expCode is {}", expCode);
+		int count = sqlSessionTemplate.selectOne(nameSpace+"selectExpCodeCountFind", expCode);
+		logger.debug("selectExpCodeCountFind() 메서드 실행 count is {}", count);
+		return count;
 	}
 	
 	// exp_code로 costIoCode 검색

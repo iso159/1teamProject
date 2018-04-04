@@ -82,6 +82,45 @@
 		<result column="m_info_join_date" property="mInfoJoindate"/>
 	</resultMap>
 	
+	<!-- 체험일지 작성 -->
+	<insert id="addExpJournal" parameterType="com.cafe24.iso159.exp.service.ExpJournal">
+			INSERT INTO 
+			t_exp_journal (
+			exp_journal_code, 
+			exp_code, 
+			m_exp_id, 
+			exp_journal, 
+			exp_journal_point, 
+			exp_journal_animal_char, 
+			exp_journal_date) 
+		VALUES 
+			(#{expJournalCode}, 
+			#{expCode}, 
+			#{mExpId}, 
+			#{expJournal}, 
+			#{expJournalPoint}, 
+			#{expJournalAnimalChar}, 
+			now());
+	</insert>
+
+	<!-- exp_journal_code PK값 구하는 부분 -->
+	<select id="selectExpJournalCode" resultType="int">
+		SELECT 
+			MAX(CAST(SUBSTRING(exp_journal_code,18) AS DECIMAL)) 
+		FROM 
+			t_exp_journal
+	</select>
+	
+	<!-- 체험일지 작성 횟수 확인 -->
+	<select id="selectExpCodeCountFind" parameterType="String" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			t_exp_journal 
+		WHERE 
+			exp_code = #{exp_code}
+	</select>
+	
 	<!-- 동물반환완료 클릭시 os_code수정 -->
 	<update id="updateCostIoOsCode" parameterType="com.cafe24.iso159.exp.service.CostIo">
 		UPDATE 
@@ -257,6 +296,8 @@
 			e.os_code_exp = os.os_code
 		WHERE 
 			e.bl_code=#{blCode}
+		ORDER BY 
+			e.exp_reserve_request_date DESC
 	</select>
 	
 	<!-- 체험 삭제 -->

@@ -2,6 +2,7 @@ package com.cafe24.iso159.exp.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,19 @@ public class ExpService {
 	private ExpDao expDao;
 	//디버그용 로거 생성
 	private static final Logger logger = LoggerFactory.getLogger(ExpService.class);
+	
+	// 체험일지 작성
+	public void addExpJournal(ExpJournal expJournal) {
+		//호출된곳 확인
+		logger.debug("ExpService.java 호출 {addExpJournal}.");
+		logger.debug("addExpJournal() 메서드 실행 expJournal is {}", expJournal);
+		//expJournalCode 생성 및 대입
+		int expJournalCode = expDao.selectExpJournalCode();
+		logger.debug("addExpJournal() 메서드 실행 expJournalCode is {}", expJournalCode);
+		expJournal.setExpJournalCode("exp_journal_code_" + expJournalCode);
+		//뷰에서 받아온 정보랑 같이 넘김
+		expDao.addExpJournal(expJournal);
+	}
 	
 	// 보호소 체험진행,종료시 동물,체험 상태 변경
 	public void progressionAnimalAndExpUpdate(Map<String, Object> map) {
@@ -121,12 +135,18 @@ public class ExpService {
 	}
 	
 	//사용자 자신이 신청한 체험 정보 뿌려주는 부분
-	public ExpAndAnimalAndBusinessLicense selectExpOneInfo(String expCode){
+	public Map<String, Object> selectExpOneInfo(String expCode){
 		//호출된곳 확인
 		logger.debug("ExpService.java 호출 {selectExpOneInfo}.");
 		ExpAndAnimalAndBusinessLicense expAndAnimalAndBusinessLicense = expDao.selectExpOneInfo(expCode);
 		logger.debug("selectExpOneInfo() 메서드 실행 expAndAnimalAndBusinessLicense is {}", expAndAnimalAndBusinessLicense);
-		return expAndAnimalAndBusinessLicense;
+		//체험일지 작성 횟수 확인
+		int count = expDao.selectExpCodeCountFind(expCode);
+		//담아서 리턴
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("expAndAnimalAndBusinessLicense", expAndAnimalAndBusinessLicense);
+		map.put("count", count);
+		return map;
 	}
 	
 	//체험 신청할때 날짜선택 뿌려주는 부분
