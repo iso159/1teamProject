@@ -153,8 +153,8 @@
         <li>
           <a href="#" data-theme="_bgp">입양</a>
            <ul style="height: 0px; overflow: hidden">
-           <c:set var="right" value="${rightName}"></c:set>
-          	<c:if test="${right eq '체험자'}">
+         	<c:set var="right" value="${rightName}"></c:set>
+          	<c:if test="${right eq '회원'}">
 	            <li>
 	              <a href="${pageContext.request.contextPath}/adopt/adoptRequest" data-theme="_bgpd">입양신청</a>
 	            </li>
@@ -220,17 +220,6 @@
           </c:if>
           </ul>
          </li>
-         <li>
-          <a href="#" data-theme="_bgp">게시판</a>
-        	<ul style="height: 0px; overflow: hidden">
-            <li>
-              <a href="${pageContext.request.contextPath}/board/boardAdd" data-theme="_bgpd">게시판등록</a>
-            </li>
-            <li>
-              <a href="${pageContext.request.contextPath}/board/boardList" data-theme="_bgpd">게시판리스트</a>
-            </li>
-          </ul>
-        </li>
     </nav>
   </div>
 </section>
