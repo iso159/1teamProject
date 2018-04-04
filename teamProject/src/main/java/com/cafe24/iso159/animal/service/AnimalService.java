@@ -138,9 +138,90 @@ public class AnimalService {
 		animaldao.deleteAnimal(animalCode);
 	}
 	//동물리스트 수정
-	public void modifyAnimal(Animal animal) {
+	public void modifyAnimal(AnimalAndFile animalAndFile, MultipartFile file, String path, String filePath,String animalCode) {
+		logger.debug("modifyAnimal(...)메서드 animal 호출");
+		logger.debug("modifyAnimal(...)메서드 animal is {}", animalAndFile);
+		logger.debug("modifyAnimal(...)메서드 file is {}", file);
+		logger.debug("modifyAnimal(...)메서드 path is {}", path);
+		logger.debug("modifyAnimal(...)메서드 filePath is {}", filePath);
 		
-		logger.debug("modifyAnimal()메서드 animal is {}", animal);
+		// 동물정보 변수에 입력
+		String animalAge = animalAndFile.getAnimalAge();
+		String animalWeight = animalAndFile.getAnimalWeight();
+		String animalArea = animalAndFile.getAnimalArea();
+		String animalBreed = animalAndFile.getAnimalBreed();
+		String animalImagePath = animalAndFile.getAnimalImagePath();
+		
+		// 변수를 객체의 필드에 세팅
+		Animal animal = new Animal();
+		animal.setAnimalCode(animalCode);
+		animal.setAnimalAge(animalAge);
+		animal.setAnimalWeight(animalWeight);
+		animal.setAnimalArea(animalArea);
+		animal.setAnimalBreed(animalBreed);
+		animal.setAnimalImagePath(animalImagePath);
+		
+		if(!file.isEmpty()) {
+			// 랜덤아이디 생성
+			UUID uuid = UUID.randomUUID();
+			// 저장파일명을 toString 메서드로 문자열형태로 입력
+			String storeFileName = uuid.toString();
+			String fullFileName = file.getOriginalFilename();
+			logger.debug("modifyAnimal(...) 메서드 fullFileName is {}",fullFileName);
+			// 마지막 .의 위치 값을 입력
+			int pos = fullFileName.indexOf(".");
+			logger.debug("modifyAnimal(...) 메서드 pos is {}",pos);
+			// 원본 파일명의 마지막 . 위치 앞의 원본 파일명을 변수에 입력
+			String originalFileName = fullFileName.substring(0, pos);
+			logger.debug("modifyAnimal(...) 메서드 originalFileName is {}",originalFileName);
+			// 원본 파일명의 마지막 . 위치 뒤의 확장자를 ext 변수에 입력
+			String ext = fullFileName.substring(pos+1);
+			logger.debug("modifyAnimal(...) 메서드 ext is {}",ext);
+			// file 사이즈를 저장
+			long size = file.getSize();
+			logger.debug("modifyAnimal(...) 메서드 size is {}",size);
+			
+			File temp = new File(path);
+			if(!temp.exists()) {
+				// 디렉토리가 없을경우 디렉토리 생성
+				temp.mkdirs();
+				logger.debug("modifyAnimal(...) 메서드 디렉토리 생성 성공");
+			}
+			temp = new File(path + filePath);
+			logger.debug("modifyAnimal(...) 메서드 temp is {}", temp);
+			if(temp.exists()) {
+				if(temp.delete()) {
+					logger.debug("파일 삭제 성공");
+				}else {
+					logger.debug("파일 삭제 실패");
+				}
+			}
+			
+			animal.setAnimalImagePath(storeFileName+"."+ext);
+			File temp2 = new File(path+storeFileName+"."+ext);
+			logger.debug("modifyAnimal(...) 메서드 temp2 is {}",temp2);
+			
+			try {
+				// 원본 파일을 빈 파일에 복사
+				file.transferTo(temp2);
+			} catch (IllegalStateException e) {
+				// IllegalStateException 예외 발생시 처리
+				e.printStackTrace();
+				if(temp.delete()) {
+					logger.debug("modifyAnimal(...) 메서드 {} 파일 삭제 성공",temp);
+				}else {
+					logger.debug("modifyAnimal(...) 메서드 {} 파일 삭제 실패",temp);
+				}
+			} catch (IOException e) {
+				// IOException 예외 발생시 처리
+				e.printStackTrace();
+				if(temp.delete()) {
+					logger.debug("modifyAnimal(...) 메서드 {} 파일 삭제 성공",temp);
+				}else {
+					logger.debug("modifyAnimal(...) 메서드 {} 파일 삭제 실패",temp);
+				}
+			}
+		}
 		animaldao.updateAnimal(animal);
 	}
 	//동물리스트 한개 조회

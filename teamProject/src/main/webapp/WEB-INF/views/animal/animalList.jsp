@@ -27,9 +27,9 @@
 				dataType:'json',
 				data: selectAnimalStatusKind,
 				success: function(msg){
-					itemSize = Object.keys(msg.response.body.items.item).length;
-					$('#animalList').empty();
+					$('#animalList').empty();					
 					if($('#animalStatusKind').val() === "yugi"){
+						itemSize = Object.keys(msg.response.body.items.item).length;
 						console.log('유기동물');
 						for(let i=0; i<itemSize; i++){
 							let divTag = '<div data-layout="ch8 ec4"> <img class="MOD_STAFF_Picture" src="'+ msg.response.body.items.item[i].filename + '" alt="" data-theme="_is1">';
@@ -55,7 +55,7 @@
 						divTag += '<p>동물 나이 : ${i.animalAge}</p>'+'<p>보호소 위치 : ${i.animalArea}</p>'+'<p>보호소 명 : ${i.blShelterName}</p>';
 						divTag += '<p>동물 상태 : ${i.osName}</p>' + '<p>동물 체중 : ${i.animalWeight}</p>' + '<p>동물 등록날짜 : ${i.animalEnrollDate}</p>';
 						divTag += '<p>동물 수정 : <a href="${pageContext.request.contextPath}/animal/animalUpdate?animalCode=${i.animalCode}">수정</a></p>';
-						divTag += '<p>동물 삭제: <a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}">삭제</a></p>';	
+						divTag += '<p>동물 삭제 : <a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}">삭제</a></p>';	
 						divTag += '</div> </c:forEach>'
 						$('#animalList').append(divTag);
 					}

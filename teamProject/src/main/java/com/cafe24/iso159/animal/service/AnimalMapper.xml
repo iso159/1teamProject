@@ -137,9 +137,11 @@
 		SET 
 			animal_breed=#{animalBreed}
 			, animal_area=#{animalArea}
-			, animal_id_code=#{animalIdCode}
 			, animal_weight=#{animalWeight}
 			, animal_age=#{animalAge} 
+		<if test="animalImagePath != null">
+			, animal_image_path=#{animalImagePath} 
+		</if>
 		WHERE 
 			animal_code=#{animalCode};
 	</update>
@@ -152,6 +154,7 @@
 			, animal_id_code as animalIdCode
 			, animal_weight as animalWeight
 			, animal_age as animalAge
+			, animal_image_path as animalImagePath
 		From 
 			t_animal
 		WHERE
