@@ -156,7 +156,7 @@
          	<c:set var="right" value="${rightName}"></c:set>
           	<c:if test="${right eq '회원'}">
 	            <li>
-	              <a href="${pageContext.request.contextPath}/adopt/adoptRequest" data-theme="_bgpd">입양신청</a>
+	              <a href="${pageContext.request.contextPath}/animal/animalList" data-theme="_bgpd">입양신청</a>
 	            </li>
             </c:if>
             <c:if test="${right eq '관리자' or right eq '보호소'}">
