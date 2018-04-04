@@ -48,4 +48,11 @@ public class BoardDao {
 		logger.debug("selectBoardContent()메서드 BoardContent is {}", BoardContent);
 		return BoardContent;
 	}
+	//게시판 글 조회
+	public BoardAndBoardContent boardDetail(String boardContentCode) {
+		//매개변수 확인
+		logger.debug("boardDetail()메서드 boardContentCode is {}", boardContentCode);
+		BoardAndBoardContent boardcontent = sqlSessionTemplate.selectOne(nameSpace+"boardDetail", boardContentCode);
+		return boardcontent;
+	}
 }

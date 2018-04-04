@@ -156,10 +156,7 @@
          	<c:set var="right" value="${rightName}"></c:set>
           	<c:if test="${right eq '회원'}">
 	            <li>
-	              <a href="${pageContext.request.contextPath}/animal/animalList" data-theme="_bgpd">입양신청</a>
-	            </li>
-	            <li>
-	              <a href="${pageContext.request.contextPath}/adopt/adoptMyList" data-theme="_bgpd">나의입양리스트</a>
+	              <a href="${pageContext.request.contextPath}/adopt/adoptRequest" data-theme="_bgpd">입양신청</a>
 	            </li>
             </c:if>
             <c:if test="${right eq '관리자' or right eq '보호소'}">
@@ -223,6 +220,21 @@
           </c:if>
           </ul>
          </li>
+        <li>
+		<c:set var="login" value="${loginId}"></c:set>
+		<c:set var="right" value="${rightName}"></c:set>
+			<a href="#" data-theme="_bgp">게시판</a>
+			<ul style="height: 0px; overflow: hidden">
+			<c:if test="${right eq '회원'}">
+            <li>
+              <a href="${pageContext.request.contextPath}/board/boardAdd" data-theme="_bgpd">게시판등록</a>
+            </li>
+            </c:if>
+            <li>
+              <a href="${pageContext.request.contextPath}/board/boardList" data-theme="_bgpd">게시판리스트</a>
+            </li>
+          </ul>
+        </li>
     </nav>
   </div>
 </section>

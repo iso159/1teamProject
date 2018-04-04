@@ -73,6 +73,21 @@
 			t_board b
 		ON bc.board_code = b.board_code
 	</select>
+	<!-- 게시판 글 상세조회 -->
+	<select id="boardDetail" parameterType="string" resultMap="selectBoardListMap">
+		SELECT 
+			b.board_name 
+			,m_member_id 
+			,board_content_title
+			,board_content_content 
+			,board_content_date 
+		FROM 
+			t_board_content bc
+		INNER JOIN 
+			t_board b
+		ON bc.board_code = b.board_code
+        WHERE bc.board_content_code = #{boardContentCode}
+	</select>
 	
 	<!-- 게시판 그룹이름 리스트 조회 -->
 	<select id="selectBoard" resultType="com.cafe24.iso159.board.service.Board">

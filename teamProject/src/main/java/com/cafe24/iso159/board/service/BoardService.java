@@ -73,6 +73,13 @@ public class BoardService {
 		logger.debug("listBoardContent()메서드 boardContent is {}", boardContent);
 		return boardContent;
 	}
+	//게시판 글 조회
+	public BoardAndBoardContent detailBoard(String boardContentCode) {
+		logger.debug("detailBoard()메서드 호출");
+		BoardAndBoardContent boardcontent = boardDao.boardDetail(boardContentCode);
+		logger.debug("detailBoard()메서드 boardcontent is {}", boardcontent);
+		return boardcontent;
+	}
 	//게시판 그룹리스트
 	public List<Board> listBoard(){
 		logger.debug("listBoard()메서드 호출");

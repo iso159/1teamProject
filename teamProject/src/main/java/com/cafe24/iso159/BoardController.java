@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.iso159.board.service.Board;
 import com.cafe24.iso159.board.service.BoardAndBoardContent;
@@ -75,5 +76,13 @@ public class BoardController {
 		logger.debug("Board()메서드 boardlist is {}", boardlist);
 		model.addAttribute("boardlist", boardlist);
 		return "board/boardList";
+	}
+	//게시판 상세페이지 요청
+	@RequestMapping(value="/board/boardDetail", method=RequestMethod.GET)
+	public String BoardDetail(Model model, @RequestParam(value="boardContentCode",required=true)String boardContentCode) {
+		logger.debug("BoardDetail()메서드 호출");
+		BoardAndBoardContent boardcontent = boardservice.detailBoard(boardContentCode);
+		model.addAttribute("boardcontent", boardcontent);
+		return "board/boardDetail";
 	}
 }

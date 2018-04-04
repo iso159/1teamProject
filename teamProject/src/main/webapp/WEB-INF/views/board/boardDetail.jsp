@@ -20,31 +20,14 @@
 	  <div data-layout="_r">
 	    <div>
 	    <!-- 내용 입력 부분 -->
-<h2>게시판</h2>
-<table>
-	<thead>
-	<tr>
-	<td>번호</td>
-	<td>분류</td>
-	<td>글제목</td>
-	<td>작성자</td>
-	<td>등록날짜</td>
-	</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="i" items="${boardlist}">
-		<tr>
-		<td>${i.boardcontent.boardNumber}</td>
-		<td>${i.boardName}</td>
-		<td><a href="${pageContext.request.contextPath}/board/boardDetail?boardContentCode=${i.boardcontent.boardContentCode}">${i.boardcontent.boardContentTitle}</a></td>
-		<td>${i.boardcontent.mMemberId}</td>
-		<td>${i.boardcontent.boardContentDate}</td>
-		</tr>
-		</c:forEach>
-	</tbody>
-	</table>
-	<a href="${pageContext.request.contextPath}/board/boardAdd">글등록</a><br>
-	<a href="${pageContext.request.contextPath}/"><button type="button" class="btn btn-success">홈으로</button></a>
+	<!-- 게시판그룹이름 -->
+	<h2>${boardcontent.boardName}</h2>
+	<!-- 게시판제목 -->
+	<h3>${boardcontent.boardcontent.boardContentTitle}</h3>
+	<!-- 게시판내용시작 -->
+	${boardcontent.boardcontent.boardContentContent}<br>
+	<p>&nbsp;</p>
+	
 	<!-- 내용 입력 부분 끝 -->
 		</div>
 	  </div>
