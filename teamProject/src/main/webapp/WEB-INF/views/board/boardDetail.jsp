@@ -20,14 +20,19 @@
 	  <div data-layout="_r">
 	    <div>
 	    <!-- 내용 입력 부분 -->
+    <c:set var="login" value="${loginId}"></c:set>
 	<!-- 게시판그룹이름 -->
 	<h2>${boardcontent.boardName}</h2>
+	<hr color="gray" width=100%>
 	<!-- 게시판제목 -->
-	<h3>${boardcontent.boardcontent.boardContentTitle}</h3>
+	<h4>${boardcontent.boardcontent.boardContentTitle}</h4>
+	<hr color="lightgray" width=100%>
 	<!-- 게시판내용시작 -->
 	${boardcontent.boardcontent.boardContentContent}<br>
 	<p>&nbsp;</p>
-	
+	<c:if test="${login eq boardcontent.boardcontent.mMemberId}">
+	<button>수정하기</button>
+	</c:if>
 	<!-- 내용 입력 부분 끝 -->
 		</div>
 	  </div>

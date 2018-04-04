@@ -27,11 +27,13 @@ public class BoardController {
 	
 	//게시판 글 등록 페이지로 이동
 	@RequestMapping(value="/board/boardAdd", method=RequestMethod.GET)
-	public String boardAdd(HttpSession session) {
+	public String boardAdd(HttpSession session, Model model) {
 		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
+		List<Board> board = boardservice.listBoard();
+		model.addAttribute("board", board);
 		return "board/boardAdd";
 	}
 	//게시판 글 등록
@@ -41,6 +43,7 @@ public class BoardController {
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
+		
 		logger.debug("BoardAdd()메서드 호출");
 		String mId = (String)session.getAttribute("loginId");
 		logger.debug("BoardAdd()메서드 mId is {}", mId);
