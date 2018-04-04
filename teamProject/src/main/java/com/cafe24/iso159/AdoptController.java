@@ -80,8 +80,24 @@ public class AdoptController {
 		logger.debug("addAdopt() 메서드 path is {}",path);
 		
 		adoptService.addAdopt(adoptCommand, path, ckfile);
-		return "redirect:/adopt/adoptList";	//입양신청 완료 후 입양리스트로
+		return "redirect:/adopt/adoptMyList";	//입양신청 완료 후 나의입양리스트화면으로
 		
+	}
+	
+	// 나의 입양신청 리스트 화면 요청 
+	@RequestMapping(value="/adopt/adoptMyList", method = RequestMethod.GET)
+	public String listAdoptMyList(HttpSession session, Model model) {
+		logger.debug("listAdoptMyList() 메서드 호출");
+		// 세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
+		if(session.getAttribute("loginId")==null) {
+			return "redirect:/member/login";
+		}
+		String mMemberId = (String) session.getAttribute("loginId");
+		List<AdoptRequestAndOsCodeAnimal> list = adoptService.listAdoptRequestMember(mMemberId);
+		logger.debug("listAdoptMyList메서드 list is {}",list);
+		model.addAttribute("list", list);
+		
+		return "/adopt/adoptMyList";
 	}
 	
 	// 파일확인페이지 요청

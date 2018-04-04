@@ -151,9 +151,9 @@
 	        <when test="OsCategory=='os_adopt_4_1_8'">
 	        WHERE ar.os_code_adopt =#{OsCategory}
 	        </when>
-	        <otherwise>
-	        WHERE ar.os_code_adopt =#{OsCategory}
-	        </otherwise>
+	        <when test="OsCategory=='전체조회'">
+	        </when>
+	       
         </choose>
   		ORDER BY 
 			ar.adopt_request_date DESC
@@ -190,6 +190,40 @@
 		ON
 			os2.os_code = a.os_code_animal
 		
+		ORDER BY ar.adopt_request_date DESC
+	</select>
+	
+	<!-- 회원아이디로 입양신청조회 -->
+	<select id="selectAdoptRequestByMemberId"
+			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest"
+			resultMap="selectAdoptRequestMap">
+		SELECT 
+			ar.adopt_request_code, 
+			ar.m_member_id,  
+			os1.os_name as osCodeAdopt, 
+            ar.animal_code, 
+            os2.os_name as osCodeAnimal,
+            ar.adopt_request_reason,
+			ar.adopt_request_date, 
+			ar.adopt_request_advice_date,
+			ar.adopt_decide_date 
+			
+		FROM 
+			t_adopt_request ar 
+		
+        INNER JOIN 
+			t_overall_status os1
+		ON 
+			os1.os_code = ar.os_code_adopt 
+        INNER JOIN
+			t_animal a
+		ON	
+			ar.animal_code = a.animal_code
+        INNER JOIN
+			t_overall_status os2
+		ON
+			os2.os_code = a.os_code_animal
+		WHERE m_member_id = #{mMemberId}
 		ORDER BY ar.adopt_request_date DESC
 	</select>
 	

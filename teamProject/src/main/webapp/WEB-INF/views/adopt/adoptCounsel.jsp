@@ -39,37 +39,35 @@
 	<!-- 메인 화면  -->
 	<!-- 메인 화면 내용 부분 -->
 	<div class="container">
-	<!-- 메인내용 시작 : Text | Text -->
-	<section>
-	  <div data-layout="_r">
-	    <div>
-	    <!-- 내용 입력 부분 -->
-		<h2>상담내용입력</h2>
-		<c:set var="aRC" value="${adoptRequestCode}"/>
-		<form id="addForm" action="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${adoptRequestCode}" method="post">
-			<c:forEach var="surveyQuestion" items="${list}">
-					<tr>
-						<td><input 	type="textarea" cols="1000" size="5000"
-									style="background-color:transparent;border:0"
-									value="<br>${surveyQuestion.surveyListQuestion}<br>"
-									id="adoptRequestAdviceContents"
-									name="adoptRequestAdviceContents" readonly>
-						</td><br>
-						<td>
-							<input	type="textarea" cols="1000" size="5000"
-									id="adoptRequestAdviceContents"
-									name="adoptRequestAdviceContents">
-						</td><br>
-					</tr>
-			</c:forEach>
-			<button id="addBtn" type="button" class="btn btn-info">상담완료</button>
-		</form>
-		<!-- 내용 입력 부분 끝 -->
-			</div>
-		  </div>
-		</section>
-		<!-- 메인내용 끝 : Text | Text -->
-		</div>
+<div class="col-md-9 .col-md-push-3">
+    <div>  
+    	<c:set var="aRC" value="${adoptRequestCode}"/>
+        <form role="form-control" action="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${adoptRequestCode}" method="post">
+        <br style="clear:both">
+                    <h3 style="margin-bottom: 25px; text-align: center;">상담내용</h3>
+    				<c:forEach var="surveyQuestion" items="${list}">
+    				<div class="form-group">
+						<input  type="textarea" 
+								class="form-control"
+								value="<br>${surveyQuestion.surveyListQuestion}<br>"
+								id="adoptRequestAdviceContents"
+								name="adoptRequestAdviceContents" readonly
+								>
+					</div>
+					<div class="form-group">
+						<input 	type="textarea" 
+								class="form-control" 
+								placeholder="질문에 답해주세요" 
+								id="adoptRequestAdviceContents"
+								name="adoptRequestAdviceContents"
+								>
+					</div>
+		</c:forEach>
+		<button id="addBtn" type="button" class="btn btn-primary pull-right">상담완료</button>			
+        </form>
+    </div>
+</div>
+</div>
 		<!-- 메인 화면 내용 부분 끝 -->
 		
 		<!-- 메인화면 끝 -->
@@ -78,3 +76,4 @@
 		<!-- foot 부분 끝 -->
 </body>
 </html>
+

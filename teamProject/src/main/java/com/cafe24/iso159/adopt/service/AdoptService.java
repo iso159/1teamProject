@@ -191,6 +191,13 @@ public class AdoptService {
 			List<AdoptRequestAndOsCodeAnimal> list = adoptDao.selectAdoptRequest();
 			return list;
 		}
+	// 입양신청 개인 리스트
+		public List<AdoptRequestAndOsCodeAnimal> listAdoptRequestMember(String mMemberId){
+			logger.debug("listAdoptRequestMember() 메소드 호출 mMemberId is {}", mMemberId);
+			List<AdoptRequestAndOsCodeAnimal> list = adoptDao.selectAdoptRequestByMemberId(mMemberId);
+			logger.debug("listAdoptRequestMember() 메소드 호출 list is {}", list);
+			return list;
+		}
 		
 	// 입양신청파일 조회
 		public List<AdoptRequestFile> listAdoptFileList(String adoptRequestCode){

@@ -55,6 +55,13 @@ public class AdoptDao {
 		logger.debug("List<AdoptCommand> selectAdoptCategory() 메서드 호출 list is {}",list);
 		return list;
 	}
+	// 입양신청 회원아이디로 개인조회
+	public List<AdoptRequestAndOsCodeAnimal> selectAdoptRequestByMemberId(String mMemberId){
+		logger.debug("selectAdoptRequestByMemberId() 메서드 호출 mMemberId is {}", mMemberId);
+		List<AdoptRequestAndOsCodeAnimal> list = sqlSessionTemplate.selectList(nameSpace + "selectAdoptRequestByMemberId",mMemberId);
+		logger.debug("selectAdoptRequestByMemberId() list is {}", list);
+		return list;
+	}
 	
 	// 입양신청 확인
 	public void updateOsCodeAdoptRequest(String adoptRequestCode) {
