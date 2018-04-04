@@ -75,8 +75,9 @@
 	</select>
 	<!-- 게시판 글 상세조회 -->
 	<select id="boardDetail" parameterType="string" resultMap="selectBoardListMap">
-		SELECT 
-			b.board_name 
+		SELECT
+			board_content_code 
+			,b.board_name 
 			,m_member_id 
 			,board_content_title
 			,board_content_content 

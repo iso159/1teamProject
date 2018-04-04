@@ -20,6 +20,8 @@
 	  <div data-layout="_r">
 	    <div>
 	    <!-- 내용 입력 부분 -->
+	    <h3>게시글 수정하기</h3>
+	    <p>&nbsp;</p>
 	   <table>
 		   <tr>
 		   <td>
@@ -31,10 +33,10 @@
 		   </td>
 		   </tr>
 		   <tr>
-		   	<td><input type="text" name="boardName" value="${boardone.boardName}"></td>
+		   	<td><input type="text" name="boardName" value="${bc.boardcontent.boardContentTitle}"></td>
 		   </tr>
 		   <tr>
-		   	<td><textarea rows="20" cols="50" name="boardContent">${boardone.boardContent}</textarea>
+		   	<td><textarea rows="20" cols="100" name="boardContent">${bc.boardcontent.boardContentContent}</textarea>
 		   </tr>	   
 	   </table>	   
 		<!-- 내용 입력 부분 끝 -->

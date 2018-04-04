@@ -236,6 +236,11 @@
             <li>
               <a href="${pageContext.request.contextPath}/board/boardList" data-theme="_bgpd">게시판리스트</a>
             </li>
+            <c:if test="${right eq '관리자'}">
+            <li>
+              <a href="${pageContext.request.contextPath}/board/boardGroupList" data-theme="_bgpd">게시판관리</a>
+            </li>
+            </c:if>
           </ul>
         </li>
     </nav>

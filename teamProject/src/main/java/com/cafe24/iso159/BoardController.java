@@ -36,6 +36,15 @@ public class BoardController {
 		model.addAttribute("board", board);
 		return "board/boardAdd";
 	}
+	//게시판 수정 페이지로 이동
+	@RequestMapping(value="/board/boardContentUpdate", method=RequestMethod.GET)
+	public String boardContentModify(Model model, @RequestParam(value="boardContentCode",required=true)String boardContentCode) {
+		List<Board> board = boardservice.listBoard();
+		model.addAttribute("board", board);
+		BoardAndBoardContent bc = boardservice.detailBoard(boardContentCode);
+		model.addAttribute("bc", bc);
+		return "board/boardContentUpdate";
+	}
 	//게시판 글 등록
 	@RequestMapping(value="/board/boardList", method=RequestMethod.POST)
 	public String BoardAdd(HttpSession session, BoardContent boardcontent) {
@@ -84,8 +93,8 @@ public class BoardController {
 	@RequestMapping(value="/board/boardDetail", method=RequestMethod.GET)
 	public String BoardDetail(Model model, @RequestParam(value="boardContentCode",required=true)String boardContentCode) {
 		logger.debug("BoardDetail()메서드 호출");
-		BoardAndBoardContent boardcontent = boardservice.detailBoard(boardContentCode);
-		model.addAttribute("boardcontent", boardcontent);
+		BoardAndBoardContent bc = boardservice.detailBoard(boardContentCode);
+		model.addAttribute("bc", bc);
 		return "board/boardDetail";
 	}
 }

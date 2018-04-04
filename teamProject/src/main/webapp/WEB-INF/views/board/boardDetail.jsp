@@ -22,16 +22,16 @@
 	    <!-- 내용 입력 부분 -->
     <c:set var="login" value="${loginId}"></c:set>
 	<!-- 게시판그룹이름 -->
-	<h2>${boardcontent.boardName}</h2>
+	<h2>${bc.boardName}</h2>
 	<hr color="gray" width=100%>
 	<!-- 게시판제목 -->
-	<h4>${boardcontent.boardcontent.boardContentTitle}</h4>
+	<h4>${bc.boardcontent.boardContentTitle}</h4>
 	<hr color="lightgray" width=100%>
 	<!-- 게시판내용시작 -->
-	${boardcontent.boardcontent.boardContentContent}<br>
+	${bc.boardcontent.boardContentContent}<br>
 	<p>&nbsp;</p>
-	<c:if test="${login eq boardcontent.boardcontent.mMemberId}">
-	<button>수정하기</button>
+	<c:if test="${login eq bc.boardcontent.mMemberId}">
+	<a href="${pageContext.request.contextPath}/board/boardContentUpdate?boardContentCode=${bc.boardcontent.boardContentCode}"><button>수정하기</button></a>
 	</c:if>
 	<!-- 내용 입력 부분 끝 -->
 		</div>
