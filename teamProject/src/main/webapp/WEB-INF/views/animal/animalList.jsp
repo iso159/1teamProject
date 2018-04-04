@@ -46,7 +46,10 @@
 					}else{
 						console.log('등록동물');
 						let divTag = '<c:forEach var="i" items="${AnimalList}">	';
-						divTag += '<div data-layout="ch8 ec4">' + '<img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" alt="" data-theme="_is1">';
+						divTag += '<div data-layout="ch8 ec4">' + '<c:set var="flag" value="${f:substring(i.animalImagePath,0,4)}"></c:set><c:set var="path" value="${i.animalImagePath}"></c:set>';
+						divTag += '<c:if test="${empty path}"><img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" alt="" data-theme="_is1"></c:if>';
+						divTag += '<c:if test="${!empty path and flag eq \'http\'}"><img class="MOD_STAFF_Picture" src="${path}" alt="" data-theme="_is1"></c:if>';
+						divTag += '<c:if test="${!empty path and flag ne \'http\'}"><img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" alt="" data-theme="_is1"></c:if>';
 						divTag += '<p class="MOD_STAFF_Name" data-theme="_bb1"><a href="${pageContext.request.contextPath}/animal/animalDetail?animalCode=${i.animalCode}">${i.animalIdCode}</a></p>';	
 						divTag += '<p class="MOD_STAFF_Positon">${i.osNameAnimalKind} ${i.animalBreed}</p>';
 						divTag += '<p>동물 나이 : ${i.animalAge}</p>'+'<p>보호소 위치 : ${i.animalArea}</p>'+'<p>보호소 명 : ${i.blShelterName}</p>';
