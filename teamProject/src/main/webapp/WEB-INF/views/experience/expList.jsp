@@ -41,7 +41,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="a" items="${expAndAnimal}" varStatus="status">
+						<c:forEach var="a" items="${expAndAnimal}">
 						<tr>
 							<td>${a.animal.animalBreed}</td>
 							<td>${a.exp.expReserveRequestDate}</td>

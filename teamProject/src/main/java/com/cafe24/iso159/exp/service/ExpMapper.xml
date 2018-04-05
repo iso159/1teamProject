@@ -82,6 +82,42 @@
 		<result column="m_info_join_date" property="mInfoJoindate"/>
 	</resultMap>
 	
+	<!-- 체험 일지 수정 -->
+	<update id="updateExpJournal" parameterType="com.cafe24.iso159.exp.service.ExpJournal">
+		UPDATE 
+			t_exp_journal 
+		SET 
+			exp_journal=#{expJournal}, 
+			exp_journal_animal_char=#{expJournalAnimalChar} 
+		WHERE 
+			exp_journal_code=#{expJournalCode};
+	</update>
+	
+	<!-- 해당번호 체험일지 수정 내용 조회 -->
+	<select id="selectExpJournalInfo" resultType="com.cafe24.iso159.exp.service.ExpJournal" parameterType="String">
+		SELECT 
+			exp_journal AS expJournal,
+			exp_journal_animal_char AS expJournalAnimalChar
+		FROM 
+			t_exp_journal 
+		WHERE 
+			exp_journal_code = #{expJournalCode}
+	</select>
+	
+	<!-- 해당 체험자 체험일지 리스트 -->
+	<select id="selectExpJournalList" resultType="com.cafe24.iso159.exp.service.ExpJournal" parameterType="String">
+		SELECT 
+			exp_journal_code AS expJournalCode,
+			exp_journal AS expJournal,
+			exp_journal_point AS expJournalPoint,
+			exp_journal_animal_char AS expJournalAnimalChar,
+			exp_journal_date AS expJournalDate 
+		FROM 
+			t_exp_journal 
+		WHERE 
+			exp_code = #{expCode}
+	</select>
+	
 	<!-- 체험일지 작성 -->
 	<insert id="addExpJournal" parameterType="com.cafe24.iso159.exp.service.ExpJournal">
 			INSERT INTO 
@@ -159,7 +195,10 @@
 		UPDATE 
 			t_exp 
 		SET 
-			os_code_exp=#{osCodeExp}
+			os_code_exp=#{osCodeExp} 
+			<if test="osCodeCostReturn != null">
+			,os_code_cost_return=#{osCodeCostReturn}
+			</if>
 		WHERE 
 			exp_code=#{expCode}
 	</update>

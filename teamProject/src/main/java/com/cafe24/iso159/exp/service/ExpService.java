@@ -24,6 +24,31 @@ public class ExpService {
 	//디버그용 로거 생성
 	private static final Logger logger = LoggerFactory.getLogger(ExpService.class);
 	
+	//체험 일지 수정
+	public void updateExpJournal(ExpJournal expJournal) {
+		logger.debug("ExpService.java 호출 {updateExpJournal}.");
+		logger.debug("updateExpJournal() 메서드 실행 expJournal is {}", expJournal);
+		expDao.updateExpJournal(expJournal);
+	}
+	
+	//해당번호 체험일지 수정 내용 조회
+	public ExpJournal selectExpJournalInfo(String expJournalCode) {
+		logger.debug("ExpService.java 호출 {selectExpJournalInfo}.");
+		logger.debug("selectExpJournalInfo() 메서드 실행 expJournalCode is {}", expJournalCode);
+		ExpJournal expJournal = expDao.selectExpJournalInfo(expJournalCode);
+		logger.debug("selectExpJournalInfo() 메서드 실행 expJournal is {}", expJournal);
+		return expJournal;
+	}
+	
+	//해당 체험자 체험일지 리스트
+	public List<ExpJournal> selectExpJournalList(String expCode){
+		logger.debug("ExpService.java 호출 {selectExpJournalList}.");
+		logger.debug("selectExpJournalList() 메서드 실행 expCode is {}", expCode);
+		List<ExpJournal> expJournal = expDao.selectExpJournalList(expCode);
+		logger.debug("selectExpJournalList() 메서드 실행 expJournal is {}", expJournal);
+		return expJournal;
+	}
+	
 	// 체험일지 작성
 	public void addExpJournal(ExpJournal expJournal) {
 		//호출된곳 확인
@@ -47,6 +72,11 @@ public class ExpService {
 		expDao.progressionAnimalUpdate(animal);
 		// 보호소 체험진행,종료시 동물 상태 변경
 		Exp exp = (Exp)map.get("exp");
+		if(exp.getOsCodeExp().equals("os_exp_12_1_2")) {
+			logger.debug("동물반환완료 클릭 {}.");
+			exp.setOsCodeCostReturn("os_cost_return_24_1_1");
+			logger.debug("progressionAnimalAndExpUpdate() 메서드 실행 osCodeCostReturn is {}", exp.getOsCodeCostReturn());
+		}
 		expDao.progressionExpUpdate(exp);
 		// costIo 생성
 		CostIo costIo = (CostIo)map.get("costIo");

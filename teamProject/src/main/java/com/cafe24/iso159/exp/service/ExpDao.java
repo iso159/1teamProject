@@ -23,6 +23,31 @@ public class ExpDao {
 	//맵퍼 id를 가져올때 사용할 맵퍼 생성
 	private final String nameSpace = "com.cafe24.iso159.exp.service.ExpMapper.";
 	
+	//체험 일지 수정
+	public void updateExpJournal(ExpJournal expJournal) {
+		logger.debug("ExpDao.java 호출 {updateExpJournal}.");
+		logger.debug("updateExpJournal() 메서드 실행 expJournal is {}", expJournal);
+		sqlSessionTemplate.update(nameSpace + "updateExpJournal", expJournal);
+	}
+	
+	//해당번호 체험일지 수정 내용 조회
+	public ExpJournal selectExpJournalInfo(String expJournalCode) {
+		logger.debug("ExpDao.java 호출 {selectExpJournalInfo}.");
+		logger.debug("selectExpJournalInfo() 메서드 실행 expJournalCode is {}", expJournalCode);
+		ExpJournal expJournal = sqlSessionTemplate.selectOne(nameSpace + "selectExpJournalInfo", expJournalCode);
+		logger.debug("selectExpJournalInfo() 메서드 실행 expJournal is {}", expJournal);
+		return expJournal;
+	}
+	
+	//해당 체험자 체험일지 리스트
+	public List<ExpJournal> selectExpJournalList(String expCode) {
+		logger.debug("ExpDao.java 호출 {selectExpJournalList}.");
+		logger.debug("selectExpJournalList() 메서드 실행 expCode is {}", expCode);
+		List<ExpJournal> expJournal = sqlSessionTemplate.selectList(nameSpace + "selectExpJournalList", expCode);
+		logger.debug("selectExpJournalList() 메서드 실행 expJournal is {}", expJournal);
+		return expJournal;
+	}
+	
 	//체험일지 작성
 	public void addExpJournal(ExpJournal expJournal) {
 		logger.debug("ExpDao.java 호출 {addExpJournal}.");

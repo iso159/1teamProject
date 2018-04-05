@@ -40,7 +40,8 @@
 							<td>보호소 아이디</td>
 							</c:if>
 							<td>체험 상태</td>
-							<td>일치 횟수</td>
+							<td>총 일치 횟수</td>
+							<td>남은 일지 횟수</td>
 							<td>체험 책임비</td>
 							<td>체험 목적</td>
 							<td>예약 신청 날짜</td>
@@ -59,7 +60,8 @@
 							<td>${selectExpOneInfo.exp.mShelterIdAccept}</td>
 							</c:if>
 							<td>${selectExpOneInfo.exp.osCodeExp}</td>
-							<td>${selectExpOneInfo.exp.expJournalCount}</td>
+							<td>${selectExpOneInfo.exp.expJournalCount}회</td>
+							<td>${selectExpOneInfo.exp.expJournalCount - count}회</td>
 							<td>${selectExpOneInfo.exp.expCost}</td>
 							<td>${selectExpOneInfo.exp.expPurpose}</td>
 							<td>${selectExpOneInfo.exp.expReserveRequestDate}</td>
@@ -80,6 +82,7 @@
 				<c:if test="${selectExpOneInfo.exp.osCodeExp eq '체험 진행중' and selectExpOneInfo.exp.expJournalCount != count}">
 					<a href="${pageContext.request.contextPath}/experience/expJournalAdd?expCode=${selectExpOneInfo.exp.expCode}"><button>체험 일지 등록</button></a>
 				</c:if>
+				<a href="${pageContext.request.contextPath}/experience/expJournalList?expCode=${selectExpOneInfo.exp.expCode}"><button type="button">체험 일지 확인</button></a>
 			</div>
 		</div>
 		</section>

@@ -32,6 +32,40 @@ public class ExpController {
 	private ExpService expService;
 	private static final Logger logger = LoggerFactory.getLogger(ExpController.class);
 	
+	//해당번호 체험일지 수정 내용 조회
+	@RequestMapping(value = "/experience/expJournalModify", method = RequestMethod.POST)
+	public String expJournalModify(ExpJournal expJournal) {
+		logger.debug("ExpController 호출 {expJournalModify.post}.");
+		logger.debug("expJournalModify().get 메서드 expJournal is {}",expJournal);
+		//뷰에서 가져온 정보로 updateExpJournal메서드 실행해서 업데이트
+		expService.updateExpJournal(expJournal);
+		return "redirect:/experience/expList";
+	}
+	
+	//체험자 체험일지 수정
+	@RequestMapping(value = "/experience/expJournalModify", method = RequestMethod.GET)
+	public String expJournalModify(Model model,@RequestParam(value="expJournalCode") String expJournalCode) {
+		logger.debug("ExpController 호출 {expJournalModify.get}.");
+		logger.debug("expJournalModify().get 메서드 expJournalCode is {}",expJournalCode);
+		//뷰로 값을 넘김
+		model.addAttribute("expJournalCode", expJournalCode);
+		//뷰로 해당 번째 체험 일지 내용 넘김
+		ExpJournal expJournal = expService.selectExpJournalInfo(expJournalCode);
+		model.addAttribute("expJournal", expJournal);
+		return "/experience/expJournalModify";
+	}
+	
+	//해당 체험자 체험일지 리스트
+	@RequestMapping(value = "/experience/expJournalList", method = RequestMethod.GET)
+	public String ExpJournalList(Model model,@RequestParam(value="expCode") String expCode) {
+		logger.debug("ExpController 호출 {ExpJournalList.get}.");
+		logger.debug("ExpJournalList().get 메서드 expCode is {}",expCode);
+		//expCode로 해당 체험자가 등록한 체험일지 확인
+		List<ExpJournal> expJournal = expService.selectExpJournalList(expCode);
+		model.addAttribute("expJournal", expJournal);
+		return "/experience/expJournalList";
+	}
+	
 	// 보호소 체험진행,종료시 동물 상태 변경
 	@RequestMapping(value = "/experience/animalUpdate", method = RequestMethod.GET)
 	public String progressionAnimalUpdate(@RequestParam(value="animalCode") String animalCode,
@@ -146,7 +180,7 @@ public class ExpController {
 	// 체험 일지 작성
 	@RequestMapping(value = "/experience/expJournalAdd", method = RequestMethod.POST)
 	public String expJournalAdd(ExpJournal expJournal,HttpSession session) {
-		logger.debug("ExpController 호출 {expJournalAdd.get}.");
+		logger.debug("ExpController 호출 {expJournalAdd.post}.");
 		//넘어온 expCode 값 확인
 		logger.debug("expJournalAdd().get 메서드 expJournal is {}",expJournal);
 		// loginId 를 통해서 입력 아이디 값 받음
