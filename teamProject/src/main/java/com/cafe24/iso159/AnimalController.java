@@ -178,7 +178,7 @@ public class AnimalController {
 	// 보호소 등록코드별 보호 유기동물리스트 api
 	@RequestMapping(value = "/animal/yugiAnimalList", method = RequestMethod.POST)
 	public void shelterAnimalList(HttpServletResponse response, HttpSession session
-								, @RequestParam(value="animalStatusKind") String animalStatusKind) throws IOException {
+								, @RequestParam(value="animalStatusKind") String animalStatusKind) {
 		logger.debug("shelterAnimalList(...) 메서드 호출");
 		logger.debug("shelterAnimalList(...) 메서드 animalStatusKind is {}", animalStatusKind);
 		String blCode = (String)session.getAttribute("loginBlCode");
@@ -208,25 +208,42 @@ public class AnimalController {
 		parameter = parameter + "&" + "upkind=417000";
 		parameter = parameter + "&" + "_type=json";
 		
+		// 주소에 url + 서비스키 + 조건을 연결
 		addr = addr + serviceKey + parameter;
+		String data = null;
+		PrintWriter out = null;
 		
-		url = new URL(addr);
-		in = url.openStream();
-		bos = new CachedOutputStream();
-		IOUtils.copy(in, bos);
-		in.close();
-		bos.close();
-		
-		String data = bos.getOut().toString();
-		
-		PrintWriter out = response.getWriter();
-		out.println(data);
-		logger.debug("data is {}", data);
-		logger.debug("addr is {}", addr);
-		JSONObject json = new JSONObject();
-		json.put("data", data);
-		
-		logger.debug("shelterAnimalList(...) 메서드 끝");
+		// 예외처리
+		try {
+			// 데이터를 가져올 url 할당
+			url = new URL(addr);
+			// url주소와 연결한후 이 연결로부터 입력받을수있는 InputStream을 리턴받음
+			in = url.openStream();
+			// 출력을 받기위해 CachedOutputStream 객체 생성
+			bos = new CachedOutputStream();
+			// in에서 bos로 데이터 복사
+			IOUtils.copy(in, bos);
+			// 복사된 데이터를 String 형태로 data변수에 입력
+			data = bos.getOut().toString();
+			// 텍스트형식의 출력 스트림을 얻은후
+			out = response.getWriter();
+			// 얻어낸 스트림에 데이터 입력
+			out.println(data);
+			logger.debug("data is {}", data);
+			logger.debug("addr is {}", addr);
+			JSONObject json = new JSONObject();
+			// json형태로 데이터를 넣음
+			json.put("data", data);
+			
+			logger.debug("shelterAnimalBreed(...) 메서드 끝");
+		}catch(MalformedURLException e) {
+			e.printStackTrace();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}finally {
+			try {in.close();} catch (IOException e) {e.printStackTrace();}
+			try {bos.close();} catch (IOException e) {e.printStackTrace();}
+		}					
 	}
 	
 	// 유기동물품종 api
