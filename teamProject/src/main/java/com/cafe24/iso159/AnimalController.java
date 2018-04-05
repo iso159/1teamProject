@@ -3,6 +3,7 @@ package com.cafe24.iso159;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -229,44 +230,64 @@ public class AnimalController {
 	}
 	
 	// 유기동물품종 api
-		@RequestMapping(value = "/animal/AnimalBreed", method = RequestMethod.POST)
-		public void shelterAnimalBreed(HttpServletResponse response, HttpSession session) throws IOException {
-			logger.debug("shelterAnimalBreed(...) 메서드 호출");
-			String blCode = (String)session.getAttribute("loginBlCode");
-			if(blCode == null) {
-				return;
-			}
-			response.setContentType("text/html; charset=utf-8");
-			String addr = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/kind?ServiceKey=";
-			String serviceKey = "7s3CsUFyR%2F1QMd5tktqM%2BnUw9gAEPUtI0GIsuGWxEUOJHwZP9NVTLOoMOKmVtZH0SmDPuv5Gg78SA94B%2BLMQsQ%3D%3D";
-			String parameter = "";
-			
-			URL url = null;
-			CachedOutputStream bos = null;
-			InputStream in = null;
-			
-			
-			parameter = parameter + "&" + "up_kind_cd=417000";
-			parameter = parameter + "&" + "_type=json";
-			
-			addr = addr + serviceKey + parameter;
-			
+	@RequestMapping(value = "/animal/AnimalBreed", method = RequestMethod.POST)
+	public void shelterAnimalBreed(HttpServletResponse response, HttpSession session){
+		logger.debug("shelterAnimalBreed(...) 메서드 호출");
+		String blCode = (String)session.getAttribute("loginBlCode");
+		if(blCode == null) {
+			return;
+		}
+		response.setContentType("text/html; charset=utf-8");
+		// 호출할 데이터가 있는 url을 addr변수에 입력
+		String addr = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/kind?ServiceKey=";
+		// 서비스키 입력
+		String serviceKey = "7s3CsUFyR%2F1QMd5tktqM%2BnUw9gAEPUtI0GIsuGWxEUOJHwZP9NVTLOoMOKmVtZH0SmDPuv5Gg78SA94B%2BLMQsQ%3D%3D";
+		// 요청메시지를 입력받을 parameter변수 선언 및 공백으로 초기화
+		String parameter = "";
+		
+		URL url = null;
+		CachedOutputStream bos = null;
+		InputStream in = null;
+		
+		// 요청메세지 추가
+		parameter = parameter + "&" + "up_kind_cd=417000";
+		parameter = parameter + "&" + "_type=json";
+		
+		// 주소에 url + 서비스키 + 조건을 연결
+		addr = addr + serviceKey + parameter;
+		String data = null;
+		PrintWriter out = null;
+		
+		// 예외처리
+		try {
+			// 데이터를 가져올 url 할당
 			url = new URL(addr);
+			// url주소와 연결한후 이 연결로부터 입력받을수있는 InputStream을 리턴받음
 			in = url.openStream();
+			// 출력을 받기위해 CachedOutputStream 객체 생성
 			bos = new CachedOutputStream();
+			// in에서 bos로 데이터 복사
 			IOUtils.copy(in, bos);
-			in.close();
-			bos.close();
-			
-			String data = bos.getOut().toString();
-			
-			PrintWriter out = response.getWriter();
+			// 복사된 데이터를 String 형태로 data변수에 입력
+			data = bos.getOut().toString();
+			// 텍스트형식의 출력 스트림을 얻은후
+			out = response.getWriter();
+			// 얻어낸 스트림에 데이터 입력
 			out.println(data);
 			logger.debug("data is {}", data);
 			logger.debug("addr is {}", addr);
 			JSONObject json = new JSONObject();
+			// json형태로 데이터를 넣음
 			json.put("data", data);
 			
 			logger.debug("shelterAnimalBreed(...) 메서드 끝");
-		}
+		}catch(MalformedURLException e) {
+			e.printStackTrace();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}finally {
+			try {in.close();} catch (IOException e) {e.printStackTrace();}
+			try {bos.close();} catch (IOException e) {e.printStackTrace();}
+		}					
+	}
 }
