@@ -95,6 +95,19 @@
 		SELECT board_code as boardCode, board_name as boardName FROM t_board
 	</select>
 	
+	<!-- 게시글 수정 -->
+	<update id="updateBoardContent" parameterType="com.cafe24.iso159.board.service.BoardContent">
+		UPDATE 
+			t_board_content 
+		SET			
+			board_content_title = #{boardContentTitle}
+			, m_member_id = #{mMemberId}
+			, board_content_content = #{boardContentContent}
+			, board_content_date = now()
+		WHERE 
+			board_content_code = #{boardContentCode}
+	</update>
+	
 	<!-- 게시판 글 총갯수 구하기 -->
 	<select id="boardCount" resultType="String">
 		SELECT COUNT(*) FROM t_board_content

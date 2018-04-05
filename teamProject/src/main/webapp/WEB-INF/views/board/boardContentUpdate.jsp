@@ -22,23 +22,26 @@
 	    <!-- 내용 입력 부분 -->
 	    <h3>게시글 수정하기</h3>
 	    <p>&nbsp;</p>
-	   <table>
+		${bc.boardName}
+	    <form action="${pageContext.request.contextPath}/board/boardUpdate" method="post">
+	    <table>
+	    	<tr>
+	    	<td><input type="hidden" name="boardContentCode" value="${bc.boardcontent.boardContentCode}"></td>
+	    	</tr>
+		    <tr>
+	    	<td><input type="text" readonly="readonly" name="mMemberId" style="background-color: lightgray" value="${bc.boardcontent.mMemberId}"></td>
+	    	</tr>
 		   <tr>
-		   <td>
-		   	<select>
-		   		<c:forEach var="i" items="${board}">
-		   		<option value="${i.boardName}">${i.boardName}</option>
-		   		</c:forEach>
-		   	</select>
-		   </td>
+		   	<td><input type="text" name="boardContentTitle" value="${bc.boardcontent.boardContentTitle}"></td>
 		   </tr>
 		   <tr>
-		   	<td><input type="text" name="boardName" value="${bc.boardcontent.boardContentTitle}"></td>
+		   	<td><textarea rows="20" cols="100" name="boardContentContent">${bc.boardcontent.boardContentContent}</textarea>
 		   </tr>
 		   <tr>
-		   	<td><textarea rows="20" cols="100" name="boardContent">${bc.boardcontent.boardContentContent}</textarea>
+		   	<td><button type="submit">수정</button></td>
 		   </tr>	   
-	   </table>	   
+	    </table>
+	    </form>	   
 		<!-- 내용 입력 부분 끝 -->
 		</div>
 	  </div>

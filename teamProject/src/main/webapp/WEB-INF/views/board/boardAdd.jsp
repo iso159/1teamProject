@@ -22,7 +22,7 @@
 	    <!-- 내용 입력 부분 -->
 	<h2>게시판 글 등록</h2>
 	<p>&nbsp;</p>
-	<form id="boardContentAdd" action="${pageContext.request.contextPath}/board/boardList" method="post">
+	<form id="boardContentAdd" action="${pageContext.request.contextPath}/board/boardAdd" method="post">
 	글종류:<select name="boardCode">
 		 <c:forEach var="i" items="${board}">
 			<option value="${i.boardCode}">${i.boardName}</option>
@@ -30,7 +30,7 @@
 		</select><br>
 	글제목:<input type="text" id="boardContentTitle" name="boardContentTitle"><br>
 	글내용:<br>
-	<textarea rows="20" cols="150" id="boardContentContent" name="boardContentContent"></textarea><br>
+	<textarea rows="20" cols="100" id="boardContentContent" name="boardContentContent"></textarea><br>
 	<button id="addBtn" type="submit">등록</button>
 	</form>
 	<!-- 내용 입력 부분 끝 -->

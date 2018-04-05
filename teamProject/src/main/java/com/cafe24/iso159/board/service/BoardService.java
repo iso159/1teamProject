@@ -86,4 +86,25 @@ public class BoardService {
 		List<Board> board = boardDao.selectBoard(); 
 		return board;
 	}
+	//게시글 수정
+	public void modifyBoardContent(BoardContent boardcontent, String boardContentCode) {
+		logger.debug("modifyBoardContent(...)메서드 animal 호출");
+		logger.debug("modifyBoardContent(...)메서드 boardContentCode is {}", boardContentCode);
+		
+		//게시글 정보 변수에 입력
+		String mMemberId = boardcontent.getmMemberId();
+		String boardContentTitle = boardcontent.getBoardContentTitle();
+		String boardContentContent = boardcontent.getBoardContentContent();
+		String boardContentDate = boardcontent.getBoardContentDate();
+		
+		//변수를 객체의 필드에 셋팅
+		BoardContent boardContent = new BoardContent();
+		boardContent.setBoardContentCode(boardContentCode);
+		boardContent.setmMemberId(mMemberId);
+		boardContent.setBoardContentTitle(boardContentTitle);
+		boardContent.setBoardContentContent(boardContentContent);
+		boardContent.setBoardContentDate(boardContentDate);
+		
+		boardDao.updateBoardContent(boardContent);
+	}
 }

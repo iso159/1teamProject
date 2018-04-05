@@ -55,4 +55,10 @@ public class BoardDao {
 		BoardAndBoardContent boardcontent = sqlSessionTemplate.selectOne(nameSpace+"boardDetail", boardContentCode);
 		return boardcontent;
 	}
+	//게시판 글 수정
+	public void updateBoardContent(BoardContent boardcontent) {
+		//boardcontent 확인
+		logger.debug("boardDetail()메서드 boardContent is {}", boardcontent);
+		sqlSessionTemplate.update(nameSpace+"updateBoardContent", boardcontent);
+	}
 }

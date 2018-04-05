@@ -39,14 +39,13 @@ public class BoardController {
 	//게시판 수정 페이지로 이동
 	@RequestMapping(value="/board/boardContentUpdate", method=RequestMethod.GET)
 	public String boardContentModify(Model model, @RequestParam(value="boardContentCode",required=true)String boardContentCode) {
-		List<Board> board = boardservice.listBoard();
-		model.addAttribute("board", board);
+		
 		BoardAndBoardContent bc = boardservice.detailBoard(boardContentCode);
 		model.addAttribute("bc", bc);
 		return "board/boardContentUpdate";
 	}
 	//게시판 글 등록
-	@RequestMapping(value="/board/boardList", method=RequestMethod.POST)
+	@RequestMapping(value="/board/boardAdd", method=RequestMethod.POST)
 	public String BoardAdd(HttpSession session, BoardContent boardcontent) {
 		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
@@ -59,6 +58,20 @@ public class BoardController {
 		boardservice.addBoard(boardcontent, mId);
 		return "redirect:/board/boardList";
 	}
+	//게시판 글 수정
+	@RequestMapping(value="/board/boardUpdate", method=RequestMethod.POST)
+	public String BoardcontentModifiy(BoardContent boardcontent, HttpSession session
+									,@RequestParam(value="boardContentCode")String boardContentCode) {
+		logger.debug("BoardcontentModifiy()메서드 호출");
+		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
+		if(session.getAttribute("loginId")==null) {
+			return "redirect:/member/login";
+		}
+		logger.debug("BoardcontentModifiy()메서드 boardContentCode is {}", boardContentCode);
+		boardservice.modifyBoardContent(boardcontent, boardContentCode);
+		return "redirect:/board/boardList";
+	}
+	
 	//게시판 그룹등록 페이지로 이동
 	/*@RequestMapping(value="/board/boardGroupAdd", method=RequestMethod.GET)
 	public String BoardAdd() {
