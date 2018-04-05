@@ -27,9 +27,14 @@
 	</form>
 	<p>&nbsp;</p>
 	<h3>게시판 그룹이름 리스트</h3>
+	
 	<c:forEach var="i" items="${board}">
-		<div>${i.boardName}</div>
+		<div>
+		${i.boardName}&nbsp;
+		<a href="${pageContext.request.contextPath}/board/boardDelete?boardCode=${i.boardCode}">삭제</a>
+		</div>
 	</c:forEach>
+
 	<!-- 내용 입력 부분 끝 -->
 		</div>
 	  </div>

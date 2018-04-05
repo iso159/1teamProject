@@ -107,4 +107,9 @@ public class BoardService {
 		
 		boardDao.updateBoardContent(boardContent);
 	}
+	//게시판 그룹이름 삭제
+	public void removeBoard(String boardCode) {
+		logger.debug("removeBoard()메서드 boardCode is {}", boardCode);
+		boardDao.deleteBoard(boardCode);
+	}
 }

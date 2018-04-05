@@ -71,6 +71,13 @@ public class BoardController {
 		boardservice.modifyBoardContent(boardcontent, boardContentCode);
 		return "redirect:/board/boardList";
 	}
+	//게시판 그룹이름 삭제
+	@RequestMapping(value="/board/boardDelete", method=RequestMethod.GET)
+	public String boardRemove(HttpSession session
+						, @RequestParam(value="boardCode")String boardCode) {
+		boardservice.removeBoard(boardCode);
+		return "redirect:/board/boardGroupList";
+	}
 	
 	//게시판 그룹등록 페이지로 이동
 	/*@RequestMapping(value="/board/boardGroupAdd", method=RequestMethod.GET)

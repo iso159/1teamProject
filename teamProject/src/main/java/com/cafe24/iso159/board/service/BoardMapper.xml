@@ -72,6 +72,7 @@
 		INNER JOIN 
 			t_board b
 		ON bc.board_code = b.board_code
+		ORDER BY bc.board_content_date DESC
 	</select>
 	<!-- 게시판 글 상세조회 -->
 	<select id="boardDetail" parameterType="string" resultMap="selectBoardListMap">
@@ -92,8 +93,13 @@
 	
 	<!-- 게시판 그룹이름 리스트 조회 -->
 	<select id="selectBoard" resultType="com.cafe24.iso159.board.service.Board">
-		SELECT board_code as boardCode, board_name as boardName FROM t_board
+		SELECT board_code as boardCode, board_name as boardName FROM t_board ORDER BY board_date DESC
 	</select>
+	
+	<!-- 게시판 그룹이름 삭제 -->
+	<delete id="deleteBoard" parameterType="String">
+		DELETE FROM t_board WHERE board_code = #{boardCode}
+	</delete>
 	
 	<!-- 게시글 수정 -->
 	<update id="updateBoardContent" parameterType="com.cafe24.iso159.board.service.BoardContent">
