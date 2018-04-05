@@ -16,61 +16,54 @@
 
 	<title>입양파일리스트</title>
 </head>
-<body class="modern">
+<body>
 	<!-- top 부분 시작-->
 	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
 	<!-- top 부분 끝-->
 	
-	<!-- 메인 화면  -->
-	<!-- 메인 화면 내용 부분 -->
-	<div class="container">
-	<!-- 메인내용 시작 : Text | Text -->
-	<section>
-	  <div data-layout="_r">
-	    <div>
-	    <!-- 내용 입력 부분 -->
-		<h2>입양파일리스트</h2>
-		<table border="1" >
-			<thead>
-				<tr>
-					<th>파일코드</th>
-					<th>입양코드</th>
-					<th>이름</th>
-					<th>확장자</th>
-					<th>사이즈</th>
-					<th>등록날짜</th>
-					<th>다운로드</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="aF" items="${list}">
+		<!-- 메인화면 시작 -->
+        <div id="page-wrapper">
+        	<!-- h태그제목 시작 -->
+        	<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">입양파일 리스트</h1>
+                </div>
+            </div>
+          	<!-- h태그제목 끝 -->
+			<!-- 내용 부분 시작-->
+			<table border="1" >
+				<thead>
 					<tr>
-						<td>${aF.ofCode}</td>
-						<td>${aF.adoptRequestCode}</td>
-						<td>${aF.ofOriginName}</td>
-						<td>${aF.ofExt}</td>
-						<td>${aF.ofSize}</td>
-						<td>${aF.ofDownDate}</td>
-						<td>
-							<a href="${pageContext.request.contextPath}/adopt/adoptFileDownload?ofSaveName=${aF.ofSaveName}&ofExt=${aF.ofExt}&ofOriginName=${aF.ofOriginName}">다운로드</a>
-						</td>
+						<th>파일코드</th>
+						<th>입양코드</th>
+						<th>이름</th>
+						<th>확장자</th>
+						<th>사이즈</th>
+						<th>등록날짜</th>
+						<th>다운로드</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table><br>
-		<a href="${pageContext.request.contextPath}/adopt/adoptList"><button type="button" id="Btn" class="btn btn-success">상담결정</button></a>
-		<!-- 내용 입력 부분 끝 -->
-		</div>
-	  </div>
-	</section>
-	<!-- 메인내용 끝 : Text | Text -->
-	</div>
-	<!-- 메인 화면 내용 부분 끝 -->
-	
-	<!-- 메인화면 끝 -->
+				</thead>
+				<tbody>
+					<c:forEach var="aF" items="${list}">
+						<tr>
+							<td>${aF.ofCode}</td>
+							<td>${aF.adoptRequestCode}</td>
+							<td>${aF.ofOriginName}</td>
+							<td>${aF.ofExt}</td>
+							<td>${aF.ofSize}</td>
+							<td>${aF.ofDownDate}</td>
+							<td>
+								<a href="${pageContext.request.contextPath}/adopt/adoptFileDownload?ofSaveName=${aF.ofSaveName}&ofExt=${aF.ofExt}&ofOriginName=${aF.ofOriginName}">다운로드</a>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table><br>
+			<a href="${pageContext.request.contextPath}/adopt/adoptList"><button type="button" id="Btn" class="btn btn-success">상담결정</button></a>
+			<!-- 내용 입력 부분 끝 -->
+			<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
 	<!-- foot 부분 끝 -->
 </body>
 </html>
-	

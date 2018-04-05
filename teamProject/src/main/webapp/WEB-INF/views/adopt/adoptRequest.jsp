@@ -21,20 +21,21 @@
 </script>
 	<title>입양신청</title>
 </head>
-<body class="modern">
+<body>
 	<!-- top 부분 시작-->
 	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
 	<!-- top 부분 끝-->
 	
-	<!-- 메인 화면  -->
-	<!-- 메인 화면 내용 부분 -->
-	<div class="container">
-	<!-- 메인내용 시작 : Text | Text -->
-	<section>
-	  <div data-layout="_r">
-	    <div class="span3 well">
-	    <!-- 내용 입력 부분 -->
-		<h2>입양신청</h2>
+	<!-- 메인화면 시작 -->
+        <div id="page-wrapper">
+        	<!-- h태그제목 시작 -->
+        	<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">입양신청하기</h1>
+                </div>
+            </div>
+          	<!-- h태그제목 끝 -->
+			<!-- 내용 부분 시작-->
 			<c:set var="m" value="${mMemberId}"/>
 			<form id="addForm" action="${pageContext.request.contextPath}/adopt/adoptRequest" method="post" enctype="multipart/form-data">
 				동물코드 <input class="span3" type="text" name="animalCode" value="${animalCode}" readonly><br>
@@ -49,18 +50,11 @@
 				<button id="addBtn" type="button"  class="btn btn-warning">입양신청하기</button>
 			</form>
 		
- 		<!-- 내용 입력 부분 끝 -->
-		</div>
-	  </div>
-	</section>
-	<!-- 메인내용 끝 : Text | Text -->
-	</div>
-	<!-- 메인 화면 내용 부분 끝 -->
-	
-	<!-- 메인화면 끝 -->
+ 		<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
 	<!-- foot 부분 끝 -->
 </body>
 </html>
+
 	

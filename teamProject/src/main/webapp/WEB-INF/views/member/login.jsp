@@ -21,81 +21,83 @@
 	<!-- top 부분 시작-->
 	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
 	<!-- top 부분 끝-->
-	<!-- 체험자 로그인 시작 -->
-	<div class="container"> 
-	<h2>체험자 로그인</h2>
-		<form id="loginForm" class="form-inline" action="${pageContext.request.contextPath}/member/login" method="post">
-			<div class="row">
-				<div class="col-md-4">
-					<label for="code">아이디</label>
-					<input id="userId" class="form-control" type="text"  name="mId" value="experience" > <br>
-					<label for="title">비밀번호</label> 
-					<input id="userPw" class="form-control" type="password"  name="mPw" value="1234"> <br>
-					<button type="submit" id="loginBtn" class="btn btn-info">로그인</button>
+	<!-- 메인화면 시작 -->
+        <div id="page-wrapper">
+        	<!-- h태그제목 시작 -->
+        	<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">체험자 로그인</h1>
+                </div>
+            </div>
+          	<!-- h태그제목 끝 -->
+			<!-- 내용 부분 시작-->
+			<form id="loginForm" class="form-inline" action="${pageContext.request.contextPath}/member/login" method="post">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="code">아이디</label>
+						<input id="userId" class="form-control" type="text"  name="mId" value="experience" > <br>
+						<label for="title">비밀번호</label> 
+						<input id="userPw" class="form-control" type="password"  name="mPw" value="1234"> <br>
+						<button type="submit" id="loginBtn" class="btn btn-info">로그인</button>
+					</div>
 				</div>
-			</div>
-		</form>
-	</div>
-	<!-- 체험자 로그인 끝 -->
-	
-	<!-- 입양자 로그인 시작 -->
-	<div class="container"> 
-	<h2>입양자 로그인</h2>
-		<form id="loginForm" class="form-inline" action="${pageContext.request.contextPath}/member/login" method="post">
+			</form>
+			<!-- 입양자 로그인 시작 -->
 			<div class="row">
-				<div class="col-md-4">
-					<label for="code">아이디</label>
-					<input id="userId" class="form-control" type="text"  name="mId" value="adopter" > <br>
-					<label for="title">비밀번호</label> 
-					<input id="userPw" class="form-control" type="password"  name="mPw" value="1234"> <br>
-					<button type="submit" id="loginBtn" class="btn btn-info">로그인</button>
-				</div>
-			</div>
-		</form>
-	</div>
-	<!-- 입양자 로그인 끝 -->
-	
-	<!-- 관리자 로그인 시작 -->
-	<div class="container">
-	<h2>관리자 로그인</h2>
-		<form id="loginForm" class="form-inline" action="${pageContext.request.contextPath}/member/login" method="post">
+		                <div class="col-lg-12">
+		                    <h1 class="page-header">입양자 로그인</h1>
+		                </div>
+		            </div>
+				<form id="loginForm" class="form-inline" action="${pageContext.request.contextPath}/member/login" method="post">
+					<div class="row">
+						<div class="col-md-4">
+							<label for="code">아이디</label>
+							<input id="userId" class="form-control" type="text"  name="mId" value="adopter" > <br>
+							<label for="title">비밀번호</label> 
+							<input id="userPw" class="form-control" type="password"  name="mPw" value="1234"> <br>
+							<button type="submit" id="loginBtn" class="btn btn-info">로그인</button>
+						</div>
+					</div>
+				</form>
+			<!-- 입양자 로그인 끝 -->
+			
+			<!-- 관리자 로그인 시작 -->
 			<div class="row">
-				<div class="col-md-4">
-					<label for="code">아이디</label>
-					<input id="userId" class="form-control" type="text"  name="mId" value="administrator" > <br>
-					<label for="title">비밀번호</label> 
-					<input id="userPw" class="form-control" type="password"  name="mPw" value="1234"> <br>
-					<button type="submit" id="loginBtn" class="btn btn-info">로그인</button>
-				</div>
-			</div>
-		</form>
-	</div>
-	<!-- 관리자 로그인 끝 -->
-	
-	<!-- 보호소 로그인 시작 -->
-	<div class="container"> 
-	<h2>보호소 로그인</h2>
-		<form id="loginForm" class="form-inline" action="${pageContext.request.contextPath}/member/login" method="post">
+		                <div class="col-lg-12">
+		                    <h1 class="page-header">관리자 로그인</h1>
+		                </div>
+		            </div>
+				<form id="loginForm" class="form-inline" action="${pageContext.request.contextPath}/member/login" method="post">
+					<div class="row">
+						<div class="col-md-4">
+							<label for="code">아이디</label>
+							<input id="userId" class="form-control" type="text"  name="mId" value="administrator" > <br>
+							<label for="title">비밀번호</label> 
+							<input id="userPw" class="form-control" type="password"  name="mPw" value="1234"> <br>
+							<button type="submit" id="loginBtn" class="btn btn-info">로그인</button>
+						</div>
+					</div>
+				</form>
+			<!-- 관리자 로그인 끝 -->
+			
+			<!-- 보호소 로그인 시작 -->
 			<div class="row">
-				<div class="col-md-4">
-					<label for="code">아이디</label>
-					<input id="userId" class="form-control" type="text"  name="mId" value="shelter" > <br>
-					<label for="title">비밀번호</label> 
-					<input id="userPw" class="form-control" type="password"  name="mPw" value="1234"> <br>
-					<button type="submit" id="loginBtn" class="btn btn-info">로그인</button>
-				</div>
-			</div>
-		</form>
-	</div>
-	<!-- 보호소 로그인 끝 -->
-	</section>
-	<!-- 메인내용 끝 : Text | Text -->
-
-	<!-- 내용 입력 부분 끝 -->
-	</div>
-	<!-- 메인 화면 내용 부분 끝 -->
-	
-	<!-- 메인화면 끝 -->
+		                <div class="col-lg-12">
+		                    <h1 class="page-header">보호소 로그인</h1>
+		                </div>
+		            </div>
+				<form id="loginForm" class="form-inline" action="${pageContext.request.contextPath}/member/login" method="post">
+					<div class="row">
+						<div class="col-md-4">
+							<label for="code">아이디</label>
+							<input id="userId" class="form-control" type="text"  name="mId" value="shelter" > <br>
+							<label for="title">비밀번호</label> 
+							<input id="userPw" class="form-control" type="password"  name="mPw" value="1234"> <br>
+							<button type="submit" id="loginBtn" class="btn btn-info">로그인</button>
+						</div>
+					</div>
+				</form>
+			<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
 	<!-- foot 부분 끝 -->

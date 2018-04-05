@@ -18,31 +18,25 @@
 	<jsp:include page="/WEB-INF/views/module/top.jsp" />
 	<!-- top 부분 끝-->
 
-	<!-- 메인 화면  -->
-	<!-- 메인 화면 내용 부분 -->
-	<div class="container">
-		<!-- 메인내용 시작 : Text | Text -->
-		<section>
-			<div data-layout="_r">
-				<div>
-					<!-- 내용 입력 부분 -->
+		<!-- 메인화면 시작 -->
+        <div id="page-wrapper">
+        	<!-- h태그제목 시작 -->
+        	<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">체험일지 수정</h1>
+                </div>
+            </div>
+          	<!-- h태그제목 끝 -->
+			<!-- 내용 부분 시작-->
 					<form action="${pageContext.request.contextPath}/experience/expJournalModify" method="post">
 					<input type="hidden" value="${expJournalCode}" name="expJournalCode">
 					체험 일지 : <input type="text" value="${expJournal.expJournal}" name="expJournal"><br>
 					동물 특징 : <input type="text" value="${expJournal.expJournalAnimalChar}" name="expJournalAnimalChar">
 					<button type="submit">수정</button>
 					</form>
-					<!-- 내용 입력 부분 끝 -->
-				</div>
-			</div>
-		</section>
-		<!-- 메인내용 끝 : Text | Text -->
-	</div>
-	<!-- 메인 화면 내용 부분 끝 -->
-
-	<!-- 메인화면 끝 -->
+					<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
-	<jsp:include page="/WEB-INF/views/module/foot.jsp" />
+	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
 	<!-- foot 부분 끝 -->
 </body>
 </html>

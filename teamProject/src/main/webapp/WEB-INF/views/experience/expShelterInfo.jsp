@@ -20,14 +20,16 @@
 	<!-- top 부분 시작-->
 	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
 	<!-- top 부분 끝-->
-	<!-- 메인 화면  -->
-	<!-- 메인 화면 내용 부분 -->
-	<div class= "container" >
-		<!-- 내용 입력 부분 -->
-		<!-- 메인내용 시작 : Text | Text -->
-		<section>
-		<div data-layout="_r">
-			<div data-layout="ch-half">
+		<!-- 메인화면 시작 -->
+        <div id="page-wrapper">
+        	<!-- h태그제목 시작 -->
+        	<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">expShelterInfo</h1>
+                </div>
+            </div>
+          	<!-- h태그제목 끝 -->
+			<!-- 내용 부분 시작-->
 				<table>
 					<thead>
 						<tr>
@@ -78,8 +80,7 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
-		</div>
+			
 		<c:if test="${ExpOneInfo.exp.osCodeExp eq '예약 신청' or ExpOneInfo.exp.osCodeExp eq '예약 확인'}">
 		<a href="${pageContext.request.contextPath}/experience/updateOsExp?osCodeExp=os_exp_12_1_5&expCode=${ExpOneInfo.exp.expCode}"><button>체험 수락</button></a>
 		</c:if>
@@ -92,12 +93,7 @@
 		<c:if test="${ExpOneInfo.animal.osCodeAnimal eq '체험중인동물' and ExpOneInfo.exp.osCodeExp eq '체험 진행중'}">
 		<a href="${pageContext.request.contextPath}/experience/animalUpdate?osCodeAnimal=os_animal_3_1_2&animalCode=${ExpOneInfo.exp.animalCode}&expCode=${ExpOneInfo.exp.expCode}&osCodeExp=os_exp_12_1_2&osCode=os_cost_13_1_2&expCost=1"><button>동물 반환 완료</button></a>
 		</c:if>
-		</section>
-		<!-- 메인내용 끝 : Text | Text -->
-		<!-- 내용 입력 부분 끝 -->
-	</div>
-	<!-- 메인 화면 내용 부분 끝 -->
-	<!-- 메인화면 끝 -->
+		<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
 	<!-- foot 부분 끝 -->
