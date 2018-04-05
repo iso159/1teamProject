@@ -26,6 +26,11 @@ public class BoardDao {
 		logger.debug("insertBoard()메서드 board is {}", board);
 		return sqlSessionTemplate.insert(nameSpace+"insertBoard", board);
 	}
+	/*//댓글 등록
+	public int insertBoardReply(BoardReply boardreply) {
+		logger.debug("insertBoard()메서드 board is {}", boardreply);
+		return sqlSessionTemplate.insert(nameSpace+"insertBoardReply", boardreply);
+	}*/
 	//게시판 그룹리스트 조회
 	public List<Board> selectBoard(){
 		logger.debug("selectBoard()메서드 호출");
@@ -40,6 +45,10 @@ public class BoardDao {
 	//max코드값 조회
 	public String selectLastCode() {
 		return sqlSessionTemplate.selectOne(nameSpace+"selectLastCode");
+	}
+	//Board Reply max코드값 조회
+	public String selectLastReplyNum() {
+		return sqlSessionTemplate.selectOne(nameSpace+"selectLastReplyNum");
 	}
 	//게시판 리스트 조회
 	public List<BoardAndBoardContent> selectBoardContent(){

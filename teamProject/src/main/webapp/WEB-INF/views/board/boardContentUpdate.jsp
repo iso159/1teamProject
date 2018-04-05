@@ -29,7 +29,7 @@
 	    	<td><input type="hidden" name="boardContentCode" value="${bc.boardcontent.boardContentCode}"></td>
 	    	</tr>
 		    <tr>
-	    	<td><input type="text" readonly="readonly" name="mMemberId" style="background-color: lightgray" value="${bc.boardcontent.mMemberId}"></td>
+	    	<td><input type="text" readonly="readonly" style="background-color: lightgray" value="${bc.boardcontent.mMemberId}"></td>
 	    	</tr>
 		   <tr>
 		   	<td><input type="text" name="boardContentTitle" value="${bc.boardcontent.boardContentTitle}"></td>

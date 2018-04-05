@@ -43,6 +43,30 @@ public class BoardService {
 		boardcontent.setmMemberId(mId);
 		boardDao.insertboardContent(boardcontent);
 	}
+	/*//게시판 댓글등록
+	public void addBoardReply(BoardReply boardreply, String mId) {
+		logger.debug("addBoard()메서드", mId);
+		
+		//마지막코드 숫자값을 저장
+		String lastNumber = boardDao.selectLastReplyNum();
+		logger.debug("lastNumber is {}", lastNumber);
+		
+		//마지막 board_reply_code 코드
+		String boardReplyCode = "board_reply_code_";
+		int lastReplyNum = 1;
+		if(lastNumber == null) {
+			boardReplyCode += lastReplyNum;  
+		}else {
+			lastReplyNum += Integer.parseInt(lastNumber);
+			boardReplyCode += lastReplyNum;
+		}
+		logger.debug("boardCode is {}", boardReplyCode);
+		//board_reply_code 셋팅
+		boardreply.setBoardReplyCode(boardReplyCode);
+		//m_member_id 셋팅
+		boardreply.setmMemberId(mId);
+		boardDao.insertBoardReply(boardreply);
+	}*/
 	//게시판 그룹등록
 	public void addBoardGroup(Board board, String mAdminId) {
 		logger.debug("addBoard()메서드", mAdminId);
@@ -50,7 +74,7 @@ public class BoardService {
 		String lastNumber = boardDao.selectLastBoardNum();
 		logger.debug("lastNumber is {}", lastNumber);
 		
-		//마지막 board_content_code 코드
+		//마지막 board_code 코드
 		String boardCode = "board_code_";
 		int lastBoardNum = 1;
 		if(lastNumber == null) {
@@ -88,19 +112,18 @@ public class BoardService {
 	}
 	//게시글 수정
 	public void modifyBoardContent(BoardContent boardcontent, String boardContentCode) {
-		logger.debug("modifyBoardContent(...)메서드 animal 호출");
+		logger.debug("modifyBoardContent(...)메서드 호출");
 		logger.debug("modifyBoardContent(...)메서드 boardContentCode is {}", boardContentCode);
-		
+				
 		//게시글 정보 변수에 입력
-		String mMemberId = boardcontent.getmMemberId();
 		String boardContentTitle = boardcontent.getBoardContentTitle();
 		String boardContentContent = boardcontent.getBoardContentContent();
 		String boardContentDate = boardcontent.getBoardContentDate();
-		
+				
 		//변수를 객체의 필드에 셋팅
 		BoardContent boardContent = new BoardContent();
+		
 		boardContent.setBoardContentCode(boardContentCode);
-		boardContent.setmMemberId(mMemberId);
 		boardContent.setBoardContentTitle(boardContentTitle);
 		boardContent.setBoardContentContent(boardContentContent);
 		boardContent.setBoardContentDate(boardContentDate);

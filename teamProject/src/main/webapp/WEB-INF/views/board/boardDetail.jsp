@@ -33,6 +33,24 @@
 	<c:if test="${login eq bc.boardcontent.mMemberId}">
 	<a href="${pageContext.request.contextPath}/board/boardContentUpdate?boardContentCode=${bc.boardcontent.boardContentCode}"><button>수정하기</button></a>
 	</c:if>
+	<p>&nbsp;</p>
+	
+	<form action="${pageContext.request.contextPath}/board/boardReplyAdd" method="post">
+	<table style='line-height:200%'>
+	<tr>
+	<td>댓글</td>
+	</tr>
+	<tr>
+	<td><input type="hidden" name="boardContentCode" value="${bc.boardcontent.boardContentCode}"></td>
+	</tr>
+	<tr>
+	<td><textarea rows="2" cols="100" id="boardReplyContent" name="boardReplyContent"></textarea></td>
+	</tr>
+	<tr>
+	<td><button type="submit">등록</button></td>
+	</tr>
+	</table>
+	</form>
 	<!-- 내용 입력 부분 끝 -->
 		</div>
 	  </div>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cafe24.iso159.board.service.Board;
 import com.cafe24.iso159.board.service.BoardAndBoardContent;
 import com.cafe24.iso159.board.service.BoardContent;
+import com.cafe24.iso159.board.service.BoardReply;
 import com.cafe24.iso159.board.service.BoardService;
 
 @Controller
@@ -117,4 +118,19 @@ public class BoardController {
 		model.addAttribute("bc", bc);
 		return "board/boardDetail";
 	}
+	/*//게시판 댓글 등록
+	@RequestMapping(value="/board/boardReplyAdd", method=RequestMethod.POST)
+	public String BoardReplyAdd(HttpSession session, BoardReply boardreply) {
+		logger.debug("BoardReplyAdd()메서드 호출");
+		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
+		if(session.getAttribute("loginId")==null) {
+			return "redirect:/member/login";
+		}
+		String mId = (String)session.getAttribute("loginId");
+		logger.debug("BoardAdd()메서드 mId is {}", mId);
+		boardservice.addBoardReply(boardreply, mId);
+		return "redirect:/board/boardDetail";
+	}*/
+	//댓글리스트 보여지게 하기
+	
 }
