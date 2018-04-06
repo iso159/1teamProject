@@ -55,7 +55,8 @@
 						divTag += '<p>동물 나이 : ${i.animalAge}</p>'+'<p>보호소 위치 : ${i.animalArea}</p>'+'<p>보호소 명 : ${i.blShelterName}</p>';
 						divTag += '<p>동물 상태 : ${i.osName}</p>' + '<p>동물 체중 : ${i.animalWeight}</p>' + '<p>동물 등록날짜 : ${i.animalEnrollDate}</p>';
 						divTag += '<p>동물 수정 : <a href="${pageContext.request.contextPath}/animal/animalUpdate?animalCode=${i.animalCode}">수정</a></p>';
-						divTag += '<p>동물 삭제 : <a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}">삭제</a></p>';	
+						divTag += '<p>동물 삭제 : <a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}">삭제</a></p>';
+						divTag += '<p>진단서 등록 : <a href="${pageContext.request.contextPath}/jindan/animalJindan?animalCode=${i.animalCode}">진단서 등록</a></p>';
 						divTag += '</div> </c:forEach>'
 						$('#animalList').append(divTag);
 					}
@@ -126,6 +127,7 @@
 					<c:if test="${!empty path and flag ne 'http'}">
 						<p>동물 삭제: <a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}&animalImagePath=${i.animalImagePath}">삭제</a></p>
 					</c:if>				
+					<p>진단서 등록 : <a href="${pageContext.request.contextPath}/jindan/animalJindan?animalCode=${i.animalCode}">진단서 등록</a></p>
 				</div>
 			</c:forEach>
 	    <div>

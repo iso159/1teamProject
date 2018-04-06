@@ -108,18 +108,18 @@
           					<c:set var="level" value="${rightLevel}"></c:set>
                             <a href="#"><i class="fa fa-dashboard fa-fw"></i> 보호소<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <c:if test="${right eq '체험자' or right eq '보호소'}">
-          						<c:if test="${right eq '체험자'}">
+                                <c:if test="${right eq '회원' or right eq '보호소'}">
+          						<c:if test="${right eq '회원' and level eq '1'}">
                                 <li>
                                     <a href="${pageContext.request.contextPath}/shelter/businessLicenseRequest">보호소 대표 신청</a>
                                 </li>
                                 </c:if>
-                                <c:if test="${right eq '체험자' or right eq '보호소'}">
+                                <c:if test="${right eq '회원' or right eq '보호소'}">
                                 <li>
                                     <a href="${pageContext.request.contextPath}/businessLicenseListPersonal">보호소 대표 신청 관리</a>
                                 </li>
                                 </c:if>
-                                <c:if test="${right eq '체험자'}">
+                                <c:if test="${right eq '회원' and level eq '1'}">
                                 <li>
                                     <a href="${pageContext.request.contextPath}/shelter/staffBusinessLicenseGet">보호소 직원 신청</a>
                                 </li>
@@ -197,10 +197,10 @@
                                 <li>
                                     <a href="${pageContext.request.contextPath}/animal/animalAdd">동물등록</a>
                                 </li>
-                                </c:if>
                                 <li>
                                     <a href="${pageContext.request.contextPath}/animal/animalList">동물리스트</a>
                                 </li>
+                                </c:if>
                             </ul>
                         </li>
                         <!-- 동물 끝 -->
