@@ -131,7 +131,7 @@
 						<ul class="nav nav-second-level">
 							<c:if test="${rightLevel eq '1' or rightLevel eq '3'}">
 								<li>
-								<a href="${pageContext.request.contextPath}/experience/expAdd?animalCode=animal_code_01&blCode=bl_code_01">체험등록</a>
+								<a href="${pageContext.request.contextPath}/experience/expAnimalList">체험하기</a>
 								</li>
 								<li>
 								<a href="${pageContext.request.contextPath}/experience/expList">나의체험리스트</a>
