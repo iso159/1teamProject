@@ -3,5 +3,37 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.jindan.service.JindanMapper">
-
+	
+	<!-- jindan테이블 입력 쿼리문 -->
+	<insert id="insertJindan" parameterType="com.cafe24.iso159.jindan.service.Jindan">
+		INSERT INTO 
+			t_jindan (jindan_code, animal_code, bl_code, m_shelter_id, os_code_medical, jindan_expost_point, jindan_overall_opinion, jindan_date) 
+		VALUES 
+			(#{jindanCode}, #{animalCode}, #{blCode}, #{mShelterId}, #{osCodeMedical}, #{jindanExpostPoint}, #{jindanOverallOpinion}, now());
+	</insert>
+	
+	<!-- jindan 테이블 기본키 코드의 최대값 조회 쿼리문 -->
+	<select id="selectJindanCodeMaxNum" resultType="Integer">
+		SELECT 
+			MAX(CAST(SUBSTRING(jindan_code,13) AS DECIMAL)) 
+		FROM t_jindan
+	</select>
+	
+	<!-- overall_status 테이블 동적쿼리 조회 쿼리문 -->
+	<select id="selectJindanOs" parameterType="String" resultType="com.cafe24.iso159.service.common.OverallStatus">
+		SELECT
+			os_code as osCode
+			, os_large as osLarge
+			, os_large_level as osLargeLevel
+			, os_small as osSmall
+			, os_small_level as osSmallLevel
+			, os_name as osName
+			, os_name_level as osNameLevel
+		FROM
+			t_overall_status
+		<if test="_parameter != null">
+			WHERE
+				os_large=#{osLarge}
+		</if>
+	</select>
 </mapper>

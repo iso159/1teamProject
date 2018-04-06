@@ -174,6 +174,7 @@
 			, animal_code
 			, bl.m_member_id
 			, bl.bl_code  
+			, animal_image_path
 		FROM t_animal a
         INNER JOIN t_overall_status osk
 		ON osk.os_code = a.os_code_kind
