@@ -1,34 +1,40 @@
 package com.cafe24.iso159.board.service;
 
-public class BoardContent {
+import java.util.List;
+
+public class BoardCommand {
+	private String boardCode;
+	private String boardName;
 	private String boardContentCode;
 	private int boardNumber;
-	private String boardCode;
 	private String mMemberId;
 	private String boardContentTitle;
 	private String boardContentContent;
 	private String boardContentDate;
-	
-	public String getBoardContentCode() {
-		return boardContentCode;
-	}
-	
-	public int getBoardNumber() {
-		return boardNumber;
-	}
-
-	public void setBoardNumber(int boardNumber) {
-		this.boardNumber = boardNumber;
-	}
-
-	public void setBoardContentCode(String boardContentCode) {
-		this.boardContentCode = boardContentCode;
-	}
+	private List<BoardReply> boardReply;
 	public String getBoardCode() {
 		return boardCode;
 	}
 	public void setBoardCode(String boardCode) {
 		this.boardCode = boardCode;
+	}
+	public String getBoardName() {
+		return boardName;
+	}
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
+	public String getBoardContentCode() {
+		return boardContentCode;
+	}
+	public void setBoardContentCode(String boardContentCode) {
+		this.boardContentCode = boardContentCode;
+	}
+	public int getBoardNumber() {
+		return boardNumber;
+	}
+	public void setBoardNumber(int boardNumber) {
+		this.boardNumber = boardNumber;
 	}
 	public String getmMemberId() {
 		return mMemberId;
@@ -54,11 +60,17 @@ public class BoardContent {
 	public void setBoardContentDate(String boardContentDate) {
 		this.boardContentDate = boardContentDate;
 	}
-
+	public List<BoardReply> getBoardReply() {
+		return boardReply;
+	}
+	public void setBoardReply(List<BoardReply> boardReply) {
+		this.boardReply = boardReply;
+	}
 	@Override
 	public String toString() {
-		return "BoardContent [boardContentCode=" + boardContentCode + ", boardNumber=" + boardNumber + ", boardCode="
-				+ boardCode + ", mMemberId=" + mMemberId + ", boardContentTitle=" + boardContentTitle
-				+ ", boardContentContent=" + boardContentContent + ", boardContentDate=" + boardContentDate + "]";
+		return "BoardCommand [boardCode=" + boardCode + ", boardName=" + boardName + ", boardContentCode="
+				+ boardContentCode + ", boardNumber=" + boardNumber + ", mMemberId=" + mMemberId
+				+ ", boardContentTitle=" + boardContentTitle + ", boardContentContent=" + boardContentContent
+				+ ", boardContentDate=" + boardContentDate + ", boardReply=" + boardReply + "]";
 	}
 }

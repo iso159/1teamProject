@@ -43,8 +43,8 @@ public class BoardService {
 		boardcontent.setmMemberId(mId);
 		boardDao.insertboardContent(boardcontent);
 	}
-	/*//게시판 댓글등록
-	public void addBoardReply(BoardReply boardreply, String mId) {
+	//게시판 댓글등록
+	public void addBoardReply(BoardReply boardreply, String mId, String boardContentCode) {
 		logger.debug("addBoard()메서드", mId);
 		
 		//마지막코드 숫자값을 저장
@@ -65,8 +65,10 @@ public class BoardService {
 		boardreply.setBoardReplyCode(boardReplyCode);
 		//m_member_id 셋팅
 		boardreply.setmMemberId(mId);
+		//board_content_code 셋팅
+		boardreply.setBoardContentCode(boardContentCode);
 		boardDao.insertBoardReply(boardreply);
-	}*/
+	}
 	//게시판 그룹등록
 	public void addBoardGroup(Board board, String mAdminId) {
 		logger.debug("addBoard()메서드", mAdminId);
@@ -103,6 +105,13 @@ public class BoardService {
 		BoardAndBoardContent boardcontent = boardDao.boardDetail(boardContentCode);
 		logger.debug("detailBoard()메서드 boardcontent is {}", boardcontent);
 		return boardcontent;
+	}
+	//게시판 댓글조회
+	public List<BoardReply> listBoardReply(String boardContentCode){
+		logger.debug("listBoardReply()메서드 호출");
+		List<BoardReply> boardReply = boardDao.selectBoardReply(boardContentCode);
+		logger.debug("listBoardReply()메서드 boardReply is {}", boardReply);
+		return boardReply;
 	}
 	//게시판 그룹리스트
 	public List<Board> listBoard(){

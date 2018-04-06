@@ -6,6 +6,7 @@ public class BoardReply {
 	private String mMemberId;
 	private String boardReplyContent;
 	private String boardReplyDate;
+	
 	public String getBoardReplyCode() {
 		return boardReplyCode;
 	}

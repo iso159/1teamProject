@@ -26,11 +26,11 @@ public class BoardDao {
 		logger.debug("insertBoard()메서드 board is {}", board);
 		return sqlSessionTemplate.insert(nameSpace+"insertBoard", board);
 	}
-	/*//댓글 등록
+	//댓글 등록
 	public int insertBoardReply(BoardReply boardreply) {
 		logger.debug("insertBoard()메서드 board is {}", boardreply);
 		return sqlSessionTemplate.insert(nameSpace+"insertBoardReply", boardreply);
-	}*/
+	}
 	//게시판 그룹리스트 조회
 	public List<Board> selectBoard(){
 		logger.debug("selectBoard()메서드 호출");
@@ -64,6 +64,15 @@ public class BoardDao {
 		BoardAndBoardContent boardcontent = sqlSessionTemplate.selectOne(nameSpace+"boardDetail", boardContentCode);
 		return boardcontent;
 	}
+	//게시판 댓글리스트 조회
+	public List<BoardReply> selectBoardReply(String boardContentCode) {
+		
+		logger.debug("selectBoardReply()메서드 boardContentCode is {}", boardContentCode);
+		List<BoardReply> boardreply = sqlSessionTemplate.selectList(nameSpace+"selectBoardReply", boardContentCode);
+		logger.debug("selectBoardReply()메서드 boardreply is {}", boardreply);
+		return boardreply;
+	}
+	
 	//게시판 글 수정
 	public void updateBoardContent(BoardContent boardcontent) {
 		//boardcontent 확인

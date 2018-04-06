@@ -112,25 +112,40 @@ public class BoardController {
 	}
 	//게시판 상세페이지 요청
 	@RequestMapping(value="/board/boardDetail", method=RequestMethod.GET)
-	public String BoardDetail(Model model, @RequestParam(value="boardContentCode",required=true)String boardContentCode) {
+	public String BoardDetail(Model model
+							, HttpSession session
+							, @RequestParam(value="boardContentCode", defaultValue="", required=true)String boardContentCode) {
 		logger.debug("BoardDetail()메서드 호출");
+		logger.debug("BoardDetail(@RequestParam) boardContentCode is {}", boardContentCode);
+		
+		if(boardContentCode.equals("")) {
+			logger.debug("if문 실행 확인");
+		boardContentCode = (String)session.getAttribute("boardContentCode");
+		}
+		logger.debug("BoardDetail()메서드 boardContentCode is {}", boardContentCode);
 		BoardAndBoardContent bc = boardservice.detailBoard(boardContentCode);
 		model.addAttribute("bc", bc);
+		List<BoardReply> br = boardservice.listBoardReply(boardContentCode);
+		model.addAttribute("br", br);
+		session.removeAttribute("boardContentCode");
 		return "board/boardDetail";
 	}
-	/*//게시판 댓글 등록
+	//게시판 댓글 등록
 	@RequestMapping(value="/board/boardReplyAdd", method=RequestMethod.POST)
-	public String BoardReplyAdd(HttpSession session, BoardReply boardreply) {
+	public String BoardReplyAdd(HttpSession session
+								, BoardReply boardreply
+								, @RequestParam(value="boardContentCode")String boardContentCode) {
 		logger.debug("BoardReplyAdd()메서드 호출");
+		logger.debug("BoardReplyAdd()메서드 boardContentCode is {}", boardContentCode);
 		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
 		String mId = (String)session.getAttribute("loginId");
 		logger.debug("BoardAdd()메서드 mId is {}", mId);
-		boardservice.addBoardReply(boardreply, mId);
+		boardservice.addBoardReply(boardreply, mId, boardContentCode);
+		session.setAttribute("boardContentCode", boardContentCode);
+		logger.debug("BoardAdd()메서드 session에 있는 boardContentCode is {}", boardContentCode);
 		return "redirect:/board/boardDetail";
-	}*/
-	//댓글리스트 보여지게 하기
-	
+	}
 }

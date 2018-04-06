@@ -16,6 +16,22 @@
 			<result column="board_content_date" property="boardContentDate"/>
 		</collection>	
 	</resultMap>
+	
+	<!-- 게시판 글 띄우는 맵퍼 -->
+	<resultMap type="com.cafe24.iso159.board.service.BoardCommand" id="selectBoardReplyListMap">
+		<id column="board_code" property="boardCode"/>
+		<result column="board_name" property="boardName"/>
+		<result column="board_content_code" property="boardContentCode"/>
+		<result column="m_member_id" property="mMemberId"/>
+		<result column="board_content_code" property="boardContentTitle"/>
+		<result column="board_content_content" property="boardContentContent"/>
+		<result column="board_content_date" property="boardContentDate"/>
+		<collection property="boardReply" ofType="com.cafe24.iso159.board.service.BoardReply">
+			<id column="board_reply_code" property="boardReplyCode"/>
+			<result column="board_reply_content" property="boardReplyContent"/>
+			<result column="board_reply_date" property="boardReplyDate"/>
+		</collection>
+	</resultMap>
 	<!-- 게시판 글 등록 -->
 	<insert id="insertBoardContent" parameterType="com.cafe24.iso159.board.service.BoardContent">
 		INSERT INTO
@@ -58,7 +74,7 @@
 	</insert>
 	
 	<!-- 게시판 댓글 등록 -->
-	<!-- <insert id="insertBoardReply" parameterType="com.cafe24.iso159.board.service.BoardReply">
+	<insert id="insertBoardReply" parameterType="com.cafe24.iso159.board.service.BoardReply">
 		INSERT INTO 
 			t_board_reply 
 			(
@@ -76,7 +92,7 @@
 				, #{boardReplyContent}
 				, now()
 			)
-	</insert> -->
+	</insert>
 	
 	<!-- 게시판 글 전체 조회 -->
 	<select id="selectBoardContent" resultMap="selectBoardListMap">
@@ -98,18 +114,31 @@
 	<!-- 게시판 글 상세조회 -->
 	<select id="boardDetail" parameterType="string" resultMap="selectBoardListMap">
 		SELECT
-			board_content_code 
+			bc.board_content_code 
 			,b.board_name 
-			,m_member_id 
-			,board_content_title
-			,board_content_content 
-			,board_content_date 
+			,bc.m_member_id 
+			,bc.board_content_title
+			,bc.board_content_content 
+			,bc.board_content_date          
 		FROM 
 			t_board_content bc
 		INNER JOIN 
 			t_board b
 		ON bc.board_code = b.board_code
-        WHERE bc.board_content_code = #{boardContentCode}
+        WHERE 
+        	bc.board_content_code = #{boardContentCode}
+	</select>
+	<!-- 게시판 댓글리스트 조회 -->
+	<select id="selectBoardReply" parameterType="String" resultType="com.cafe24.iso159.board.service.BoardReply">
+		SELECT 
+			board_reply_code AS boardReplyCode
+    		,board_content_code AS boardContentCode
+    		,board_reply_content AS boardReplyContent
+    		,board_reply_date As boardReplyDate
+		FROM 
+			t_board_reply 
+		WHERE 
+			board_content_code = #{boardContentCode}
 	</select>
 	
 	<!-- 게시판 그룹이름 리스트 조회 -->
