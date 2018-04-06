@@ -23,6 +23,15 @@ public class ExpDao {
 	//맵퍼 id를 가져올때 사용할 맵퍼 생성
 	private final String nameSpace = "com.cafe24.iso159.exp.service.ExpMapper.";
 	
+	// 체험 하기 클릭시 체험 가능 동물 내용 띄워줌
+	public List<Animal> selectExpAnimalList(String osCodeAnimal) {
+		logger.debug("ExpDao.java 호출 {selectExpAnimalList}.");
+		logger.debug("selectExpAnimalList() 메서드 실행 osCodeAnimal is {}", osCodeAnimal);
+		List<Animal> animal = sqlSessionTemplate.selectList(nameSpace + "selectExpAnimalList", osCodeAnimal);
+		logger.debug("selectExpAnimalList() 메서드 실행 animal is {}", animal);
+		return animal;
+	}
+	
 	//체험 일지 수정
 	public void updateExpJournal(ExpJournal expJournal) {
 		logger.debug("ExpDao.java 호출 {updateExpJournal}.");

@@ -32,6 +32,16 @@ public class ExpController {
 	private ExpService expService;
 	private static final Logger logger = LoggerFactory.getLogger(ExpController.class);
 	
+	//체험 하기 클릭시 체험 가능 동물 내용 띄워줌 
+	@RequestMapping(value = "/experience/expAnimalList", method = RequestMethod.GET)
+	public String expAnimalList(Model model) {
+		logger.debug("ExpController 호출 {expAnimalList.get}.");
+		List<Animal> animal =  expService.selectExpAnimalList();
+		logger.debug("expAnimalList().get 메서드 animal is {}",animal);
+		model.addAttribute("animal", animal);
+		return "/experience/expAnimalList";
+	}
+	
 	//해당번호 체험일지 수정 내용 조회
 	@RequestMapping(value = "/experience/expJournalModify", method = RequestMethod.POST)
 	public String expJournalModify(ExpJournal expJournal) {
@@ -173,7 +183,6 @@ public class ExpController {
 		logger.debug("ExpOneList().get 메서드 expAndAnimal is {}",expAndAnimal);
 		model.addAttribute("loginId", loginId);
 		model.addAttribute("expAndAnimal", expAndAnimal);
-		
 		return "/experience/expList";
 	}
 	

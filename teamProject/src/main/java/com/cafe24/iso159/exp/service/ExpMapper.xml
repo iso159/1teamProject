@@ -82,6 +82,36 @@
 		<result column="m_info_join_date" property="mInfoJoindate"/>
 	</resultMap>
 	
+	<!-- 체험 하기 클릭시 체험 가능 동물 내용 띄워줌  -->
+	<select id="selectExpAnimalList" resultType="com.cafe24.iso159.animal.service.Animal" parameterType="String">
+		SELECT 
+			a.animal_code AS animalCode
+		    ,os1.os_name AS osCodeAnimal
+		    ,a.bl_code AS blCode
+		    ,bl.bl_shelter_name AS mShelterId
+		    ,os2.os_name AS osCodeKind
+		    ,a.animal_breed AS animalBreed
+		    ,a.animal_weight AS animalWeight
+		    ,a.animal_age AS animalAge
+		    ,a.animal_image_path AS animalImagePath
+		FROM 
+			t_animal a
+		INNER JOIN
+			t_overall_status os1
+		ON
+			a.os_code_animal = os1.os_code
+		INNER JOIN
+			t_overall_status os2
+		ON
+			a.os_code_kind = os2.os_code
+		INNER JOIN
+			t_business_license bl
+		ON
+			a.m_shelter_id = bl.m_member_id
+		WHERE
+			a.os_code_animal = #{osCodeAnimal}
+	</select>
+	
 	<!-- 체험 일지 수정 -->
 	<update id="updateExpJournal" parameterType="com.cafe24.iso159.exp.service.ExpJournal">
 		UPDATE 

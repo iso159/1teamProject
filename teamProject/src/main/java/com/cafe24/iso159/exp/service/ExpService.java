@@ -24,6 +24,16 @@ public class ExpService {
 	//디버그용 로거 생성
 	private static final Logger logger = LoggerFactory.getLogger(ExpService.class);
 	
+	//체험 하기 클릭시 체험 가능 동물 내용 띄워줌
+	public List<Animal> selectExpAnimalList(){
+		logger.debug("ExpService.java 호출 {selectExpAnimalList}.");
+		String osCodeAnimal = "os_animal_3_1_2";
+		logger.debug("selectExpAnimalList() 메서드 실행 osCodeAnimal is {}", osCodeAnimal);
+		List<Animal> animal = expDao.selectExpAnimalList(osCodeAnimal);
+		logger.debug("selectExpAnimalList() 메서드 실행 animal is {}", animal);
+		return animal;
+	}
+	
 	//체험 일지 수정
 	public void updateExpJournal(ExpJournal expJournal) {
 		logger.debug("ExpService.java 호출 {updateExpJournal}.");
