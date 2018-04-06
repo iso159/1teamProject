@@ -72,6 +72,13 @@ public class BoardController {
 		boardservice.modifyBoardContent(boardcontent, boardContentCode);
 		return "redirect:/board/boardList";
 	}
+	//게시글 삭제
+	@RequestMapping(value="/board/boardContentDelete", method=RequestMethod.GET)
+	public String boardContentRemove(HttpSession session
+									, @RequestParam(value="boardContentCode")String boardContentCode) {
+		boardservice.removeBoardContent(boardContentCode);
+		return "redirect:/board/boardList";
+	}
 	//게시판 그룹이름 삭제
 	@RequestMapping(value="/board/boardDelete", method=RequestMethod.GET)
 	public String boardRemove(HttpSession session

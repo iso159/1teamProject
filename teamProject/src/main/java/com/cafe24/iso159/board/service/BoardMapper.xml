@@ -151,6 +151,11 @@
 		DELETE FROM t_board WHERE board_code = #{boardCode}
 	</delete>
 	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoardContent" parameterType="String">
+		DELETE FROM t_board_content WHERE board_content_code = #{boardContentCode}
+	</delete>
+	
 	<!-- 게시글 수정 -->
 	<update id="updateBoardContent" parameterType="com.cafe24.iso159.board.service.BoardContent">
 		UPDATE 

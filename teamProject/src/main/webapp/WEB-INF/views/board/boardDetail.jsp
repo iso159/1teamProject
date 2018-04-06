@@ -28,14 +28,17 @@
 	<h2>${bc.boardName}</h2>
 	<hr color="gray" width=100%>
 	<!-- 게시판제목 -->
-	<h4>${bc.boardcontent.boardContentTitle}</h4>
+	<h3>${bc.boardcontent.boardContentTitle}</h3>
+	<!-- 등록날짜 -->
+	<div style="color:gray;">${bc.boardcontent.boardContentDate}</div>
 	<hr color="lightgray" width=100%>
 	<!-- 게시판내용시작 -->
 	${bc.boardcontent.boardContentContent}<br>
 	
 	<p>&nbsp;</p>
 	<c:if test="${login eq bc.boardcontent.mMemberId}">
-	<a href="${pageContext.request.contextPath}/board/boardContentUpdate?boardContentCode=${bc.boardcontent.boardContentCode}"><button>수정하기</button></a>
+	<a href="${pageContext.request.contextPath}/board/boardContentUpdate?boardContentCode=${bc.boardcontent.boardContentCode}"><button>수정</button></a>
+	<a href="${pageContext.request.contextPath}/board/boardContentDelete?boardContentCode=${bc.boardcontent.boardContentCode}"><button>삭제</button></a>
 	</c:if>
 	<p>&nbsp;</p>
 	
