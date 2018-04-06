@@ -229,13 +229,18 @@
 							<c:set var="login" value="${loginId}"></c:set>
 							<c:set var="right" value="${rightName}"></c:set>
 							<c:if test="${right eq '회원'}">
-								<li><a
-									href="${pageContext.request.contextPath}/board/boardAdd">게시판등록</a>
+								<li>
+									<a href="${pageContext.request.contextPath}/board/boardAdd">게시판등록</a>
 								</li>
 							</c:if>
 							<li>
 								<a href="${pageContext.request.contextPath}/board/boardList">게시판리스트</a>
 							</li>
+							<c:if test="${right eq '관리자'}">
+								<li>
+									<a href="${pageContext.request.contextPath}/board/boardGroupList">게시판관리</a>
+								</li>
+							</c:if>
 						</ul>
 					</li>
 					<!-- 게시판 끝 -->
