@@ -4,15 +4,6 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -20,20 +11,22 @@
 	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
 	<!-- top 부분 끝-->
 	<h2>회원 리스트</h2>
-	<!-- 검색 기능 시작 -->
-	<div> 
-		<ul class="nav top-menu">
-			<li>
-				<form class="navbar-form"
-					action="${pageContext.request.contextPath}/member/memberList?rowPerPage=${rowPerPage}" method="get">
-					<input class="form-control" name="searchWord" placeholder="Search" type="text">
-					<button type="submit" class="btn btn-danger">검색</button>
-				</form>
-			</li>
-		</ul> 
-	</div>
-	<!-- 검색 기능 끝 -->
-	<table border=1 class="table table-striped">
+	<!-- 메인내용 시작 : Text | Text -->
+	<div class="container">
+		<!-- 검색 기능 시작 -->
+		<div> 
+			<ul class="nav top-menu">
+				<li>
+					<form class="navbar-form"
+						action="${pageContext.request.contextPath}/member/memberList?rowPerPage=${rowPerPage}" method="get">
+						<input class="form-control" name="searchWord" placeholder="Search" type="text">
+						<button type="submit" class="btn btn-danger">검색</button>
+					</form>
+				</li>
+			</ul> 
+		</div>
+		<!-- 검색 기능 끝 -->
+		<table border=1 class="table table-striped">
 			<thead>
 				<tr>
 					<th>회원 아이디</th>
@@ -41,7 +34,7 @@
 					<th>회원 닉네임</th>
 					<th>회원 성별</th>
 					<th>회원 생년월일</th>
-					<th>화원 우편번호</th>
+					<th>회원 우편번호</th>
 					<th>회원 주소</th>
 					<th>회원 이메일</th>
 					<th>회원 휴대폰</th>
@@ -69,13 +62,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	<!-- 메인내용 시작 : Text | Text -->
-	<section>
-	<div data-layout="_r">
-		<div data-layout="ch-half">
-		</div>
-	</div>
-	</section>
 	<!-- 메인내용 끝 : Text | Text -->
 
 	<!-- 내용 입력 부분 끝 -->

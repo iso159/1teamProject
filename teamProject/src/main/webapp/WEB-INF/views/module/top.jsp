@@ -82,7 +82,7 @@
 						</div> <!-- /input-group -->
 					</li>
 					
-					<c:if test="${right eq '회원' or right eq '보호소'}">
+					<c:if test="${right eq '회원' or right eq '보호소' or right eq '관리자'}">
                     <!-- 보호소 시작 -->
                     <li>
                     	<c:set var="right" value="${rightName}"></c:set>
@@ -90,32 +90,32 @@
                         <a href="#"><i class="fa fa-dashboard fa-fw"></i>보호소 관리<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
       						<c:if test="${right eq '회원' and level eq '1'}">
-                            <li>
-                                <a href="${pageContext.request.contextPath}/shelter/businessLicenseRequest">보호소 대표 신청</a>
-                            </li>
+	                            <li>
+	                                <a href="${pageContext.request.contextPath}/shelter/businessLicenseRequest">보호소 대표 신청</a>
+	                            </li>
                             </c:if>
                             <c:if test="${right eq '회원' or right eq '보호소'}">
-                            <li>
-                                <a href="${pageContext.request.contextPath}/businessLicenseListPersonal">보호소 대표 신청 관리</a>
-                            </li>
+	                            <li>
+	                                <a href="${pageContext.request.contextPath}/businessLicenseListPersonal">보호소 대표 신청 관리</a>
+	                            </li>
                             </c:if>
                             <c:if test="${right eq '회원' and level eq '1'}">
-                            <li>
-                                <a href="${pageContext.request.contextPath}/shelter/staffBusinessLicenseGet">보호소 직원 신청</a>
-                            </li>
+	                            <li>
+	                                <a href="${pageContext.request.contextPath}/shelter/staffBusinessLicenseGet">보호소 직원 신청</a>
+	                            </li>
                             </c:if>
-                            <li>
-                                <a href="${pageContext.request.contextPath}/shelter/requestShelterStaffPersonal">보호소 직원 신청 관리</a>
-                            </li>
                             <c:if test="${right eq '관리자'}">
-                            <li>
-                                <a href="${pageContext.request.contextPath}/businessLicenseRequestList">대표 보호소 신청 목록</a>
-                            </li>
+	                            <li>
+	                                <a href="${pageContext.request.contextPath}/businessLicenseRequestList">대표 보호소 신청 목록</a>
+	                            </li>
                             </c:if>
                             <c:if test="${right eq '보호소' and level eq '2'}">  
-                            <li>
-                                <a href="${pageContext.request.contextPath}/shelter/requestShelterStaffList">직원 신청 목록</a>
-                            </li>
+	                            <li>
+	                                <a href="${pageContext.request.contextPath}/shelter/requestShelterStaffPersonal">보호소 직원 신청 관리</a>
+	                            </li>
+	                            <li>
+	                                <a href="${pageContext.request.contextPath}/shelter/requestShelterStaffList">직원 신청 목록</a>
+	                            </li>
                             </c:if>
                         </ul>
                     </li>
