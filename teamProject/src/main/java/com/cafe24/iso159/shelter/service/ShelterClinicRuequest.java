@@ -6,7 +6,7 @@ public class ShelterClinicRuequest {
 	private String osCodeClinicKind;
 	private String scDate;
 	private String scReserveDate;
-
+ 
 	public String getmShelterId() {
 		return mShelterId;
 	}
