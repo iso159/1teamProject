@@ -16,9 +16,18 @@ public class AnimalDao {
 	private static final Logger logger = LoggerFactory.getLogger(AnimalDao.class);
 	
 	private final String nameSpace = "com.cafe24.iso159.animal.service.AnimalMapper.";
+	
+	// animal 테이블에서 동물 상태코드를 수정하는 쿼리문 updateAnimalOsCode을 접근하는 DAO 메서드
+	public void updateAnimalOsCode(Animal animal) {
+		logger.debug("updateAnimalOsCode(Animal animal) 메서드 호출");
+		logger.debug("updateAnimalOsCode(Animal animal) 메서드 animal is {}", animal);
+		int result = sqlSessionTemplate.update(nameSpace + "updateAnimalOsCode", animal);
+		logger.debug("updateAnimalOsCode(Animal animal) 메서드 result is {}", result);
+		logger.debug("updateAnimalOsCode(Animal animal) 메서드 끝");
+	}
+	
 	//동물등록
-	public int insertAnimal(Animal animal) {
-		
+	public int insertAnimal(Animal animal) {		
 		logger.debug("insertAnimal()메서드 animal is {}", animal);		
 		return sqlSessionTemplate.insert(nameSpace+"insertAnimal", animal); 
 	}

@@ -20,6 +20,15 @@
 		<result column="animal_image_path" property="animalImagePath"></result>
 	</resultMap>
 	
+	<!-- animal 테이블에서 동물 상태코드를 수정하는 쿼리문 -->
+	<update id="updateAnimalOsCode" parameterType="com.cafe24.iso159.animal.service.Animal">
+		UPDATE t_animal 
+		SET 
+			os_code_animal=#{osCodeAnimal}
+		WHERE 
+			animal_code=#{animalCode};
+	</update>
+	
 	<!-- 동물등록 -->
 	<insert id="insertAnimal" parameterType="com.cafe24.iso159.animal.service.Animal">
 		INSERT INTO 

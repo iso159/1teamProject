@@ -5,16 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var itemSize;
@@ -50,8 +41,9 @@
 						divTag += '<c:if test="${empty path}"><img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" alt="" data-theme="_is1"></c:if>';
 						divTag += '<c:if test="${!empty path and flag eq \'http\'}"><img class="MOD_STAFF_Picture" src="${path}" alt="" data-theme="_is1"></c:if>';
 						divTag += '<c:if test="${!empty path and flag ne \'http\'}"><img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" alt="" data-theme="_is1"></c:if>';
-						divTag += '<p class="MOD_STAFF_Name" data-theme="_bb1"><a href="${pageContext.request.contextPath}/animal/animalDetail?animalCode=${i.animalCode}">${i.animalIdCode}</a></p>';	
-						divTag += '<p class="MOD_STAFF_Positon">${i.osNameAnimalKind} ${i.animalBreed}</p>';
+						divTag += '<p>동물 식별코드 : {i.animalIdCode}</p>';	
+						divTag += '<p>종류 : ${i.osNameAnimalKind} </p>';
+						divTag += '<p>품종 : ${i.animalBreed}</p>';
 						divTag += '<p>동물 나이 : ${i.animalAge}</p>'+'<p>보호소 위치 : ${i.animalArea}</p>'+'<p>보호소 명 : ${i.blShelterName}</p>';
 						divTag += '<p>동물 상태 : ${i.osName}</p>' + '<p>동물 체중 : ${i.animalWeight}</p>' + '<p>동물 등록날짜 : ${i.animalEnrollDate}</p>';
 						divTag += '<p>동물 수정 : <a href="${pageContext.request.contextPath}/animal/animalUpdate?animalCode=${i.animalCode}">수정</a></p>';
@@ -112,8 +104,9 @@
 					<c:if test="${!empty path and flag ne 'http'}">
 						<img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" alt="" data-theme="_is1">
 					</c:if>
-					<p class="MOD_STAFF_Name" data-theme="_bb1"><a href="${pageContext.request.contextPath}/animal/animalDetail?animalCode=${i.animalCode}">${i.animalIdCode}</a></p>
-					<p class="MOD_STAFF_Positon">${i.osNameAnimalKind} ${i.animalBreed}</p>
+					<p>동물 식별코드 : ${i.animalIdCode}</p>
+					<p>종류 : ${i.osNameAnimalKind} </p>
+					<p>품종 : ${i.animalBreed}</p>
 					<p>동물 나이 : ${i.animalAge}</p>					
 					<p>보호소 위치 : ${i.animalArea}</p>
 					<p>보호소 명 : ${i.blShelterName}</p>

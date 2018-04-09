@@ -4,6 +4,47 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.jindan.service.JindanMapper">
 	
+	<!-- t_jindan_nose 테이블 입력 쿼리문-->
+	<insert id="insertJindanNose" parameterType="com.cafe24.iso159.jindan.service.JindanNose">
+		INSERT INTO 
+			t_jindan_nose (jindan_nose_code, jindan_code, os_nose_secrete, os_nose_odd_yumu) 
+		VALUES 
+			(#{jindanNoseCode}, #{jindanCode}, #{osNoseSecrete}, #{osNoseOddYumu});
+	</insert>
+	
+	<!-- t_jindan_skin 테이블 입력 쿼리문 -->
+	<insert id="insertJindanSkin" parameterType="com.cafe24.iso159.jindan.service.JindanSkin">
+		INSERT INTO 
+			t_jindan_skin (jindan_skin_code, jindan_code, os_coat, os_skin, os_skin_odd_yumu) 
+		VALUES 
+			(#{jindanSkinCode}, #{jindanCode}, #{osCoat}, #{osSkin}, #{osSkinOddYumu});
+	</insert>
+	
+	<!-- t_jindan_general 테이블 입력 쿼리문 -->
+	<insert id="insertJindanGeneral" parameterType="com.cafe24.iso159.jindan.service.JindanGeneral">
+		INSERT INTO 
+			t_jindan_general (jindan_general_code, jindan_code, os_body, os_manner, os_rheum, os_general_odd_yumu) 
+		VALUES 
+			(#{jindanGeneralCode}, #{jindanCode}, #{osBody}, #{osManner}, #{osRheum}, #{osGeneralOddYumu});
+	</insert>
+	
+	<!-- t_jindan_eyes 테이블 입력 쿼리문 -->
+	<insert id="insertJindanEyes" parameterType="com.cafe24.iso159.jindan.service.JindanEyes">
+		INSERT INTO 
+			t_jindan_eyes (jindan_eyes_code, jindan_code, os_cornea, os_conjunctiva, os_crystalline, os_eyes_odd_yumu) 
+		VALUES 
+			(#{jindanEyesCode}, #{jindanCode}, #{osCornea}, #{osConjunctiva}, #{osCrystalline}, #{osEyesOddYumu});
+		
+	</insert>
+	
+	<!-- t_jindan_ears 테이블 입력 쿼리문 -->
+	<insert id="insertJindanEars" parameterType="com.cafe24.iso159.jindan.service.JindanEars">
+		INSERT INTO 
+			t_jindan_ears (jindan_ears_code, jindan_code, os_hearing, os_ears_secrete, os_mite, os_ears_odd_yumu) 
+		VALUES 
+			(#{jindanEarsCode}, #{jindanCode}, #{osHearing}, #{osEarsSecrete}, #{osMite}, #{osEarsOddYumu});		
+	</insert>
+	
 	<!-- jindan테이블 입력 쿼리문 -->
 	<insert id="insertJindan" parameterType="com.cafe24.iso159.jindan.service.Jindan">
 		INSERT INTO 
@@ -13,7 +54,7 @@
 	</insert>
 	
 	<!-- jindan 테이블 기본키 코드의 최대값 조회 쿼리문 -->
-	<select id="selectJindanCodeMaxNum" resultType="Integer">
+	<select id="selectJindanCodeMaxNum" resultType="String">
 		SELECT 
 			MAX(CAST(SUBSTRING(jindan_code,13) AS DECIMAL)) 
 		FROM t_jindan

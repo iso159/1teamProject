@@ -4,8 +4,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="f" %>
 <html>
 <head>
-
-	
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#jindanBtn').click(function(){
+				$('#jindanForm').submit();
+			});
+		});
+		
+		function check_one_box(chk){
+			var obj = document.getElementsByName(chk.name);	
+			for(let i=0; i<obj.length;i++){
+				if(obj[i] != chk){
+					obj[i].checked=false;
+				}
+			}
+		}
+	</script>
 	<title>Home</title>
 </head>
 <body>
@@ -46,10 +61,16 @@
 			<div>
 				<h2>동물 진단서 체크</h2>
 			</div>
-			<div style="border: 1px; padding: 10px; height: 500px; width: 500px;">
-				<form 
-					  action = "${pageContext.request.contextPath}/jindan/jindanAdd" 
+			<div style="border: 1px; padding: 10px; height: 500px; width: 800px;">
+				<form id="jindanForm"
+					  action = "${pageContext.request.contextPath}/jindan/animalJindan" 
 					  method="post">
+					<input type="hidden" name="animalCode" value="${i.animalCode}">
+					<select name="osCodeMedical">
+						<c:forEach var="jk" items="${jindanKind}">
+							<option value="${jk.osCode}">${jk.osName}
+						</c:forEach>
+					</select>
 					<table border="1">
 						<thead>
 							<tr>
@@ -61,11 +82,11 @@
 						</thead>
 						<tbody>
 							<!-- 일반상태 진단 시작 -->
-							<tr>
+							<tr class="generalStatus">
 								<th rowspan="4">일반 상태</th>
 								<td rowspan="4">
 									<c:forEach var="is" items="${isang}">
-										<input type="checkbox" name="osGeneralOddYumu" value="${is.osCode}">${is.osName}
+										<input type="checkbox" name="osGeneralOddYumu" value="${is.osCode}" onclick="check_one_box(this)">${is.osName}
 									</c:forEach>					
 								</td>
 								<tr>
@@ -74,7 +95,7 @@
 										<c:forEach var="g" items="${general}">
 											<c:set var="go" value="${g.osSmall}"></c:set>
 											<c:if test="${go eq '신체상태'}">
-												<input type="checkbox" name="osBody" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osBody" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -85,7 +106,7 @@
 										<c:forEach var="g" items="${general}">
 											<c:set var="go" value="${g.osSmall}"></c:set>
 											<c:if test="${go eq '태도'}">
-												<input type="checkbox" name="osManner" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osManner" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -96,7 +117,7 @@
 										<c:forEach var="g" items="${general}">
 											<c:set var="go" value="${g.osSmall}"></c:set>
 											<c:if test="${go eq '점막'}">
-												<input type="checkbox" name="osRheum" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osRheum" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -109,7 +130,7 @@
 								<th rowspan="3">피부 상태</th>
 								<td rowspan="3">
 									<c:forEach var="is" items="${isang}">
-										<input type="checkbox" name="osSkinOddYumu" value="${is.osCode}">${is.osName}
+										<input type="checkbox" name="osSkinOddYumu" value="${is.osCode}" onclick="check_one_box(this)">${is.osName}
 									</c:forEach>					
 								</td>
 								<tr>
@@ -118,7 +139,7 @@
 										<c:forEach var="g" items="${skin}">
 											<c:set var="go" value="${g.osSmall}"></c:set>
 											<c:if test="${go eq '피모'}">
-												<input type="checkbox" name="osCoat" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osCoat" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -129,7 +150,7 @@
 										<c:forEach var="g" items="${skin}">
 											<c:set var="go" value="${g.osSmall}"></c:set>
 											<c:if test="${go eq '피부'}">
-												<input type="checkbox" name="osSkin" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osSkin" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -142,7 +163,7 @@
 								<th rowspan="4">눈 상태</th>
 								<td rowspan="4">
 									<c:forEach var="is" items="${isang}">
-										<input type="checkbox" name="osEyesOddYumu" value="${is.osCode}">${is.osName}
+										<input type="checkbox" name="osEyesOddYumu" value="${is.osCode}" onclick="check_one_box(this)">${is.osName}
 									</c:forEach>					
 								</td>
 								<tr>
@@ -151,7 +172,7 @@
 										<c:forEach var="g" items="${eyes}">
 											<c:set var="go" value="${g.osSmall}"></c:set>
 											<c:if test="${go eq '각막'}">
-												<input type="checkbox" name="osCornea" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osCornea" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -162,7 +183,7 @@
 										<c:forEach var="g" items="${eyes}">
 											<c:set var="go" value="${g.osSmall}"></c:set>
 											<c:if test="${go eq '결막'}">
-												<input type="checkbox" name="osConjunctiva" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osConjunctiva" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -173,7 +194,7 @@
 										<c:forEach var="g" items="${eyes}">
 											<c:set var="go" value="${g.osSmall}"></c:set>
 											<c:if test="${go eq '수정체'}">
-												<input type="checkbox" name="osCrystalline" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osCrystalline" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -186,7 +207,7 @@
 								<th rowspan="4">귀 상태</th>
 								<td rowspan="4">
 									<c:forEach var="is" items="${isang}">
-										<input type="checkbox" name="osEarsOddYumu" value="${is.osCode}">${is.osName}
+										<input type="checkbox" name="osEarsOddYumu" value="${is.osCode}" onclick="check_one_box(this)">${is.osName}
 									</c:forEach>					
 								</td>
 								<tr>
@@ -195,7 +216,7 @@
 										<c:forEach var="g" items="${ears}">
 											<c:set var="go" value="${g.osSmall}"></c:set>
 											<c:if test="${go eq '청각'}">
-												<input type="checkbox" name="osHearing" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osHearing" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -207,7 +228,7 @@
 											<c:set var="gos" value="${g.osSmall}"></c:set>
 											<c:set var="gol" value="${g.osLarge}"></c:set>
 											<c:if test="${gos eq '분비물' and gol eq '귀'}">
-												<input type="checkbox" name="osEarsSecrete" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osEarsSecrete" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -218,7 +239,7 @@
 										<c:forEach var="g" items="${ears}">
 											<c:set var="go" value="${g.osSmall}"></c:set>
 											<c:if test="${go eq '진드기'}">
-												<input type="checkbox" name="osMite" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osMite" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -231,7 +252,7 @@
 								<th rowspan="3">코 상태</th>
 								<td rowspan="3">
 									<c:forEach var="is" items="${isang}">
-										<input type="checkbox" name="osNoseOddYumu" value="${is.osCode}">${is.osName}
+										<input type="checkbox" name="osNoseOddYumu" value="${is.osCode}" onclick="check_one_box(this)">${is.osName}
 									</c:forEach>					
 								</td>
 								<tr>
@@ -241,7 +262,7 @@
 											<c:set var="go" value="${g.osSmall}"></c:set>
 											<c:set var="gol" value="${g.osLarge}"></c:set>
 											<c:if test="${go eq '분비물' and gol eq '코'}">
-												<input type="checkbox" name="osNoseSecrete" value="${g.osCode}">${g.osName} 	
+												<input type="checkbox" name="osNoseSecrete" value="${g.osCode}" onclick="check_one_box(this)">${g.osName} 	
 											</c:if>
 										</c:forEach><br>
 									</td>
@@ -250,9 +271,13 @@
 							<!-- 코 상태 진단 끝 -->
 						</tbody>
 					</table>
+					<!-- 종합 소견 시작 -->
+						<h4>종합 소견 작성</h4>
+						<textarea rows="5" cols="68" name="jindanOverallOpinion"></textarea>
+					<!-- 종합 소견 끝 -->
 				</form>
-				<div style="border: 1px ; padding: 10px; height: auto; text-align: right; width: 460px;">
-					<button type="button" style="align-content: center">진단서 등록</button>
+				<div style="border: 1px ; padding: 10px; height: auto; text-align: right; width: 500px;">
+					<button type="button" id="jindanBtn" style="align-content: center">진단서 등록</button>
 				</div>
 			</div>
 			<!-- 내용 부분 끝-->
