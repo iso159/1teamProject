@@ -82,13 +82,13 @@
 						</div> <!-- /input-group -->
 					</li>
 					
+					<c:if test="${right eq '회원' or right eq '보호소'}">
                     <!-- 보호소 시작 -->
                     <li>
                     	<c:set var="right" value="${rightName}"></c:set>
       					<c:set var="level" value="${rightLevel}"></c:set>
-                        <a href="#"><i class="fa fa-dashboard fa-fw"></i> 보호소<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-dashboard fa-fw"></i>보호소 관리<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <c:if test="${right eq '회원' or right eq '보호소'}">
       						<c:if test="${right eq '회원' and level eq '1'}">
                             <li>
                                 <a href="${pageContext.request.contextPath}/shelter/businessLicenseRequest">보호소 대표 신청</a>
@@ -107,7 +107,6 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/shelter/requestShelterStaffPersonal">보호소 직원 신청 관리</a>
                             </li>
-                            </c:if>
                             <c:if test="${right eq '관리자'}">
                             <li>
                                 <a href="${pageContext.request.contextPath}/businessLicenseRequestList">대표 보호소 신청 목록</a>
@@ -115,30 +114,26 @@
                             </c:if>
                             <c:if test="${right eq '보호소' and level eq '2'}">  
                             <li>
-                                <a href="${pageContext.request.contextPath}/businessLicenseListPersonal">보호소 대표 신청 관리</a>
-                            </li>
-                            <li>
                                 <a href="${pageContext.request.contextPath}/shelter/requestShelterStaffList">직원 신청 목록</a>
                             </li>
                             </c:if>
                         </ul>
                     </li>
+                    </c:if>
                     <!-- 보호소 끝 -->
 
 					<!-- 체험 시작 -->
 					<li>
 					<a href="#"><i class="fa fa-sitemap fa-fw"></i> 체험<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<c:if test="${rightLevel eq '1' or rightLevel eq '3'}">
 								<li>
 								<a href="${pageContext.request.contextPath}/experience/expAnimalList">체험하기</a>
 								</li>
 								<li>
 								<a href="${pageContext.request.contextPath}/experience/expList">나의체험리스트</a>
 								</li>
-							</c:if>
 							<c:if test="${rightLevel eq '1' or rightLevel eq '2'}">
-								<li><a href="${pageContext.request.contextPath}/experience/expShelterList?blCode=${loginBlCode}">보호소 체험 리스트</a></li>
+								<li><a href="${pageContext.request.contextPath}/experience/expShelterList?blCode=${loginBlCode}">체험 리스트</a></li>
 							</c:if>
 						</ul></li>
 					<!-- 체험 끝 -->
@@ -147,38 +142,38 @@
 					<li>
 					<a href="#"><i class="fa fa-files-o fa-fw"></i> 입양<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<c:set var="right" value="${rightName}"></c:set>
-							<c:if test="${right eq '회원'}">
 								<li><a
 									href="${pageContext.request.contextPath}/animal/animalList">입양신청</a>
 								</li>
 								<li><a
 									href="${pageContext.request.contextPath}/adopt/adoptMyList">나의입양리스트</a>
 								</li>
-							</c:if>
 							<c:if test="${right eq '관리자' or right eq '보호소'}">
 								<li><a
-									href="${pageContext.request.contextPath}/adopt/adoptList">입양신청리스트</a>
+									href="${pageContext.request.contextPath}/adopt/adoptList">입양 신청 리스트</a>
 								</li>
 							</c:if>
-						</ul></li>
+						</ul>
+					</li>
 					<!-- 입양 끝 -->
-
-					<!-- 동물 시작 -->
+			
+					<!-- 동물 관리 시작 -->
+					<c:if test="${right eq '보호소'}">
 					<li>
-					<a href="#"><i class="fa fa-files-o fa-fw"></i> 동물<span class="fa arrow"></span></a>
+					<a href="#"><i class="fa fa-files-o fa-fw"></i>동물 관리<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<c:set var="right" value="${rightName}"></c:set>
-							<c:if test="${right eq '보호소'}">
 								<li><a
 									href="${pageContext.request.contextPath}/animal/animalAdd">동물등록</a>
 								</li>
-							</c:if>
+							
 							<li><a
 								href="${pageContext.request.contextPath}/animal/animalList">동물리스트</a>
 							</li>
-						</ul></li>
-					<!-- 동물 끝 -->
+						</ul>
+					</li>
+					</c:if>
+					<!-- 동물 관리 끝 -->
 
 					<!-- 애견용품 시작 -->
 					<li>
@@ -197,31 +192,33 @@
 						</ul>
 					</li>
 					<!-- 애견용품 끝 -->
-					<!-- 설문지 시작 -->
-					<li><a href="#"><i class="fa fa-files-o fa-fw"></i> 설문지<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<c:set var="right" value="${rightName}"></c:set>
-							<c:if test="${right eq '관리자'}">
-								<li><a
-									href="${pageContext.request.contextPath}/survey/surveyAdd">설문지등록</a>
-								</li>
-								<li><a
-									href="${pageContext.request.contextPath}/survey/surveyList">설문지조회</a>
-								</li>
-							</c:if>
-						</ul></li>
-					<!-- 설문지 끝 -->
-
+					
+					<c:if test="${right eq '관리자'}">
+						<!-- 설문지 시작 -->
+						<li><a href="#"><i class="fa fa-files-o fa-fw"></i> 설문지<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								
+									<li><a
+										href="${pageContext.request.contextPath}/survey/surveyAdd">설문지등록</a>
+									</li>
+									<li><a
+										href="${pageContext.request.contextPath}/survey/surveyList">설문지조회</a>
+									</li>
+							</ul>
+						</li>					
+						<!-- 설문지 끝 -->
+					</c:if>
+					
+					<c:if test="${right eq '회원' or right eq '보호소' }">
 					<!-- 진단 시작 -->
 					<li><a href="#"><i class="fa fa-files-o fa-fw"></i> 진단<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<c:set var="login" value="${loginId}"></c:set>
-							<c:set var="right" value="${rightName}"></c:set>
 							<c:if test="${right eq '회원'}">
 								<li><a href="${pageContext.request.contextPath}/jindan/jindanShelterList">보호소 진료 예약</a></li>
 							</c:if>
 						</ul></li>
 					<!-- 진단 끝 -->
+					</c:if>
 
 					<!-- 게시판 시작 -->
 					<li><a href="#"><i class="fa fa-files-o fa-fw"></i> 게시판<span class="fa arrow"></span></a>
