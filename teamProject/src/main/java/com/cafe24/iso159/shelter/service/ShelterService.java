@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cafe24.iso159.member.service.Member;
 import com.cafe24.iso159.member.service.MemberDao;
 import com.cafe24.iso159.member.service.MemberInfo;
 
@@ -403,5 +402,42 @@ public class ShelterService {
 		}
 		
 		logger.debug("addBusinessLicense(...) 메서드 끝");
+	}
+	// 사후관리 보호소 신청 쿼리문을 사용하는 Service 메서드
+		public void addClinicRequest(String blCode,String loginId) {
+			logger.debug("addClinicRequest(String blCode,String loginId) 메서드 호출");
+			logger.debug("addClinicRequest(String blCode,String loginId) 메서드 loginId is {}", loginId);
+			logger.debug("addClinicRequest(String blCode,String loginId) 메서드 blCode is {}", blCode);
+			String scCode = "sc_code_";
+			String scCodeNum = shelterDao.selectScCodeNum();
+			int scCodePlus = 1;
+			//os_jindan_2_1_2', 'os_jindan_2_1_2'
+			//os_code_clinic_kind, os_code_clinic_status
+			final String osCodeClinicKind = "os_jindan_2_1_2";
+			final String osCodeClinicStatus = "os_jindan_2_1_2";
+			if(scCodeNum == null) {
+				scCode += 1;
+			}else {
+				scCodePlus += Integer.parseInt(scCodeNum);
+				scCode += scCodePlus;
+			}
+			BusinessLicenseClinic businessLicenseClinic = new BusinessLicenseClinic();
+			businessLicenseClinic.setScCode(scCode);
+			businessLicenseClinic.setBlCode(blCode);
+			businessLicenseClinic.setAdoptCode(osCodeClinicKind);
+			businessLicenseClinic.setOsCodeClinicStatus(osCodeClinicStatus);
+			businessLicenseClinic.setmAdoptId(osCodeClinicStatus);
+			logger.debug("addClinicRequest(String blCode,String loginId) 메서드 businessLicenseClinic is {}", businessLicenseClinic);
+			shelterDao.insertClinicRequest(businessLicenseClinic);
+			logger.debug("addClinicRequest(String blCode,String loginId) 메서드 끝");
+		}
+		
+		// 보호소에 사후 진료 전체 신청리스트 Service
+		public List<BusinessLicenseClinic> getShelterClinicRequestList(){
+			logger.debug("getShelterClinicRequestList() 메서드 호출");
+			List<BusinessLicenseClinic> list = shelterDao.selectShelterClinicRequestList();
+			logger.debug("getShelterClinicRequestList() 메서드 list is {}", list);
+			logger.debug("getShelterClinicRequestList() 메서드 끝");
+			return list;
 	}
 }

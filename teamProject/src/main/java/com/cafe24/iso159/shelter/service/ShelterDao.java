@@ -87,6 +87,7 @@ public class ShelterDao {
 	public void updateShelterRight(Map<String,Object> map) {
 		logger.debug("updateShelterRight(Map<String,Object> map) 메서드 호출");
 		logger.debug("updateShelterRight(Map<String,Object> map) 메서드 map is {}", map);
+		@SuppressWarnings("unused")
 		int result = sqlSessionTemplate.update(nameSpace + "updateShelterRight", map);
 		logger.debug("updateShelterRight(Map<String,Object> map) 메서드 끝");
 	}
@@ -95,6 +96,7 @@ public class ShelterDao {
 	public void updateBusinessLicenseDeny(Map<String,Object> map) {
 		logger.debug("updateBusinessLicenseDeny(Map<String,Object> map) 메서드 호출");
 		logger.debug("updateBusinessLicenseDeny(Map<String,Object> map) 메서드 map is {}",map);
+		@SuppressWarnings("unused")
 		int result = sqlSessionTemplate.update(nameSpace + "updateBusinessLicenseDeny", map);
 		logger.debug("updateBusinessLicenseDeny(Map<String,Object> map) 메서드 끝");
 	}
@@ -168,4 +170,31 @@ public class ShelterDao {
 		logger.debug("insertBusinessLicenseFile(BusinessLicenseFile businessLicenseFile) 메서드 result is {}",result);
 		logger.debug("insertBusinessLicenseFile(BusinessLicenseFile businessLicenseFile) 메서드 끝");
 	}
+
+	// 사후관리 보호소 신청 쿼리문을 사용하는 Dao 메서드
+	public void insertClinicRequest(BusinessLicenseClinic businessLicenseClinic) {
+		logger.debug("insertClinicRequest(BusinessLicenseClinic businessLicenseClinic) 메서드 호출");
+		logger.debug("insertClinicRequest(BusinessLicenseClinic businessLicenseClinic) 메서드 businessLicenseClinic is {}", businessLicenseClinic);
+		int result = sqlSessionTemplate.insert(nameSpace + "insertClinicRequest", businessLicenseClinic);
+		logger.debug("insertClinicRequest(BusinessLicenseClinic businessLicenseClinic) 메서드 result is {}", result);
+		logger.debug("insertClinicRequest(BusinessLicenseClinic businessLicenseClinic) 메서드 끝");
+	}
+	
+	// t_shelter_clinic 테이블의 sc_code의 숫자 조회 Dao 메서드
+	public String selectScCodeNum() {
+		logger.debug("selectScCodeNum 메서드 호출");
+		String result = sqlSessionTemplate.selectOne(nameSpace + "selectScCodeNum");
+		logger.debug("selectScCodeNum 메서드 result is {}",result);
+		logger.debug("selectScCodeNum 메서드 끝");
+		return result;
+	}
+	
+	// 보호소에 사후 진료 전체 신청리스트 Dao
+		public List<BusinessLicenseClinic> selectShelterClinicRequestList() {
+			logger.debug("selectShelterClinicRequestList() 메서드 호출");
+			List<BusinessLicenseClinic> list = sqlSessionTemplate.selectList(nameSpace + "selectShelterClinicRequestList");
+			logger.debug("selectShelterClinicRequestList() 메서드 list is {}",list);
+			logger.debug("selectShelterClinicRequestList() 메서드 끝");
+			return list;
+		}
 }

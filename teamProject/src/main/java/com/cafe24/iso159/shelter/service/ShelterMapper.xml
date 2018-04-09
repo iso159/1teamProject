@@ -241,4 +241,28 @@
 		VALUES 
 			(#{ofCode}, #{blCode}, #{ofPath}, #{ofOriginName}, #{ofSaveName}, #{ofExt}, #{ofSize}, now());
 	</insert>
+	
+		<!-- 사후 진료 신청하려는 보호소 1개 선택해서 보여주는 쿼리 -->
+	<select id="insertClinicRequest" parameterType="com.cafe24.iso159.shelter.service.BusinessLicenseClinic">
+		INSERT INTO 
+			t_shelter_clinic(sc_code, bl_code, m_shelter_id, adopt_code, m_adopt_id, os_code_clinic_kind, os_code_clinic_status, sc_date, sc_reserve_date)
+		VALUES (#{scCode}, #{blCode}, null, #{adoptCode}, #{mAdoptId}, 'os_jindan_2_1_2', 'os_jindan_2_1_2', now(), now());	
+	</select>
+	
+	<!-- t_shelter_clinic 테이블의 sc_code의 숫자 조회 -->
+	<select id="selectScCodeNum" resultType="String">
+		SELECT 
+			MAX(CAST(SUBSTRING(sc_code,9) AS DECIMAL)) 
+		FROM t_shelter_clinic
+	</select>
+	
+	<!-- 보호소에 사후관리 진료 신청한 리스트 조회 쿼리 -->
+	<select id="selectShelterClinicRequestList" resultType="com.cafe24.iso159.shelter.service.BusinessLicenseClinic">
+		SELECT 
+			m_shelter_id, m_adopt_id, os_code_clinic_kind, sc_date,sc_reserve_date 
+		FROM 
+			t_shelter_clinic 
+		ORDER BY
+			sc_reserve_date ASC
+	</select>
 </mapper>

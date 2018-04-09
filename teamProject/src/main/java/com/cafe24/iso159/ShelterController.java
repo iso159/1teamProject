@@ -19,10 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.iso159.member.service.MemberInfo;
 import com.cafe24.iso159.shelter.service.BusinessLicense;
+import com.cafe24.iso159.shelter.service.BusinessLicenseClinic;
 import com.cafe24.iso159.shelter.service.BusinessLicenseCommand;
 import com.cafe24.iso159.shelter.service.MemberIdAndBusinessLicenseFile;
 import com.cafe24.iso159.shelter.service.ShelterService;
-import com.cafe24.iso159.shelter.service.ShelterStaffRequest;
 import com.cafe24.iso159.shelter.service.ShelterStaffRequestAndShelterName;
 
 @Controller
@@ -334,5 +334,30 @@ public class ShelterController {
 		logger.debug("addBusinessLicense(...) 메서드 path is {}",path);
 		shelterService.addBusinessLicense(businessLicenseCommand, path, file);
 		return "redirect:/businessLicenseRequestList";
+	}
+	
+	// 사후진료 신청 폼으로 매핑하는 컨트롤러
+	@RequestMapping(value="/shelter/shelterClinicRequest", method=RequestMethod.GET)
+	public String addClinicRequest(BusinessLicenseClinic businessLicenseClinic, HttpSession session) {
+		logger.debug("addClinicRequest(BusinessLicenseClinic businessLicenseClinic) 메서드 호출");
+		String loginId = (String)session.getAttribute("loginId");
+		logger.debug("addClinicRequest(BusinessLicenseClinic businessLicenseClinic 메서드 loginId is {}", loginId);
+		if(loginId==null) {
+			return "redirect:/member/login";
+		}
+		shelterService.addClinicRequest(loginId, loginId);
+		logger.debug("addClinicRequest(BusinessLicenseClinic businessLicenseClinic) 메서드 끝");
+		return "shelter/shelterClinicRequest";
+	}
+	
+	// 전체 리스트 요청
+	@RequestMapping(value = "/shelter/shelterClinicRequestList")
+	public String shelterClinicRequestList(HttpSession session) {
+		logger.debug("shelterClinicRequestList() 메서드 호출");
+		List<BusinessLicenseClinic> list = shelterService.getShelterClinicRequestList();
+		session.setAttribute("list", list);
+		logger.debug("shelterClinicRequestList() 메서드 list is {}", list);
+		logger.debug("shelterClinicRequestList() 메서드 끝");
+		return "/shelter/shelterClinicRequestList";
 	}
 }
