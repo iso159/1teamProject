@@ -31,7 +31,7 @@
 							<img class="MOD_STAFF_Picture" src="https://unsplash.it/200/200/?random" alt="" data-theme="_is1">
 						</c:if>
 						<c:if test="${!empty path and flag eq 'http'}">
-							<img class="MOD_STAFF_Picture" src="${path}" alt="" data-theme="_is1">
+							<img class="MOD_STAFF_Picture" src="${path}" width="120px" height="90px" alt="" data-theme="_is1">
 						</c:if>
 						<c:if test="${!empty path and flag ne 'http'}">
 							<img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" alt="" data-theme="_is1">
