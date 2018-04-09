@@ -211,13 +211,21 @@
 					
 					<c:if test="${right eq '회원' or right eq '보호소' }">
 					<!-- 진단 시작 -->
-					<li><a href="#"><i class="fa fa-files-o fa-fw"></i> 진단<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<c:if test="${right eq '회원'}">
-								<li><a href="${pageContext.request.contextPath}/jindan/jindanShelterList">보호소 진료 예약</a></li>
-							</c:if>
-						</ul></li>
-					<!-- 진단 끝 -->
+	               <li><a href="#"><i class="fa fa-files-o fa-fw"></i> 진단<span class="fa arrow"></span></a>
+	                  <ul class="nav nav-second-level">
+	                     <c:set var="login" value="${loginId}"></c:set>
+	                     <c:set var="right" value="${rightName}"></c:set>
+	                     <c:if test="${right eq '회원'}">
+	                        <li>
+	                           <a href="${pageContext.request.contextPath}/jindan/jindanShelterList">보호소 진료 예약</a>
+	                        </li>
+	                     </c:if>
+	                        <li>
+	                           <a href="${pageContext.request.contextPath}/shelter/shelterClinicRequestList">보호소 진료 예약 리스트</a>
+	                        </li>
+	                  </ul>
+	               </li>
+	               <!-- 진단 끝 -->
 					</c:if>
 
 					<!-- 게시판 시작 -->
