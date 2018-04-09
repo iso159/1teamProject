@@ -450,13 +450,23 @@
 			e.exp_code = #{expCode}
 	</select>
 	
+	<!-- 해당 사용자 신청 총갯수 -->
+	<select id="selectExpTotalCount" resultType="int" parameterType="String">
+		SELECT 
+			count(*) as count 
+		FROM 
+			t_exp
+		WHERE 
+			m_exp_id = #{mExpId}
+	</select>
+	
 	<!-- 체험 신청 후 해당 사용자 신청한 목록 보는 부분 -->
 	<resultMap type="com.cafe24.iso159.exp.service.ExpAndAnimal" id="selectExpOneListMap">
 		<collection property="overallStatus" resultMap="OverallStatusVo"></collection>
 		<collection property="exp" resultMap="ExpVo"></collection>
 		<collection property="animal" resultMap="AnimalVo"></collection>
 	</resultMap>
-	<select id="selectExpOneList" resultMap="selectExpOneListMap" parameterType="String">
+	<select id="selectExpOneList" resultMap="selectExpOneListMap" parameterType="java.util.Map">
 		SELECT 
 			a.animal_breed,
 			e.exp_reserve_request_date,
@@ -478,6 +488,8 @@
 			e.m_exp_id = #{mExpId}
 		ORDER BY 
 			exp_reserve_request_date DESC
+		LIMIT 
+			#{startRow},#{rowPerPage}
 	</select>
 	
 	<!-- 체험 신청할때 날짜선택 뿌려주는 부분 -->

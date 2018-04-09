@@ -193,11 +193,18 @@ public class ExpDao {
 		sqlSessionTemplate.delete(nameSpace + "deleteExpOne", expCode);
 	}
 	
+	// 해당 사용자 신청 총갯수
+	public int selectExpTotalCount(String mExpId) {
+		int count = sqlSessionTemplate.selectOne(nameSpace + "selectExpTotalCount", mExpId);
+		return count;
+	}
+	
 	//사용자가 자기가신청한 체험 리스트 보는 코드
-	public List<ExpAndAnimal> selectExpOneList(String mExpId) {
+	public List<ExpAndAnimal> selectExpOneList(Map<String, Object> map) {
 		//호출된곳 확인
 		logger.debug("ExpDao.java 호출 {selectExpOneList}.");
-		List<ExpAndAnimal> expAndAnimal = sqlSessionTemplate.selectList(nameSpace + "selectExpOneList", mExpId);
+		logger.debug("selectExpOneList() 메서드 실행 map is {}", map);
+		List<ExpAndAnimal> expAndAnimal = sqlSessionTemplate.selectList(nameSpace + "selectExpOneList", map);
 		logger.debug("selectExpOneList() 메서드 실행 expAndAnimal is {}", expAndAnimal);
 		return expAndAnimal;
 	}

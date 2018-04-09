@@ -175,12 +175,30 @@ public class ExpService {
 	}
 	
 	//사용자 자신의 체험 정보 리스트 뿌려주는 부분
-	public List<ExpAndAnimal> selectExpOneList(String mExpId) {
+	public Map<String, Object> selectExpOneList(Map<String, Object> map) {
 		//호출된곳 확인
 		logger.debug("ExpService.java 호출 {selectExpOneList}.");
-		List<ExpAndAnimal> expAndAnimal = expDao.selectExpOneList(mExpId);
+		logger.debug("selectExpOneList() 메서드 실행 map is {}", map);
+		String mExpId = (String)map.get("mExpId");
+		int currentPage = (Integer)map.get("currentPage");
+		int rowPerPage = (Integer)map.get("rowPerPage");
+		// 시작  페이지
+		int startRow = (currentPage-1)*rowPerPage;
+		map.put("startRow", startRow);
+		List<ExpAndAnimal> expAndAnimal = expDao.selectExpOneList(map);
 		logger.debug("selectExpOneList() 메서드 실행 expAndAnimal is {}", expAndAnimal);
-		return expAndAnimal;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		returnMap.put("rowPerPage", rowPerPage);
+		returnMap.put("currentPage", currentPage);
+		returnMap.put("startRow", startRow);
+		returnMap.put("expAndAnimal", expAndAnimal);
+		// 데이터 총갯수 구함
+		int totalCount = expDao.selectExpTotalCount(mExpId);
+		returnMap.put("totalCount", totalCount);
+		// 페이지마다 마지막 표시
+		int lastPage = (int)Math.ceil((double)totalCount/(double)rowPerPage);
+		returnMap.put("lastPage", lastPage);
+		return returnMap;
 	}
 	
 	//사용자 자신이 신청한 체험 정보 뿌려주는 부분

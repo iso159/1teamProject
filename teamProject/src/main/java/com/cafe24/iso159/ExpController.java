@@ -184,17 +184,25 @@ public class ExpController {
 	
 	// 체험 개인 리스트 /experience/expList 을 get 방식으로 호출할때 발생
 	@RequestMapping(value = "/experience/expList", method = RequestMethod.GET)
-	public String ExpOneList(Model model,HttpSession session) {
+	public String ExpOneList(Model model,HttpSession session
+			,@RequestParam(value="currentPage" ,defaultValue="1" ,required=false) int currentPage
+			,@RequestParam(value="rowPerPage" ,defaultValue="10" ,required=false) int rowPerPage) {
 		logger.debug("ExpController 호출 {ExpOneList.get}.");
-		String loginId = (String)session.getAttribute("loginId");
+		String mExpId = (String)session.getAttribute("loginId");
 		//넘어온 loginId 값 확인
-		logger.debug("ExpOneList().get 메서드 loginId is {}",loginId);
+		logger.debug("ExpOneList().get 메서드 mExpId is {}",mExpId);
+		logger.debug("ExpOneList().get 메서드 currentPage is {}",currentPage);
+		logger.debug("ExpOneList().get 메서드 rowPerPage is {}",rowPerPage);
+		Map<String, Object> map = new HashMap<String, Object>();
 		//loginId값으로 해당 체험 리스트 가져옴
-		List<ExpAndAnimal> expAndAnimal = expService.selectExpOneList(loginId);
+		map.put("mExpId", mExpId);
+		map.put("currentPage", currentPage);
+		map.put("rowPerPage", rowPerPage);
+		Map<String, Object> returnMap = expService.selectExpOneList(map);
 		//리스트 확인
-		logger.debug("ExpOneList().get 메서드 expAndAnimal is {}",expAndAnimal);
-		model.addAttribute("loginId", loginId);
-		model.addAttribute("expAndAnimal", expAndAnimal);
+		logger.debug("ExpOneList().get 메서드 returnMap is {}",returnMap);
+		model.addAttribute("loginId", mExpId);
+		model.addAttribute("expAndAnimal", returnMap);
 		return "/experience/expList";
 	}
 	
