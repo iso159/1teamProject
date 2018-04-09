@@ -86,7 +86,7 @@
 								<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
 									<ul class="pagination">
 										<li class="paginate_button previous" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
-											<a href="#">Previous</a>
+											<a href="<c:if test="${expAndAnimal.startRow gt 0}">${pageContext.request.contextPath}/experience/expList?currentPage=${expAndAnimal.currentPage-1}&rowPerPage=${expAndAnimal.rowPerPage}</c:if>">«</a>
 										</li>
 										<c:forEach var="i" begin="0" end="${expAndAnimal.lastPage-1}">
 										<li class="paginate_button" aria-controls="dataTables-example" tabindex="0">
@@ -94,7 +94,7 @@
 										</li>
 										</c:forEach>
 										<li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
-										<a href="#">Next</a>
+										<a href="<c:if test="${expAndAnimal.currentPage lt expAndAnimal.lastPage}">${pageContext.request.contextPath}/experience/expList?currentPage=${expAndAnimal.currentPage+1}&rowPerPage=${expAndAnimal.rowPerPage}</c:if>">»</a>
 										</li>
 									</ul>
 								</div>
