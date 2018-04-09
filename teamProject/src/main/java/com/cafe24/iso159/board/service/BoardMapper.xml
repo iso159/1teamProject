@@ -134,6 +134,7 @@
 			board_reply_code AS boardReplyCode
     		,board_content_code AS boardContentCode
     		,board_reply_content AS boardReplyContent
+    		,m_member_id AS mMemberId
     		,board_reply_date As boardReplyDate
 		FROM 
 			t_board_reply 

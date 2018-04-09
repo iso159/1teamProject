@@ -45,7 +45,7 @@
 	<form action="${pageContext.request.contextPath}/board/boardReplyAdd" method="post">
 	<table style='line-height:200%'>
 	<tr>
-	<td>댓글</td>
+	<td><b>댓글</b></td>
 	</tr>
 	<tr>
 	<td><input type="hidden" id="boardContentCode" name="boardContentCode" value="${bc.boardcontent.boardContentCode}"></td>
@@ -58,12 +58,14 @@
 	</tr>
 	</table>
 	</form>
+	<p>&nbsp;</p>
 	
-	댓글리스트<br>
 	<c:forEach var="i" items="${br}">
-		${i.boardReplyContent}<br>
-	</c:forEach>
-	
+		${i.boardReplyContent}&nbsp;&nbsp;
+		<font color="#4682b4"><b>${i.mMemberId}</b></font><br>
+		<div style="color:gray;">${i.boardReplyDate}</div>
+		<br>
+	</c:forEach>	
 	<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
