@@ -82,6 +82,39 @@
 		<result column="m_info_join_date" property="mInfoJoindate"/>
 	</resultMap>
 	
+	<resultMap type="com.cafe24.iso159.exp.service.ExpJournal" id="ExpJournalVo">
+		<id column="exp_journal_code" property="expJournalCode"/>
+		<result column="exp_code" property="expCode"/>
+		<result column="m_exp_id" property="mExpId"/>
+		<result column="exp_journal" property="expJournal"/>
+		<result column="exp_journal_point" property="expJournalPoint"/>
+		<result column="exp_journal_animal_char" property="expJournalAnimalChar"/>
+		<result column="exp_journal_date" property="expJournalDate"/>
+	</resultMap>
+	
+	<!-- 체험돌물 보여줄때 해당동물 이미 진행한 체험 기록 보여줌 -->
+	<resultMap type="com.cafe24.iso159.exp.service.ExpAndExpJournal" id="selectOneAnimalExpInfoMap">
+		<collection property="exp" resultMap="ExpVo"></collection>
+		<collection property="expJournal" resultMap="ExpJournalVo"></collection>
+	</resultMap>
+	<select id="selectOneAnimalExpInfo" resultMap="selectOneAnimalExpInfoMap" parameterType="String">
+		SELECT 
+			e.animal_code
+			,e.bl_code
+			,e.exp_start_date
+			,e.exp_end_date
+			,ej.exp_journal
+			,ej.exp_journal_animal_char
+		FROM 
+			t_exp e 
+		INNER JOIN 
+			t_exp_journal ej 
+		ON 
+			e.exp_code=ej.exp_code
+		WHERE 
+			e.animal_code = #{animalCode}
+	</select>
+	
 	<!-- 체험 하기 클릭시 체험 가능 동물 내용 띄워줌  -->
 	<select id="selectExpAnimalList" resultType="com.cafe24.iso159.animal.service.Animal" parameterType="String">
 		SELECT 

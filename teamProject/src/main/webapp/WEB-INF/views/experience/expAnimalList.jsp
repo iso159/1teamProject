@@ -62,6 +62,18 @@
 					<td>동물상태:</td>
 					<td>${i.osCodeAnimal}</td>
 				</tr>
+				<tr>
+					<td>체험기록</td>
+					<td>체험신청</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/experience/oneAnimalExpList?animalCode=${i.animalCode}"><button>기록</button></a></td>
+					<td><a href="${pageContext.request.contextPath}/experience/expAdd?animalCode=${i.animalCode}&blCode=${i.blCode}"><button>신청</button></a></td>
+				</tr>
 			</table>
 
 			</div>

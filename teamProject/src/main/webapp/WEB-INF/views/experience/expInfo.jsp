@@ -71,9 +71,11 @@
 				</c:otherwise>
 				</c:choose>
 				<c:if test="${selectExpOneInfo.exp.osCodeExp eq '체험 진행중' and selectExpOneInfo.exp.expJournalCount != count}">
-					<a href="${pageContext.request.contextPath}/experience/expJournalAdd?expCode=${selectExpOneInfo.exp.expCode}"><button>체험 일지 등록</button></a>
+					<a href="${pageContext.request.contextPath}/experience/expJournalAdd?expCode=${selectExpOneInfo.exp.expCode}"><button type="button" style="float: right;">체험 일지 등록</button></a>
 				</c:if>
-				<a href="${pageContext.request.contextPath}/experience/expJournalList?expCode=${selectExpOneInfo.exp.expCode}"><button type="button">체험 일지 확인</button></a>
+				<c:if test="${selectExpOneInfo.exp.osCodeExp eq '체험 완료' or selectExpOneInfo.exp.osCodeExp eq '체험 진행중'}">
+				<a href="${pageContext.request.contextPath}/experience/expJournalList?expCode=${selectExpOneInfo.exp.expCode}"><button type="button" type="button" style="float: right;">체험 일지 확인</button></a>
+				</c:if>
 			<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>

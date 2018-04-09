@@ -20,6 +20,7 @@ import com.cafe24.iso159.exp.service.CostIo;
 import com.cafe24.iso159.exp.service.Exp;
 import com.cafe24.iso159.exp.service.ExpAndAnimal;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense;
+import com.cafe24.iso159.exp.service.ExpAndExpJournal;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo;
 import com.cafe24.iso159.exp.service.ExpJournal;
 import com.cafe24.iso159.exp.service.ExpPeriod;
@@ -31,6 +32,17 @@ public class ExpController {
 	@Autowired
 	private ExpService expService;
 	private static final Logger logger = LoggerFactory.getLogger(ExpController.class);
+	
+	//체험돌물 보여줄때 해당동물 이미 진행한 체험 기록 보여줌
+	@RequestMapping(value = "/experience/oneAnimalExpList", method = RequestMethod.GET)
+	public String OneAnimalExpInfo(Model model,@RequestParam(value="animalCode") String animalCode) {
+		logger.debug("ExpController 호출 {OneAnimalExpInfo.get}.");
+		logger.debug("OneAnimalExpInfo().get 메서드 animalCode is {}",animalCode);
+		List<ExpAndExpJournal> expAndAnimalAndExpJournal = expService.selectOneAnimalExpInfo(animalCode);
+		logger.debug("OneAnimalExpInfo().get 메서드 expAndAnimalAndExpJournal is {}",expAndAnimalAndExpJournal);
+		model.addAttribute("expAndAnimalAndExpJournal", expAndAnimalAndExpJournal);
+		return "/experience/oneAnimalExpList";
+	}
 	
 	//체험 하기 클릭시 체험 가능 동물 내용 띄워줌 
 	@RequestMapping(value = "/experience/expAnimalList", method = RequestMethod.GET)
@@ -258,7 +270,7 @@ public class ExpController {
 		logger.debug("expAdd().post 메서드 loginId is {}",loginId);
 		exp.setmExpId(loginId);
 		expService.addExp(exp);
-		return "redirect:/";
+		return "redirect:/experience/expList";
 	}
 	
 }

@@ -34,8 +34,11 @@
 						<td>${e.expJournal}</td>
 						<td>${e.expJournalAnimalChar}</td>
 						<td>${e.expJournalPoint}</td>
-						<td><a href="${pageContext.request.contextPath}/experience/expJournalModify?expJournalCode=${e.expJournalCode}">
-						<button>수정</button></a></td>
+						<td>
+						<a href="${pageContext.request.contextPath}/experience/expJournalModify?expJournalCode=${e.expJournalCode}">
+						<button>수정</button>
+						</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
