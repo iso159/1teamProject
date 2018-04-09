@@ -30,10 +30,12 @@
 							<th>종료 날짜</th>
 							<th>체험 상태</th>
 							<th>상세 정보</th>
+							<th>설문 조사</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="a" items="${expAndAnimal}">
+						<c:set var="expC" value="${a.overallStatus.osName}"></c:set>
 						<tr>
 							<td>${a.animal.animalBreed}</td>
 							<td>${a.exp.expReserveRequestDate}</td>
@@ -41,6 +43,9 @@
 							<td>${a.exp.expEndDate}</td>
 							<td>${a.overallStatus.osName}</td>
 							<td><a href="${pageContext.request.contextPath}/experience/expInfo?expCode=${a.exp.expCode}">정보 확인</a></td>
+							<c:if test="${expC eq '체험 완료'}">
+								<td><a href="${pageContext.request.contextPath}/survey/surveyMemberAdd?expCode=${a.exp.expCode}">설문하기</a></td>
+							</c:if>
 						</tr>
 						</c:forEach>
 					</tbody>
