@@ -2,27 +2,23 @@ package com.cafe24.iso159.board.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardCommand {
-	private String boardCode;
-	private String boardName;
 	private String boardContentCode;
+	private String boardCode;
 	private int boardNumber;
 	private String mMemberId;
 	private String boardContentTitle;
 	private String boardContentContent;
 	private String boardContentDate;
-	private List<BoardReply> boardReply;
+	private List<MultipartFile> file;
+		
 	public String getBoardCode() {
 		return boardCode;
 	}
 	public void setBoardCode(String boardCode) {
 		this.boardCode = boardCode;
-	}
-	public String getBoardName() {
-		return boardName;
-	}
-	public void setBoardName(String boardName) {
-		this.boardName = boardName;
 	}
 	public String getBoardContentCode() {
 		return boardContentCode;
@@ -60,17 +56,17 @@ public class BoardCommand {
 	public void setBoardContentDate(String boardContentDate) {
 		this.boardContentDate = boardContentDate;
 	}
-	public List<BoardReply> getBoardReply() {
-		return boardReply;
+	public List<MultipartFile> getFile() {
+		return file;
 	}
-	public void setBoardReply(List<BoardReply> boardReply) {
-		this.boardReply = boardReply;
+	public void setFile(List<MultipartFile> file) {
+		this.file = file;
 	}
 	@Override
 	public String toString() {
-		return "BoardCommand [boardCode=" + boardCode + ", boardName=" + boardName + ", boardContentCode="
-				+ boardContentCode + ", boardNumber=" + boardNumber + ", mMemberId=" + mMemberId
-				+ ", boardContentTitle=" + boardContentTitle + ", boardContentContent=" + boardContentContent
-				+ ", boardContentDate=" + boardContentDate + ", boardReply=" + boardReply + "]";
+		return "BoardCommand [boardContentCode=" + boardContentCode + ", boardCode=" + boardCode + ", boardNumber="
+				+ boardNumber + ", mMemberId=" + mMemberId + ", boardContentTitle=" + boardContentTitle
+				+ ", boardContentContent=" + boardContentContent + ", boardContentDate=" + boardContentDate + ", file="
+				+ file + "]";
 	}
 }

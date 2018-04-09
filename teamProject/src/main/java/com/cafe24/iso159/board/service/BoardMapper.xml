@@ -17,21 +17,6 @@
 		</collection>	
 	</resultMap>
 	
-	<!-- 게시판 글 띄우는 맵퍼 -->
-	<resultMap type="com.cafe24.iso159.board.service.BoardCommand" id="selectBoardReplyListMap">
-		<id column="board_code" property="boardCode"/>
-		<result column="board_name" property="boardName"/>
-		<result column="board_content_code" property="boardContentCode"/>
-		<result column="m_member_id" property="mMemberId"/>
-		<result column="board_content_code" property="boardContentTitle"/>
-		<result column="board_content_content" property="boardContentContent"/>
-		<result column="board_content_date" property="boardContentDate"/>
-		<collection property="boardReply" ofType="com.cafe24.iso159.board.service.BoardReply">
-			<id column="board_reply_code" property="boardReplyCode"/>
-			<result column="board_reply_content" property="boardReplyContent"/>
-			<result column="board_reply_date" property="boardReplyDate"/>
-		</collection>
-	</resultMap>
 	<!-- 게시판 글 등록 -->
 	<insert id="insertBoardContent" parameterType="com.cafe24.iso159.board.service.BoardContent">
 		INSERT INTO
@@ -52,6 +37,32 @@
  				, #{boardContentTitle}
  				, #{boardContentContent}
  				, now()
+			)
+	</insert>
+	<!-- 게시판 파일등록 -->
+	<insert id="insertBoardFile" parameterType="com.cafe24.iso159.board.service.BoardContentFile">
+		INSERT INTO 
+		t_overall_file 
+		(
+			of_code, 
+			board_content_code, 
+			of_path, 
+			of_origin_name, 
+			of_save_name, 
+			of_ext, 
+			of_size, 
+			of_down_date
+		) 
+		VALUES 
+			(
+				#{ofCode}, 
+				#{boardContentCode}, 
+				#{ofPath}, 
+				#{ofOriginName}, 
+				#{ofSaveName}, 
+				#{ofExt}, 
+				#{ofSize}, 
+				now()
 			)
 	</insert>
 	<!-- 게시판 등록 -->
@@ -177,6 +188,11 @@
 	<!-- 게시판 글 총갯수 구하기 -->
 	<select id="boardCount" resultType="String">
 		SELECT COUNT(*) FROM t_board_content
+	</select>
+	
+	<!-- 파일추가 max코드값 조회 쿼리문 -->
+	<select id="selectLastCodeOf" resultType="String">
+		select max(CAST(substring(of_code,9) AS DECIMAL)) as maxcol from t_overall_file
 	</select>
 	
 	<!-- 게시판등록 max코드값 조회 쿼리문 -->

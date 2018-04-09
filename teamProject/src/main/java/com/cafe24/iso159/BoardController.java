@@ -12,9 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.iso159.board.service.Board;
 import com.cafe24.iso159.board.service.BoardAndBoardContent;
+import com.cafe24.iso159.board.service.BoardCommand;
 import com.cafe24.iso159.board.service.BoardContent;
 import com.cafe24.iso159.board.service.BoardReply;
 import com.cafe24.iso159.board.service.BoardService;
@@ -47,16 +49,26 @@ public class BoardController {
 	}
 	//게시판 글 등록
 	@RequestMapping(value="/board/boardAdd", method=RequestMethod.POST)
-	public String BoardAdd(HttpSession session, BoardContent boardcontent) {
+	public String BoardAdd(HttpSession session, BoardCommand boardCommand
+							, @RequestParam(value="file") MultipartFile file) {
 		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
-		
+	
 		logger.debug("BoardAdd()메서드 호출");
+		logger.debug("BoardAdd(...) 메서드 file is {}",file);
+		
 		String mId = (String)session.getAttribute("loginId");
 		logger.debug("BoardAdd()메서드 mId is {}", mId);
-		boardservice.addBoard(boardcontent, mId);
+		//resource 폴더경로
+		String path = null;
+		if(file != null) {
+			path = session.getServletContext().getRealPath("/");
+			path += "resources/boardUpload/";
+		}
+		logger.debug("BoardAdd() 메서드 0000000000000000000000000000000path is {}",path);
+		boardservice.addBoard(boardCommand, mId, path, file);
 		return "redirect:/board/boardList";
 	}
 	//게시판 글 수정

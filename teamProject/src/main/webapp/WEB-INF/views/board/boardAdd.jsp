@@ -24,7 +24,7 @@
 			<!-- 내용 부분 시작-->
 	<h2>게시판 글 등록</h2>
 	<p>&nbsp;</p>
-	<form id="boardContentAdd" action="${pageContext.request.contextPath}/board/boardAdd" method="post">
+	<form id="boardContentAdd" action="${pageContext.request.contextPath}/board/boardAdd" method="post" enctype="multipart/form-data">
 	글종류:<select name="boardCode">
 		 <c:forEach var="i" items="${board}">
 			<option value="${i.boardCode}">${i.boardName}</option>
@@ -33,8 +33,24 @@
 	글제목:<input type="text" id="boardContentTitle" name="boardContentTitle"><br>
 	글내용:<br>
 	<textarea rows="20" cols="100" id="boardContentContent" name="boardContentContent"></textarea><br>
+	파일첨부<input type="file" name="file"><br>
+	<!-- <span id="Helper"></span><br> -->
 	<button id="addBtn" type="submit">등록</button>
 	</form>
+	<!-- <script>
+		$(document).ready(function(){
+			$('#addBtn').click(function(){
+				//공백이 들어가면 알려준다
+				if($('#boardContentTitle').val() == ""){
+					$('#Helper').text('제목을 입력해주세요');
+				}else if($('#boardContentContent').val() == ""){
+					$('#Helper').text('내용을 입력해주세요');
+		        }else {
+		              $('#boardContentAdd').submit();
+		          }
+			});
+		});
+	</script> -->
 	<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>

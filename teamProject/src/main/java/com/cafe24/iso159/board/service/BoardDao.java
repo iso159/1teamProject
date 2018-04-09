@@ -17,9 +17,14 @@ public class BoardDao {
 	
 	private final String nameSpace = "com.cafe24.iso159.board.service.BoardMapper.";
 	//게시판 글 등록
-	public int insertboardContent(BoardContent boardcontent) {
-		logger.debug("insertBoardCotent()메서드 boardcontent is {}", boardcontent);
-		return sqlSessionTemplate.insert(nameSpace+"insertBoardContent", boardcontent);
+	public int insertboardContent(BoardContent boardContent) {
+		logger.debug("insertBoardCotent()메서드 boardcontent is {}", boardContent);
+		return sqlSessionTemplate.insert(nameSpace+"insertBoardContent", boardContent);
+	}
+	//파일등록
+	public int insertBoardFile(BoardContentFile boardContentFile) {
+		logger.debug("insertBoardFile()메서드 boardContentFile is {}", boardContentFile);
+		return sqlSessionTemplate.insert(nameSpace+"insertBoardFile", boardContentFile);
 	}
 	//게시판 그룹 등록
 	public int insertBoard(Board board) {
@@ -38,6 +43,12 @@ public class BoardDao {
 		logger.debug("selectBoardContent()메서드 Board is {}", board);
 		return board;
 	}
+	//selectLastCodeOf
+	public String selectLastCodeOf() {
+		logger.debug("selectLastCodeOf() 메서드 호출");
+		return sqlSessionTemplate.selectOne(nameSpace + "selectLastCodeOf");
+	}
+	
 	//Board max코드값 조회
 	public String selectLastBoardNum() {
 		return sqlSessionTemplate.selectOne(nameSpace+"selectLastBoardNum");
