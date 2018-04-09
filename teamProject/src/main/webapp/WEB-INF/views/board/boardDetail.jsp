@@ -61,8 +61,8 @@
 	<p>&nbsp;</p>
 	
 	<c:forEach var="i" items="${br}">
-		${i.boardReplyContent}&nbsp;&nbsp;
-		<font color="#4682b4"><b>${i.mMemberId}</b></font><br>
+		<div style="color:gray"><b>${i.mMemberId}</b></div>
+		${i.boardReplyContent}&nbsp;<c:if test="${login eq i.mMemberId}"><a href="${pageContext.request.contextPath}/board/boardReplyDelete?boardReplyCode=${i.boardReplyCode}&boardContentCode=${i.boardContentCode}">삭제</a></c:if><br>
 		<div style="color:gray;">${i.boardReplyDate}</div>
 		<br>
 	</c:forEach>	

@@ -140,6 +140,7 @@
 			t_board_reply 
 		WHERE 
 			board_content_code = #{boardContentCode}
+		ORDER BY board_reply_date DESC
 	</select>
 	
 	<!-- 게시판 그룹이름 리스트 조회 -->
@@ -155,6 +156,11 @@
 	<!-- 게시글 삭제 -->
 	<delete id="deleteBoardContent" parameterType="String">
 		DELETE FROM t_board_content WHERE board_content_code = #{boardContentCode}
+	</delete>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteBoardReply" parameterType="String">
+		DELETE FROM t_board_reply WHERE board_reply_code = #{boardReplyCode}
 	</delete>
 	
 	<!-- 게시글 수정 -->

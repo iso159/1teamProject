@@ -91,4 +91,10 @@ public class BoardDao {
 		logger.debug("deleteBoardContent()메서드 boardContentCode is {}", boardContentCode);
 		sqlSessionTemplate.delete(nameSpace+"deleteBoardContent", boardContentCode);
 	}
+	//댓글 삭제
+	public void deleteBoardReply(String boardReplyCode) {
+		//String값 받아오는지 확인
+		logger.debug("deleteBoardReply()메서드 boardReplyCode is {}", boardReplyCode);
+		sqlSessionTemplate.delete(nameSpace+"deleteBoardReply", boardReplyCode);
+	}
 }

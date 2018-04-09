@@ -79,6 +79,16 @@ public class BoardController {
 		boardservice.removeBoardContent(boardContentCode);
 		return "redirect:/board/boardList";
 	}
+	//댓글 삭제
+	@RequestMapping(value="/board/boardReplyDelete", method=RequestMethod.GET)
+	public String boardReplyRemove(HttpSession session
+									, @RequestParam(value="boardContentCode")String boardContentCode
+									, @RequestParam(value="boardReplyCode")String boardReplyCode) {
+		boardservice.removeBoardReply(boardReplyCode);
+		session.setAttribute("boardContentCode", boardContentCode);
+		logger.debug("BoardAdd()메서드 session에 있는 boardContentCode is {}", boardContentCode);
+		return "redirect:/board/boardDetail";
+	}
 	//게시판 그룹이름 삭제
 	@RequestMapping(value="/board/boardDelete", method=RequestMethod.GET)
 	public String boardRemove(HttpSession session
