@@ -4,15 +4,8 @@
 
 <html>
 <head>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
         $('#addBtn').click(function(){
@@ -27,6 +20,7 @@
 	          }
         });
     });
+    
 </script>
 
 	<title>상담 내용</title>
@@ -53,20 +47,23 @@
 	    				<div class="form-group">
 							<input  type="textarea" 
 									class="form-control"
-									value="<br>${surveyQuestion.surveyListQuestion}<br>"
+									value="${surveyQuestion.surveyListQuestion}"
 									id="adoptRequestAdviceContents"
 									name="adoptRequestAdviceContents" readonly>
-						</div>
-						<div class="form-group">
-							<input 	type="text" 
-									class="form-control" 
-									placeholder="질문에 답해주세요" 
+							<input 	type="checkbox" 
+									value="동의합니다"
 									id="adoptRequestAdviceContents"
-									name="adoptRequestAdviceContents">
+									name="adoptRequestAdviceContents">동의합니다
+							<input 	type="checkbox" 
+									value="동의하지않습니다"
+									id="adoptRequestAdviceContents"
+									name="adoptRequestAdviceContents">동의하지않습니다
+									
 						</div>
+						
 			</c:forEach>
 			<button id="addBtn" type="button" class="btn btn-primary pull-right">상담완료</button>			
-	        </form>
+	        </form><br><br>
     
     
     <!-- 내용 부분 끝-->

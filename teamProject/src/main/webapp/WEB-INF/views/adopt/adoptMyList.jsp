@@ -3,21 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<title>나의 입양신청 현황</title>
 </head>
-<body class="modern">
+<body>
 	<!-- top 부분 시작-->
 	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
 	<!-- top 부분 끝-->
-	
 		<!-- 메인화면 시작 -->
         <div id="page-wrapper">
         	<!-- h태그제목 시작 -->
@@ -65,8 +57,7 @@
 				</tbody>
 			</table>
 				<a href="${pageContext.request.contextPath}/"><button type="button" class="btn warning">홈으로</button></a>
-		    
-		    <!-- 내용 부분 끝-->
+		   <!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
 	<!-- foot 부분 끝 -->

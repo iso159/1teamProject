@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
         $('#addBtn').click(function(){
