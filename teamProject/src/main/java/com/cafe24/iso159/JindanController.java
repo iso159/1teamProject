@@ -86,4 +86,15 @@ public class JindanController {
 		logger.debug("jindanAnimal(get) 메서드 끝");		
 		return "/jindan/jindanAnimal";
 	}
+	
+	// 사후 진료 신청 가능한 보호소 리스트 보여주는 폼 매핑 컨트롤러
+	@RequestMapping(value="/jindan/jindanShelterList")
+	public String jindanShelterList(Model model) {
+		logger.debug("jindanShelterList() 메서드 호출");
+		List<BusinessLicense> list = shelterService.getShelterList();
+		logger.debug("jindanShelterList() 메서드 list is {}", list);
+		model.addAttribute("list",list);
+		logger.debug("jindanShelterList() 메서드 끝");
+		return "jindan/jindanShelterList";
+	}
 }

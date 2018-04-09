@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.cafe24.iso159.animal.service.Animal;
 import com.cafe24.iso159.animal.service.AnimalDao;
 import com.cafe24.iso159.service.common.OverallStatus;
+import com.cafe24.iso159.shelter.service.BusinessLicense;
 import com.cafe24.iso159.shelter.service.ShelterDao;
 
 @Service
@@ -192,5 +193,13 @@ public class JindanService {
 		
 		logger.debug("getJindanOs() 메서드 끝");
 		return map;
+	}
+	
+	//진료 신청을 위한 보호소 전체리스트 조회
+	public List<BusinessLicense> getBusinessLicenseList(){
+		logger.debug("getBusinessLicenseList() 메서드 호출");
+		List<BusinessLicense> list = jindanDAO.selectBusinessLicenseList();
+		logger.debug("getBusinessLicenseList() 메서드 list is {}", list);
+		return list;
 	}
 }

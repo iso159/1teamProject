@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cafe24.iso159.service.common.OverallStatus;
+import com.cafe24.iso159.shelter.service.BusinessLicense;
 
 @Repository
 public class JindanDAO {
@@ -89,6 +90,13 @@ public class JindanDAO {
 		List<OverallStatus> list = sqlSessionTemplate.selectList(nameSpace + "selectJindanOs", osLarge);
 		logger.debug("selectJindanOs(String osLarge) 메서드 list is {}", list);
 		logger.debug("selectJindanOs(String osLarge) 메서드 끝");
+		return list;
+	}
+	
+	//보호소 테이블 전체 리스트 조회 Dao
+	public List<BusinessLicense> selectBusinessLicenseList() {
+		List<BusinessLicense> list = sqlSessionTemplate.selectList(nameSpace + "BusinessLicenseList");
+		logger.debug("selectBusinessLicenseList() 메서드 list is {}", list);
 		return list;
 	}
 }

@@ -77,4 +77,12 @@
 				os_large=#{osLarge}
 		</if>
 	</select>
+	
+		<!-- 사후진료 신청할 때 신청 가능 보호소 리스트 보여주는 쿼리 -->
+	<select id="BusinessLicenseList" resultType="com.cafe24.iso159.goods.service.Goods">
+		SELECT
+			bl_code as blCode, m_member_id as mMemberId, os_code_license_status as osCodeLicenseStatus, bl_shelter_name as blShelterName, bl_shelter_number as blShelterNumber, bl_shelter_reg_number as blShelterRegNumber, bl_shelter_address as blShelterAddress, bl_shelter_enroll_date as blShelterEnrollDate
+		FROM
+			t_business_license
+	</select>
 </mapper>
