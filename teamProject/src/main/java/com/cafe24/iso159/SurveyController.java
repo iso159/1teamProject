@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cafe24.iso159.member.service.MemberSurvey;
 import com.cafe24.iso159.survey.service.Survey;
 import com.cafe24.iso159.survey.service.SurveyList;
 import com.cafe24.iso159.survey.service.SurveyService;
+//import com.cafe24.iso159.member.service.MemberSurvey;
 
 @Controller
 @Transactional
@@ -26,6 +28,7 @@ public class SurveyController {
 	private static final Logger logger = LoggerFactory.getLogger(SurveyController.class);
 	@Autowired
 	private SurveyService surveyService;
+	
 	
 	// 설문지 질문 리스트 화면 요청
 	@RequestMapping(value="/survey/surveyQuestionAdd", method = RequestMethod.GET)
@@ -162,13 +165,35 @@ public class SurveyController {
 	
 	// 회원이 설문조사 하는 화면 요청
 	@RequestMapping(value="/survey/surveyMemberAdd", method = RequestMethod.GET)
-	public String addSurveyMember(HttpSession session) {
-		logger.debug("addSurveyMember() GET 메서드 호출");
+	public String addSurveyMember(	HttpSession session, Model model,
+									@RequestParam(value="expCode") String expCode,
+									@RequestParam(value="surveyCode") String surveyCode) {
+		logger.debug("addSurveyMember() GET 메서드 호출 expCode is {}", expCode);
+		logger.debug("addSurveyMember() GET 메서드 호출 surveyCode is {}", surveyCode);
 		// 세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
 		}
-		return "/survey/surveyMember";
+		// 설문지 질문조회
+		List<SurveyList> list = surveyService.listSurveyListBySurveyCode(surveyCode);
+		logger.debug("selectSurveyList() 메서드 호출 list is {}", list);
+		model.addAttribute("list", list);
+		return "/survey/surveyMemberAdd";
+	}
+	@RequestMapping(value="/survey/surveyMemberAdd", method = RequestMethod.POST)
+	public String addSurveyMember(	HttpSession session, Model model,
+									MemberSurvey memberSurvey,
+									@RequestParam(value="surveyRecordCode") List<String> surveyRecordCode,
+								    @RequestParam(value="surveyListCode") List<String> surveyListCode) {
+		logger.debug("addSurveyMember() POST 메서드 호출 surveyRecordCode is {}", surveyRecordCode);
+		logger.debug("addSurveyMember() POST 메서드 호출 surveyListCode is {}", surveyListCode);
+		// 세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
+		if(session.getAttribute("loginId")==null) {
+			return "redirect:/member/login";
+		}
+		memberSurvey.setmExpId((String) session.getAttribute("loginId"));
+		surveyService.addMemberSurvey(memberSurvey);
+		return "redirect:/experience/expList";
 	}
 	
 }

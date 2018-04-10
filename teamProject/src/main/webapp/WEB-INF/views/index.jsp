@@ -48,68 +48,90 @@
                                         <tr>
                                             <th>OS</th>
                                             <td colspan="2">Linux</td>
-                                           
+                                           	<td>Linux</td>
                                         </tr>
                                         <tr>
                                             <th>웹 브라우저</th>
                                             <td colspan="2">Crome</td>
-                                            
+                                            <td>Crome 최적화</td>
                                         </tr>
                                         <tr>
                                             <th>WAS</th>
                                             <td colspan="2">
                                                apache-tomcat-8.0.X
                                             </td>
-                                            
+                                            <td>apache-tomcat-8.0.X</td>
                                         </tr>
                                         <tr>
-                                            <th rowspan="7">개발언어</th>
+                                            <th rowspan="9">개발언어</th>
                                         </tr>
                                         <tr>
-                                            <th rowspan="2">서버</td>
+                                            <th rowspan="3">서버</td>
                                            	<td>Java 1.8</td>
+                                           	<td>Servlet 3.1</td>
                                         </tr>
                                         <tr>
                                         	<td>Servlet 3.1</td>
+                                        	<td>JDK 1.8.X</td>
+                                        </tr>
+                                        <tr>
+                                        	<td></td>
+                                        	<td>JSP 2.3</td>
                                         </tr>
                                         <tr>
                                         	<th rowspan="5">클라이언트</td>
                                        		<td>JavaScript</td>
                                         </tr>
                                          <tr>
-                                        	
-                                        </tr>
-                                         <tr>
                                         	<td>HTML5</td>
                                         </tr>
                                          <tr>
                                         	<td>CSS</td>
-                                        	
                                         </tr>
                                          <tr>
                                         	<td>JSP</td>
                                         </tr>
-                                        <tr>
-                                        	<td>JQuery</td>
+                                         <tr>
+                                        	<td>jQuery</td>
                                         </tr>
                                         <tr>
-                                            <th>Framework</th>
-                                            <td colspan="2">bootstrap 3.3.6</td>
+                                            <th rowspan="3">Framework</th>
+                                            <td colspan="3">bootstrap 3.3.6</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">Spring Framework 4.3.7</td>
+                                        </tr>
+                                         <tr>
+                                            <td colspan="3">Mybatis 3.4.1</td>
                                         </tr>
                                         <tr>
                                             <th>DBMS</th>
-                                            <td>MySQL5.7</td>
+                                            <td colspan="2">MySQL5.7</td>
+                                            <td>MySQL5.5.X UTF-8</td>
                                         </tr>
                                         <tr>
-                                            <th>Tools</th>
+                                            <th rowspan="6">Tools</th>
                                          	<td colspan="2">Spring Tool Suite 3.9.2</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">MySQL Workbench 6.3.10</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">GitHub(http://iso159.cafe24.com)</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">eXerd</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">SourceTree</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Maven</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <p>Grid classes apply to devices with screen widths greater than or equal to the breakpoint sizes, and override grid classes targeted at smaller devices. Therefore, applying any
-                                <code>.col-md-</code> class to an element will not only affect its styling on medium devices but also on large devices if a
-                                <code>.col-lg-</code> class is not present.</p>
+                            <p></p>
                         </div>
                     </div>
                 </div>

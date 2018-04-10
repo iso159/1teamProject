@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cafe24.iso159.adopt.service.AdoptDao;
+import com.cafe24.iso159.member.service.MemberSurvey;
 
 @Repository
 public class SurveyDao {
@@ -27,6 +28,11 @@ public class SurveyDao {
 		logger.debug("insertSurveyList() 메서드 호출");
 		sqlSessionTemplate.insert(nameSpace + "insertSurveyList",surveyList);
 	}
+	// 회원 설문지 등록
+	public void insertMemberSurvey(MemberSurvey memberSurvey) {
+		logger.debug("insertMemberSurvey() 메서드 호출 memberSurvey is {}",memberSurvey);
+		sqlSessionTemplate.insert(nameSpace + "insertMemberSurvey",memberSurvey);
+	}
 	
 	// max코드값 조회
 	public String selectLastSurveyCode() {
@@ -36,6 +42,10 @@ public class SurveyDao {
 	public String selectLastSurveyListCode() {
 		logger.debug("selectLastSurveyListCode() 메서드 호출");
 		return sqlSessionTemplate.selectOne(nameSpace + "selectLastSurveyListCode");
+	}
+	public String selectLastMemberSurveyCode() {
+		logger.debug("selectLastMemberSurveyCode() 메서드 호출");
+		return sqlSessionTemplate.selectOne(nameSpace + "selectLastMemberSurveyCode");
 	}
 	
 	// 설문지 조회

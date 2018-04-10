@@ -14,6 +14,36 @@
 		select max(CAST(substring(survey_list_code, 18) AS DECIMAL)) as maxcol from t_survey_list
 	</select>
 	
+	<!-- 회원설문지 추가 max코드값 조회 쿼리문 -->
+	<select id="selectLastMemberSurveyCode" resultType="String">
+		select max(CAST(substring(m_survey_code, 15) AS DECIMAL)) as maxcol from t_member_survey
+	</select>
+	
+	<!-- 회원설문지 등록 쿼리문 -->
+	<insert id="insertMemberSurvey"
+			parameterType="com.cafe24.iso159.member.service.MemberSurvey">
+		INSERT INTO 
+			t_member_survey 
+			(
+				m_survey_code, 
+				survey_list_code, 
+				exp_code, 
+				m_exp_id, 
+				adopt_request_code, 
+				survey_record_code 
+			) 
+		VALUES 
+			(
+				#{mSurveyCode}, 
+				#{surveyListCode}, 
+				#{expCode}, 
+				#{mExpId}, 
+				#{adoptRequestCode}, 
+				#{surveyRecordCode}
+			)
+			
+	</insert>
+	
 	<!-- 설문지 조회 select 쿼리문 -->
 	<select id="selectSurveyList"
 			resultType="com.cafe24.iso159.survey.service.Survey">

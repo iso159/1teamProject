@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cafe24.iso159.member.service.MemberSurvey;
+
 @Service
 public class SurveyService {
 	private static final Logger logger = LoggerFactory.getLogger(SurveyService.class);
@@ -73,6 +75,35 @@ public class SurveyService {
 			logger.debug("surveyList is {}", surveyList);
 			surveyDao.insertSurveyList(surveyList);
 		
+	}
+	
+	// 회원설문지 등록
+	public void addMemberSurvey(MemberSurvey memberSurvey) {
+		logger.debug("addMemberSurvey() 메소드 호출 memberSurvey is {}", memberSurvey);
+		
+		// 마지막코드 숫자값을 저장
+		String lastMemberSurveyCode = surveyDao.selectLastMemberSurveyCode();
+		
+		// 마지막 survey_code 코드
+		String msCode = "m_survey_code_";
+		String MemberSurveyCode = "m_survey_code_1";
+		int surveyListCodeNum = 1;
+		
+		if(lastMemberSurveyCode == null) {
+			msCode += surveyListCodeNum;
+		}else {
+			surveyListCodeNum += Integer.parseInt(lastMemberSurveyCode);
+			msCode += surveyListCodeNum;
+		}
+		logger.debug("svlCode is {}", msCode);
+		
+		// MemberSurvey에 값 셋팅 후 메소드 호출
+		memberSurvey.setmSurveyCode(msCode);
+		memberSurvey.setSurveyListCode(memberSurvey.getSurveyListCode());
+		memberSurvey.setExpCode(memberSurvey.getExpCode());
+		memberSurvey.setmExpId(memberSurvey.getmExpId());
+		memberSurvey.setSurveyRecordCode(memberSurvey.getSurveyRecordCode());
+		surveyDao.insertMemberSurvey(memberSurvey);
 	}
 	
 	// 설문지 리스트 조회
