@@ -4,6 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<style type="text/css">
+	.image {
+	  font-size: 0;
+	  text-align: center;
+	  width: 200px;  /* Container's dimensions */
+	  height: 150px;
+			}
+	img {
+	  display: inline-block;
+	  vertical-align: middle;
+	  max-height: 100%;
+	  max-width: 100%;
+	}
+	.trick {
+	  display: inline-block;
+	  vertical-align: middle;
+	  height: 150px;
+	}
+	</style>
 	<title></title>
 </head>
 <body>
@@ -23,18 +42,19 @@
 			<c:forEach var="i" items="${animal}">
  			<c:set var="flag" value="${f:substring(i.animalImagePath,0,4)}"></c:set>
 			<c:set var="path" value="${i.animalImagePath}"></c:set>
+			<div style="margin:15;">
 			<div class ="col-xs-6 col-md-3">
 			<table>
 				<tr>
 					<td colspan="2">
  						<c:if test="${empty path}">
-							<img class="MOD_STAFF_Picture" src="https://unsplash.it/200/200/?random" alt="" data-theme="_is1">
+							<div class ="image"><div class ="trick"><img class="MOD_STAFF_Picture" src="https://unsplash.it/200/200/?random" alt="" data-theme="_is1"></div></div>
 						</c:if>
 						<c:if test="${!empty path and flag eq 'http'}">
-							<img class="MOD_STAFF_Picture" src="${path}" width="120px" height="90px" alt="" data-theme="_is1">
+							<div class ="image"><div class ="trick"><img class="MOD_STAFF_Picture" src="${path}" alt="" data-theme="_is1"></div></div>
 						</c:if>
 						<c:if test="${!empty path and flag ne 'http'}">
-							<img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" alt="" data-theme="_is1">
+							<div class ="image"><div class ="trick"><img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" alt="" data-theme="_is1"></div></div>
 						</c:if> 
 					</td>
 				</tr>
@@ -75,9 +95,10 @@
 					<td><a href="${pageContext.request.contextPath}/experience/expAdd?animalCode=${i.animalCode}&blCode=${i.blCode}"><button>신청</button></a></td>
 				</tr>
 			</table>
-
+			</div>
 			</div>
 			</c:forEach>
+			</div>
 			<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
