@@ -36,10 +36,10 @@ public class AnimalDao {
 			return sqlSessionTemplate.selectOne(nameSpace+"selectLastCode");
 		}
 	//동물 리스트 조회
-	public List<AnimalCommand> selectAnimalList(String blCode){
+	public List<AnimalCommand> selectAnimalList(Map<String,Object> map){
 		logger.debug("selectAnimalList(String blCode)메서드 호출");
-		logger.debug("selectAnimalList(String blCode)메서드 blCode is {}", blCode);
-		List<AnimalCommand> AnimalList = sqlSessionTemplate.selectList(nameSpace+"selectAnimalList",blCode);
+		logger.debug("selectAnimalList(String blCode)메서드 map is {}", map);
+		List<AnimalCommand> AnimalList = sqlSessionTemplate.selectList(nameSpace+"selectAnimalList",map);
 		logger.debug("selectAnimalList(String blCode)메서드 호출 AnimalList is {}", AnimalList);
 		return AnimalList;
 	}

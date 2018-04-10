@@ -69,7 +69,7 @@
 	</select>
 	
 	<!-- 동물 리스트 전체조회-->
-	<select id="selectAnimalList" parameterType="String" resultMap="selectAnimalListMap">
+	<select id="selectAnimalList" parameterType="java.util.Map" resultMap="selectAnimalListMap">
 		SELECT
 			os.os_name
 			,osk.os_name as osNameAnimalKind			
@@ -89,8 +89,10 @@
 		ON osk.os_code = a.os_code_kind
         INNER JOIN t_business_license bl
 		ON a.bl_code = bl.bl_code
-		<if test="_parameter!=null">
-			WHERE bl.bl_code=#{blCode}
+		<if test="blCode != null">
+			<if test="osCodeAnimal != null">
+				WHERE bl.bl_code=#{blCode} and os.os_name=#{osCodeAnimal}
+			</if>
 		</if>
 	</select>
 	<!-- 조건검색 -->
@@ -115,28 +117,29 @@
 		ON a.bl_code = bl.bl_code
         <choose> 
         <when test= "AnimalCategory=='animal_area'">
-        WHERE animal_area =#{selectName}
+        WHERE animal_area LIKE CONCAT("%",#{selectName},"%")
         </when>
         <when test="AnimalCategory=='animal_breed'">
-        WHERE animal_breed =#{selectName}
+        WHERE animal_breed LIKE CONCAT("%",#{selectName},"%")
         </when>
         <when test="AnimalCategory=='animal_id_code'">
-        WHERE animal_id_code =#{selectName}
+        WHERE animal_id_code LIKE CONCAT("%",#{selectName},"%")
         </when> 
         <when test="AnimalCategory=='animal_enroll_date'">
-        WHERE animal_enroll_date =#{selectName}
+        WHERE animal_enroll_date LIKE CONCAT("%",#{selectName},"%")
         </when>
         <otherwise>
-        WHERE bl.bl_shelter_Name =#{selectName}
+        WHERE bl.bl_shelter_Name LIKE CONCAT("%",#{selectName},"%")
         </otherwise>
         </choose>
 	</select>
 	
 	<!-- 동물리스트 삭제 -->
 	<delete id="deleteAnimal" parameterType="String">
-		DELETE 
-			FROM t_animal 
-			WHERE animal_code=#{animalCode};
+		DELETE FROM 
+			t_animal 
+		WHERE 
+			animal_code=#{animalCode};
 	</delete>
 	
 	<!-- 동물리스트 수정 -->

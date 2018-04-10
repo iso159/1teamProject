@@ -55,9 +55,13 @@ public class AnimalController {
 		logger.debug("animalAdd(HttpSession session,Model model, Animal animal) 메서드 animalWeight is {}", animalWeight);
 		logger.debug("animalAdd(HttpSession session,Model model, Animal animal) 메서드 animalAge is {}", animalAge);
 		logger.debug("animalAdd(HttpSession session,Model model, Animal animal) 메서드 imagePath is {}", imagePath);
+		
+		// 세션을 확인해 로그인 정보나 blCode정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
-		}
+		}else if(session.getAttribute("loginBlCode") == null) {
+			return "redirect:/";
+		}		
 		model.addAttribute("animalBreed", animalBreed);
 		model.addAttribute("animalArea", animalArea);
 		model.addAttribute("animalIdCode", animalIdCode);
@@ -68,14 +72,16 @@ public class AnimalController {
 		return "animal/animalAdd";
 	}
 	
-	//동물등록
+	// 동물등록
 	@RequestMapping(value="/animal/animalAdd", method=RequestMethod.POST)
 	public String animalAdd(HttpSession session, AnimalAndFile animalAndFile
 							, @RequestParam(value="file") MultipartFile file) {
 		logger.debug("animalAdd(...) 메서드 호출");
-		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
+		// 세션을 확인해 로그인 정보나 blCode정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
+		}else if(session.getAttribute("loginBlCode") == null) {
+			return "redirect:/";
 		}
 		logger.debug("animalAdd(...) 메서드 animalAndFile is {}", animalAndFile);
 		logger.debug("animalAdd(...) 메서드 file is {}",file);
@@ -95,15 +101,27 @@ public class AnimalController {
 	}
 	//동물리스트
 	@RequestMapping(value="/animal/animalList", method=RequestMethod.GET)
-	public String animal(HttpSession session, Model model) {
-		logger.debug("animal()메서드 호출");
+	public String animal(HttpSession session, Model model
+						, @RequestParam(value="osCodeAnimal", defaultValue="등록동물") String osCodeAnimal) {
+		logger.debug("animal(...get)메서드 호출");
 		String blCode = (String)session.getAttribute("loginBlCode");
-		List<AnimalCommand> AnimalList = animalservice.listAnimal(blCode);
+		
+		// 세션을 확인해 로그인 정보나 blCode정보가 없으면 리다이렉트
+		if(session.getAttribute("loginId")==null) {
+			return "redirect:/member/login";
+		}else if(blCode == null) {
+			return "redirect:/";
+		}
+		List<AnimalCommand> AnimalList = animalservice.listAnimal(blCode, osCodeAnimal);
+		logger.debug("animal(...get)메서드 AnimalList is {}", AnimalList);
 		model.addAttribute("AnimalList", AnimalList);
+		model.addAttribute("boxSelect", osCodeAnimal);
+		logger.debug("animal(...get)메서드 끝");
 		return "animal/animalList";
 	}
+	
 	//동물 조건검색
-	@RequestMapping(value="/animal/animalCategory", method=RequestMethod.POST)
+	@RequestMapping(value="/animal/animalCategory", method=RequestMethod.GET)
 	public String animalCategory(Model model
 								,@RequestParam(value="AnimalCategory",required=false) String AnimalCategory
 								,@RequestParam(value="selectName",required=false) String selectName) {
@@ -116,20 +134,19 @@ public class AnimalController {
 		model.addAttribute("AnimalList", selectCategory);
 		return "animal/animalList";
 	}
-	//동물리스트 상세페이지요청
-	@RequestMapping(value="/animal/animalDetail", method=RequestMethod.GET)
-	public String animalDetail(HttpSession session, Model model, @RequestParam(value="animalCode",required=true)String animalCode) {
-			
-		AnimalCommand animalDetail =animalservice.detailAnimal(animalCode);
-		model.addAttribute("animalDetail", animalDetail);
-		return "animal/animalDetail";
-	}
+	
 	//동물리스트 삭제
 	@RequestMapping(value="/animal/animalDelete", method=RequestMethod.GET)
 	public String animalRemove(HttpSession session
 								, @RequestParam(value="animalCode")String animalCode
 								, @RequestParam(value="animalImagePath", defaultValue="") String animalImagePath) {
-		logger.debug("animalRemove(...) 메서드 호출");
+		logger.debug("animalRemove(...) 메서드 호출");		
+		// 세션을 확인해 로그인 정보나 blCode정보가 없으면 리다이렉트
+		if(session.getAttribute("loginId")==null) {
+			return "redirect:/member/login";
+		}else if(session.getAttribute("loginBlCode") == null) {
+			return "redirect:/";
+		}		
 		logger.debug("animalRemove(...) 메서드 animalCode is {}", animalCode);
 		logger.debug("animalRemove(...) 메서드 animalImagePath is {}", animalImagePath);
 		String path=null;
@@ -141,12 +158,15 @@ public class AnimalController {
 		animalservice.removeAnimal(animalCode, animalImagePath, path);
 		return "redirect:/animal/animalList";
 	}
+	
 	//동물리스트 수정 GET방식
 	@RequestMapping(value="/animal/animalUpdate", method=RequestMethod.GET)
 	public String animalModify(Model model, @RequestParam(value="animalCode",required=true)String animalCode, HttpSession session) {
-		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트 
+		// 세션을 확인해 로그인 정보나 blCode정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
+		}else if(session.getAttribute("loginBlCode") == null) {
+			return "redirect:/";
 		}
 		Animal animal = animalservice.getAnimalOne(animalCode);
 		// 매개변수 animal 값 확인
@@ -155,6 +175,7 @@ public class AnimalController {
 		logger.debug("animalModify()메서드 animal is {}", animal);
 		return "animal/animalUpdate";
 	}
+	
 	//동물리스트 수정 POST방식
 	@RequestMapping(value="/animal/animalUpdate", method = RequestMethod.POST)
 	public String animalModify(AnimalAndFile animalAndFile, HttpSession session
@@ -162,9 +183,11 @@ public class AnimalController {
 							, @RequestParam(value="file") MultipartFile file
 							, @RequestParam(value="filePath") String filePath) {
 		logger.debug("animalModify(...)메서드 호출");
-		//세션에 로그인 값을 확인하고 로그인 정보가 없으면 리다이렉트
+		// 세션을 확인해 로그인 정보나 blCode정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
+		}else if(session.getAttribute("loginBlCode") == null) {
+			return "redirect:/";
 		}
 		logger.debug("animalModify(...)메서드 animalAndFile is {}", animalAndFile);
 		logger.debug("animalModify(...)메서드 file is {}", file);
@@ -178,7 +201,8 @@ public class AnimalController {
 	// 보호소 등록코드별 보호 유기동물리스트 api
 	@RequestMapping(value = "/animal/yugiAnimalList", method = RequestMethod.POST)
 	public void shelterAnimalList(HttpServletResponse response, HttpSession session
-								, @RequestParam(value="animalStatusKind") String animalStatusKind) {
+								, @RequestParam(value="animalStatusKind") String animalStatusKind
+								) {
 		logger.debug("shelterAnimalList(...) 메서드 호출");
 		logger.debug("shelterAnimalList(...) 메서드 animalStatusKind is {}", animalStatusKind);
 		String blCode = (String)session.getAttribute("loginBlCode");

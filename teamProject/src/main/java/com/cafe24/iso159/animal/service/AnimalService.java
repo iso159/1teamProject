@@ -124,11 +124,16 @@ public class AnimalService {
 		
 	}
 	//동물리스트
-	public List<AnimalCommand> listAnimal(String blCode) {
+	public List<AnimalCommand> listAnimal(String blCode, String osCodeAnimal) {
 		logger.debug("listAnimal(String blCode)메서드 호출");
 		logger.debug("listAnimal(String blCode)메서드 호출 blCode is {}", blCode);
-		List<AnimalCommand> AnimalList = animaldao.selectAnimalList(blCode);
-		
+		logger.debug("listAnimal(String blCode)메서드 호출 osCodeAnimal is {}", osCodeAnimal);
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("blCode", blCode);
+		map.put("osCodeAnimal", osCodeAnimal);
+		List<AnimalCommand> AnimalList = animaldao.selectAnimalList(map);
+		logger.debug("listAnimal(String blCode)메서드 AnimalList is {}", AnimalList);
+		logger.debug("listAnimal(String blCode)메서드 끝");
 		return AnimalList;
 	}
 	
@@ -256,7 +261,7 @@ public class AnimalService {
 	public List<AnimalCommand> categoryAnimal(String AnimalCategory, String selectName) {
 		logger.debug("categoryAnimal()메서드 selectName is {}", selectName);
 		
-		Map map = new HashMap();
+		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("AnimalCategory", AnimalCategory);
 		map.put("selectName", selectName);
 		

@@ -10,20 +10,31 @@
 	$(document).ready(function(){
 		var itemSize;
 		var animalArray;
+		var boxSelect = '${boxSelect}';
+		
+		// 셀렉트 박스 selected
+		if(boxSelect === 'yugi'){
+			$('#animalStatusKind').val(boxSelect);
+		}else{
+			$('#animalStatusKind').val("${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=" + boxSelect);
+		}
+		
+		// 동물 상태별 리스트 처리
 		$('#animalStatusKind').change(function(){
-			var selectAnimalStatusKind = {"animalStatusKind" : $('#animalStatusKind').val()};
-			$.ajax({
-				url:'yugiAnimalList',
-				type:'post',
-				dataType:'json',
-				data: selectAnimalStatusKind,
-				success: function(msg){
-					$('#animalList').empty();					
-					if($('#animalStatusKind').val() === "yugi"){
+			var selectAnimalStatusKind = {"animalStatusKind" : $('#animalStatusKind').val() };
+			var animalStatusKind = $('#animalStatusKind').val();
+			if(animalStatusKind === "yugi"){
+				$.ajax({
+					url:'yugiAnimalList',
+					type:'post',
+					dataType:'json',
+					data: selectAnimalStatusKind,
+					success: function(msg){
+						$('#animalList').empty();					
 						itemSize = Object.keys(msg.response.body.items.item).length;
 						console.log('유기동물');
 						for(let i=0; i<itemSize; i++){
-							let divTag = '<div data-layout="ch8 ec4"> <img class="MOD_STAFF_Picture" src="'+ msg.response.body.items.item[i].filename + '" alt="" data-theme="_is1">';
+							let divTag = '<div data-layout="ch8 ec4" style="float:left;"> <img class="MOD_STAFF_Picture" style="width:200px; height:200px;" src="'+ msg.response.body.items.item[i].filename + '" alt="" data-theme="_is1">';
 						    divTag += '<p class="MOD_STAFF_Name" data-theme="_bb1">'+ msg.response.body.items.item[i].noticeNo + '</p>';
 						    divTag += '<p class="MOD_STAFF_Positon">' + msg.response.body.items.item[i].kindCd + '</p>';
 						    divTag += '<p> 동물 나이' + msg.response.body.items.item[i].age + '</p>';
@@ -31,34 +42,21 @@
 						    divTag += '<p> 보호소 명 : ' + msg.response.body.items.item[i].careNm + '</p>';
 						    divTag += '<p> 보호소 전화번호 : ' +  msg.response.body.items.item[i].careTel + '</p>';
 						    divTag += '<p> 체중 : ' +  msg.response.body.items.item[i].weight + '</p>';
-						    divTag += '<p> 동물 등록 : <a href="${pageContext.request.contextPath}/animal/animalAdd?animalArea=' + msg.response.body.items.item[i].careAddr + '&animalIdCode=' + msg.response.body.items.item[i].noticeNo + '&animalWeight=' + msg.response.body.items.item[i].weight + '&animalAge=' + msg.response.body.items.item[i].age +'&imagePath=' + msg.response.body.items.item[i].filename + '">동물등록</a></p></div>'
+						    divTag += '<p> 동물 등록 : <a href="${pageContext.request.contextPath}/animal/animalAdd?animalArea=' + msg.response.body.items.item[i].careAddr + '&animalIdCode=' + msg.response.body.items.item[i].noticeNo + '&animalWeight=' + msg.response.body.items.item[i].weight + '&animalAge=' + msg.response.body.items.item[i].age +'&imagePath=' + msg.response.body.items.item[i].filename + '">동물등록</a></p></div>';
 							$('#animalList').append(divTag);
 						}
-					}else{
-						console.log('등록동물');
-						let divTag = '<c:forEach var="i" items="${AnimalList}">	';
-						divTag += '<div data-layout="ch8 ec4">' + '<c:set var="flag" value="${f:substring(i.animalImagePath,0,4)}"></c:set><c:set var="path" value="${i.animalImagePath}"></c:set>';
-						divTag += '<c:if test="${empty path}"><img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" alt="" data-theme="_is1"></c:if>';
-						divTag += '<c:if test="${!empty path and flag eq \'http\'}"><img class="MOD_STAFF_Picture" src="${path}" alt="" data-theme="_is1"></c:if>';
-						divTag += '<c:if test="${!empty path and flag ne \'http\'}"><img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" alt="" data-theme="_is1"></c:if>';
-						divTag += '<p>동물 식별코드 : {i.animalIdCode}</p>';	
-						divTag += '<p>종류 : ${i.osNameAnimalKind} </p>';
-						divTag += '<p>품종 : ${i.animalBreed}</p>';
-						divTag += '<p>동물 나이 : ${i.animalAge}</p>'+'<p>보호소 위치 : ${i.animalArea}</p>'+'<p>보호소 명 : ${i.blShelterName}</p>';
-						divTag += '<p>동물 상태 : ${i.osName}</p>' + '<p>동물 체중 : ${i.animalWeight}</p>' + '<p>동물 등록날짜 : ${i.animalEnrollDate}</p>';
-						divTag += '<p>동물 수정 : <a href="${pageContext.request.contextPath}/animal/animalUpdate?animalCode=${i.animalCode}">수정</a></p>';
-						divTag += '<p>동물 삭제 : <a href="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}">삭제</a></p>';
-						divTag += '<p>진단서 등록 : <a href="${pageContext.request.contextPath}/jindan/animalJindan?animalCode=${i.animalCode}">진단서 등록</a></p>';
-						divTag += '</div> </c:forEach>'
-						$('#animalList').append(divTag);
+					},
+					error: function(error){
+						console.log('없음');
+						$('#animalList').empty();
 					}
-				},
-				error: function(error){
-					console.log('없음');
-					$('#animalList').empty();
-				}
-			});
+				});
+			}else {
+				location.href = animalStatusKind;
+			}
 		});
+		
+		
 	});
 </script>
 <title>유기동물 리스트</title>
@@ -74,8 +72,10 @@
 	<!-- 메인내용 시작 : Text | Text -->
 	<h2>유기동물 리스트</h2>	
 	<select id="animalStatusKind">
-		<option value="insert">등록동물</option>
+		<option value="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=등록동물">등록동물</option>
 		<option value="yugi">유기동물</option>
+		<option value="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=체험(입양)가능동물">체험(입양)가능동물</option>
+		<option value="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=체험중인동물">체험중인동물</option>
 	</select>
 	<!-- 조건검색 -->
 	<section>
@@ -92,17 +92,17 @@
 		</form>
 	  	<div data-layout="_r" id="animalList">
 	  		<c:forEach var="i" items="${AnimalList}">		
-				<div data-layout="ch8 ec4">
+				<div data-layout="ch8 ec4" style="float:left;">
 					<c:set var="flag" value="${f:substring(i.animalImagePath,0,4)}"></c:set>
 					<c:set var="path" value="${i.animalImagePath}"></c:set>
 					<c:if test="${empty path}">
-						<img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" alt="" data-theme="_is1">
+						<img class="MOD_STAFF_Picture" src="https://unsplash.it/400/400/?random" style="width:200px; height:200px;" alt="" data-theme="_is1">
 					</c:if>
 					<c:if test="${!empty path and flag eq 'http'}">
-						<img class="MOD_STAFF_Picture" src="${path}" alt="" data-theme="_is1">
+						<img class="MOD_STAFF_Picture" src="${path}" style="width:200px; height:200px;" alt="" data-theme="_is1">
 					</c:if>
 					<c:if test="${!empty path and flag ne 'http'}">
-						<img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" alt="" data-theme="_is1">
+						<img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" style="width:200px; height:200px;" alt="" data-theme="_is1">
 					</c:if>
 					<p>동물 식별코드 : ${i.animalIdCode}</p>
 					<p>종류 : ${i.osNameAnimalKind} </p>
