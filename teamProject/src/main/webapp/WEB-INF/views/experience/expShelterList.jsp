@@ -20,6 +20,12 @@
             </div>
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
+				<c:if test="${empty exp}">
+					<script>
+					alert('기록이 없습니다.');
+					window.history.back();
+					</script>
+				</c:if>
 				<table>
 					<thead>
 						<tr>
@@ -42,6 +48,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				</div>
 			<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>

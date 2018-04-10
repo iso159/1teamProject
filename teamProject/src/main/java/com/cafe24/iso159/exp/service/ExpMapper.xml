@@ -92,12 +92,26 @@
 		<result column="exp_journal_date" property="expJournalDate"/>
 	</resultMap>
 	
-	<!-- 체험돌물 보여줄때 해당동물 이미 진행한 체험 기록 보여줌 -->
+	<!-- 해당 체험동물 체험 기록 총 카운터 확인 -->
+	<select id="selectExpAnimalTotalCount" resultType="int" parameterType="String">
+		SELECT 
+			count(*) as count 
+		FROM 
+			t_exp e 
+		INNER JOIN 
+			t_exp_journal ej 
+		ON 
+			e.exp_code=ej.exp_code
+		WHERE 
+			e.animal_code = #{animalCode}
+	</select>
+	
+	<!-- 체험동물 보여줄때 해당동물 이미 진행한 체험 기록 보여줌 -->
 	<resultMap type="com.cafe24.iso159.exp.service.ExpAndExpJournal" id="selectOneAnimalExpInfoMap">
 		<collection property="exp" resultMap="ExpVo"></collection>
 		<collection property="expJournal" resultMap="ExpJournalVo"></collection>
 	</resultMap>
-	<select id="selectOneAnimalExpInfo" resultMap="selectOneAnimalExpInfoMap" parameterType="String">
+	<select id="selectOneAnimalExpInfo" resultMap="selectOneAnimalExpInfoMap" parameterType="java.util.Map">
 		SELECT 
 			e.animal_code
 			,e.bl_code
@@ -113,6 +127,8 @@
 			e.exp_code=ej.exp_code
 		WHERE 
 			e.animal_code = #{animalCode}
+		LIMIT 
+			#{startRow},#{rowPerPage}
 	</select>
 	
 	<!-- 체험 하기 클릭시 체험 가능 동물 내용 띄워줌  -->
@@ -510,7 +526,6 @@
 	<select id="selectExpCode" resultType="int">
 		SELECT MAX(CAST(SUBSTRING(exp_code,10) AS DECIMAL)) FROM t_exp
 	</select>
-	
 	<!-- 유기동물 체험신청 부분 -->
 	<insert id="addExp" parameterType="com.cafe24.iso159.exp.service.Exp">
 		INSERT INTO 

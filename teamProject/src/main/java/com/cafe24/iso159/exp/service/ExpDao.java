@@ -23,11 +23,17 @@ public class ExpDao {
 	//맵퍼 id를 가져올때 사용할 맵퍼 생성
 	private final String nameSpace = "com.cafe24.iso159.exp.service.ExpMapper.";
 	
+	//해당 체험동물 체험 기록 총 카운터 확인
+	public int selectExpAnimalTotalCount(String animalCode) {
+		int count = sqlSessionTemplate.selectOne(nameSpace + "selectExpAnimalTotalCount", animalCode);
+		return count;
+	}
+	
 	//체험돌물 보여줄때 해당동물 이미 진행한 체험 기록 보여줌
-	public List<ExpAndExpJournal> selectOneAnimalExpInfo(String animalCode){
+	public List<ExpAndExpJournal> selectOneAnimalExpInfo(Map<String, Object> map){
 		logger.debug("ExpDao.java 호출 {selectOneAnimalExpInfo}.");
-		logger.debug("selectOneAnimalExpInfo() 메서드 실행 animalCode is {}", animalCode);
-		List<ExpAndExpJournal> expAndAnimalAndExpJournal = sqlSessionTemplate.selectList(nameSpace + "selectOneAnimalExpInfo", animalCode);
+		logger.debug("selectOneAnimalExpInfo() 메서드 실행 map is {}", map);
+		List<ExpAndExpJournal> expAndAnimalAndExpJournal = sqlSessionTemplate.selectList(nameSpace + "selectOneAnimalExpInfo", map);
 		logger.debug("selectOneAnimalExpInfo() 메서드 실행 expAndAnimalAndExpJournal is {}", expAndAnimalAndExpJournal);
 		return expAndAnimalAndExpJournal;
 	}

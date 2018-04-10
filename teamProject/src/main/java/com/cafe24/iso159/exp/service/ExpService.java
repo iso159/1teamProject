@@ -25,12 +25,33 @@ public class ExpService {
 	private static final Logger logger = LoggerFactory.getLogger(ExpService.class);
 	
 	//체험돌물 보여줄때 해당동물 이미 진행한 체험 기록 보여줌
-	public List<ExpAndExpJournal> selectOneAnimalExpInfo(String animalCode){
+	public Map<String, Object> selectOneAnimalExpInfo(Map<String, Object> map){
 		logger.debug("ExpService.java 호출 {selectOneAnimalExpInfo}.");
-		logger.debug("selectOneAnimalExpInfo() 메서드 실행 animalCode is {}", animalCode);
-		List<ExpAndExpJournal> expAndAnimalAndExpJournal = expDao.selectOneAnimalExpInfo(animalCode);
+		logger.debug("selectOneAnimalExpInfo() 메서드 실행 map is {}", map);
+		// map 에서 currentPage,rowPerPage 리턴맵에 담기위해 꺼낸다
+		int currentPage = (Integer)map.get("currentPage");
+		int rowPerPage = (Integer)map.get("rowPerPage");
+		// 시작 페이지를 구한다
+		int startRow = (currentPage-1)*rowPerPage;
+		logger.debug("selectOneAnimalExpInfo() 메서드 실행 startRow is {}", startRow);
+		map.put("startRow", startRow);
+		//startRow,rowPerPage,animalCode 를 이용해서 리스트를 꺼내온다
+		List<ExpAndExpJournal> expAndAnimalAndExpJournal = expDao.selectOneAnimalExpInfo(map);
 		logger.debug("selectOneAnimalExpInfo() 메서드 실행 expAndAnimalAndExpJournal is {}", expAndAnimalAndExpJournal);
-		return expAndAnimalAndExpJournal;
+		// 데이터 총갯수 구함
+		String animalCode = (String)map.get("animalCode");
+		int totalCount = expDao.selectExpAnimalTotalCount(animalCode);
+		// 페이지 마지막 표시
+		int lastPage = (int)Math.ceil((double)totalCount/(double)rowPerPage);
+		//리턴 맵에 가져온 리스트와 currentPage,rowPerPage,startRow,lastPage,totalCount 담아서 넘김
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		returnMap.put("currentPage",currentPage);
+		returnMap.put("rowPerPage",rowPerPage);
+		returnMap.put("startRow", startRow);
+		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount", totalCount);
+		returnMap.put("expAndAnimalAndExpJournal", expAndAnimalAndExpJournal);
+		return returnMap;
 	}
 	
 	//체험 하기 클릭시 체험 가능 동물 내용 띄워줌

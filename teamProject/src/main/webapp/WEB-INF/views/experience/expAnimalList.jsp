@@ -20,22 +20,28 @@
             </div>
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
+			<c:if test="${empty animal}">
+				<script>
+				alert('기록이 없습니다.');
+				window.history.back();
+				</script>
+			</c:if>
 			<c:forEach var="i" items="${animal}">
  			<c:set var="flag" value="${f:substring(i.animalImagePath,0,4)}"></c:set>
 			<c:set var="path" value="${i.animalImagePath}"></c:set>
-			<div style="margin:15;">
+			<div>
 			<div class ="col-xs-6 col-md-3">
-			<table>
+			<table style="height: 400px;">
 				<tr>
 					<td colspan="2">
  						<c:if test="${empty path}">
-							<img class="MOD_STAFF_Picture" src="https://unsplash.it/200/200/?random" height="200px" width="200px" alt="" data-theme="_is1">
+							<img class="MOD_STAFF_Picture" src="https://unsplash.it/200/200/?random" style="height:200px; width:200px;" alt="" data-theme="_is1">
 						</c:if>
 						<c:if test="${!empty path and flag eq 'http'}">
-							<img class="MOD_STAFF_Picture" src="${path}" alt="" height="200px" width="200px" data-theme="_is1">
+							<img class="MOD_STAFF_Picture" src="${path}" alt="" style="height:200px; width:200px;" data-theme="_is1">
 						</c:if>
 						<c:if test="${!empty path and flag ne 'http'}">
-							<img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" height="200px" width="200px" alt="" data-theme="_is1">
+							<img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" style="height:200px; width:200px;" alt="" data-theme="_is1">
 						</c:if> 
 					</td>
 				</tr>

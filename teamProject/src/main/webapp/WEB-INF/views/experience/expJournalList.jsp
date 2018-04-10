@@ -9,9 +9,14 @@
 	<!-- top 부분 시작-->
 	<jsp:include page="/WEB-INF/views/module/top.jsp" />
 	<!-- top 부분 끝-->
-
 		<!-- 메인화면 시작 -->
 		<!-- 내용 부분 시작-->
+		<c:if test="${empty expJournal}">
+			<script>
+			alert('기록이 없습니다.');
+			window.history.back();
+			</script>
+		</c:if>
         <div id="page-wrapper">
         	<c:forEach var="e" items="${expJournal}" varStatus="status">
         	<div class="row">
@@ -43,6 +48,7 @@
 				</tbody>
 			</table>
 			</c:forEach>
+			</div>
 			<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>

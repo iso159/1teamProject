@@ -20,6 +20,12 @@
 		</div>
 		<!-- h태그제목 끝 -->
 		<!-- 내용 부분 시작-->
+		<c:if test="${empty expAndAnimal.expAndAnimal}">
+			<script>
+			alert('기록이 없습니다.');
+			window.history.back();
+			</script>
+		</c:if>
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
@@ -41,13 +47,13 @@
 								</div>
 							</div>
 							<div class="col-sm-4">
-								<div id="dataTables-example_filter" class="dataTables_filter">
-									<label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="dataTables-example">
+								<div id="dataTables-example_filter" class="dataTables_filter" style="float: right;">
+									<label>Search:(공사중)<input type="search" class="form-control input-sm" placeholder="" aria-controls="dataTables-example">
 									</label>
 								</div>
 							</div>
 						</div>
-						<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
 									<th>품종</th>
@@ -79,10 +85,10 @@
 							</tbody>
 						</table>
 						<div class="row">
-							<div class="col-sm-7">
+							<div class="col-sm-5">
 								<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">${expAndAnimal.startRow+1}번 ~ ${expAndAnimal.rowPerPage * expAndAnimal.currentPage}번 까지 총 ${expAndAnimal.totalCount}개</div>
 							</div>
-							<div class="col-sm-5">
+							<div class="col-sm-7">
 								<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
 									<ul class="pagination">
 										<li class="paginate_button previous" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
@@ -103,6 +109,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 		<!-- 내용 부분 끝-->
 		<!-- foot 부분 시작 -->
