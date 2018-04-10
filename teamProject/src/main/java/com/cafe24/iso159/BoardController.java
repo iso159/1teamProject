@@ -18,6 +18,7 @@ import com.cafe24.iso159.board.service.Board;
 import com.cafe24.iso159.board.service.BoardAndBoardContent;
 import com.cafe24.iso159.board.service.BoardCommand;
 import com.cafe24.iso159.board.service.BoardContent;
+import com.cafe24.iso159.board.service.BoardContentFile;
 import com.cafe24.iso159.board.service.BoardReply;
 import com.cafe24.iso159.board.service.BoardService;
 
@@ -139,6 +140,7 @@ public class BoardController {
 		model.addAttribute("boardlist", boardlist);
 		return "board/boardList";
 	}
+	
 	//게시판 상세페이지 요청
 	@RequestMapping(value="/board/boardDetail", method=RequestMethod.GET)
 	public String BoardDetail(Model model
@@ -156,6 +158,8 @@ public class BoardController {
 		model.addAttribute("bc", bc);
 		List<BoardReply> br = boardservice.listBoardReply(boardContentCode);
 		model.addAttribute("br", br);
+		List<BoardContentFile> bcFile = boardservice.listBoardContentFile(boardContentCode);
+		model.addAttribute("bcFile", bcFile);
 		session.removeAttribute("boardContentCode");
 		return "board/boardDetail";
 	}
@@ -177,4 +181,6 @@ public class BoardController {
 		logger.debug("BoardAdd()메서드 session에 있는 boardContentCode is {}", boardContentCode);
 		return "redirect:/board/boardDetail";
 	}
+	//파일다운로드
+	
 }

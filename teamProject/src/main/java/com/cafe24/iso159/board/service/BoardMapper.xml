@@ -122,8 +122,19 @@
 		ON bc.board_code = b.board_code
 		ORDER BY bc.board_content_date DESC
 	</select>
+	<!-- 게시판 파일 조회 -->
+	<select id="selectBoardContentFile" parameterType="String" resultType="com.cafe24.iso159.board.service.BoardContentFile">
+		SELECT
+			of_save_name as ofSaveName 
+			,of_origin_name as ofOriginName
+			, of_ext as ofExt
+		FROM 
+			t_overall_file 
+		WHERE 
+			board_content_code = #{boardContentCode};
+	</select>
 	<!-- 게시판 글 상세조회 -->
-	<select id="boardDetail" parameterType="string" resultMap="selectBoardListMap">
+	<select id="boardDetail" parameterType="String" resultMap="selectBoardListMap">
 		SELECT
 			bc.board_content_code 
 			,b.board_name 

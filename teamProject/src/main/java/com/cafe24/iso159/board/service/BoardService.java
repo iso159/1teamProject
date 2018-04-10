@@ -184,6 +184,13 @@ public class BoardService {
 		logger.debug("listBoardContent()메서드 boardContent is {}", boardContent);
 		return boardContent;
 	}
+	//게시판파일리스트
+	public List<BoardContentFile> listBoardContentFile(String BoardContentCode){
+		logger.debug("listBoardContentFile()메서드 BoardContentFile is {}", BoardContentCode);
+		List<BoardContentFile> boardContentFile = boardDao.selectBoardContentFile(BoardContentCode);
+		logger.debug("listBoardContentFile()메서드 boardContentFile is {}", boardContentFile);
+		return boardContentFile;
+	}
 	//게시판 글 조회
 	public BoardAndBoardContent detailBoard(String boardContentCode) {
 		logger.debug("detailBoard()메서드 호출");

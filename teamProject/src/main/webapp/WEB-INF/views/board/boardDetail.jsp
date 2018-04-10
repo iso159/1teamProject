@@ -22,8 +22,9 @@
             </div>
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
+    
     <c:set var="login" value="${loginId}"></c:set>
-	
+    
 	<!-- 게시판그룹이름 -->
 	<h2>${bc.boardName}</h2>
 	<hr color="gray" width=100%>
@@ -31,9 +32,18 @@
 	<h3>${bc.boardcontent.boardContentTitle}</h3>
 	<!-- 등록날짜 -->
 	<div style="color:gray;">${bc.boardcontent.boardContentDate}</div>
-	<hr color="lightgray" width=100%>
+	<p>&nbsp;</p>
+	<!-- 사진 -->
+	
 	<!-- 게시판내용시작 -->
 	${bc.boardcontent.boardContentContent}<br>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<!-- 파일리스트 -->
+	
+	<c:forEach var="i" items="${bcFile}">
+		<a href="${pageContext.request.contextPath}/board/boardFileDownLoad">${i.ofOriginName}</a><br>
+	</c:forEach>
 	
 	<p>&nbsp;</p>
 	<c:if test="${login eq bc.boardcontent.mMemberId}">

@@ -68,6 +68,14 @@ public class BoardDao {
 		logger.debug("selectBoardContent()메서드 BoardContent is {}", BoardContent);
 		return BoardContent;
 	}
+	//게시판 파일조회
+	public List<BoardContentFile> selectBoardContentFile(String boardContentCode){
+		//매개변수 확인
+		logger.debug("boardDetail()메서드 boardContentCode is {}", boardContentCode);
+		List<BoardContentFile> boardContentFile = sqlSessionTemplate.selectList(nameSpace+"selectBoardContentFile", boardContentCode);
+		logger.debug("selectBoardContentFile()메서드 boardContentFile is {}", boardContentFile);
+		return boardContentFile;
+	}
 	//게시판 글 조회
 	public BoardAndBoardContent boardDetail(String boardContentCode) {
 		//매개변수 확인
