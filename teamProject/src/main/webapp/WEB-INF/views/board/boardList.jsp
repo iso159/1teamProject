@@ -23,6 +23,8 @@
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
 	<h2>게시판</h2>
+	<p></p>
+	
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -63,6 +65,18 @@
 			</c:if>
 			</ul> 	
 	</div>
+	<!-- 조건검색 -->
+	<form ID="selectForm" action="${pageContext.request.contextPath}/board/boardCategory" method="post">
+		<select name="boardCategory">
+			<option value="m_member_id">아이디</option>
+			<option value="board_content_title">제목</option>
+			<option value="board_content_content">동물식별코드</option>
+			<option value="board_content_date">등록날짜</option>
+		</select>
+		<input type="text" id="selectName" name="selectName">
+		<button type="submit">검색</button>
+	</form>
+	<p></p>
 	<a href="${pageContext.request.contextPath}/board/boardAdd">글등록</a><br>
 	<a href="${pageContext.request.contextPath}/"><button type="button" class="btn btn-success">홈으로</button></a>
 	<!-- 내용 부분 끝-->
