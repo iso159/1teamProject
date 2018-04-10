@@ -1,6 +1,7 @@
 package com.cafe24.iso159.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -62,9 +63,9 @@ public class BoardDao {
 		return sqlSessionTemplate.selectOne(nameSpace+"selectLastReplyNum");
 	}
 	//게시판 리스트 조회
-	public List<BoardAndBoardContent> selectBoardContent(){
+	public List<BoardAndBoardContent> selectBoardContent(Map<String, Object> map){
 		logger.debug("selectBoardContent()메서드 호출");
-		List<BoardAndBoardContent> BoardContent = sqlSessionTemplate.selectList(nameSpace+"selectBoardContent");
+		List<BoardAndBoardContent> BoardContent = sqlSessionTemplate.selectList(nameSpace+"selectBoardContent", map);
 		logger.debug("selectBoardContent()메서드 BoardContent is {}", BoardContent);
 		return BoardContent;
 	}
@@ -90,6 +91,13 @@ public class BoardDao {
 		List<BoardReply> boardreply = sqlSessionTemplate.selectList(nameSpace+"selectBoardReply", boardContentCode);
 		logger.debug("selectBoardReply()메서드 boardreply is {}", boardreply);
 		return boardreply;
+	}
+	//게시판 총행갯수
+	public int selectTotalCount(Map<String, Object> map) {
+		
+		int totalCount = sqlSessionTemplate.selectOne(nameSpace+"selectTotalCount", map);
+		logger.debug("selectTotalCount()메서드 map is {}",map);
+		return totalCount;
 	}
 	
 	//게시판 글 수정

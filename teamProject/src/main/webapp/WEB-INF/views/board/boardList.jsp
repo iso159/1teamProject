@@ -23,7 +23,7 @@
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
 	<h2>게시판</h2>
-	<table border="1">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 			<td>번호</td>
@@ -34,7 +34,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="i" items="${boardlist}">
+			<c:set var="boardContent" value="${map.boardContent}" />
+			<c:forEach var="i" items="${boardContent}">
 			<tr>
 			<td>${i.boardcontent.boardNumber}</td>
 			<td>${i.boardName}</td>
@@ -45,6 +46,23 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<!-- 이전,다음 작업 -->
+	<div>														  			
+		<ul class="pagination">
+			<c:set var="currentPage" value="${currentPage}"/> <!-- currentPage = ${currentPage} -->
+			<c:if test="${currentPage!=1}"> <!-- if(currentPage!=1) -->
+				<li class="page-item">
+ 					<a class = "page-link" href="${pageContext.request.contextPath}/board/boardList?currentPage=${currentPage-1}&rowPerPage=${rowPerPage}&boardSearchWord=${boardSearchWord}">이전</a>
+ 					</li>
+ 				</c:if>
+			<c:if test="${currentPage!=lastPage}"> <!-- if(currentPage!=lastPage) -->
+				<li class="page-item">
+ 					<a class = "page-link" href="${pageContext.request.contextPath}/board/boardList?currentPage=${currentPage+1}&rowPerPage=${rowPerPage}&boardSearchWord=${boardSearchWord}">다음</a>
+ 					</li>
+			</c:if>
+			</ul> 	
+	</div>
 	<a href="${pageContext.request.contextPath}/board/boardAdd">글등록</a><br>
 	<a href="${pageContext.request.contextPath}/"><button type="button" class="btn btn-success">홈으로</button></a>
 	<!-- 내용 부분 끝-->

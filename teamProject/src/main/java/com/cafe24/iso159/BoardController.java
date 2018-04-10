@@ -1,6 +1,7 @@
 package com.cafe24.iso159;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -136,11 +137,19 @@ public class BoardController {
 	}
 	//게시판리스트
 	@RequestMapping(value="/board/boardList", method=RequestMethod.GET)
-	public String Board(Model model) {
-		logger.debug("Board()메서드 호출");
-		List<BoardAndBoardContent> boardlist = boardservice.listBoardContent();
+	public String Board(Model model
+						,@RequestParam(value="currentPage",defaultValue="1",required=false) int currentPage
+						,@RequestParam(value="rowPerPage",defaultValue="10",required=false) int rowPerPage) {
+		
+		logger.debug("Board()메서드 currentPage is {}", currentPage);
+		logger.debug("Board()메서드 rowPerPage is {}", rowPerPage);
+		
+		Map<String, Object> boardlist = boardservice.listBoardContent(currentPage, rowPerPage);
+		
 		logger.debug("Board()메서드 boardlist is {}", boardlist);
-		model.addAttribute("boardlist", boardlist);
+		model.addAttribute("map", boardlist);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("rowPerPage", rowPerPage);
 		return "board/boardList";
 	}
 	

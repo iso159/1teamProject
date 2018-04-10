@@ -2,7 +2,9 @@ package com.cafe24.iso159.board.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -181,11 +183,36 @@ public class BoardService {
 		boardDao.insertBoard(board);
 	}
 	//게시판리스트
-	public List<BoardAndBoardContent> listBoardContent(){
+	public Map<String, Object> listBoardContent(int currentPage, int rowPerPage){
 		logger.debug("listBoardContent()메서드 호출");
-		List<BoardAndBoardContent> boardContent = boardDao.selectBoardContent();
+		
+		//startRow선언
+		int startRow = 0;
+		//현재페이지 * 보여줄 개수로 시작행 구함
+		startRow = (currentPage-1)*rowPerPage;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("currentPage", currentPage);
+		map.put("rowPerPage", rowPerPage);
+		
+		//리턴할 맵객체 생성
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		//페이지별로 보여줄 리스트 조회 메서드 호출
+		List<BoardAndBoardContent> boardContent = boardDao.selectBoardContent(map);
 		logger.debug("listBoardContent()메서드 boardContent is {}", boardContent);
-		return boardContent;
+		//총 행의 개수 조회 메서드 호출 및 totalCount에 입력
+		int totalCount = boardDao.selectTotalCount(map);
+		logger.debug("getListByPage()메서드 totalCount is {}", totalCount);
+		//totalCount와 pagePerRow로 마지막 페이지를 구함
+		int lastPage = (int)(totalCount/rowPerPage+1);
+		logger.debug("getListByPage()메서드 lastPage is {}", lastPage);
+		
+		//returnMap에 list와 lastPage를 매핑함
+		returnMap.put("boardContent", boardContent);
+		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount", totalCount);
+		return returnMap;
 	}
 	//게시판파일리스트
 	public List<BoardContentFile> listBoardContentFile(String BoardContentCode){

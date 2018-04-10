@@ -106,7 +106,7 @@
 	</insert>
 	
 	<!-- 게시판 글 전체 조회 -->
-	<select id="selectBoardContent" resultMap="selectBoardListMap">
+	<select id="selectBoardContent" parameterType="java.util.Map" resultMap="selectBoardListMap">
 		SELECT 
 			substring(board_content_code, 20) as boardNumber 
 			,board_content_code
@@ -121,7 +121,16 @@
 			t_board b
 		ON bc.board_code = b.board_code
 		ORDER BY bc.board_content_date DESC
+		LIMIT #{startRow},#{rowPerPage}
 	</select>
+	<!-- 총 행의 개수 -->
+	<select id="selectTotalCount" parameterType="java.util.Map" resultType="Integer">
+		SELECT COUNT(*)
+		FROM t_board_content
+		<if test= "boardSearchWord != null">
+			WHERE city_name LIKE CONCAT('%',#{citySearchWord},'%')
+		</if>
+	</select> 
 	<!-- 게시판 파일 조회 -->
 	<select id="selectBoardContentFile" parameterType="String" resultType="com.cafe24.iso159.board.service.BoardContentFile">
 		SELECT
