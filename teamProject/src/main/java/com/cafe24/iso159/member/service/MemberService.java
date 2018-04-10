@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-
 @Service
 @Transactional
 public class MemberService {
@@ -45,7 +43,7 @@ public class MemberService {
 		return memberLoginLevel;
 	}
 	
-	// 상품 리스트 전체 조회
+	// 회원 리스트 전체 조회
 	public List<MemberAndMemberInfo> getMemberList() {
 		// 전체 회원 조회 메서드 호출 후 리턴
 		logger.debug("getMemberList() 메서드 호출");

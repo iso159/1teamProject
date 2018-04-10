@@ -426,7 +426,7 @@ public class ShelterService {
 			businessLicenseClinic.setBlCode(blCode);
 			businessLicenseClinic.setAdoptCode(osCodeClinicKind);
 			businessLicenseClinic.setOsCodeClinicStatus(osCodeClinicStatus);
-			businessLicenseClinic.setmAdoptId(osCodeClinicStatus);
+			businessLicenseClinic.setmId(loginId);
 			logger.debug("addClinicRequest(String blCode,String loginId) 메서드 businessLicenseClinic is {}", businessLicenseClinic);
 			shelterDao.insertClinicRequest(businessLicenseClinic);
 			logger.debug("addClinicRequest(String blCode,String loginId) 메서드 끝");

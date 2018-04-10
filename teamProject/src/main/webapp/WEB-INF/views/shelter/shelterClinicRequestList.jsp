@@ -30,8 +30,7 @@
 					<th>보호소 아이디</th>
 					<th>입양자 아이디</th>
 					<th>진료 상태</th>
-					<th>보호소 진료 날짜</th>
-					<th>보호소 잔료 요청 날짜</th>
+					<th>보호소 진료 요청 날짜</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,10 +39,8 @@
 						<td>${sc.mShelterId}</td>
 						<td>${sc.mAdoptId}</td>
 						<td>${sc.osCodeClinicKind}</td>
-						<td>${sc.scDate}</td>
 						<td>${sc.scReserveDate}</td>
 						<td>
-							<button type="button">Look!!</button>
 						</td>
 					</tr>
 				</c:forEach>

@@ -40,7 +40,7 @@
 							<td>${goodsDetail.pointGoodsPoint}</td>
 							<td>${goodsDetail.pointGoodsDesc}</td>
 							<td>${goodsDetail.pointGoodsDate}</td>
-							<td><a href="${pageContext.request.contextPath}/goods/goodsRemove?pointGoodsCode=${g.pointGoodsCode}">삭제</a></td>
+							<td><a href="${pageContext.request.contextPath}/goods/goodsCart?pointGoodsCode=${g.pointGoodsCode}">장바구니 담기</a></td>
 						</tr>
 					</tbody>
 				</table>

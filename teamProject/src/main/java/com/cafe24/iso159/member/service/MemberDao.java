@@ -54,16 +54,7 @@ public class MemberDao {
 		logger.debug("selectMemberList() 메서드 list is {}", list);
 		return list;
 	}
-	
-/*	
-	// 회원 한명 상세정보 조회
-	public Member memberDetail(String memberCode) {
-		//매개변수 확인
-		logger.debug("memberDetail()메서드 memberCode is {}", memberCode);
-		return sqlSessionTemplate.selectOne(nameSpace+"memberDetail", memberCode);
-	}
-*/
-	
+
 	// 회원 수정 updateMember 호출 dao
 	public void updateMember(Member member) {
 		logger.debug("updateMember(Member mId) 메서드 member is {}", member);
@@ -94,6 +85,7 @@ public class MemberDao {
 		logger.debug("selectMemberOneId(String memberId) 메서드 memberId is {}", memberId);
 		return checkMemberId;	
 	}
+
 	// member 회원삭제
 	public void updateMemberRight(Map<String, Object> map) {
 		// 매개변수 member 값 확인

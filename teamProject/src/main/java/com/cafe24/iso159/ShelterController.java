@@ -321,7 +321,7 @@ public class ShelterController {
 	// 보호소 대표 신청 등록 폼 데이터 입력후 매핑된 서블릿
 	@RequestMapping(value="/shelter/businessLicenseRequest", method=RequestMethod.POST)
 	public String addBusinessLicense(BusinessLicenseCommand businessLicenseCommand, HttpSession session
-									, @RequestParam(value="multipartFile") MultipartFile file) {
+									,@RequestParam(value="multipartFile") MultipartFile file) {
 		String loginId = (String)session.getAttribute("loginId");
 		if(loginId==null) {
 			return "redirect:/member/login";

@@ -5,7 +5,7 @@ public class BusinessLicenseClinic {
 	private String blCode;
 	private String mShelterId;
 	private String adoptCode;
-	private String mAdoptId;
+	private String mId;
 	private String osCodeClinicKind;
 	private String osCodeClinicStatus;
 	private String scDate;
@@ -43,12 +43,12 @@ public class BusinessLicenseClinic {
 		this.adoptCode = adoptCode;
 	}
 
-	public String getmAdoptId() {
-		return mAdoptId;
+	public String getmId() {
+		return mId;
 	}
 
-	public void setmAdoptId(String mAdoptId) {
-		this.mAdoptId = mAdoptId;
+	public void setmId(String mId) {
+		this.mId = mId;
 	}
 
 	public String getOsCodeClinicKind() {
@@ -86,8 +86,9 @@ public class BusinessLicenseClinic {
 	@Override
 	public String toString() {
 		return "BusinessLicenseClinic [scCode=" + scCode + ", blCode=" + blCode + ", mShelterId=" + mShelterId
-				+ ", adoptCode=" + adoptCode + ", mAdoptId=" + mAdoptId + ", osCodeClinicKind=" + osCodeClinicKind
+				+ ", adoptCode=" + adoptCode + ", mId=" + mId + ", osCodeClinicKind=" + osCodeClinicKind
 				+ ", osCodeClinicStatus=" + osCodeClinicStatus + ", scDate=" + scDate + ", scReserveDate="
 				+ scReserveDate + "]";
 	}
+
 }
