@@ -2,6 +2,8 @@ package com.cafe24.iso159;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.iso159.board.service.Board;
 import com.cafe24.iso159.board.service.BoardAndBoardContent;
@@ -182,5 +185,21 @@ public class BoardController {
 		return "redirect:/board/boardDetail";
 	}
 	//파일다운로드
-	
+	@RequestMapping(value="/board/boardFileDownload", method=RequestMethod.GET)
+	public ModelAndView downloadBoardFile(HttpSession session
+										, HttpServletRequest request
+										, HttpServletResponse response
+										, @RequestParam(value="ofSaveName") String ofSaveName
+										, @RequestParam(value="ofOriginName") String ofOriginName
+										, @RequestParam(value="ofExt") String ofExt) {
+		
+		logger.debug("downloadBoardFile() 메서드 호출");
+		logger.debug("ofSaveName :{}",ofSaveName);
+		logger.debug("ofOriginName :{}",ofOriginName);
+		logger.debug("ofExt :{}",ofExt);
+		// resource 폴더경로
+		String path = session.getServletContext().getRealPath("/");
+		path += "resources/boardUpload/";
+		return boardservice.boardFileDownload(request, path, ofSaveName, ofExt, ofOriginName);
+	}
 }

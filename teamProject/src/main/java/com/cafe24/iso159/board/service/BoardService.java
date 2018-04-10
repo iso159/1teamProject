@@ -5,12 +5,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Service
 @Transactional
@@ -247,5 +250,44 @@ public class BoardService {
 	public void removeBoard(String boardCode) {
 		logger.debug("removeBoard()메서드 boardCode is {}", boardCode);
 		boardDao.deleteBoard(boardCode);
+	}
+	//게시판 파일 다운로드
+	public ModelAndView boardFileDownload(HttpServletRequest request, String path, String ofSaveName, String ofExt, String ofOriginName) {
+		
+		logger.debug("downloadFile() 메소드 호출");
+		logger.debug("downloadFile() 메서드 실행 paht is {}", path);
+		logger.debug("downloadFile() 메서드 실행 fileName is {}", ofSaveName);
+		logger.debug("downloadFile() 메서드 실행 fileName is {}", ofOriginName);
+		
+		// 경로 + 다운받을 파일이름을 file에 입력
+		File file = new File(path+ofSaveName);
+		logger.debug("downloadFile() 메서드 실행 file is {}", file);
+		// 입력한 파일을 읽을수 없다면 if블록실행
+		if(!file.canRead()) {
+			logger.debug("{} 파일을 찾지 못했습니다.",file);
+			return new ModelAndView("fileDownloadView", "file",file);
+		}
+		// 확장자 request에 셋팅
+		request.setAttribute("fileExt", ofExt);
+		// 저장 파일명 request에 셋팅
+		request.setAttribute("fileName", ofSaveName);
+		// 원본 파일명을 request에 매핑
+		request.setAttribute("ofOriginName", ofOriginName);
+		// 확장자명을 더해서 파일 셋팅
+		File boardFile = new File(path+ofSaveName+"."+ofExt);
+		logger.debug("boardFileDownload() 메서드 실행 boardFile is {}", boardFile);
+		try {
+			// 파일이 있다면 if블록실행
+			if(file.exists()) {
+				// 확장자명을 더한 파일명으로 수정
+				file.renameTo(boardFile);
+				// 확장자명을 더한 파일을 request에 셋팅
+				request.setAttribute("boardFile", boardFile);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return new ModelAndView("fileDownloadView", "file",boardFile);
 	}
 }

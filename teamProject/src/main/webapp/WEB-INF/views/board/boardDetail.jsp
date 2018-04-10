@@ -42,7 +42,7 @@
 	<!-- 파일리스트 -->
 	
 	<c:forEach var="i" items="${bcFile}">
-		<a href="${pageContext.request.contextPath}/board/boardFileDownLoad">${i.ofOriginName}</a><br>
+		<a href="${pageContext.request.contextPath}/board/boardFileDownload?ofSaveName=${i.ofSaveName}&ofOriginName=${i.ofOriginName}&ofExt=${i.ofExt}">${i.ofOriginName}</a><br>
 	</c:forEach>
 	
 	<p>&nbsp;</p>
