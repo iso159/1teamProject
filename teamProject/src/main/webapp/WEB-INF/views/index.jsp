@@ -4,6 +4,7 @@
 <html>
 <head>
 	<title>Home</title>
+	
 </head>
 <body>
 	<!-- top 부분 시작-->
@@ -20,6 +21,48 @@
             </div>
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
+			
+			<!-- 통계차트 시작 -->
+			<div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            	유기동물 통계자료
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-pills">
+                                <li class="active"><a href="#home-pills" data-toggle="tab">개체수</a>
+                                </li>
+                                <li><a href="#profile-pills" data-toggle="tab">처리상황</a>
+                                </li>
+                                <li><a href="#messages-pills" data-toggle="tab">함께한시간</a>
+                                </li>
+                                
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="home-pills">
+                                    <h4>유기동물 개체수 (2014자료)</h4>
+                                    <p><img src="${pageContext.request.contextPath}/resources/img/1.JPG" width:100%></p>
+                                </div>
+                                <div class="tab-pane fade" id="profile-pills">
+                                    <h4>유기동물 처리상황</h4>
+                                    <p><img src="${pageContext.request.contextPath}/resources/img/2.JPG" width:100%></p>
+                                </div>
+                                <div class="tab-pane fade" id="messages-pills">
+                                    <h4>반려견이 주인과 함께 사는 시간</h4>
+                                    <p><img src="${pageContext.request.contextPath}/resources/img/3.JPG" width:100%></p>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+             </div>
+			<!-- 통계차트 끝 -->
 			
 			<!-- 프로젝트  -->
 			<div class="row">
