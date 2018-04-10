@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
-	
+	<title></title>
+	 <link rel="icon" type="image/png"  href="${pageContext.request.contextPath}/resources/img/dog.png"/>
 </head>
 <body>
 	<!-- top 부분 시작-->
