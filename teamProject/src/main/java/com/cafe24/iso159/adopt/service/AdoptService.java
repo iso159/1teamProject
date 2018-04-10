@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.cafe24.iso159.animal.service.Animal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -140,6 +143,14 @@ public class AdoptService {
 			logger.debug("addAdopt() 메서드 끝");
 		}//메소드끝
 
+	// 입양신청메뉴에서 입양가능한 동물리스트 조회
+		public List<Animal> listAdoptAnimal(){
+			logger.debug("listAdoptAnimal() 메소드 호출");
+			String osCodeAnimal = "os_animal_3_1_2";
+			List<Animal> list = adoptDao.selectAdoptAnimalList(osCodeAnimal);
+			logger.debug("listAdoptAnimal() 메소드 호출 list is {]", list);
+			return list;
+		}
 		
 		
 	// 입양신청확인

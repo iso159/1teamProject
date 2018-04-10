@@ -14,6 +14,7 @@ import com.cafe24.iso159.adopt.service.AdoptRequest;
 import com.cafe24.iso159.adopt.service.AdoptRequestAndOsCodeAnimal;
 import com.cafe24.iso159.adopt.service.AdoptRequestFile;
 import com.cafe24.iso159.adopt.service.AdoptService;
+import com.cafe24.iso159.animal.service.Animal;
 import com.cafe24.iso159.animal.service.AnimalCommand;
 import com.cafe24.iso159.survey.service.SurveyList;
 import com.cafe24.iso159.survey.service.SurveyService;
@@ -83,6 +84,17 @@ public class AdoptController {
 		return "redirect:/adopt/adoptMyList";	//입양신청 완료 후 나의입양리스트화면으로
 		
 	}
+	
+	// 입양신청메뉴, 입양가능한 동물리스트화면 요청
+	@RequestMapping(value="/adopt/adoptAnimalList",method = RequestMethod.GET)
+	public String listAdoptAnimalList(Model model) {
+		logger.debug("listAdoptAnimalList() 메서드 호출");
+		List<Animal> list = adoptService.listAdoptAnimal();
+		logger.debug("listAdoptAnimalList() 메서드 호출 list is {}",list);
+		model.addAttribute("animal", list);
+		return "/adopt/adoptAnimalList";
+	}
+	
 	
 	// 나의 입양신청 리스트 화면 요청 
 	@RequestMapping(value="/adopt/adoptMyList", method = RequestMethod.GET)

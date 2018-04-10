@@ -148,7 +148,7 @@
 					<a href="#"><i class="fa fa-gittip fa-fw"></i> 입양<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 								<li><a
-									href="${pageContext.request.contextPath}/animal/animalList">입양신청</a>
+									href="${pageContext.request.contextPath}/adopt/adoptAnimalList">입양신청</a>
 								</li>
 								<li><a
 									href="${pageContext.request.contextPath}/adopt/adoptMyList">나의입양리스트</a>

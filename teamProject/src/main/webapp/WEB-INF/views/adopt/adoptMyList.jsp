@@ -15,7 +15,7 @@
         	<!-- h태그제목 시작 -->
         	<div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">나의 입양 신청 현황</h1>
+                    <h1 class="page-header">입양신청내역</h1>
                 </div>
             </div>
           	<!-- h태그제목 끝 -->
@@ -27,9 +27,7 @@
 			<div class="panel-heading">${loginId}님신청리스트</div>
 			<!-- 테이블 이름 끝 -->
 			<div class="panel-body">
-				<div class="row">
-				<div class="col-sm-8">
-				<div class="dataTables_length" id="dataTables-example_length">
+				<div class="table-responsive">
 				<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 					<thead>
 						<tr>
@@ -68,6 +66,8 @@
 				</table>
 				<a href="${pageContext.request.contextPath}/"><button type="button" class="btn warning">홈으로</button></a>
 		   </div>
+		</div>
+		</div>
 		</div>
 		</div>
 		</div>

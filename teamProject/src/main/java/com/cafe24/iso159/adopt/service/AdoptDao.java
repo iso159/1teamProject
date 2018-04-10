@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.iso159.animal.service.Animal;
+
 
 @Repository
 public class AdoptDao {
@@ -21,6 +23,13 @@ public class AdoptDao {
 	public void insertAdopt(AdoptRequest adoptRequest) {
 		logger.debug("insertAdopt() 메서드 호출");
 		sqlSessionTemplate.insert(nameSpace + "AdoptRequest", adoptRequest);
+	}
+	
+	// 입양신청메뉴에서 입양가능한 동물리스트 조회
+	public List<Animal> selectAdoptAnimalList(String osCodeAnimal){
+		logger.debug("selectAdoptAnimalList() 메서드 호출 osCodeAnimal is {}",osCodeAnimal);
+		List<Animal> list = sqlSessionTemplate.selectList(nameSpace + "selectAdoptAnimalList", osCodeAnimal);
+		return list;
 	}
 	
 	// 파일등록
