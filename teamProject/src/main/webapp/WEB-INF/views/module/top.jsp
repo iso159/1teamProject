@@ -73,11 +73,10 @@
 				<ul class="nav" id="side-menu">
 					<li class="sidebar-search">
 						<div class="input-group custom-search-form">
-							<input type="text" class="form-control" placeholder="https://github.com/iso159/1teamProject">
+							<input type="text" class="form-control" placeholder="Search...">
 							<span class="input-group-btn">
 								<button class="btn btn-default" type="button">
-									<a href="https://github.com/iso159/1teamProject"></a>
-									<i class="fa fa-git"></i>
+									<i class="fa fa-search"></i>
 								</button>
 							</span>
 						</div> <!-- /input-group -->
@@ -88,7 +87,7 @@
                     <li>
                     	<c:set var="right" value="${rightName}"></c:set>
       					<c:set var="level" value="${rightLevel}"></c:set>
-                        <a href="#"><i class="fa fa-hospital-o fa-fw"></i>보호소 관리<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-dashboard fa-fw"></i>보호소 관리<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
       						<c:if test="${right eq '회원' and level eq '1'}">
 	                            <li>
@@ -125,23 +124,28 @@
 
 					<!-- 체험 시작 -->
 					<li>
-					<a href="#"><i class="fa fa-dribbble fa-fw"></i> 체험<span class="fa arrow"></span></a>
+					<a href="#"><i class="fa fa-sitemap fa-fw"></i> 체험<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-								<li>
-								<a href="${pageContext.request.contextPath}/experience/expAnimalList">체험하기</a>
-								</li>
-								<li>
-								<a href="${pageContext.request.contextPath}/experience/expList">나의체험리스트</a>
-								</li>
-							<c:if test="${rightLevel eq '1' or rightLevel eq '2'}">
-								<li><a href="${pageContext.request.contextPath}/experience/expShelterList?blCode=${loginBlCode}">체험 리스트</a></li>
+							<c:if test="${rightLevel ne '2'}">
+							<li>
+							<a href="${pageContext.request.contextPath}/experience/expAnimalList">체험하기</a>
+							</li>
 							</c:if>
-						</ul></li>
+							<c:if test="${rightLevel ne '2'}">
+							<li>
+							<a href="${pageContext.request.contextPath}/experience/expList">나의체험리스트</a>
+							</li>
+							</c:if>
+							<c:if test="${rightLevel eq '1' or rightLevel eq '2'}">
+							<li><a href="${pageContext.request.contextPath}/experience/expShelterList?blCode=${loginBlCode}">체험 리스트</a></li>
+							</c:if>
+						</ul>
+					</li>
 					<!-- 체험 끝 -->
 
 					<!-- 입양 시작 -->
 					<li>
-					<a href="#"><i class="fa fa-gittip fa-fw"></i> 입양<span class="fa arrow"></span></a>
+					<a href="#"><i class="fa fa-files-o fa-fw"></i> 입양<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 								<li><a
 									href="${pageContext.request.contextPath}/animal/animalList">입양신청</a>
@@ -161,7 +165,7 @@
 					<!-- 동물 관리 시작 -->
 					<c:if test="${right eq '보호소'}">
 					<li>
-					<a href="#"><i class="fa  fa-paw fa-fw"></i>동물 관리<span class="fa arrow"></span></a>
+					<a href="#"><i class="fa fa-files-o fa-fw"></i>동물 관리<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<c:set var="right" value="${rightName}"></c:set>
 								<li><a
@@ -180,7 +184,7 @@
 					<li>
 					<c:set var="login" value="${loginId}"></c:set> 
 					<c:set var="right" value="${rightName}"></c:set> 
-					<a href="#"><i class="fa fa-gift fa-fw"></i> 애견용품<span class="fa arrow"></span></a>
+					<a href="#"><i class="fa fa-files-o fa-fw"></i> 애견용품<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<c:if test="${right eq '관리자'}">
 								<li>
@@ -196,7 +200,7 @@
 					
 					<c:if test="${right eq '관리자'}">
 						<!-- 설문지 시작 -->
-						<li><a href="#"><i class="fa fa-pencil-square-o fa-fw"></i> 설문지<span class="fa arrow"></span></a>
+						<li><a href="#"><i class="fa fa-files-o fa-fw"></i> 설문지<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								
 									<li><a
@@ -212,7 +216,7 @@
 					
 					<c:if test="${right eq '회원' or right eq '보호소' }">
 					<!-- 진단 시작 -->
-	               <li><a href="#"><i class="fa fa-medkit fa-fw"></i> 진단<span class="fa arrow"></span></a>
+	               <li><a href="#"><i class="fa fa-files-o fa-fw"></i> 진단<span class="fa arrow"></span></a>
 	                  <ul class="nav nav-second-level">
 	                     <c:set var="login" value="${loginId}"></c:set>
 	                     <c:set var="right" value="${rightName}"></c:set>
