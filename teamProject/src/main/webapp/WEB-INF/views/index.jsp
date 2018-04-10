@@ -16,7 +16,7 @@
         	<!-- h태그제목 시작 -->
         	<div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Team Project Intro</h1>
+                    <h1 class="page-header"><i class="fa fa-cube"></i>Team Project Intro</h1>
                 </div>
             </div>
           	<!-- h태그제목 끝 -->
@@ -26,7 +26,7 @@
 			<div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            	유기동물 통계자료
+                         <i class="fa fa-bar-chart-o"></i>유기동물 통계자료
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -44,15 +44,15 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="home-pills">
-                                    <h4>유기동물 개체수 (2014자료)</h4>
+                                    <h4><i class="fa fa-hand-o-right"></i>유기동물 개체수 (2014자료)</h4>
                                     <p><img src="${pageContext.request.contextPath}/resources/img/1.JPG" width:100%></p>
                                 </div>
                                 <div class="tab-pane fade" id="profile-pills">
-                                    <h4>유기동물 처리상황</h4>
+                                    <h4><i class="fa fa-hand-o-right"></i>유기동물 처리상황</h4>
                                     <p><img src="${pageContext.request.contextPath}/resources/img/2.JPG" width:100%></p>
                                 </div>
                                 <div class="tab-pane fade" id="messages-pills">
-                                    <h4>반려견이 주인과 함께 사는 시간</h4>
+                                    <h4><i class="fa fa-hand-o-right"></i>반려견이 주인과 함께 사는 시간</h4>
                                     <p><img src="${pageContext.request.contextPath}/resources/img/3.JPG" width:100%></p>
                                 </div>
                                
@@ -69,7 +69,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <h3>프로젝트 소개</h3>
+                            <h3><i class="fa fa-quote-left  "></i>프로젝트 소개<i class="fa fa-quote-right"></i></h3>
                             <p>반려동물 인구 1000만시대를 맞아 성숙한 반려 문화가 요구되는 요즘 유기동물 또한 급증하고 있다. 유기동물 체험을 통해 분양을 활성화 하고 주민 사이의 인식차이 극복과 동물 복지에 대한 의식 개선을 이뤄내는 데 목적이 있다.</p>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
