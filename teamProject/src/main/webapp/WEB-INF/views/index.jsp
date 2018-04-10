@@ -26,7 +26,7 @@
 			<div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                         <i class="fa fa-bar-chart-o"></i>유기동물 통계자료
+                         <i class="fa fa-bar-chart-o"></i>유기동물 통계자료     <p class="text-right"><small>출처:농림축산식품부,동물자유연대</small></p>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -48,11 +48,11 @@
                                     <p><img src="${pageContext.request.contextPath}/resources/img/1.JPG" width:100%></p>
                                 </div>
                                 <div class="tab-pane fade" id="profile-pills">
-                                    <h4><i class="fa fa-hand-o-right"></i>유기동물 처리상황</h4>
+                                    <h4><i class="fa fa-hand-o-right"></i>유기동물 처리상황 (2014자료)</h4>
                                     <p><img src="${pageContext.request.contextPath}/resources/img/2.JPG" width:100%></p>
                                 </div>
                                 <div class="tab-pane fade" id="messages-pills">
-                                    <h4><i class="fa fa-hand-o-right"></i>반려견이 주인과 함께 사는 시간</h4>
+                                    <h4><i class="fa fa-hand-o-right"></i>반려견이 주인과 함께 사는 시간 (2010자료)</h4>
                                     <p><img src="${pageContext.request.contextPath}/resources/img/3.JPG" width:100%></p>
                                 </div>
                                
@@ -217,7 +217,7 @@
                                             <small class=" text-muted">
                                                 <i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small>
                                             <strong class="pull-right primary-font">
-                                            <i class="fa fa-github-alt fa-fw"></i>김장성</strong>
+                                            <i class="fa fa-github-alt fa-fw"></i>김장성(팀장)</strong>
                                         </div>
                                         <p>
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
@@ -231,7 +231,7 @@
                                     <div class="chat-body clearfix">
                                         <div class="header">
                                             <strong class="primary-font">
-                                            <i class="fa fa-github-alt fa-fw"></i>송인석</strong>
+                                            <i class="fa fa-github-alt fa-fw"></i>송인석(팀원)</strong>
                                             <small class="pull-right text-muted">
                                                 <i class="fa fa-clock-o fa-fw"></i> 14 mins ago</small>
                                         </div>
@@ -249,7 +249,7 @@
                                             <small class=" text-muted">
                                                 <i class="fa fa-clock-o fa-fw"></i> 15 mins ago</small>
                                             <strong class="pull-right primary-font">
-                                            <i class="fa fa-github-alt fa-fw"></i>김항수</strong>
+                                            <i class="fa fa-github-alt fa-fw"></i>김항수(팀원)</strong>
                                         </div>
                                         <p>
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
@@ -263,7 +263,7 @@
                                     <div class="chat-body clearfix">
                                         <div class="header">
                                             <strong class="primary-font">
-                                            <i class="fa fa-github-alt fa-fw"></i>진 영</strong>
+                                            <i class="fa fa-github-alt fa-fw"></i>진 영(팀원)</strong>
                                             <small class="pull-right text-muted">
                                                 <i class="fa fa-clock-o fa-fw"></i> 14 mins ago</small>
                                         </div>
@@ -281,7 +281,7 @@
                                             <small class=" text-muted">
                                                 <i class="fa fa-clock-o fa-fw"></i> 15 mins ago</small>
                                             <strong class="pull-right primary-font">
-                                            <i class="fa fa-github-alt fa-fw"></i>차선영</strong>
+                                            <i class="fa fa-github-alt fa-fw"></i>차선영(팀원)</strong>
                                         </div>
                                         <p>
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
