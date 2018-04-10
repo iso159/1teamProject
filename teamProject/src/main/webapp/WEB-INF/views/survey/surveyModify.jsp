@@ -23,10 +23,10 @@
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
 			<form  action="${pageContext.request.contextPath}/survey/surveyModify?surveyCode=${survey.surveyCode}" method="post">
-				설문지이름 <input type="text" id="surveyName" name="surveyName" value="${survey.surveyName}"><br>
-				포인트 <input type="text" id="surveyPoint" name="surveyPoint" value="${survey.surveyPoint}"><hr>
-				<button type="submit" id="surveyBtn" class="btn btn-info">설문지수정완료</button>
-			</form>
+				설문지이름 <input type="text" id="surveyName" name="surveyName" value="${survey.surveyName}" class="form-control"><br>
+				포인트 <input type="text" id="surveyPoint" name="surveyPoint" value="${survey.surveyPoint}" class="form-control"><hr>
+				<button type="submit" id="surveyBtn" class="btn info">설문지수정완료</button>
+			</form><br>
 			<a href="${pageContext.request.contextPath}/survey/surveyList"><button type="button" class="btn info">설문지조회</button></a>
  		 <!-- 내용 입력 부분 끝 -->
 		 <!-- 내용 입력 부분 끝 -->

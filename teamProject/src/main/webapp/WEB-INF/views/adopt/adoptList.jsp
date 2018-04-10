@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>입양리스트</title>
@@ -19,22 +19,34 @@
                 </div>
             </div>
           	<!-- h태그제목 끝 -->
-			<!-- 내용 부분 시작-->
-	
-			<!-- 조건검색 -->
-			<form id="selectForm" action="${pageContext.request.contextPath}/adopt/adoptlCategory" method="post">
-				<select name="OsCategory" id="selectOsCode">
-					<option value="전체조회">--전체조회--</option>
-					<option value="os_adopt_4_1_1">입양신청</option>
-					<option value="os_adopt_4_1_2">입양신청완료</option>
-					<option value="os_adopt_4_1_5">상담진행중</option>
-					<option value="os_adopt_4_1_7">입양완료</option>
-					<option value="os_adopt_4_1_8">입양거절</option>
-				</select>
-				<button type="submit">검색</button>
-			</form>
+		<!-- 내용 부분 시작-->
+		<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+			<!-- 테이블 이름 시작 -->
+			<div class="panel-heading">${loginId}님 입양리스트</div>
+			<!-- 테이블 이름 끝 -->
+			<div class="panel-body">
+				<div class="row">
+				<div class="col-sm-8">
+				<div class="dataTables_length" id="dataTables-example_length">
+				<!-- 조건검색 -->
+				<form id="selectForm" action="${pageContext.request.contextPath}/adopt/adoptlCategory" method="post">
+					<select name="OsCategory" id="selectOsCode">
+						<option value="전체조회">--전체조회--</option>
+						<option value="os_adopt_4_1_1">입양신청</option>
+						<option value="os_adopt_4_1_2">입양신청완료</option>
+						<option value="os_adopt_4_1_5">상담진행중</option>
+						<option value="os_adopt_4_1_7">입양완료</option>
+						<option value="os_adopt_4_1_8">입양거절</option>
+					</select>
+					<button type="submit" class="btn btn-primary btn-xs">검색</button>
+				</form>
+				</div>
+			</div><br>
 			<!-- 리스트 -->
-			<table border="1">
+			
+			<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 				<thead>
 					<c:set var="right" value="${rightName}"></c:set>
 					<tr>
@@ -93,6 +105,10 @@
 				</tbody>
 			</table>
 				<a href="${pageContext.request.contextPath}/"><button type="button" class="btn warning">홈으로</button></a>
+			</div>
+				</div>
+			</div>
+		</div>
 			<!-- 내용 부분 끝-->
 			
 	

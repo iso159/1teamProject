@@ -41,8 +41,8 @@
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
 			<form  id="formSurveySubmit" name="actionTag" action="${pageContext.request.contextPath}/survey/surveyAdd" method="post">
-				설문지이름 <input type="text" id="surveyName" name="surveyName"><br>
-				포인트	<input type="text" id="surveyPoint" name="surveyPoint"><hr>
+				설문지이름 <input type="text" id="surveyName" name="surveyName" class="form-control"><br>
+				포인트	<input type="text" id="surveyPoint" name="surveyPoint" class="form-control"><hr>
 				<button type="button" id="surveyBtn" class="btn btn-info">설문지 등록</button>
 			</form>
 			
@@ -54,7 +54,17 @@
             </div>
           	<!-- h태그제목 끝 -->
           	
-			<table border="1">
+			<div class="row">
+			<div class="col-lg-12">
+			<div class="panel panel-default">
+			<!-- 테이블 이름 시작 -->
+			<div class="panel-heading">설문지 리스트</div>
+			<!-- 테이블 이름 끝 -->
+			<div class="panel-body">
+				<div class="row">
+				<div class="col-sm-8">
+				<div class="dataTables_length" id="dataTables-example_length">
+				<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 				<thead>
 					<tr>
 						<th>설문지코드</th>
@@ -78,6 +88,10 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			</div>
+		</div>
+		</div>
+		</div>
 		<!-- 내용 입력 부분 끝 -->
 		</div>
 	 
