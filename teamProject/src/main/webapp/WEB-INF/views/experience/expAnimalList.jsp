@@ -4,25 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style type="text/css">
-	.image {
-	  font-size: 0;
-	  text-align: center;
-	  width: 200px;  /* Container's dimensions */
-	  height: 150px;
-			}
-	img {
-	  display: inline-block;
-	  vertical-align: middle;
-	  max-height: 100%;
-	  max-width: 100%;
-	}
-	.trick {
-	  display: inline-block;
-	  vertical-align: middle;
-	  height: 150px;
-	}
-	</style>
 	<title></title>
 </head>
 <body>
@@ -48,13 +29,13 @@
 				<tr>
 					<td colspan="2">
  						<c:if test="${empty path}">
-							<div class ="image"><div class ="trick"><img class="MOD_STAFF_Picture" src="https://unsplash.it/200/200/?random" alt="" data-theme="_is1"></div></div>
+							<img class="MOD_STAFF_Picture" src="https://unsplash.it/200/200/?random" height="200px" width="200px" alt="" data-theme="_is1">
 						</c:if>
 						<c:if test="${!empty path and flag eq 'http'}">
-							<div class ="image"><div class ="trick"><img class="MOD_STAFF_Picture" src="${path}" alt="" data-theme="_is1"></div></div>
+							<img class="MOD_STAFF_Picture" src="${path}" alt="" height="200px" width="200px" data-theme="_is1">
 						</c:if>
 						<c:if test="${!empty path and flag ne 'http'}">
-							<div class ="image"><div class ="trick"><img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" alt="" data-theme="_is1"></div></div>
+							<img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" height="200px" width="200px" alt="" data-theme="_is1">
 						</c:if> 
 					</td>
 				</tr>
