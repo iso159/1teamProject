@@ -124,17 +124,43 @@ public class AnimalService {
 		
 	}
 	//동물리스트
-	public List<AnimalCommand> listAnimal(String blCode, String osCodeAnimal) {
-		logger.debug("listAnimal(String blCode)메서드 호출");
-		logger.debug("listAnimal(String blCode)메서드 호출 blCode is {}", blCode);
-		logger.debug("listAnimal(String blCode)메서드 호출 osCodeAnimal is {}", osCodeAnimal);
+	public Map<String,Object> listAnimal(String blCode, String osCodeAnimal, 
+										  int currentPage, int pagePerRow) {
+		logger.debug("listAnimal(...)메서드 호출");
+		logger.debug("listAnimal(...)메서드 호출 blCode is {}", blCode);
+		logger.debug("listAnimal(...)메서드 호출 osCodeAnimal is {}", osCodeAnimal);
+		logger.debug("listAnimal(...)메서드 호출 currentPage is {}", currentPage);
+		logger.debug("listAnimal(...)메서드 호출 pagePerRow is {}", pagePerRow);
+		// 시작 행 입력
+		int startRow = currentPage*pagePerRow;
+		// 쿼리에 입력할 맵 생성
 		Map<String,Object> map = new HashMap<String, Object>();
+		// 매개변수 값 매핑
 		map.put("blCode", blCode);
 		map.put("osCodeAnimal", osCodeAnimal);
+		map.put("osName", osCodeAnimal);
+		map.put("startRow", startRow);
+		map.put("pagePerRow", pagePerRow);
+		
+		// 동물 정보 리스트 입력
 		List<AnimalCommand> AnimalList = animaldao.selectAnimalList(map);
-		logger.debug("listAnimal(String blCode)메서드 AnimalList is {}", AnimalList);
+		
+		// 조회결과의 개수 입력
+		int totalCount = animaldao.selectAnimalCountByOsName(map);
+		double pageCount = (double)totalCount/(double)pagePerRow;
+		logger.debug("listAnimal(...)메서드 pageCount is {}", pageCount);
+		// 마지막 페이지 구하기
+		int maxPage = (int)(Math.ceil(pageCount));
+		logger.debug("listAnimal(...)메서드 AnimalList is {}", AnimalList);
+		logger.debug("listAnimal(...)메서드 totalCount is {}", totalCount);
+		logger.debug("listAnimal(...)메서드 maxPage is {}", maxPage);
+		
+		// 리턴할 맵 생성
+		Map<String,Object> returnMap = new HashMap<String, Object>();
+		returnMap.put("AnimalList", AnimalList);
+		returnMap.put("maxPage", maxPage);				
 		logger.debug("listAnimal(String blCode)메서드 끝");
-		return AnimalList;
+		return returnMap;
 	}
 	
 	//동물삭제

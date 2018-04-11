@@ -17,6 +17,16 @@ public class AnimalDao {
 	
 	private final String nameSpace = "com.cafe24.iso159.animal.service.AnimalMapper.";
 	
+	// 동물 상태별 카운트 조회 쿼리문 selectAnimalCountByOsName을 접근하는 DAO 메서드
+	public int selectAnimalCountByOsName(Map<String,Object> map) {
+		logger.debug("selectAnimalCountByOsName(Map<String,Object> map) 메서드 호출");
+		logger.debug("selectAnimalCountByOsName(Map<String,Object> map) 메서드 map is {}", map);
+		int totalCount = sqlSessionTemplate.selectOne(nameSpace + "selectAnimalCountByOsName", map);
+		logger.debug("selectAnimalCountByOsName(Map<String,Object> map) 메서드 totalCount is {}", totalCount);
+		logger.debug("selectAnimalCountByOsName(Map<String,Object> map) 메서드 끝");
+		return totalCount;
+	}
+	
 	// animal 테이블에서 동물 상태코드를 수정하는 쿼리문 updateAnimalOsCode을 접근하는 DAO 메서드
 	public void updateAnimalOsCode(Animal animal) {
 		logger.debug("updateAnimalOsCode(Animal animal) 메서드 호출");
@@ -41,6 +51,7 @@ public class AnimalDao {
 		logger.debug("selectAnimalList(String blCode)메서드 map is {}", map);
 		List<AnimalCommand> AnimalList = sqlSessionTemplate.selectList(nameSpace+"selectAnimalList",map);
 		logger.debug("selectAnimalList(String blCode)메서드 호출 AnimalList is {}", AnimalList);
+		logger.debug("selectAnimalList(String blCode)메서드 끝");
 		return AnimalList;
 	}
 	//동물삭제

@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -102,8 +103,13 @@ public class AnimalController {
 	//동물리스트
 	@RequestMapping(value="/animal/animalList", method=RequestMethod.GET)
 	public String animal(HttpSession session, Model model
-						, @RequestParam(value="osCodeAnimal", defaultValue="등록동물") String osCodeAnimal) {
+						, @RequestParam(value="osCodeAnimal", defaultValue="등록동물") String osCodeAnimal
+						, @RequestParam(value="currentPage", defaultValue="0") int currentPage
+						, @RequestParam(value="pagePerRow", defaultValue="6") int pagePerRow) {
 		logger.debug("animal(...get)메서드 호출");
+		logger.debug("animal(...get)메서드 osCodeAnimal is {}", osCodeAnimal);
+		logger.debug("animal(...get)메서드 currentPage is {}", currentPage);
+		logger.debug("animal(...get)메서드 pagePerRow is {}", pagePerRow);		
 		String blCode = (String)session.getAttribute("loginBlCode");
 		
 		// 세션을 확인해 로그인 정보나 blCode정보가 없으면 리다이렉트
@@ -112,10 +118,18 @@ public class AnimalController {
 		}else if(blCode == null) {
 			return "redirect:/";
 		}
-		List<AnimalCommand> AnimalList = animalservice.listAnimal(blCode, osCodeAnimal);
+		Map<String,Object> map = animalservice.listAnimal(blCode, osCodeAnimal, currentPage, pagePerRow);
+		List<AnimalCommand> AnimalList = (List<AnimalCommand>)map.get("AnimalList");
+		int maxPage = (Integer)map.get("maxPage");
+		logger.debug("animal(...get)메서드 map is {}", map);
 		logger.debug("animal(...get)메서드 AnimalList is {}", AnimalList);
+		logger.debug("animal(...get)메서드 maxPage is {}", maxPage);
+		
 		model.addAttribute("AnimalList", AnimalList);
 		model.addAttribute("boxSelect", osCodeAnimal);
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("pagePerRow", pagePerRow);
+		model.addAttribute("currentPage", currentPage);
 		logger.debug("animal(...get)메서드 끝");
 		return "animal/animalList";
 	}

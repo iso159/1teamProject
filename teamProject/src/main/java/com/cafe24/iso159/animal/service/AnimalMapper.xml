@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cafe24.iso159.animal.service.AnimalMapper">
+
 	<!--동물리스트 띄우는 맵퍼  -->
 	<resultMap id="selectAnimalListMap" type="com.cafe24.iso159.animal.service.AnimalCommand">
 		<id column="os_name" property="osName"/>
@@ -19,6 +20,20 @@
 		<result column="bl_code" property="blCode"/>
 		<result column="animal_image_path" property="animalImagePath"></result>
 	</resultMap>
+	
+	<!-- 동물 상태별 카운트 조회 쿼리문 -->
+	<select id="selectAnimalCountByOsName" parameterType="java.util.Map" resultType="Integer">
+		SELECT 
+			COUNT(animal_code)
+		FROM 
+			t_animal a
+		INNER JOIN 
+			t_overall_status os
+		ON 
+			a.os_code_animal = os.os_code
+		WHERE 
+			os_name=#{osName} AND a.bl_code=#{blCode}
+	</select>
 	
 	<!-- animal 테이블에서 동물 상태코드를 수정하는 쿼리문 -->
 	<update id="updateAnimalOsCode" parameterType="com.cafe24.iso159.animal.service.Animal">
@@ -94,6 +109,8 @@
 				WHERE bl.bl_code=#{blCode} and os.os_name=#{osCodeAnimal}
 			</if>
 		</if>
+		ORDER BY animal_code DESC
+		LIMIT #{startRow},#{pagePerRow}
 	</select>
 	<!-- 조건검색 -->
 	<select id="selectAnimalcategory" parameterType="java.util.Map" resultMap="selectAnimalListMap">
