@@ -5,74 +5,54 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 	<title>회원가입</title>
 </head>
 <body class="modern">
 	<!-- top 부분 시작-->
 	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
 	<!-- top 부분 끝-->
-	
 	<!-- 메인 화면  -->
 	<!-- 메인 화면 내용 부분 -->
 	<section>
-	  <div data-layout="_r">
-	    <div>
-	    	<!-- 내용 입력 부분 -->
-			<div class="container">
-				<div>
-					<h2>회원가입</h2>
-				</div>
-				<div>
-					<form id="signUpForm" action="${pageContext.request.contextPath}/member/memberAdd" method="post">
-						<table>
-							<tr>
-								<td>아이디</td>
-								<td><input type="text" name="mId"></td>
-							</tr>
-							<tr>
-								<td>비밀번호</td>
-								<td><input type="password" name="mPw"></td>
-							</tr>
-							<tr>
-								<td>이름</td>
-								<td><input type="text" name="mInfoName"></td>
-							</tr>
-							<tr>
-								<td>닉네임</td>
-								<td><input type="text" name="mInfoNickname"></td>
-							</tr>
-							<tr>
-								<td>성별</td>
-								<td><input type="text" name="mInfoGender"></td>
-							</tr>
-							<tr>
-								<td>생년월일</td>
-								<td><input type="text" name="mInfoBirth"></td>
-							</tr>
-							<tr>
-								<td>우편번호</td>
-								<td><input type="text" name="mInfoPostcode"></td>
-							</tr>
-							<tr>
-								<td>주소</td>
-								<td><input type="text" name="mInfoAddress"></td>
-							</tr>
-							<tr>
-								<td>이메일</td>
-								<td><input type="text" name="mInfoEmail"></td>
-							</tr>
-							<tr>
-								<td>핸드폰</td>
-								<td><input type="text" name="mInfoPhone"></td>
-							</tr>
-						</table>
-						<button type="submit" id="signUpBtn">회원가입</button>
-					</form>
+		<div data-layout="_r">
+			<div>
+				<!-- 내용 입력 부분 -->
+				<div class="container">
+					<div>
+						<h2 class="page-header">회원가입</h2>
+						<div class="col-lg-4">
+							<div>
+								<form role="form" id="signUpForm" action="${pageContext.request.contextPath}/member/memberAdd" method="post">
+									아이디 
+									<input class="form-control" type="text" name="mId"><br> 
+									비밀번호 
+									<input class="form-control" type="password" name="mPw"><br>
+									이름 
+									<input class="form-control" type="text" name="mInfoName"><br> 
+									닉네임 
+									<input class="form-control" type="text" name="mInfoNickname"><br> 
+									성별 
+									<input class="form-control" type="text" name="mInfoGender"><br> 
+									생년월일 
+									<input class="form-control" type="text" name="mInfoBirth"><br> 
+									우편번호 
+									<input class="form-control" type="text" name="mInfoPostcode"><br> 
+									주소 
+									<input class="form-control" type="text" name="mInfoAddress"><br> 
+									이메일 
+									<input class="form-control" type="text" name="mInfoEmail"><br> 
+									핸드폰 
+									<input class="form-control" type="text" name="mInfoPhone"><br>
+									<button id="addBtn" type="submit" class="btn btn-warning">회원가입</button>
+								</form>
+							</div>
+						</div>
+						<!-- 내용 입력 부분 끝 -->
+					</div>
 				</div>
 			</div>
-			<!-- 내용 입력 부분 끝 -->
 		</div>
-	  </div>
 	</section>
 	<!-- 메인 화면 내용 끝 -->
 	<!-- 메인 화면 내용 부분 끝 -->
