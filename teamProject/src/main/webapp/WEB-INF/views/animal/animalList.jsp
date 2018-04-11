@@ -41,7 +41,7 @@
 						    divTag += '<p> 보호소 위치 : ' + msg.response.body.items.item[i].careAddr + '</p>';
 						    divTag += '<p> 보호소 명 : ' + msg.response.body.items.item[i].careNm + '</p>';
 						    divTag += '<p> 체중 : ' +  msg.response.body.items.item[i].weight + '</p>';
-						    divTag += '<p> 동물 등록 : <a href="${pageContext.request.contextPath}/animal/animalAdd?animalArea=' + msg.response.body.items.item[i].careAddr + '&animalIdCode=' + msg.response.body.items.item[i].noticeNo + '&animalWeight=' + msg.response.body.items.item[i].weight + '&animalAge=' + msg.response.body.items.item[i].age +'&imagePath=' + msg.response.body.items.item[i].filename + '"><button class="btn btn-outline btn-success">동물등록</button></a></p>';
+						    divTag += '<p> 동물 등록 : <a href="${pageContext.request.contextPath}/animal/animalAdd?animalArea=' + msg.response.body.items.item[i].careAddr + '&animalIdCode=' + msg.response.body.items.item[i].noticeNo + '&animalWeight=' + msg.response.body.items.item[i].weight + '&animalAge=' + msg.response.body.items.item[i].age +'&imagePath=' + msg.response.body.items.item[i].filename + '&animalBreed=' + msg.response.body.items.item[i].kindCd + '"><button class="btn btn-outline btn-success">동물등록</button></a></p>';
 						    divTag += '</div></div></div>';
 							$('#animalList').append(divTag);
 						}
@@ -77,111 +77,113 @@
 	<!-- top 부분 끝-->
 	
 	<!-- 메인 화면  -->
-	<!-- 메인 화면 내용 부분 -->
-	<div class="container" style="position: static;">
-	<!-- 메인내용 시작 : Text | Text -->
-	<h2>유기동물 리스트</h2>	
-	<select id="animalStatusKind">
-		<option value="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=등록동물&currentPage=${currentPage}&pagePerRow=${pagePerRow}">등록동물</option>
-		<option value="yugi">유기동물</option>
-		<option value="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=체험(입양)가능동물&currentPage=${currentPage}&pagePerRow=${pagePerRow}">체험(입양)가능동물</option>
-		<option value="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=체험중인동물&currentPage=${currentPage}&pagePerRow=${pagePerRow}">체험중인동물</option>
-	</select>
-	<!-- 조건검색 -->
-	<section>
-		<form ID="selectForm" action="${pageContext.request.contextPath}/animal/animalCategory" method="post">
-			<select name="AnimalCategory">
-				<option value="animal_area">지역</option>
-				<option value="animal_breed">품종</option>
-				<option value="animal_id_code">동물식별코드</option>
-				<option value="animal_enroll_date">등록날짜</option>
-				<option value="bl.bl_shelter_name">보호소이름</option>
-			</select>
-			<input type="text" id="selectName" name="selectName">
-			<button type="submit">검색</button>
-		</form>
-	  	<div id="animalList">
-	  		<c:forEach var="i" items="${AnimalList}">		
-				<div class="col-lg-4">
-					<div class="panel panel-default">
-                        <div class="panel-heading">
-                            ${i.animalIdCode}
-                        </div>
-                        <div class="panel-body">
-							<c:set var="flag" value="${f:substring(i.animalImagePath,0,4)}"></c:set>
-							<c:set var="path" value="${i.animalImagePath}"></c:set>
-							<c:if test="${empty path}">
-								<img src="https://unsplash.it/400/400/?random" style="width:200px; height:200px;" alt="">
-							</c:if>
-							<c:if test="${!empty path and flag eq 'http'}">
-								<img src="${path}" style="width:200px; height:200px;" alt="">
-							</c:if>
-							<c:if test="${!empty path and flag ne 'http'}">
-								<img src="${pageContext.request.contextPath}/resources/animalUpload/${path}" style="width:200px; height:200px;" alt="">
-							</c:if>
-							<p>품종 : ${i.animalBreed}</p>
-							<p>동물 나이 : ${i.animalAge}</p>	
-							<p>동물 체중 : ${i.animalWeight}</p>					
-							<p>보호소 위치 : ${i.animalArea}</p>
-							<p>보호소 명 : ${i.blShelterName}</p>									
-							<p>동물 등록날짜 : ${i.animalEnrollDate}</p>
-							<p>
-								<a href="${pageContext.request.contextPath}/animal/animalUpdate?animalCode=${i.animalCode}"><button class="btn btn-outline btn-success">수정</button></a>&emsp;
+	<div id="page-wrapper">
+		<!-- 메인 화면 내용 부분 -->
+		<div class="container" style="position: static;">
+		<!-- 메인내용 시작 : Text | Text -->
+		<h2>유기동물 리스트</h2>	
+		<select id="animalStatusKind">
+			<option value="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=등록동물&currentPage=${currentPage}&pagePerRow=${pagePerRow}">등록동물</option>
+			<option value="yugi">유기동물</option>
+			<option value="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=체험(입양)가능동물&currentPage=${currentPage}&pagePerRow=${pagePerRow}">체험(입양)가능동물</option>
+			<option value="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=체험중인동물&currentPage=${currentPage}&pagePerRow=${pagePerRow}">체험중인동물</option>
+		</select>
+		<!-- 조건검색 -->
+		<section>
+			<form ID="selectForm" action="${pageContext.request.contextPath}/animal/animalCategory" method="post">
+				<select name="AnimalCategory">
+					<option value="animal_area">지역</option>
+					<option value="animal_breed">품종</option>
+					<option value="animal_id_code">동물식별코드</option>
+					<option value="animal_enroll_date">등록날짜</option>
+					<option value="bl.bl_shelter_name">보호소이름</option>
+				</select>
+				<input type="text" id="selectName" name="selectName">
+				<button type="submit">검색</button>
+			</form>
+		  	<div id="animalList">
+		  		<c:forEach var="i" items="${AnimalList}">		
+					<div class="col-lg-4">
+						<div class="panel panel-default">
+	                        <div class="panel-heading">
+	                            ${i.animalIdCode}
+	                        </div>
+	                        <div class="panel-body">
+								<c:set var="flag" value="${f:substring(i.animalImagePath,0,4)}"></c:set>
+								<c:set var="path" value="${i.animalImagePath}"></c:set>
+								<c:if test="${empty path}">
+									<img src="https://unsplash.it/400/400/?random" style="width:200px; height:200px;" alt="">
+								</c:if>
 								<c:if test="${!empty path and flag eq 'http'}">
-									<button class="btn btn-outline btn-danger" value="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}" onclick="remove_animal(this)">삭제</button>&emsp;
+									<img src="${path}" style="width:200px; height:200px;" alt="">
 								</c:if>
 								<c:if test="${!empty path and flag ne 'http'}">
-									<button class="btn btn-outline btn-danger" value="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}&animalImagePath=${i.animalImagePath}" onclick="remove_animal(this)">삭제</button>&emsp;
-								</c:if>				
-								<a href="${pageContext.request.contextPath}/jindan/animalJindan?animalCode=${i.animalCode}"><button class="btn btn-outline btn-warning">진단서 등록</button></a>								
-							</p>							
+									<img src="${pageContext.request.contextPath}/resources/animalUpload/${path}" style="width:200px; height:200px;" alt="">
+								</c:if>
+								<p>품종 : ${i.animalBreed}</p>
+								<p>동물 나이 : ${i.animalAge}</p>	
+								<p>동물 체중 : ${i.animalWeight}</p>					
+								<p>보호소 위치 : ${i.animalArea}</p>
+								<p>보호소 명 : ${i.blShelterName}</p>									
+								<p>동물 등록날짜 : ${i.animalEnrollDate}</p>
+								<p>
+									<a href="${pageContext.request.contextPath}/animal/animalUpdate?animalCode=${i.animalCode}"><button class="btn btn-outline btn-success">수정</button></a>&emsp;
+									<c:if test="${!empty path and flag eq 'http'}">
+										<button class="btn btn-outline btn-danger" value="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}" onclick="remove_animal(this)">삭제</button>&emsp;
+									</c:if>
+									<c:if test="${!empty path and flag ne 'http'}">
+										<button class="btn btn-outline btn-danger" value="${pageContext.request.contextPath}/animal/animalDelete?animalCode=${i.animalCode}&animalImagePath=${i.animalImagePath}" onclick="remove_animal(this)">삭제</button>&emsp;
+									</c:if>				
+									<a href="${pageContext.request.contextPath}/jindan/animalJindan?animalCode=${i.animalCode}"><button class="btn btn-outline btn-warning">진단서 등록</button></a>								
+								</p>							
+							</div>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
-		<!-- 메인화면 시작 -->
-		</div>
-	    
-	    <!-- 페이징 시작 -->
-	    <div style="width:200px; height:70px; position: relative; bottom:30px; left:500px;">
-			<ul class="pagination">
-				<c:set var="cp" value="${currentPage+1}"></c:set>
-				<c:set var="mp" value="${maxPage}"></c:set>
-				<c:if test="${cp eq '1'}">
-					<li>
-						<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${currentPage}&pagePerRow=${pagePerRow}">이전</a>
-					</li>
-				</c:if>
-				<c:if test="${cp ne '1'}">
-					<li>
-						<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${currentPage-1}&pagePerRow=${pagePerRow}">이전</a>
-					</li>
-				</c:if>
-				<c:forEach var="i" begin="1" end="${maxPage}">
-					<c:if test="${cp eq i}">
-						<li class="active">
-							<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${i-1}&pagePerRow=${pagePerRow}">${i}</a>
-						</li>
-					</c:if>
-					<c:if test="${cp ne i}">
-						<li>
-							<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${i-1}&pagePerRow=${pagePerRow}">${i}</a>
-						</li>
-					</c:if>
 				</c:forEach>
-				<c:if test="${cp eq mp}">
-					<li>
-						<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${currentPage}&pagePerRow=${pagePerRow}">다음</a>
-					</li>
-				</c:if>
-				<c:if test="${cp ne mp}">
-					<li>
-						<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${currentPage+1}&pagePerRow=${pagePerRow}">다음</a>
-					</li>
-				</c:if>
-			</ul>
+			<!-- 메인화면 시작 -->
+			</div>
+		    
+		    <!-- 페이징 시작 -->
+		    <div style="width:200px; height:70px; position: relative; bottom:30px; left:500px;">
+				<ul class="pagination">
+					<c:set var="cp" value="${currentPage+1}"></c:set>
+					<c:set var="mp" value="${maxPage}"></c:set>
+					<c:if test="${cp eq '1'}">
+						<li>
+							<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${currentPage}&pagePerRow=${pagePerRow}">이전</a>
+						</li>
+					</c:if>
+					<c:if test="${cp ne '1'}">
+						<li>
+							<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${currentPage-1}&pagePerRow=${pagePerRow}">이전</a>
+						</li>
+					</c:if>
+					<c:forEach var="i" begin="1" end="${maxPage}">
+						<c:if test="${cp eq i}">
+							<li class="active">
+								<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${i-1}&pagePerRow=${pagePerRow}">${i}</a>
+							</li>
+						</c:if>
+						<c:if test="${cp ne i}">
+							<li>
+								<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${i-1}&pagePerRow=${pagePerRow}">${i}</a>
+							</li>
+						</c:if>
+					</c:forEach>
+					<c:if test="${cp eq mp}">
+						<li>
+							<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${currentPage}&pagePerRow=${pagePerRow}">다음</a>
+						</li>
+					</c:if>
+					<c:if test="${cp ne mp}">
+						<li>
+							<a href="${pageContext.request.contextPath}/animal/animalList?osCodeAnimal=${boxSelect}&currentPage=${currentPage+1}&pagePerRow=${pagePerRow}">다음</a>
+						</li>
+					</c:if>
+				</ul>
+			</div>
+			<!-- 페이징 끝 -->
 		</div>
-		<!-- 페이징 끝 -->
 	</div>
 	<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->

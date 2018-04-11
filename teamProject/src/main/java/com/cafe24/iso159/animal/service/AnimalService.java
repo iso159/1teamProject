@@ -23,21 +23,18 @@ public class AnimalService {
 
 	private static final Logger logger = LoggerFactory.getLogger(AnimalService.class);
 	//동물등록
-	public void addAnimal(AnimalAndFile animalAndFile, String mShelterId, String blCode, String path, MultipartFile file){
+	public void addAnimal(AnimalAndFile animalAndFile, String mShelterId, String blCode, String path, MultipartFile file, String blShelterName){
 		logger.debug("addAnimal()메서드 animalAndFile is {}",animalAndFile);
-		// 동물정보 변수에 입력
-		String animalIdCode = animalAndFile.getAnimalIdCode();
-		String animalAge = animalAndFile.getAnimalAge();
-		String animalWeight = animalAndFile.getAnimalWeight();
+		String animalAge = (animalAndFile.getAnimalAge() + "(년생)");
+		String animalWeight = (animalAndFile.getAnimalWeight()+"(kg)");
 		String animalArea = animalAndFile.getAnimalArea();
 		String animalBreed = animalAndFile.getAnimalBreed();
-		String osCodeAnimal = animalAndFile.getOsCodeAnimal();
+		final String osCodeAnimal = "os_animal_3_1_1";
 		String animalImagePath = animalAndFile.getAnimalImagePath();
-		String osCodeKind = "os_animal_kinds_11_1_1";
+		final String osCodeKind = "os_animal_kinds_11_1_1";
 		
 		// 변수를 객체의 필드에 세팅
 		Animal animal = new Animal();		
-		animal.setAnimalIdCode(animalIdCode);
 		animal.setAnimalAge(animalAge);
 		animal.setAnimalWeight(animalWeight);
 		animal.setAnimalArea(animalArea);
@@ -61,6 +58,17 @@ public class AnimalService {
 			animalCode += lastAnimalNum;
 		}
 		logger.debug("AnimalCode is {}", animalCode);
+		
+		// 동물정보 변수에 입력
+		String animalIdCode = null;
+		if(animalAndFile.getAnimalIdCode()!=null) {
+			animalIdCode = animalAndFile.getAnimalIdCode();
+		}else {
+			animalIdCode = blShelterName + "-" + animalBreed + "-" + lastAnimalNum;
+		}
+		
+		// animalIdCode 셋팅
+		animal.setAnimalIdCode(animalIdCode);
 		//animalCode셋팅
 		animal.setAnimalCode(animalCode);
 		//m_shelterId셋팅

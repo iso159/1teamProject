@@ -49,34 +49,47 @@ public class AnimalController {
 							,@RequestParam(value="animalWeight", defaultValue="") String animalWeight
 							,@RequestParam(value="animalAge", defaultValue="") String animalAge
 							,@RequestParam(value="imagePath", defaultValue="") String imagePath) {
-		logger.debug("animalAdd(HttpSession session,Model model, Animal animal) 메서드 호출");
-		logger.debug("animalAdd(HttpSession session,Model model, Animal animal) 메서드 animalBreed is {}", animalBreed);
-		logger.debug("animalAdd(HttpSession session,Model model, Animal animal) 메서드 animalArea is {}", animalArea);
-		logger.debug("animalAdd(HttpSession session,Model model, Animal animal) 메서드 animalIdCode is {}", animalIdCode);
-		logger.debug("animalAdd(HttpSession session,Model model, Animal animal) 메서드 animalWeight is {}", animalWeight);
-		logger.debug("animalAdd(HttpSession session,Model model, Animal animal) 메서드 animalAge is {}", animalAge);
-		logger.debug("animalAdd(HttpSession session,Model model, Animal animal) 메서드 imagePath is {}", imagePath);
+		logger.debug("animalAdd(...get) 메서드 호출");
+		logger.debug("animalAdd(...get) 메서드 animalBreed is {}", animalBreed);
+		logger.debug("animalAdd(...get) 메서드 animalArea is {}", animalArea);
+		logger.debug("animalAdd(...get) 메서드 animalIdCode is {}", animalIdCode);
+		logger.debug("animalAdd(...get) 메서드 animalWeight is {}", animalWeight);
+		logger.debug("animalAdd(...get) 메서드 animalAge is {}", animalAge);
+		logger.debug("animalAdd(...get) 메서드 imagePath is {}", imagePath);
 		
+		String blCode = (String)session.getAttribute("loginBlCode");
 		// 세션을 확인해 로그인 정보나 blCode정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
 			return "redirect:/member/login";
-		}else if(session.getAttribute("loginBlCode") == null) {
+		}else if(blCode == null) {
 			return "redirect:/";
 		}		
-		model.addAttribute("animalBreed", animalBreed);
-		model.addAttribute("animalArea", animalArea);
-		model.addAttribute("animalIdCode", animalIdCode);
-		model.addAttribute("animalWeight", animalWeight);
-		model.addAttribute("animalAge", animalAge);
-		model.addAttribute("imagePath", imagePath);
-		logger.debug("animalAdd(HttpSession session,Model model, Animal animal) 메서드 끝");
+		
+		// 특정 문자열의 자리수 입력
+		int weightIdx = animalWeight.indexOf("(");
+		int ageIdx = animalAge.indexOf("(");
+		
+		if(animalIdCode.equals("")) {
+			BusinessLicense businessLicense = shelterService.getOneBusinessLicense(blCode);
+			logger.debug("animalAdd(...get) 메서드 businessLicense is {}", businessLicense);
+			model.addAttribute("businessLicense", businessLicense);
+		}else {
+			model.addAttribute("animalBreed", animalBreed.substring(4));
+			model.addAttribute("animalArea", animalArea);
+			model.addAttribute("animalIdCode", animalIdCode);
+			model.addAttribute("animalWeight", animalWeight.substring(0,weightIdx));
+			model.addAttribute("animalAge", animalAge.substring(0,ageIdx));
+			model.addAttribute("imagePath", imagePath);
+		}
+		logger.debug("animalAdd(...get) 메서드 끝");
 		return "animal/animalAdd";
 	}
 	
 	// 동물등록
 	@RequestMapping(value="/animal/animalAdd", method=RequestMethod.POST)
 	public String animalAdd(HttpSession session, AnimalAndFile animalAndFile
-							, @RequestParam(value="file") MultipartFile file) {
+							, @RequestParam(value="file") MultipartFile file
+							, @RequestParam(value="blShelterName", defaultValue="") String blShelterName) {
 		logger.debug("animalAdd(...) 메서드 호출");
 		// 세션을 확인해 로그인 정보나 blCode정보가 없으면 리다이렉트
 		if(session.getAttribute("loginId")==null) {
@@ -85,6 +98,7 @@ public class AnimalController {
 			return "redirect:/";
 		}
 		logger.debug("animalAdd(...) 메서드 animalAndFile is {}", animalAndFile);
+		logger.debug("animalAdd(...) 메서드 blShelterName is {}", blShelterName);
 		logger.debug("animalAdd(...) 메서드 file is {}",file);
 		//세션에서 로그인 아이디를 가져와서 mShelterId에 셋팅
 		String mShelterId = (String)session.getAttribute("loginId");
@@ -97,7 +111,7 @@ public class AnimalController {
 			path = session.getServletContext().getRealPath("/");
 			path += "resources/animalUpload/";
 		}
-		animalservice.addAnimal(animalAndFile, mShelterId, blCode, path, file);
+		animalservice.addAnimal(animalAndFile, mShelterId, blCode, path, file, blShelterName);
 		return "redirect:/animal/animalList";
 	}
 	//동물리스트
