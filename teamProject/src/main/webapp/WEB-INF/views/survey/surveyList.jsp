@@ -33,6 +33,7 @@
 				<div class="row">
 				<div class="col-sm-8">
 				<div class="dataTables_length" id="dataTables-example_length">
+				<div class="table-responsive">
 				<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 				<thead>
 					<tr>
@@ -67,6 +68,7 @@
 				</tbody>
 			</table>
 			<a href="${pageContext.request.contextPath}/"><button type="button" class="btn warning">홈으로</button></a>
+	 		</div>
 	 		</div>
 		</div>
 		</div>

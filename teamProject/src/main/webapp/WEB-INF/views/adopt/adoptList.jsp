@@ -35,7 +35,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 			<!-- 테이블 이름 시작 -->
-			<div class="panel-heading">${loginId}님 입양리스트</div>
+			<div class="panel-heading">회원 입양신청현황 리스트</div>
 			<!-- 테이블 이름 끝 -->
 			<div class="panel-body">
 				<div class="row">
@@ -56,7 +56,10 @@
 				</div>
 			</div><br>
 			<!-- 리스트 -->
-			
+			<div class="panel-body">
+			<div class="row">
+			<div class="dataTables_length" id="dataTables-example_length">
+			<div class="table-responsive">
 			<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 				<thead>
 					<c:set var="right" value="${rightName}"></c:set>
@@ -120,8 +123,10 @@
 			</table>
 				<a href="${pageContext.request.contextPath}/"><button type="button" class="btn warning">홈으로</button></a>
 			</div>
+			</div>
 				</div>
 			</div>
+			</div></div></div>
 		</div>
 			<!-- 내용 부분 끝-->
 			
