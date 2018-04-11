@@ -50,17 +50,32 @@
 			<c:if test="${!empty path and flag ne 'http'}">
 				<img class="MOD_STAFF_Picture" src="${pageContext.request.contextPath}/resources/animalUpload/${path}" alt="" data-theme="_is1">
 			</c:if>
-			<p>식별 코드 : ${i.animalIdCode}</p>
-			<p>종류 : ${i.osNameAnimalKind}</p> 
-			<p>품종 : ${i.animalBreed}</p>
-			<p>동물 나이 : ${i.animalAge}</p>					
-			<p>보호소 위치 : ${i.animalArea}</p>
-			<p>보호소 명 : ${i.blShelterName}</p>		
-			<p>동물 체중 : ${i.animalWeight}</p>		
-			<p>동물 등록날짜 : ${i.animalEnrollDate}</p>
-			<div>
-				<h2>동물 진단서 체크</h2>
-			</div>
+			<!-- 동물정보  -->
+			<div class="col-lg-4">
+                  <div class="panel panel-info">
+                      <div class="panel-heading">
+                          	동물정보
+                      </div>
+                      <div class="panel-body">
+						<p>식별 코드 : ${i.animalIdCode}</p>
+						<p>종류 : ${i.osNameAnimalKind}</p> 
+						<p>품종 : ${i.animalBreed}</p>
+						<p>동물 나이 : ${i.animalAge}</p>					
+						<p>보호소 위치 : ${i.animalArea}</p>
+						<p>보호소 명 : ${i.blShelterName}</p>		
+						<p>동물 체중 : ${i.animalWeight}</p>		
+						<p>동물 등록날짜 : ${i.animalEnrollDate}</p>
+					</div>
+                  </div>
+             </div>
+             <!-- 동물정보 끝 -->
+			<!-- h태그제목 시작 -->
+        	<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">동물 진단서 체크</h1>
+                </div>
+            </div>
+          	<!-- h태그제목 끝 -->
 			<div style="border: 1px; padding: 10px; height: 500px; width: 800px;">
 				<form id="jindanForm"
 					  action = "${pageContext.request.contextPath}/jindan/animalJindan" 
@@ -71,7 +86,9 @@
 							<option value="${jk.osCode}">${jk.osName}
 						</c:forEach>
 					</select>
-					<table border="1">
+					<div class="panel-body">
+					<div class="table-responsive">
+					<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 						<thead>
 							<tr>
 								<th>진단목록</th>
@@ -271,14 +288,14 @@
 							<!-- 코 상태 진단 끝 -->
 						</tbody>
 					</table>
-					<!-- 종합 소견 시작 -->
-						<h4>종합 소견 작성</h4>
-						<textarea rows="5" cols="68" name="jindanOverallOpinion"></textarea>
-					<!-- 종합 소견 끝 -->
-				</form>
-				<div style="border: 1px ; padding: 10px; height: auto; text-align: right; width: 500px;">
-					<button type="button" id="jindanBtn" style="align-content: center">진단서 등록</button>
 				</div>
+			</div>
+			<!-- 종합 소견 시작 -->
+				<h4>종합 소견 작성</h4>
+				<textarea class="form-control" rows="5" cols="68" name="jindanOverallOpinion"></textarea>
+			<!-- 종합 소견 끝 -->
+			</form>
+				<button type="button" id="jindanBtn" class="btn btn-info">진단서 등록</button>
 			</div>
 			<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->

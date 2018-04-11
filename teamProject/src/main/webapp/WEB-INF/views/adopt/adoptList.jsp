@@ -4,6 +4,17 @@
 <html>
 <head>
 	<title>입양리스트</title>
+	<script type="text/javascript">
+		function cansel(){
+			var requestVal = $('#cansel').val();
+		    if(confirm("입양취소 하시겠습니까?")){
+		        location.href = requestVal;
+		        return true;
+		    } else {
+		        return false;
+		    }
+		}
+	</script>
 </head>
 <body>
 	<!-- top 부분 시작-->
@@ -97,7 +108,10 @@
 						<td>${aR.adoptRequest.adoptDecideDate}</td>
 						<c:if test="${right eq '관리자'}">
 						<td>
-							<a href="${pageContext.request.contextPath}/adopt/adoptCancle?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}&animalCode=${aR.adoptRequest.animalCode}">입양취소</a>
+							<button value="${pageContext.request.contextPath}/adopt/adoptCancle?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}&animalCode=${aR.adoptRequest.animalCode}" 
+									id="cansel" 
+									onclick="cansel();" 
+									class="btn btn-outline btn-danger btn-sm">입양취소</button>
 						</td>
 						</c:if>
 					</tr>
