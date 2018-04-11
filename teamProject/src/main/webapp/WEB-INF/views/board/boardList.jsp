@@ -6,6 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<style>	
+		#selectform {
+		    float: right;
+		    position: relative;
+		    left: -50%;
+		}
+	</style>
 </head>
 <body>
 	<!-- top 부분 시작-->
@@ -23,7 +30,7 @@
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
 	<h2>게시판</h2>
-	<p></p>
+	<p>&nbsp;&nbsp;</p>
 	
 	<table class="table table-hover">
 		<thead>
@@ -50,7 +57,7 @@
 	</table>
 	
 	<!-- 이전,다음 작업 -->
-	<div>														  			
+	<div id="paging">														  			
 		<ul class="pagination">
 			<c:set var="currentPage" value="${currentPage}"/> <!-- currentPage = ${currentPage} -->
 			<c:if test="${currentPage!=1}"> <!-- if(currentPage!=1) -->
@@ -65,20 +72,22 @@
 			</c:if>
 			</ul> 	
 	</div>
+	<p>&nbsp;</p>
 	<!-- 조건검색 -->
-	<form ID="selectForm" action="${pageContext.request.contextPath}/board/boardCategory" method="post">
+	<div id="selectform">
+	<form ID="selectForm" action="${pageContext.request.contextPath}/board/boardList" method="GET">
 		<select name="boardCategory">
 			<option value="m_member_id">아이디</option>
 			<option value="board_content_title">제목</option>
-			<option value="board_content_content">동물식별코드</option>
+			<option value="board_content_content">내용</option>
 			<option value="board_content_date">등록날짜</option>
 		</select>
-		<input type="text" id="selectName" name="selectName">
+		<input type="text" id="boardSearchWord" name="boardSearchWord">
 		<button type="submit">검색</button>
 	</form>
-	<p></p>
-	<a href="${pageContext.request.contextPath}/board/boardAdd">글등록</a><br>
-	<a href="${pageContext.request.contextPath}/"><button type="button" class="btn btn-success">홈으로</button></a>
+	</div>
+	<%-- <p>&nbsp;</p>
+	<a href="${pageContext.request.contextPath}/board/boardAdd"><button type="button" class="btn btn-success">글등록</button></a><br> --%>
 	<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>

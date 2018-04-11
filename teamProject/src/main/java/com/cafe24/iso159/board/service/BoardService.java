@@ -183,7 +183,7 @@ public class BoardService {
 		boardDao.insertBoard(board);
 	}
 	//게시판리스트
-	public Map<String, Object> listBoardContent(int currentPage, int rowPerPage){
+	public Map<String, Object> listBoardContent(int currentPage, int rowPerPage, String boardCategory, String boardSearchWord){
 		logger.debug("listBoardContent()메서드 호출");
 		
 		//startRow선언
@@ -195,6 +195,8 @@ public class BoardService {
 		map.put("startRow", startRow);
 		map.put("currentPage", currentPage);
 		map.put("rowPerPage", rowPerPage);
+		map.put("boardCategory", boardCategory);
+		map.put("boardSearchWord", boardSearchWord);
 		
 		//리턴할 맵객체 생성
 		Map<String, Object> returnMap = new HashMap<String, Object>();

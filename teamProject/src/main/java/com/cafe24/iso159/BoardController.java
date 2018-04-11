@@ -139,12 +139,16 @@ public class BoardController {
 	@RequestMapping(value="/board/boardList", method=RequestMethod.GET)
 	public String Board(Model model
 						,@RequestParam(value="currentPage",defaultValue="1",required=false) int currentPage
-						,@RequestParam(value="rowPerPage",defaultValue="10",required=false) int rowPerPage) {
+						,@RequestParam(value="rowPerPage",defaultValue="10",required=false) int rowPerPage
+						,@RequestParam(value="boardCategory",required=false) String boardCategory
+						,@RequestParam(value="boardSearchWord",required=false) String boardSearchWord) {
 		
 		logger.debug("Board()메서드 currentPage is {}", currentPage);
 		logger.debug("Board()메서드 rowPerPage is {}", rowPerPage);
+		logger.debug("Board()메서드 boardCategory is {}", boardCategory);
+		logger.debug("Board()메서드 boardSearchWord is {}", boardSearchWord);
 		
-		Map<String, Object> boardlist = boardservice.listBoardContent(currentPage, rowPerPage);
+		Map<String, Object> boardlist = boardservice.listBoardContent(currentPage, rowPerPage, boardCategory, boardSearchWord);
 		
 		logger.debug("Board()메서드 boardlist is {}", boardlist);
 		model.addAttribute("map", boardlist);

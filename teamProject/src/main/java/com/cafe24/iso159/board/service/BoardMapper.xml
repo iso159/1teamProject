@@ -120,15 +120,45 @@
 		INNER JOIN 
 			t_board b
 		ON bc.board_code = b.board_code
+		<if test="boardSearchWord != null">
+		<choose>
+		<when test="boardCategory=='board_content_title'">
+			WHERE board_content_title LIKE CONCAT('%',#{boardSearchWord},'%')
+		</when>
+		<when test="boardCategory=='board_content_content'">
+			WHERE board_content_content LIKE CONCAT('%',#{boardSearchWord},'%')
+		</when>
+		<when test="boardCategory=='board_content_date'">
+			WHERE board_content_date LIKE CONCAT('%',#{boardSearchWord},'%')
+		</when>
+		<when test="boardCategory=='m_member_id'">
+			WHERE m_member_id LIKE CONCAT('%',#{boardSearchWord},'%')
+		</when>
+		</choose>
+		</if>
 		ORDER BY bc.board_content_date DESC
 		LIMIT #{startRow},#{rowPerPage}
 	</select>
+	
 	<!-- 총 행의 개수 -->
 	<select id="selectTotalCount" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*)
 		FROM t_board_content
-		<if test= "boardSearchWord != null">
-			WHERE city_name LIKE CONCAT('%',#{citySearchWord},'%')
+		<if test="boardSearchWord != null">
+		<choose>
+		<when test="boardCategory=='board_content_title'">
+			WHERE board_content_title LIKE CONCAT('%',#{boardSearchWord},'%')
+		</when>
+		<when test="boardCategory=='board_content_content'">
+			WHERE board_content_content LIKE CONCAT('%',#{boardSearchWord},'%')
+		</when>
+		<when test="boardCategory=='board_content_date'">
+			WHERE board_content_date LIKE CONCAT('%',#{boardSearchWord},'%')
+		</when>
+		<when test="boardCategory=='m_member_id'">
+			WHERE m_member_id LIKE CONCAT('%',#{boardSearchWord},'%')
+		</when>
+		</choose>
 		</if>
 	</select> 
 	<!-- 게시판 파일 조회 -->
