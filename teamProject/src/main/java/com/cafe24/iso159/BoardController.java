@@ -213,6 +213,7 @@ public class BoardController {
 		// resource 폴더경로
 		String path = session.getServletContext().getRealPath("/");
 		path += "resources/boardUpload/";
+		logger.debug("downloadBoardFile() 메서드 0000000000000000000000000000000path is {}", path);
 		return boardservice.boardFileDownload(request, path, ofSaveName, ofExt, ofOriginName);
 	}
 }

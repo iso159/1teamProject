@@ -59,16 +59,19 @@ public class BoardService {
 		
 		if(!multiPartFile.isEmpty()) {
 			for(MultipartFile file : boardCommand.getFile()) {
-				// 1. db에 입력
+				// 랜덤으로 uuid 생성
 				UUID uuid = UUID.randomUUID();
-				// 파일이름
+				// 저장파일명을 toString 메서드로 문자열형태로 입력
 				String ofSaveName = uuid.toString(); // 중복되지않은 이름
-				// 원본파일이름
+				logger.debug("addBoard()메서드 ofSaveName is {}", ofSaveName);
+				// 확장자까지 포함된 원본 파일명
 				String ofOriginName = file.getOriginalFilename();
 				// 파일확장자
 				int pos = ofOriginName.lastIndexOf(".");
 				// 원본 파일명의 마지막 . 위치 앞의 원본 파일명을 변수에 입력
-				//String originalFileName = ofOriginName.substring(0, pos);
+				String originalFileName = ofOriginName.substring(0, pos);
+				logger.debug("addBoard() 메서드 originalFileName is {}",originalFileName);
+				// 원본 파일명의 마지막 . 위치 뒤의 확장자를 ext 변수에 입력
 				String ofExt = ofOriginName.substring(pos+1);
 				// 파일크기
 				long ofSize = file.getSize();
@@ -92,11 +95,13 @@ public class BoardService {
 				boardContentFile.setOfCode(ofCode);
 				boardContentFile.setBoardContentCode(boardContentCode);
 				boardContentFile.setOfPath(path);
-				boardContentFile.setOfOriginName(ofOriginName);
+				boardContentFile.setOfOriginName(originalFileName);
 				boardContentFile.setOfSaveName(ofSaveName);
 				boardContentFile.setOfExt(ofExt);
 				boardContentFile.setOfSize(ofSize);
 				boardDao.insertBoardFile(boardContentFile);
+				
+				//하드디스크에 파일 저장경로 설정
 				File temp = new File(path);
 				if(!temp.exists()) {
 					// 디렉토리가 없을경우 디렉토리 생성

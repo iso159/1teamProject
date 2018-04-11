@@ -34,7 +34,11 @@
 	<div style="color:gray;">${bc.boardcontent.boardContentDate}</div>
 	<p>&nbsp;</p>
 	<!-- 사진 -->
-	
+	<c:forEach var="i" items="${bcFile}">
+	<c:if test="${i.ofExt eq 'jpg'}">
+		<img src="${pageContext.request.contextPath}/resources/boardUpload/${i.ofSaveName}" style="height:300px; width:300px;">
+	</c:if>
+	</c:forEach>
 	<!-- 게시판내용시작 -->
 	${bc.boardcontent.boardContentContent}<br>
 	<p>&nbsp;</p>
