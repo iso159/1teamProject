@@ -154,7 +154,10 @@
 	<update id="updateMember" parameterType="com.cafe24.iso159.member.service.Member">
 		UPDATE
 			t_member SET
-			m_pw = #{mPw}
+				m_id = #{mId}
+			<if test='mPw != ""'>
+				, m_pw = #{mPw}
+			</if>
 		WHERE
 			m_id = #{mId}
 	</update> 	
