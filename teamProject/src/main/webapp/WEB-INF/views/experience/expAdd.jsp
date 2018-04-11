@@ -116,7 +116,9 @@
 				});
 			}
 			$('#insertForm').click(function(){
-				$("#expadd").submit();
+				if($('#expPurpose').val() != ''){
+					$("#expadd").submit();
+				}
 			});
 		});
 	});
@@ -138,24 +140,79 @@
             </div>
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
-				<form id="expadd" name="expadd" action="${pageContext.request.contextPath}/experience/expAdd" method="post">
-				<input type="hidden" name="animalCode" value="${animalCode}">
-				<input type="hidden" name="blCode" value="${blCode}">
-				<div>
-					<select name="expPeriodCode" id="expPeriodCode">
-						<option>---기간 및 가격---</option>
-						<c:forEach var="e" items="${addAttribute}">
-							<option value="${e.expPeriodCode}">기간:${e.expPeriodPeriod},가격:${e.expPeriodCost}</option>
-						</c:forEach>
-					</select>
-				</div>
-				<input type="hidden" name=expJournalCount id="expPeriodJournalCount">
-				<input type="hidden" name="expCost" id="expPeriodCost">
-				시작일 : <input type="text" name="expStartDate" id="sdate" size="10" maxlength="10" value="" readonly="readonly"/><br>
-				종료일 : <input type="text" name="expEndDate" id="edate" size="10" maxlength="10" value="" readonly="readonly"/><br>
-				체험 이유 : <input type="text" id="expPurpose" name="expPurpose">
-				<br><button type="button" id="insertForm">입력</button>
-				</form>
+			<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            체험 신청
+                        </div>
+                        <!-- .panel-heading -->
+                        <div class="panel-body">
+                      	  <form id="expadd" name="expadd" action="${pageContext.request.contextPath}/experience/expAdd" method="post">
+                      	  	<input type="hidden" name="animalCode" value="${animalCode}">
+							<input type="hidden" name="blCode" value="${blCode}">
+							<input type="hidden" name=expJournalCount id="expPeriodJournalCount">
+							<input type="hidden" name="expCost" id="expPeriodCost">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. 기간 및 책임비 선택</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                        	기간 및 책임비를 선택해주세요.<br>
+                                        	<select name="expPeriodCode" id="expPeriodCode">
+												<option>---기간 및 가격---</option>
+												<c:forEach var="e" items="${addAttribute}">
+													<option value="${e.expPeriodCode}">기간:${e.expPeriodPeriod},가격:${e.expPeriodCost}</option>
+												</c:forEach>
+											</select>
+											<br><br>
+											시작일 : <input type="text" name="expStartDate" id="sdate" size="10" maxlength="10" value="" readonly="readonly"/><br>
+											시작일은 기간 및 가격을 선택하게 되면 선택이 가능합니다.<br><br>
+											종료일 : <input type="text" name="expEndDate" id="edate" size="10" maxlength="10" value="" readonly="readonly"/><br>
+											종료일은 자동으로 선택됩니다.<br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. 체험 신청하게된 이유</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                        	체험 신청하게된 이유를 작성해주세요. <br><br>
+                                        	체험 이유 : <input type="text" id="expPurpose" name="expPurpose">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. 체험 신청</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                        동물 체험 신청을 해주셔서 감사합니다 ! <br>
+                                        <br><button type="button" id="insertForm">체험 신청하기</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <!-- .panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            	</div>
+			</div>
 			<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
