@@ -77,6 +77,11 @@ public class BoardDao {
 		logger.debug("selectBoardContentFile()메서드 boardContentFile is {}", boardContentFile);
 		return boardContentFile;
 	}
+	//게시판 파일 하나 조회
+	public BoardContentFile selectBoardFile(String boardContentCode) {
+		BoardContentFile boardFile = sqlSessionTemplate.selectOne(nameSpace+"selectBoardContentFile", boardContentCode);
+		return boardFile;
+	}
 	//게시판 글 조회
 	public BoardAndBoardContent boardDetail(String boardContentCode) {
 		//매개변수 확인
@@ -117,6 +122,11 @@ public class BoardDao {
 		//String값 받아오는지 확인
 		logger.debug("deleteBoardContent()메서드 boardContentCode is {}", boardContentCode);
 		sqlSessionTemplate.delete(nameSpace+"deleteBoardContent", boardContentCode);
+	}
+	//파일 삭제
+	public void deleteBoardFile(String boardContentCode) {
+		logger.debug("deleteBoardFile()메서드 boardContentCode is {}", boardContentCode);
+		sqlSessionTemplate.delete(nameSpace+"deleteBoardFile", boardContentCode);
 	}
 	//댓글 삭제
 	public void deleteBoardReply(String boardReplyCode) {

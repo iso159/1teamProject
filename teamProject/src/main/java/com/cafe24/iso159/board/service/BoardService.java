@@ -69,8 +69,8 @@ public class BoardService {
 				// 파일확장자
 				int pos = ofOriginName.lastIndexOf(".");
 				// 원본 파일명의 마지막 . 위치 앞의 원본 파일명을 변수에 입력
-				String originalFileName = ofOriginName.substring(0, pos);
-				logger.debug("addBoard() 메서드 originalFileName is {}",originalFileName);
+				//String originalFileName = ofOriginName.substring(0, pos);
+				//logger.debug("addBoard() 메서드 originalFileName is {}",originalFileName);
 				// 원본 파일명의 마지막 . 위치 뒤의 확장자를 ext 변수에 입력
 				String ofExt = ofOriginName.substring(pos+1);
 				// 파일크기
@@ -95,7 +95,7 @@ public class BoardService {
 				boardContentFile.setOfCode(ofCode);
 				boardContentFile.setBoardContentCode(boardContentCode);
 				boardContentFile.setOfPath(path);
-				boardContentFile.setOfOriginName(originalFileName);
+				boardContentFile.setOfOriginName(ofOriginName);
 				boardContentFile.setOfSaveName(ofSaveName);
 				boardContentFile.setOfExt(ofExt);
 				boardContentFile.setOfSize(ofSize);
@@ -269,8 +269,29 @@ public class BoardService {
 		boardDao.updateBoardContent(boardContent);
 	}
 	//게시글 삭제
-	public void removeBoardContent(String boardContentCode) {
+	public void removeBoardContent(String boardContentCode, String path) {
 		logger.debug("removeBoardContent()메서드 boardContentCode is {}", boardContentCode);
+		logger.debug("removeBoardContent()메서드 path is {}", path);
+		//파일이 있는지 확인후 삭제
+		BoardContentFile boardContentFile = boardDao.selectBoardFile(boardContentCode);
+		if(boardContentFile != null) {
+			List<BoardContentFile> list = boardDao.selectBoardContentFile(boardContentCode);
+			for(BoardContentFile i : list) {
+				//path와 파일이름을 결합
+				File temp = new File(path+i.getOfSaveName());
+				//File클래스의 생성자 함수, pathname에 해당되는 파일의 File 객체를 생성한다
+				//파일이 있다면 if블록 실행
+				if(temp.exists()) {
+					if(temp.delete()) { //파일을 삭제하고 if문 실행
+						logger.debug("removeBoardContent(int cityId, String path) 메서드 temp.delete CLEAR DELETE !{} !", temp);
+					}else {
+						//파일 삭제 실패 debug 메세지
+						logger.debug("removeBoardContent(int cityId, String path) 메서드temp.delete FAILURE DELETE ! {}",temp);
+					}
+				}
+			}
+			boardDao.deleteBoardFile(boardContentCode);
+		}
 		boardDao.deleteBoardContent(boardContentCode);
 	}
 	

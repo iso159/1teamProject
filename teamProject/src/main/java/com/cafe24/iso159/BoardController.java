@@ -93,7 +93,11 @@ public class BoardController {
 	@RequestMapping(value="/board/boardContentDelete", method=RequestMethod.GET)
 	public String boardContentRemove(HttpSession session
 									, @RequestParam(value="boardContentCode")String boardContentCode) {
-		boardservice.removeBoardContent(boardContentCode);
+		
+		String path = session.getServletContext().getRealPath("/");
+		path +="resources/boardUpload/";
+		logger.debug("boardContentRemove()메서드 path:{}",path);
+		boardservice.removeBoardContent(boardContentCode, path);
 		return "redirect:/board/boardList";
 	}
 	//댓글 삭제

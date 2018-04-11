@@ -172,6 +172,7 @@
 		WHERE 
 			board_content_code = #{boardContentCode};
 	</select>
+	
 	<!-- 게시판 글 상세조회 -->
 	<select id="boardDetail" parameterType="String" resultMap="selectBoardListMap">
 		SELECT
@@ -219,6 +220,12 @@
 		DELETE FROM t_board_content WHERE board_content_code = #{boardContentCode}
 	</delete>
 	
+	<!-- 파일삭제 -->
+	<delete id="deleteBoardFile" parameterType="String">
+		DELETE
+ 		FROM t_overall_file
+ 		WHERE board_content_code = #{boardContentCode}
+	</delete>
 	<!-- 댓글 삭제 -->
 	<delete id="deleteBoardReply" parameterType="String">
 		DELETE FROM t_board_reply WHERE board_reply_code = #{boardReplyCode}
