@@ -101,7 +101,7 @@
 							<form role="form" id="loginForm"  action="${pageContext.request.contextPath}/member/login" method="post">
 								<fieldset>
 									<div class="form-group">
-										<input id="userId" class="form-control" name="mId" type="text" value="administrator">
+										<input id="userId" class="form-control" name="mId" type="text" value="shelter">
 									</div>
 									<div class="form-group">
 										<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
@@ -131,7 +131,7 @@
 							<form role="form" id="loginForm"  action="${pageContext.request.contextPath}/member/login" method="post">
 								<fieldset>
 									<div class="form-group">
-										<input id="userId" class="form-control" name="mId" type="text" value="shelter">
+										<input id="userId" class="form-control" name="mId" type="text" value="administrator">
 									</div>
 									<div class="form-group">
 										<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
