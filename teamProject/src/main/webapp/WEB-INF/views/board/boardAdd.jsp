@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -34,10 +35,10 @@
 	글내용:<br>
 	<textarea rows="20" cols="100" id="boardContentContent" name="boardContentContent"></textarea><br>
 	파일첨부<input type="file" name="file"><br>
-	<!-- <span id="Helper"></span><br> -->
-	<button id="addBtn" type="submit">등록</button>
+	<span id="Helper"></span><br>
+	<button id="addBtn" type="button">등록</button>
 	</form>
-	<!-- <script>
+	<script>
 		$(document).ready(function(){
 			$('#addBtn').click(function(){
 				//공백이 들어가면 알려준다
@@ -50,7 +51,7 @@
 		          }
 			});
 		});
-	</script> -->
+	</script>
 	<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
