@@ -7,24 +7,33 @@
 <script src="${pageContext.request.contextPath}/resources/jquery/jquery-3.3.1.min.js"></script>
 	<title>직원 신청 보호소 리스트</title>
 </head>
-<body class="modern">
+<body>
 	<!-- top 부분 시작-->
 	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
 	<!-- top 부분 끝-->
 	
-	<!-- 메인 화면  -->
-	<!-- 메인 화면 내용 부분 -->
-	<div class="container">
-	<!-- 메인내용 시작 : Text | Text -->
-	<section>
-	  <div data-layout="_r">
-	    <div>
-	    <!-- 내용 입력 부분 -->
-	<div>
-		<h1>진료 신청 리스트</h1>
-	</div>
-	<div>
-		<table border="1">
+		<!-- 메인화면 시작 -->
+        <div id="page-wrapper">
+        	<!-- h태그제목 시작 -->
+        	<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">진료신청 리스트</h1>
+                </div>
+            </div>
+          	<!-- h태그제목 끝 -->
+          	
+			<!-- 내용 부분 시작-->
+			<div class="row">
+			<div class="col-lg-12">
+			<div class="panel panel-default">
+			<!-- 테이블 이름 시작 -->
+			<div class="panel-heading">진료신청 리스트</div>
+			<!-- 테이블 이름 끝 -->
+			<div class="panel-body">
+				<div class="row">
+				<div class="dataTables_length" id="dataTables-example_length">
+				<div class="table-responsive">
+				<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 			<thead>
 				<tr>
 					<th>보호소 아이디</th>
@@ -47,17 +56,14 @@
 			</tbody>
 		</table>
 	</div>
-	    <!-- 내용 입력 부분 끝 -->
 		</div>
-	  </div>
-	</section>
-	<!-- 메인내용 끝 : Text | Text -->
-	</div>
-	<!-- 메인 화면 내용 부분 끝 -->
-	
-	<!-- 메인화면 끝 -->
-	<!-- foot 부분 시작 -->
+		</div>
+		</div></div></div></div></div>
+			<!-- 내용 입력 부분 끝 -->
+			<!-- 내용 부분 끝-->
+			<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>
 	<!-- foot 부분 끝 -->
 </body>
 </html>
+			
