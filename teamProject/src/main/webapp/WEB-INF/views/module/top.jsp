@@ -75,7 +75,7 @@
 						<div class="input-group custom-search-form">
 							<input type="text" class="form-control" placeholder="https://github.com/iso159/1teamProject">
 							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">
+								<button class="btn btn-default" type="button" onclick = "window.open('https://github.com/iso159/1teamProject')">
 									<i class="fa fa-git"></i>
 								</button>
 							</span>
