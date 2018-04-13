@@ -88,7 +88,10 @@
 					<c:set var="date" value="${aR.adoptRequest.adoptRequestAdviceDate}"></c:set>
 					<c:set var="right" value="${rightName}"></c:set>
 					<tr>
-						<td>${aR.adoptRequest.adoptRequestCode}</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/adopt/adoptAdd?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}&animalCode=${aR.adoptRequest.animalCode}&blCode=${aR.adoptRequest.blCode}&mMemberId=${aR.adoptRequest.mMemberId}">
+							${aR.adoptRequest.adoptRequestCode}</a>
+						</td>
 						<td>
 							<a href="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${aR.adoptRequest.adoptRequestCode}">${aR.adoptRequest.mMemberId}</a>
 						</td>

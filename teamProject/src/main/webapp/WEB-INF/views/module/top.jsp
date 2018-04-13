@@ -160,6 +160,12 @@
 									href="${pageContext.request.contextPath}/adopt/adoptList">입양 신청 리스트</a>
 								</li>
 								</c:if>
+								<c:if test="${right eq '관리자' or right eq '보호소'}">
+								<li><a
+									href="${pageContext.request.contextPath}/adopt/adopterList">입양자 리스트</a>
+								</li>
+								</c:if>
+								
 						</ul>
 					</li>
 					<!-- 입양 끝 -->

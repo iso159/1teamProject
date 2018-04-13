@@ -25,6 +25,25 @@ public class AdoptDao {
 		sqlSessionTemplate.insert(nameSpace + "AdoptRequest", adoptRequest);
 	}
 	
+	// 입양자 등록
+	public void insertAdopter(Adopt adopt) {
+		logger.debug("insertAdopter() 메서드 호출 adopt is {}", adopt);
+		sqlSessionTemplate.insert(nameSpace + "insertAdopter", adopt);
+	}
+	// 입양자등록시 필요컬럼 조회
+	public Adopt selectAdoptRequestByAdoptRequestCode(String adoptRequestCode) {
+		logger.debug("selectAdoptRequestByAdoptRequestCode() 메서드 호출 adoptRequestCode is {]", adoptRequestCode);
+		return sqlSessionTemplate.selectOne(nameSpace + "selectAdoptRequestByAdoptRequestCode", adoptRequestCode);
+	}
+	
+	// 입양자조회
+	public List<Adopt> selectAdopt(){
+		logger.debug("selectAdopt() 메서드 호출 adoptRequestCode");
+		List<Adopt> list = sqlSessionTemplate.selectList(nameSpace + "selectAdopt");
+		logger.debug("selectAdopt() 메서드 호출 list is {}",list);
+		return list;
+	}
+	
 	// 입양신청메뉴에서 입양가능한 동물리스트 조회
 	public List<Animal> selectAdoptAnimalList(String osCodeAnimal){
 		logger.debug("selectAdoptAnimalList() 메서드 호출 osCodeAnimal is {}",osCodeAnimal);
@@ -46,6 +65,10 @@ public class AdoptDao {
 	public String selectLastCodeOf() {
 		logger.debug("selectLastCodeOf() 메서드 호출");
 		return sqlSessionTemplate.selectOne(nameSpace + "selectLastCodeOf");
+	}
+	public String selectLastCodeA() {
+		logger.debug("selectLastCodeA() 메서드 호출");
+		return sqlSessionTemplate.selectOne(nameSpace + "selectLastCodeA");
 	}
 	
 	

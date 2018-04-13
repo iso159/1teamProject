@@ -7,7 +7,7 @@ public class Adopt {
 	private String adoptRequestCode;
 	private String mMemberId;
 	private String mAdminId;
-	
+	private String adoptDate;
 	
 	public String getAdoptCode() {
 		return adoptCode;
@@ -45,12 +45,19 @@ public class Adopt {
 	public void setmAdminId(String mAdminId) {
 		this.mAdminId = mAdminId;
 	}
+	public String getAdoptDate() {
+		return adoptDate;
+	}
+	public void setAdoptDate(String adoptDate) {
+		this.adoptDate = adoptDate;
+	}
 	@Override
 	public String toString() {
 		return "Adopt [adoptCode=" + adoptCode + ", blCode=" + blCode + ", animalCode=" + animalCode
 				+ ", adoptRequestCode=" + adoptRequestCode + ", mMemberId=" + mMemberId + ", mAdminId=" + mAdminId
-				+ "]";
+				+ ", adoptDate=" + adoptDate + "]";
 	}
+	
 	
 	
 }

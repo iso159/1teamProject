@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe24.iso159.animal.service.Animal;
+import com.cafe24.iso159.survey.service.Survey;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -143,6 +144,40 @@ public class AdoptService {
 			logger.debug("addAdopt() 메서드 끝");
 		}//메소드끝
 
+	// 입양자 등록
+		public void addAdopter(Adopt adopt) {
+			logger.debug("addAdopter() 메소드 호출 adopt is {}", adopt);
+			
+			// 마지막코드 숫자값을 저장
+			String lastAdoptCode = adoptDao.selectLastCodeA();
+			
+			// 마지막 survey_code 코드
+			String aCode = "adopt_code_";
+			String adoptCode = "adopt_code_1";
+			int adoptCodeNum = 1;
+			
+			if(lastAdoptCode == null) {
+				aCode += adoptCodeNum;
+			}else {
+				adoptCodeNum += Integer.parseInt(lastAdoptCode);
+				aCode += adoptCodeNum;
+			}
+			logger.debug("aCode is {}", aCode);
+			
+			// adopt에 담은 후 입력 메소드 호출
+			adopt.setAdoptCode(aCode);
+			adopt.setAdoptRequestCode(adopt.getAdoptRequestCode());
+			adopt.setAnimalCode(adopt.getAnimalCode());
+			adopt.setBlCode(adopt.getBlCode());
+			adopt.setmAdminId(adopt.getmAdminId());
+			adopt.setmMemberId(adopt.getmMemberId());
+			logger.debug("adopt is {}", adopt);
+			adoptDao.insertAdopter(adopt);
+			
+		}
+		
+		
+		
 	// 입양신청메뉴에서 입양가능한 동물리스트 조회
 		public List<Animal> listAdoptAnimal(){
 			logger.debug("listAdoptAnimal() 메소드 호출");
@@ -278,5 +313,16 @@ public class AdoptService {
 			return adoptRequest;
 		
 		}
-		
+	// 입양자 입양신청코드로 조회
+		public Adopt selectAdoptRequestByAdoptRequestCode(String adoptRequestCode) {
+			logger.debug("selectAdoptRequestByAdoptRequestCode() 메소드 호출 adoptRequestCode is{}",adoptRequestCode);
+			Adopt adopt = adoptDao.selectAdoptRequestByAdoptRequestCode(adoptRequestCode);
+			return adopt;
+		}
+	// 입양자 조회
+		public List<Adopt> selectAdopt(){
+			logger.debug("selectAdopt() 메소드 호출");
+			List<Adopt> list = adoptDao.selectAdopt();
+			return list;
+		}
 }

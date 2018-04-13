@@ -59,6 +59,11 @@
 		select max(CAST(substring(of_code,9) AS DECIMAL)) as maxcol from t_overall_file
 	</select>
 	
+	<!-- 입양자 max코드값 조회 쿼리문 -->
+	<select id="selectLastCodeA" resultType="String">
+		select max(CAST(substring(adopt_code,12) AS DECIMAL)) as maxcol from t_adopt
+	</select>
+	
 	<!-- 입양신청 등록 쿼리문 -->
 	<insert id="AdoptRequest"
 			parameterType="com.cafe24.iso159.adopt.service.AdoptRequest">
@@ -87,6 +92,47 @@
 			#{adoptPoint}
 		)
 	</insert>
+	
+	<!-- 입양자 등록 쿼리문 -->
+	<insert id="insertAdopter"
+			parameterType="com.cafe24.iso159.adopt.service.Adopt">
+		INSERT INTO 
+			t_adopt 
+			(
+				adopt_code, 
+				bl_code, 
+				animal_code, 
+				adopt_request_code, 
+				m_member_id, 
+				m_admin_id, 
+				adopt_date 
+			) 
+		VALUES 
+			(
+				#{adoptCode}, 
+				#{blCode}, 
+				#{animalCode},
+				#{adoptRequestCode},
+				#{mMemberId}, 
+				#{mAdminId}, 
+				now() 
+			)
+	</insert>
+	
+	<!-- 입양자 조회 -->
+	<select id="selectAdopt"
+			resultType="com.cafe24.iso159.adopt.service.Adopt">
+		SELECT 
+			adopt_code as adoptCode, 
+			bl_code as blCode, 
+			animal_code as animalCode, 
+			adopt_request_code as adoptRequestCode, 
+			m_member_id as mMemberId, 
+			m_admin_id as mAdminId, 
+			adopt_date as adoptDate 
+		FROM 
+			t_adopt
+	</select>
 	
 	<!-- 입양신청한 조회 맵퍼 -->
 	<resultMap 	type="com.cafe24.iso159.adopt.service.AdoptRequestAndOsCodeAnimal" 
@@ -359,4 +405,17 @@
 			adopt_request_code=#{adoptRequestCode}
 	</select>
 	
+	<!-- 입양신청코드로 입양자 등록시 필요컬럼 조회 -->
+	<select id="selectAdoptRequestByAdoptRequestCode"
+			parameterType="com.cafe24.iso159.adopt.service.Adopt"
+			resultType="com.cafe24.iso159.adopt.service.Adopt">
+		SELECT 
+			animal_code as animalCode,
+			bl_code as blCode,
+			m_member_id as mMemberId
+		FROM 
+			t_adopt_request
+		WHERE 
+			adopt_request_code = #{adoptRequestCode}	
+	</select>
 </mapper>

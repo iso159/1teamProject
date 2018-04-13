@@ -7,20 +7,16 @@
 
 <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 <script>
-    $(document).ready(function(){
-        $('#addBtn').click(function(){
-        	// 공백들어갈시 팝업창으로 알려줌
-        	let adoptRequestAdviceContents = $.trim($('#adoptRequestAdviceContents').val());
-	          if(adoptRequestAdviceContents == ""){
-	        	  alert('모든질문에 답을 입력해주세요');
-	        	  // 텍스트비움
-	        	  $('#adoptRequestAdviceContents').val('');
-	          }else {
-	              $('#addForm').submit();
-	          }
-        });
-    });
-    
+$('#addBtn').click(function(){
+	$("input[type='checkbox'].adoptRequestAdviceContents").change(function(){
+		var a = $("input[type='checkbox'].adoptRequestAdviceContents");
+		if(a.length == a.filter(":checked").length){
+			$('#addForm').submit();
+		}else{
+			alert('모두 체크해주세요');
+		}
+		});
+	});
 </script>
 
 	<title>상담 내용</title>

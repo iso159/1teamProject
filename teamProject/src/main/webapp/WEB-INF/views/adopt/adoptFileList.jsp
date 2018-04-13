@@ -30,7 +30,7 @@
 			<!-- 테이블 이름 끝 -->
 			<div class="panel-body">
 				<div class="row">
-				<div class="col-sm-8">
+				<div class="col-lg-12">
 				<div class="dataTables_length" id="dataTables-example_length">
 				<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 				<thead>
