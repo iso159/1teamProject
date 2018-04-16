@@ -52,7 +52,6 @@
 								<form role="form" id="signUpForm" action="${pageContext.request.contextPath}/member/memberAdd" method="post">
 									아이디 
 									<input class="form-control" type="text" name="mId" placeholder="아이디" required/>
-									<input type="button" id="duplication" value="아이디 중복검사"/>
 									비밀번호 
 									<input class="form-control" type="password" name="mPw"><br>
 									이름 

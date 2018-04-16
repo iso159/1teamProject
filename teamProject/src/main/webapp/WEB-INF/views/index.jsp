@@ -66,8 +66,8 @@
 	                                    <tbody>
 	                                        <tr>
 	                                            <th>OS</th>
-	                                            <td colspan="2">Linux</td>
-	                                           	<td>Linux</td>
+	                                            <td colspan="2">Windows 7</td>
+	                                           	<td>Windows 7</td>
 	                                        </tr>
 	                                        <tr>
 	                                            <th>웹 브라우저</th>
