@@ -93,4 +93,8 @@ public class MemberDao {
 		// 아이디가 updateMember인 쿼리를 실행해 member필드의 id와 같은 컬럼 삭제
 		sqlSessionTemplate.update(nameSpace + "updateMemberRight", map);
 	}
+
+	public List<Member> duplication() {
+		return null;
+	}
 }

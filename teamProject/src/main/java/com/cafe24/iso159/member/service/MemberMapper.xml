@@ -193,4 +193,16 @@
 		SET m_right_code = #{mRightCode} 
 		WHERE m_id = #{mId};
 	</update>
+	
+	<select id = "checkMemberId" resultType="String" parameterType="com.cafe24.iso159.member.service.Member">
+
+		SELECT
+
+  			count(*)
+
+ 		FROM t_member
+
+ 		WHERE m_id=#{mId} 
+
+		</select>
 </mapper>

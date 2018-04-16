@@ -83,4 +83,19 @@ public class MemberService {
 			logger.debug("removeMember(String mId) 메서드 map is {}",map);
 			memberDao.updateMemberRight(map);
 		}
+		public List<Member> duplication(String duplicationId) {
+			
+			return null;
+		}
+		
+		// 회원 리스트 전체 조회
+		public List<Member> getcheckMemberId() {
+			// 전체 회원 조회 메서드 호출 후 리턴
+			logger.debug("getMemberList() 메서드 호출");
+			List<Member> list = memberDao.duplication();
+			logger.debug("getMemberList() 메서드 호출 끝");
+			logger.debug("getMemberList() 메서드 list is {}", list);
+			// 리턴받은 리스트 출력
+			return list;
+		}
 }

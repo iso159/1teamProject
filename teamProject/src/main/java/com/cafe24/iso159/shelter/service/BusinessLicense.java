@@ -70,6 +70,5 @@ public class BusinessLicense {
 				+ osCodeLicenseStatus + ", blShelterName=" + blShelterName + ", blShelterNumber=" + blShelterNumber
 				+ ", blShelterRegNumber=" + blShelterRegNumber + ", blShelterAddress=" + blShelterAddress
 				+ ", blShelterDenyReason=" + blShelterDenyReason + ", blShelterDate=" + blShelterDate + "]";
-	}
-	
+	}	
 }

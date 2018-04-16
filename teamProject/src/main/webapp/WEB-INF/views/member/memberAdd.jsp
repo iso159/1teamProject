@@ -6,6 +6,31 @@
 <html>
 <head>
 <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#duplication").click(function(){
+			if($("#mId").val()){
+				var query = {id:$("#checkMemberId").val()};
+				$.ajax({
+					url : "/member/memberAdd",
+					type : "post",
+					data : query,
+					success : function(data){
+						if(data==1){
+							alert("사용할 수 없는 아이디");
+							$("#mId").val("");
+						}else if(data==-1){
+							alert("사용할 수 있는 아이디 입니다.");
+						}
+					}
+				});
+			}else{
+				alert("사용할 아이디를 입력하세요");
+				$("#mId").focus();
+			}
+		});
+	});
+</script>
 	<title>회원가입</title>
 </head>
 <body class="modern">
@@ -15,6 +40,7 @@
 	<!-- 메인 화면  -->
 	<!-- 메인 화면 내용 부분 -->
 	<section>
+	<div id="page-wrapper">
 		<div data-layout="_r">
 			<div>
 				<!-- 내용 입력 부분 -->
@@ -25,7 +51,8 @@
 							<div>
 								<form role="form" id="signUpForm" action="${pageContext.request.contextPath}/member/memberAdd" method="post">
 									아이디 
-									<input class="form-control" type="text" name="mId"><br> 
+									<input class="form-control" type="text" name="mId" placeholder="아이디" required/>
+									<input type="button" id="duplication" value="아이디 중복검사"/>
 									비밀번호 
 									<input class="form-control" type="password" name="mPw"><br>
 									이름 

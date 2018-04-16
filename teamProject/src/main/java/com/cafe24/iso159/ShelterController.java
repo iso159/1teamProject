@@ -337,7 +337,7 @@ public class ShelterController {
 	}
 	
 	// 사후진료 신청 폼으로 매핑하는 컨트롤러
-	@RequestMapping(value="/shelter/shelterClinicRequest", method=RequestMethod.GET)
+	@RequestMapping(value="/shelter/shelterClinicRequest", method= {RequestMethod.GET, RequestMethod.POST})
 	public String addClinicRequest(BusinessLicenseClinic businessLicenseClinic, HttpSession session) {
 		logger.debug("addClinicRequest(BusinessLicenseClinic businessLicenseClinic) 메서드 호출");
 		String loginId = (String)session.getAttribute("loginId");
