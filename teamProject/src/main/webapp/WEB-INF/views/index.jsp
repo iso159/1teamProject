@@ -71,8 +71,8 @@
 	                                        </tr>
 	                                        <tr>
 	                                            <th>웹 브라우저</th>
-	                                            <td colspan="2">Crome</td>
-	                                            <td>Crome 최적화</td>
+	                                            <td colspan="2">Chrome</td>
+	                                            <td>Chrome 최적화</td>
 	                                        </tr>
 	                                        <tr>
 	                                            <th>WAS</th>
@@ -136,10 +136,10 @@
 	                                            <td colspan="2">MySQL Workbench 6.3.10</td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td colspan="2">GitHub(http://iso159.cafe24.com)</td>
+	                                            <td colspan="2">GitHub(https://github.com/iso159/1teamProject)</td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td colspan="2">eXerd</td>
+	                                            <td colspan="2">eXERD</td>
 	                                        </tr>
 	                                        <tr>
 	                                            <td colspan="2">SourceTree</td>
