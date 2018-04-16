@@ -22,17 +22,17 @@
 		<!-- 내용 부분 시작-->
 		<c:if test="${empty exp}">
 			<script>
-					alert('기록이 없습니다.');
-					window.history.back();
-					</script>
+				alert('기록이 없습니다.');
+				window.history.back();
+			</script>
 		</c:if>
 		<!-- 내용 부분 시작 -->
 		<div class="panel panel-default">
 			<!-- 테이블 이름 시작 -->
-			<div class="panel-heading">동물 체험 정보</div>
+			<div class="panel-heading">보호소 체험 리스트</div>
 			<!-- 테이블 이름 끝 -->
 			<div class="panel-body">
-				<div class="row">
+<%-- 				<div class="row">
 					<div class="col-sm-8">
 						<div class="dataTables_length" id="dataTables-example_length">
 							<label> 페이징수 <select name="rowPerPage"
@@ -61,7 +61,7 @@
 							</label>
 						</div>
 					</div>
-				</div>
+				</div> --%>
 				<table class="table table-striped table-bordered table-hover"
 					id="dataTables-example">
 					<thead>

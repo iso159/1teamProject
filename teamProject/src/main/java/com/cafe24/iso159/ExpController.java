@@ -20,6 +20,7 @@ import com.cafe24.iso159.exp.service.CostIo;
 import com.cafe24.iso159.exp.service.Exp;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo;
+import com.cafe24.iso159.exp.service.ExpAndExpJournal;
 import com.cafe24.iso159.exp.service.ExpJournal;
 import com.cafe24.iso159.exp.service.ExpPeriod;
 import com.cafe24.iso159.exp.service.ExpService;
@@ -49,6 +50,12 @@ public class ExpController {
 		logger.debug("OneAnimalExpInfo().get 메서드 returnMap is {}",returnMap);
 		//담겨저온 값 확인
 		logger.debug("ExpOneList().get 메서드 returnMap is {}",returnMap);
+		List<ExpAndExpJournal> expAndExpJournal= (List<ExpAndExpJournal>)returnMap.get("expAndAnimalAndExpJournal");
+		logger.debug("ExpOneList().get 메서드 expAndExpJournal is {}",expAndExpJournal);
+		if(expAndExpJournal.isEmpty()) {
+			logger.debug("ExpOneList().get 메서드 {}","동물체험일지 없음");
+			return "redirect:/experience/expAnimalList";
+		}
 		model.addAttribute("returnMap", returnMap);
 		model.addAttribute("animalCode", animalCode);
 		return "/experience/oneAnimalExpList";
