@@ -30,118 +30,120 @@
 	<div id="page-wrapper">
 		<!-- h태그제목 시작 -->
 		<!-- 체험자 로그인 시작 -->
-		<div class="container" style="width:500px; height:400px; float:left;">
-			<div class="row">
-				<div class="col-md-10"  style="min-width: 200px;">
-					<div class="login-panel panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">체험자 로그인</h3>
-						</div>
-						<div class="panel-body">
-							<form role="form" id="loginForm"  action="${pageContext.request.contextPath}/member/login" method="post">
-								<fieldset>
-									<div class="form-group">
-										<input id="userId" class="form-control" name="mId" type="text" value="experience">
-									</div>
-									<div class="form-group">
-										<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
-									</div>
-									<div class="checkbox">
-									</div>
-									<!-- Change this to a button or input when using this as a form -->
-									<button type="submit" id="loginBtn" class="btn btn-lg btn-info btn-block">Login</button>
-								</fieldset>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			</div>
-		<!-- 체험자 로그인 끝 -->
-
-		<!-- 입양자 로그인 시작 -->
-		<div class="container" style="width:500px; height:400px; float:left;">
-			<div class="row">
-				<div class="col-md-10"  style="min-width: 200px;">
-					<div class="login-panel panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">입양자 로그인</h3>
-						</div>
-						<div class="panel-body">
-							<form role="form" id="loginForm"  action="${pageContext.request.contextPath}/member/login" method="post">
-								<fieldset>
-									<div class="form-group">
-										<input id="userId" class="form-control" name="mId" type="text" value="adopter">
-									</div>
-									<div class="form-group">
-										<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
-									</div>
-									<div class="checkbox">
-									</div>
-									<!-- Change this to a button or input when using this as a form -->
-									<button type="submit" id="loginBtn" class="btn btn-lg btn-info btn-block">Login</button>
-								</fieldset>
-							</form>
+		<div class="container">
+			<div class="container" style="width:500px; height:400px; float:left;">
+				<div class="row">
+					<div class="col-md-10"  style="min-width: 200px;">
+						<div class="login-panel panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">체험자 로그인</h3>
+							</div>
+							<div class="panel-body">
+								<form role="form" id="loginForm"  action="${pageContext.request.contextPath}/member/login" method="post">
+									<fieldset>
+										<div class="form-group">
+											<input id="userId" class="form-control" name="mId" type="text" value="experience">
+										</div>
+										<div class="form-group">
+											<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
+										</div>
+										<div class="checkbox">
+										</div>
+										<!-- Change this to a button or input when using this as a form -->
+										<button type="submit" id="loginBtn" class="btn btn-lg btn-info btn-block">Login</button>
+									</fieldset>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			</div>
-		<!-- 입양자 로그인 끝 -->
-
-		<!-- 보호소 로그인 시작 -->
-		<div class="container" style="width:500px; height:400px; float:left;">
-			<div class="row">
-				<div class="col-md-10"  style="min-width: 200px;">
-					<div class="login-panel panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">보호소 로그인</h3>
-						</div>
-						<div class="panel-body">
-							<form role="form" id="loginForm"  action="${pageContext.request.contextPath}/member/login" method="post">
-								<fieldset>
-									<div class="form-group">
-										<input id="userId" class="form-control" name="mId" type="text" value="shelter">
-									</div>
-									<div class="form-group">
-										<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
-									</div>
-									<div class="checkbox">
-									</div>
-									<!-- Change this to a button or input when using this as a form -->
-									<button type="submit" id="loginBtn" class="btn btn-lg btn-info btn-block">Login</button>
-								</fieldset>
-							</form>
+				</div>
+			<!-- 체험자 로그인 끝 -->
+	
+			<!-- 입양자 로그인 시작 -->
+			<div class="container" style="width:500px; height:400px; float:left;">
+				<div class="row">
+					<div class="col-md-10"  style="min-width: 200px;">
+						<div class="login-panel panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">입양자 로그인</h3>
+							</div>
+							<div class="panel-body">
+								<form role="form" id="loginForm"  action="${pageContext.request.contextPath}/member/login" method="post">
+									<fieldset>
+										<div class="form-group">
+											<input id="userId" class="form-control" name="mId" type="text" value="adopter">
+										</div>
+										<div class="form-group">
+											<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
+										</div>
+										<div class="checkbox">
+										</div>
+										<!-- Change this to a button or input when using this as a form -->
+										<button type="submit" id="loginBtn" class="btn btn-lg btn-info btn-block">Login</button>
+									</fieldset>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			</div>
-		<!-- 보호소 로그인 끝 -->
-
-		<!-- 보호소 로그인 시작 -->
-		<div class="container" style="width:500px; height:400px; float:left;">
-			<div class="row">
-				<div class="col-md-10"  style="min-width: 200px;">
-					<div class="login-panel panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">관리자 로그인</h3>
+				</div>
+			<!-- 입양자 로그인 끝 -->
+	
+			<!-- 보호소 로그인 시작 -->
+			<div class="container" style="width:500px; height:400px; float:left;">
+				<div class="row">
+					<div class="col-md-10"  style="min-width: 200px;">
+						<div class="login-panel panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">보호소 로그인</h3>
+							</div>
+							<div class="panel-body">
+								<form role="form" id="loginForm"  action="${pageContext.request.contextPath}/member/login" method="post">
+									<fieldset>
+										<div class="form-group">
+											<input id="userId" class="form-control" name="mId" type="text" value="shelter">
+										</div>
+										<div class="form-group">
+											<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
+										</div>
+										<div class="checkbox">
+										</div>
+										<!-- Change this to a button or input when using this as a form -->
+										<button type="submit" id="loginBtn" class="btn btn-lg btn-info btn-block">Login</button>
+									</fieldset>
+								</form>
+							</div>
 						</div>
-						<div class="panel-body">
-							<form role="form" id="loginForm"  action="${pageContext.request.contextPath}/member/login" method="post">
-								<fieldset>
-									<div class="form-group">
-										<input id="userId" class="form-control" name="mId" type="text" value="administrator">
-									</div>
-									<div class="form-group">
-										<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
-									</div>
-									<div class="checkbox">
-									</div>
-									<!-- Change this to a button or input when using this as a form -->
-									<button type="submit" id="loginBtn" class="btn btn-lg btn-info btn-block">Login</button>
-								</fieldset>
-							</form>
+					</div>
+				</div>
+				</div>
+			<!-- 보호소 로그인 끝 -->
+	
+			<!-- 보호소 로그인 시작 -->
+			<div class="container" style="width:500px; height:400px; float:left;">
+				<div class="row">
+					<div class="col-md-10"  style="min-width: 200px;">
+						<div class="login-panel panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">관리자 로그인</h3>
+							</div>
+							<div class="panel-body">
+								<form role="form" id="loginForm"  action="${pageContext.request.contextPath}/member/login" method="post">
+									<fieldset>
+										<div class="form-group">
+											<input id="userId" class="form-control" name="mId" type="text" value="administrator">
+										</div>
+										<div class="form-group">
+											<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
+										</div>
+										<div class="checkbox">
+										</div>
+										<!-- Change this to a button or input when using this as a form -->
+										<button type="submit" id="loginBtn" class="btn btn-lg btn-info btn-block">Login</button>
+									</fieldset>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
