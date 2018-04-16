@@ -7,16 +7,19 @@
 
 <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 <script>
-$('#addBtn').click(function(){
-	$("input[type='checkbox'].adoptRequestAdviceContents").change(function(){
-		var a = $("input[type='checkbox'].adoptRequestAdviceContents");
-		if(a.length == a.filter(":checked").length){
-			$('#addForm').submit();
-		}else{
-			alert('모두 체크해주세요');
-		}
-		});
-	});
+$(document).ready(function(){
+    //최상단 체크박스 클릭
+    $("#checkAll").click(function(){
+        //클릭되었으면
+        if($("#checkAll").prop("checked")){
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[id=Yes]").prop("checked",true);
+        }
+    })
+     $('#addBtn').click(function(){
+    	 $('#addForm').submit();
+     });
+})
 </script>
 
 	<title>상담 내용</title>
@@ -39,6 +42,7 @@ $('#addBtn').click(function(){
 	    	<c:set var="aRC" value="${adoptRequestCode}"/>
 	        <form id="addForm" role="form-control" action="${pageContext.request.contextPath}/adopt/adoptCounsel?adoptRequestCode=${adoptRequestCode}" method="post">
 	        <br style="clear:both">
+	        <div>전체선택<input type="checkbox" id="checkAll"></div>
 	    				<c:forEach var="surveyQuestion" items="${list}">
 	    				<div class="form-group">
 							<input  type="textarea" 
@@ -48,11 +52,11 @@ $('#addBtn').click(function(){
 									name="adoptRequestAdviceContents" readonly>
 							<input 	type="checkbox" 
 									value="동의합니다"
-									id="adoptRequestAdviceContents"
+									id="Yes"
 									name="adoptRequestAdviceContents">동의합니다
 							<input 	type="checkbox" 
 									value="동의하지않습니다"
-									id="adoptRequestAdviceContents"
+									id="No"
 									name="adoptRequestAdviceContents">동의하지않습니다
 									
 						</div>
