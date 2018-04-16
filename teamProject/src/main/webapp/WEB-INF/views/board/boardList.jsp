@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,6 +12,15 @@
 		    float: right;
 		    position: relative;
 		    left: -50%;
+		}
+		select {
+		    width: 100px;
+		    height: 30px;
+		    padding-left: 10px;
+		    font-size: 18px;
+		    color: #006fff;
+		    border: 1px solid #006fff;
+		    border-radius: 3px;
 		}
 	</style>
 </head>
@@ -50,7 +60,8 @@
 			<td>${i.boardName}</td>
 			<td><a href="${pageContext.request.contextPath}/board/boardDetail?boardContentCode=${i.boardcontent.boardContentCode}">${i.boardcontent.boardContentTitle}</a></td>
 			<td>${i.boardcontent.mMemberId}</td>
-			<td>${i.boardcontent.boardContentDate}</td>
+			<td><fmt:parseDate value="${i.boardcontent.boardContentDate}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S"/>
+			<fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			</tr>
 			</c:forEach>
 		</tbody>
@@ -88,6 +99,7 @@
 	</div>
 	<%-- <p>&nbsp;</p>
 	<a href="${pageContext.request.contextPath}/board/boardAdd"><button type="button" class="btn btn-success">글등록</button></a><br> --%>
+	<p>&nbsp;</p>
 	<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>

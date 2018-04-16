@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,7 +32,10 @@
 	<!-- 게시판제목 -->
 	<h3>${bc.boardcontent.boardContentTitle}</h3>
 	<!-- 등록날짜 -->
-	<div style="color:gray;">${bc.boardcontent.boardContentDate}</div>
+	<div style="color:gray;">
+		<fmt:parseDate value="${bc.boardcontent.boardContentDate}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S"/>
+		<fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/>
+	</div>
 	<p>&nbsp;</p>
 	<!-- 사진 -->
 	<c:forEach var="i" items="${bcFile}">
@@ -77,7 +81,10 @@
 	<c:forEach var="i" items="${br}">
 		<div style="color:gray"><b>${i.mMemberId}</b></div>
 		${i.boardReplyContent}&nbsp;<c:if test="${login eq i.mMemberId}"><a href="${pageContext.request.contextPath}/board/boardReplyDelete?boardReplyCode=${i.boardReplyCode}&boardContentCode=${i.boardContentCode}">삭제</a></c:if><br>
-		<div style="color:gray;">${i.boardReplyDate}</div>
+		<div style="color:gray;">
+			<fmt:parseDate value="${i.boardReplyDate}" var="time" pattern="yyyy-MM-dd HH:mm:ss.S"/>
+			<fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/>
+		</div>
 		<br>
 	</c:forEach>	
 	<!-- 내용 부분 끝-->
