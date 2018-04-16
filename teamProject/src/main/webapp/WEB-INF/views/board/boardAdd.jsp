@@ -23,6 +23,7 @@
             </div>
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
+	<div class="container">
 	<h2>게시판 글 등록</h2>
 	<p>&nbsp;</p>
 	<form id="boardContentAdd" action="${pageContext.request.contextPath}/board/boardAdd" method="post" enctype="multipart/form-data">
@@ -36,8 +37,9 @@
 	<textarea rows="20" cols="100" id="boardContentContent" name="boardContentContent"></textarea><br>
 	파일첨부<input type="file" name="file"><br>
 	<span id="Helper"></span><br>
-	<button id="addBtn" type="button">등록</button>
+	<button class="btn btn-primary" id="addBtn" type="button">등록</button>
 	</form>
+	</div>
 	<script>
 		$(document).ready(function(){
 			$('#addBtn').click(function(){

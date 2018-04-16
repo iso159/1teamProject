@@ -23,7 +23,7 @@
             </div>
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
-    
+    <div class="container">
     <c:set var="login" value="${loginId}"></c:set>
     
 	<!-- 게시판그룹이름 -->
@@ -55,8 +55,8 @@
 	
 	<p>&nbsp;</p>
 	<c:if test="${login eq bc.boardcontent.mMemberId}">
-	<a href="${pageContext.request.contextPath}/board/boardContentUpdate?boardContentCode=${bc.boardcontent.boardContentCode}"><button>수정</button></a>
-	<a href="${pageContext.request.contextPath}/board/boardContentDelete?boardContentCode=${bc.boardcontent.boardContentCode}"><button>삭제</button></a>
+	<a href="${pageContext.request.contextPath}/board/boardContentUpdate?boardContentCode=${bc.boardcontent.boardContentCode}"><button class="btn btn-outline btn-primary">수정</button></a>&nbsp;
+	<a href="${pageContext.request.contextPath}/board/boardContentDelete?boardContentCode=${bc.boardcontent.boardContentCode}"><button class="btn btn-outline btn-danger">삭제</button></a>
 	</c:if>
 	<p>&nbsp;</p>
 	
@@ -86,7 +86,8 @@
 			<fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/>
 		</div>
 		<br>
-	</c:forEach>	
+	</c:forEach>
+	</div>	
 	<!-- 내용 부분 끝-->
 	<!-- foot 부분 시작 -->
 	<jsp:include page="/WEB-INF/views/module/foot.jsp"/>

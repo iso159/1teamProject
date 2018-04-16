@@ -22,6 +22,12 @@
 		    border: 1px solid #006fff;
 		    border-radius: 3px;
 		}
+		#type01 {
+		    padding: 10px;
+		    font-weight: bold;
+		    vertical-align: top;
+		    border-top: 2px solid gray;
+		}
 	</style>
 </head>
 <body>
@@ -39,11 +45,12 @@
             </div>
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
+	<div class="container">
 	<h2>게시판</h2>
 	<p>&nbsp;&nbsp;</p>
 	
 	<table class="table table-hover">
-		<thead>
+		<thead id="type01">
 			<tr>
 			<td>번호</td>
 			<td>분류</td>
@@ -66,7 +73,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
+
 	<!-- 이전,다음 작업 -->
 	<div id="paging">														  			
 		<ul class="pagination">
@@ -97,6 +104,8 @@
 		<button type="submit">검색</button>
 	</form>
 	</div>
+	</div>
+	
 	<%-- <p>&nbsp;</p>
 	<a href="${pageContext.request.contextPath}/board/boardAdd"><button type="button" class="btn btn-success">글등록</button></a><br> --%>
 	<p>&nbsp;</p>
