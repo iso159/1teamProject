@@ -26,7 +26,7 @@
 			<div class="col-lg-12">
 			<div class="panel panel-default">
 			<!-- 테이블 이름 시작 -->
-			<div class="panel-heading">${loginId}님 파일리스트</div>
+			<div class="panel-heading">입양파일리스트</div>
 			<!-- 테이블 이름 끝 -->
 			<div class="panel-body">
 				<div class="row">

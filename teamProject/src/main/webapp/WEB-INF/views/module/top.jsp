@@ -32,7 +32,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="${pageContext.request.contextPath}/"><i class="fa fa-paw"></i>유기동물 분양</a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/"><i class="fa fa-paw"></i>유기동물 체험을 통한 분양 활성화 시스템<i class="fa fa-paw"></i></a>
 		</div>
 		<!-- 메인 로고부분 끝 -->
 		<!-- 메인 상단 로그인 관리 부분 -->

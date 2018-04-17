@@ -45,7 +45,7 @@
 											<input id="userId" class="form-control" name="mId" type="text" value="experience">
 										</div>
 										<div class="form-group">
-											<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
+											<input id="userPw" class="form-control" name="mPw" type="password" value="1">
 										</div>
 										<div class="checkbox">
 										</div>
@@ -75,7 +75,7 @@
 											<input id="userId" class="form-control" name="mId" type="text" value="adopter">
 										</div>
 										<div class="form-group">
-											<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
+											<input id="userPw" class="form-control" name="mPw" type="password" value="1">
 										</div>
 										<div class="checkbox">
 										</div>
@@ -105,7 +105,7 @@
 											<input id="userId" class="form-control" name="mId" type="text" value="shelter">
 										</div>
 										<div class="form-group">
-											<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
+											<input id="userPw" class="form-control" name="mPw" type="password" value="1">
 										</div>
 										<div class="checkbox">
 										</div>
@@ -135,7 +135,7 @@
 											<input id="userId" class="form-control" name="mId" type="text" value="administrator">
 										</div>
 										<div class="form-group">
-											<input id="userPw" class="form-control" name="mPw" type="password" value="1234">
+											<input id="userPw" class="form-control" name="mPw" type="password" value="1">
 										</div>
 										<div class="checkbox">
 										</div>
