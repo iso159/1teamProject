@@ -17,20 +17,25 @@
 	<!-- 메인화면 시작 -->
         <div id="page-wrapper">
         	<!-- h태그제목 시작 -->
-	                <div class="col-lg-12">
-	                    <h1 class="page-header"><i class="fa fa-cube"></i>Team Project Intro</h1>
-	                </div>
+            <div class="col-lg-12">
+                    <h1 class="page-header"><i class="fa fa-smile-o"></i>Welcome to my project!</h1>
+               
 	            <div class="cycle-slideshow">
 	                <img src="${pageContext.request.contextPath}/resources/img/HomeDog.jpg" width:100%>
 	                 <img src="${pageContext.request.contextPath}/resources/img/HomeDog1.jpg" width:100%>
 					 <img src="${pageContext.request.contextPath}/resources/img/HomeDog2.jpg" width:100%>
             	</div>
-          
+           </div>
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
 			
 			<!-- 프로젝트  -->
 			<div class="row">
+			<!-- h태그제목 시작 -->
+            <div class="col-lg-12">
+                    <h1 class="page-header"><i class="fa fa-cube"></i>Team Project Intro</h1>
+             </div>
+             <!-- h태그제목 끝 -->
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                       <div class="panel-heading">
