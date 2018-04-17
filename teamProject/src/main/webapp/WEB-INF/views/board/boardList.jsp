@@ -28,6 +28,10 @@
 		    vertical-align: top;
 		    border-top: 2px solid gray;
 		}
+		#type02{
+			padding: 10px;
+			
+		}
 	</style>
 </head>
 <body>
@@ -59,7 +63,7 @@
 			<td>등록날짜</td>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="type02">
 			<c:set var="boardContent" value="${map.boardContent}" />
 			<c:forEach var="i" items="${boardContent}">
 			<tr>

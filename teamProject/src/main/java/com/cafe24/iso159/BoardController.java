@@ -153,11 +153,14 @@ public class BoardController {
 		logger.debug("Board()메서드 boardSearchWord is {}", boardSearchWord);
 		
 		Map<String, Object> boardlist = boardservice.listBoardContent(currentPage, rowPerPage, boardCategory, boardSearchWord);
-		
+		int lastPage = (Integer)boardlist.get("lastPage");
+			
 		logger.debug("Board()메서드 boardlist is {}", boardlist);
 		model.addAttribute("map", boardlist);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("rowPerPage", rowPerPage);
+		model.addAttribute("lastPage", lastPage);
+	
 		return "board/boardList";
 	}
 	

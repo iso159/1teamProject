@@ -219,6 +219,7 @@ public class BoardService {
 		returnMap.put("boardContent", boardContent);
 		returnMap.put("lastPage", lastPage);
 		returnMap.put("totalCount", totalCount);
+		
 		return returnMap;
 	}
 	//게시판파일리스트
