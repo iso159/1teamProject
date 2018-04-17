@@ -103,7 +103,9 @@
 	                            <li>
 	                                <a href="${pageContext.request.contextPath}/shelter/staffBusinessLicenseGet">보호소 직원 신청</a>
 	                            </li>
-	                             <li>
+	                        </c:if>
+	                        <c:if test="${right eq '회원' or right eq '보호소' and level eq '1'}">
+	                            <li>
 	                                <a href="${pageContext.request.contextPath}/shelter/requestShelterStaffPersonal">보호소 직원 신청 관리</a>
 	                            </li>
                             </c:if>

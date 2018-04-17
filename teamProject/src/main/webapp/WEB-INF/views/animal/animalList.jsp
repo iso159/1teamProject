@@ -33,6 +33,7 @@
 						$('#animalList').empty();					
 						itemSize = Object.keys(msg.response.body.items.item).length;
 						console.log('유기동물');
+						$('#pagingDiv').hide();
 						for(let i=0; i<itemSize; i++){
 							let divTag='<div class="col-lg-4"><div class="panel panel-default"><div class="panel-heading">' + msg.response.body.items.item[i].noticeNo + '</div><div class="panel-body">';
 							divTag += '<img style="width:200px; height:200px;" src="'+ msg.response.body.items.item[i].filename + '" alt="" data-theme="_is1">';
@@ -144,7 +145,7 @@
 			</div>
 		    
 		    <!-- 페이징 시작 -->
-		    <div style="width:200px; height:70px; position: relative; bottom:30px; left:500px;">
+		    <div id="pagingDiv" style="width:200px; height:70px; position: relative; bottom:30px; left:500px;">
 				<ul class="pagination">
 					<c:set var="cp" value="${currentPage+1}"></c:set>
 					<c:set var="mp" value="${maxPage}"></c:set>

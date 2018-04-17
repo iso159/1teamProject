@@ -57,64 +57,45 @@
 		<!-- 메인내용 시작 : Text | Text -->
 		<section>
 		  <div data-layout="_r">
-		    <div>
+		    <div style="width:500px;">
 		    <!-- 내용 입력 부분 -->
 			<h2>동물등록폼</h2>
-			<form id="addForm" 
+			<form role="form" id="addForm" 
 				  action="${pageContext.request.contextPath}/animal/animalAdd"
 				  enctype="multipart/form-data" 
 				  method="post">
 				<input type="hidden" name="animalImagePath" value="${imagePath}">
-				<table>
-					<tr>
-						<td>품종 :</td>
-						<td>
-							<select name="animalBreed" id="animalKind">
-	
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>보호소 위치:</td>
-						<td>
-							<c:set var="bl" value="${businessLicense}"></c:set>
-							<c:if test="${empty bl}">
-								<input type="text" id="animalArea" name="animalArea" value="${animalArea}" readonly="readonly">
-							</c:if>
-							<c:if test="${!empty bl}">
-								<input type="text" id="animalArea" name="animalArea" value="${bl.blShelterAddress}" readonly="readonly">
-							</c:if>
-						</td>
-					</tr>
-					<tr>
-						<c:if test="${!empty bl}">
-							<td><input type="hidden" id="animalIdCode" name="blShelterName" value="${bl.blShelterName}"></td>
-						</c:if>
-						<c:if test="${empty bl}">
-							<td>
-								<input type="hidden" id="animalIdCode" name="animalIdCode" value="${animalIdCode}">
-							</td>
-						</c:if>
-					</tr>
-					<tr>
-						<td>체중:</td>
-						<td><input type="text" id="animalWeight" name="animalWeight" value="${animalWeight}"></td>
-					</tr>
-					<tr>
-						<td>나이:</td>
-						<td><input type="text" id="animalAge" name="animalAge" value="${animalAge}"></td>
-					<tr>
-					<tr>
-						<td><input type="file" name="file" value="사진첨부"></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><span id="Helper"></span></td>
-					</tr>
-					<tr>
-						<td><button id="addBtn" type="button">등록</button></td>
-					</tr>
-				</table>
+				<div class="form-group" >		
+					품종   <select class="form-control" name="animalBreed" id="animalKind">
+						 </select>
+				</div>
+				<div class="form-group">
+					<label>보호소 주소</label>
+					<c:set var="bl" value="${businessLicense}"></c:set>
+					<c:if test="${empty bl}">
+						<input type="text" class="form-control" id="animalArea" name="animalArea" value="${animalArea}" readonly="readonly">
+					</c:if>
+					<c:if test="${!empty bl}">
+						<input type="text" class="form-control" id="animalArea" name="animalArea" value="${bl.blShelterAddress}" readonly="readonly">
+					</c:if>
+				</div>
+					<c:if test="${!empty bl}">
+						<input type="hidden" class="form-control" id="animalIdCode" name="blShelterName" value="${bl.blShelterName}">
+					</c:if>
+					<c:if test="${empty bl}">
+						<input type="hidden" class="form-control" id="animalIdCode" name="animalIdCode" value="${animalIdCode}">
+					</c:if>
+				<div class="form-group">
+					<label>체중</label>
+					<input type="text" class="form-control" id="animalWeight" name="animalWeight" value="${animalWeight}">
+				</div>
+					<label>나이</label>
+					<input type="text" class="form-control" id="animalAge" name="animalAge" value="${animalAge}">
+					<br>
+					<input type="file" name="file" value="사진첨부">
+					<span id="Helper"></span>
+					<br>
+					<button class="btn btn-outline btn-success" id="addBtn" type="button">등록</button>
 			</form>
 		<!-- 내용 입력 부분 끝 -->
 			</div>

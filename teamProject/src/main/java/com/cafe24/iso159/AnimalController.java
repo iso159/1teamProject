@@ -287,7 +287,7 @@ public class AnimalController {
 			// json형태로 데이터를 넣음
 			json.put("data", data);
 			
-			logger.debug("shelterAnimalBreed(...) 메서드 끝");
+			logger.debug("shelterAnimalList(...) 메서드 끝");
 		}catch(MalformedURLException e) {
 			e.printStackTrace();
 		}catch(IOException e) {

@@ -125,7 +125,7 @@
 			m.m_id as mId
 			,m.bl_code as blCode
 			,mr.m_right_name as mRightName
-			,mr.m_right_level as mRightLevel
+			,m_right_grade_level as mRightLevel
 		FROM 
 			t_member m
 		INNER JOIN 
