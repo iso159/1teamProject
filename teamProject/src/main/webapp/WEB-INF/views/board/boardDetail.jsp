@@ -40,7 +40,7 @@
 	<!-- 사진 -->
 	<c:forEach var="i" items="${bcFile}">
 	<c:if test="${i.ofExt eq 'jpg'}">
-		<img src="${pageContext.request.contextPath}/resources/boardUpload/${i.ofSaveName}" style="height:300px; width:300px;">
+		<img src="${pageContext.request.contextPath}/resources/boardUpload/${i.ofSaveName}" style="height:300px; width:300px;"><br><br>
 	</c:if>
 	</c:forEach>
 	<!-- 게시판내용시작 -->

@@ -7,7 +7,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
 <title>Insert title here</title>
-</head>
+<style>
+  /* div[contenteditable=true] {
+	  border: 1px solid #9a9a9a;
+	  font-size: 12px;
+	  width: 60%;
+	  height: 500px;
+	  padding: 5px;
+	} */
+	textarea {
+		 padding: 10px;
+	}
+</style>
 <body>
 	<!-- top 부분 시작-->
 	<jsp:include page="/WEB-INF/views/module/top.jsp"/>
@@ -34,8 +45,11 @@
 		</select><br>
 	글제목:<input type="text" id="boardContentTitle" name="boardContentTitle"><br>
 	글내용:<br>
-	<textarea rows="20" cols="100" id="boardContentContent" name="boardContentContent"></textarea><br>
-	파일첨부<input type="file" name="file"><br>
+	<textarea rows="20" cols="100" id="boardContentContent" name="boardContentContent">	
+	</textarea><br>
+	
+	<!-- <div contenteditable="true"></div> -->
+	파일첨부<input type="file" name="file">
 	<span id="Helper"></span><br>
 	<button class="btn btn-primary" id="addBtn" type="button">등록</button>
 	</form>

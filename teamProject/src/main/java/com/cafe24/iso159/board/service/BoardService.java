@@ -52,7 +52,7 @@ public class BoardService {
 		boardContent.setBoardCode(boardCommand.getBoardCode());
 		boardContent.setBoardNumber(boardCommand.getBoardNumber());
 		boardContent.setBoardContentTitle(boardCommand.getBoardContentTitle());
-		boardContent.setBoardContentContent(boardCommand.getBoardContentContent());
+		boardContent.setBoardContentContent(boardCommand.getBoardContentContent().replace("\r\n", "<br>"));
 		boardContent.setBoardContentDate(boardCommand.getBoardContentDate());
 		
 		boardDao.insertboardContent(boardContent);
