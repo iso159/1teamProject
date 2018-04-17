@@ -149,12 +149,14 @@
 					<li>
 					<a href="#"><i class="fa fa-gittip fa-fw"></i> 입양<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
+								<c:if test="${right ne '관리자'}">
 								<li><a
 									href="${pageContext.request.contextPath}/adopt/adoptAnimalList">입양신청</a>
 								</li>
 								<li><a
 									href="${pageContext.request.contextPath}/adopt/adoptMyList">나의입양리스트</a>
 								</li>
+								</c:if>
 								<c:if test="${right eq '관리자' or right eq '보호소'}">
 								<li><a
 									href="${pageContext.request.contextPath}/adopt/adoptList">입양 신청 리스트</a>
