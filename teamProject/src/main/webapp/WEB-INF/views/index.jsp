@@ -231,7 +231,7 @@
                                             <i class="fa fa-github-alt fa-fw"></i>김장성(팀장)</strong>
                                         </div>
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                         프로젝트를 진행했는데 주제선정 -> 분석 -> 설계 -> 구현 -> 테스트 단계로 분석과 설계단계가 중요하다고 느꼈습니다. 분석과 설계가 제대로 되지않으니 구현하면서 DB구조가 바뀌고 쿼리문도 길어지고 기능도 계속 추가되어서 예상했던 기간보다 더 오래걸렸습니다. 또 다른 사람들과의 소통도 중요했습니다. 혼자하는 프로젝트가 아니기 때문에 프로세스의 흐름에 대한 생각이 같지 않으면 기능적으로도 문제가 발생한다는걸 경험했습니다. 이번 프로젝트 경험은 저에게 큰 도움이 되었습니다.
                                         </p>
                                     </div>
                                 </li>
