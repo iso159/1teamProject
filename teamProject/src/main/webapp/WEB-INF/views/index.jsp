@@ -5,6 +5,9 @@
 <head>
 	<title></title>
 	 <link rel="icon" type="image/png"  href="${pageContext.request.contextPath}/resources/img/dog.png"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://malsup.github.com/jquery.cycle2.js"></script>
+
 </head>
 <body>
 	<!-- top 부분 시작-->
@@ -14,11 +17,15 @@
 	<!-- 메인화면 시작 -->
         <div id="page-wrapper">
         	<!-- h태그제목 시작 -->
-        	<div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"><i class="fa fa-cube"></i>Team Project Intro</h1>
-                </div>
-            </div>
+	                <div class="col-lg-12">
+	                    <h1 class="page-header"><i class="fa fa-cube"></i>Team Project Intro</h1>
+	                </div>
+	            <div class="cycle-slideshow">
+	                <img src="${pageContext.request.contextPath}/resources/img/HomeDog.jpg" width:100%>
+	                 <img src="${pageContext.request.contextPath}/resources/img/HomeDog1.jpg" width:100%>
+					 <img src="${pageContext.request.contextPath}/resources/img/HomeDog2.jpg" width:100%>
+            	</div>
+          
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
 			
@@ -27,7 +34,13 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                       <div class="panel-heading">
+                      <c:set var="login" value="${loginId}"></c:set>
+                      <c:if test="${empty login}">
                          <i class="fa fa-play-circle-o"></i>프로젝트 시작하기<p class="text-left"><button onclick = "location.href='${pageContext.request.contextPath}/member/login'" type="button" class="btn btn-danger btn-sm">Get Start!</button></p>
+                       </c:if>
+                       	<c:if test="${!empty login}">
+                        	<i class="fa fa-play-circle-o"></i>프로젝트 시작하기<p class="text-left"><button onclick = "location.href='${pageContext.request.contextPath}/experience/expAnimalList'" type="button" class="btn btn-warning btn-sm">Get Start!!</button></p>
+                        </c:if>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">

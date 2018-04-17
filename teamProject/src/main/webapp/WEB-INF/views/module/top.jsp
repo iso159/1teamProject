@@ -103,16 +103,16 @@
 	                            <li>
 	                                <a href="${pageContext.request.contextPath}/shelter/staffBusinessLicenseGet">보호소 직원 신청</a>
 	                            </li>
+	                             <li>
+	                                <a href="${pageContext.request.contextPath}/shelter/requestShelterStaffPersonal">보호소 직원 신청 관리</a>
+	                            </li>
                             </c:if>
                             <c:if test="${right eq '관리자'}">
 	                            <li>
 	                                <a href="${pageContext.request.contextPath}/businessLicenseRequestList">대표 보호소 신청 목록</a>
 	                            </li>
                             </c:if>
-                            <c:if test="${right eq '보호소' and level eq '2'}">  
-	                            <li>
-	                                <a href="${pageContext.request.contextPath}/shelter/requestShelterStaffPersonal">보호소 직원 신청 관리</a>
-	                            </li>
+                            <c:if test="${right eq '보호소' and level eq '2'}">
 	                            <li>
 	                                <a href="${pageContext.request.contextPath}/shelter/requestShelterStaffList">직원 신청 목록</a>
 	                            </li>
@@ -188,24 +188,6 @@
 					</c:if>
 					<!-- 동물 관리 끝 -->
 
-					<!-- 애견용품 시작 -->
-					<li>
-					<c:set var="login" value="${loginId}"></c:set> 
-					<c:set var="right" value="${rightName}"></c:set> 
-					<a href="#"><i class="fa fa-gift fa-fw"></i> 애견용품<span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<c:if test="${right eq '관리자'}">
-								<li>
-									<a href="${pageContext.request.contextPath}/goods/goodsAdd">애견용품 등록</a>
-								</li>
-								<li>
-									<a href="${pageContext.request.contextPath}/goods/goodsList">애견용품 리스트</a>
-								</li>
-							</c:if>
-						</ul>
-					</li>
-					<!-- 애견용품 끝 -->
-					
 					<c:if test="${right eq '관리자'}">
 						<!-- 설문지 시작 -->
 						<li><a href="#"><i class="fa fa-pencil-square-o fa-fw"></i> 설문지<span class="fa arrow"></span></a>
