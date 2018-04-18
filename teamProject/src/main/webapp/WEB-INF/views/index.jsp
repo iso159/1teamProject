@@ -21,9 +21,11 @@
                     <h1 class="page-header"><i class="fa fa-smile-o"></i>Welcome to my project!</h1>
                
 	            <div class="cycle-slideshow">
-	                <img src="${pageContext.request.contextPath}/resources/img/HomeDog.jpg" width:100%>
-	                 <img src="${pageContext.request.contextPath}/resources/img/HomeDog1.jpg" width:100%>
-					 <img src="${pageContext.request.contextPath}/resources/img/HomeDog2.jpg" width:100%>
+	                <img src="${pageContext.request.contextPath}/resources/img/dog1.jpg" width:100%>
+	                 <img src="${pageContext.request.contextPath}/resources/img/dog2.jpg" width:100%>
+					 <img src="${pageContext.request.contextPath}/resources/img/dog3.jpg" width:100%>
+					 <img src="${pageContext.request.contextPath}/resources/img/dog4.jpg" width:100%>
+					 <img src="${pageContext.request.contextPath}/resources/img/dog5.jpg" width:100%>
             	</div>
            </div>
           	<!-- h태그제목 끝 -->
