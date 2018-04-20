@@ -20,12 +20,13 @@
             </div>
           	<!-- h태그제목 끝 -->
 			<!-- 내용 부분 시작-->
-			<c:if test="${empty animal}">
+			<!-- 호스팅 서버로 적용시 적용안됨 -->
+			<%-- <c:if test="${empty animal}">
 				<script>
 				alert('기록이 없습니다.');
 				window.history.back();
 				</script>
-			</c:if>
+			</c:if> --%>
 			<c:forEach var="i" items="${animal}">
  			<c:set var="flag" value="${f:substring(i.animalImagePath,0,4)}"></c:set>
 			<c:set var="path" value="${i.animalImagePath}"></c:set>

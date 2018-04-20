@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cafe24.iso159.animal.service.Animal;
 import com.cafe24.iso159.exp.service.CostIo;
 import com.cafe24.iso159.exp.service.Exp;
+import com.cafe24.iso159.exp.service.ExpAndAnimal;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndBusinessLicense;
 import com.cafe24.iso159.exp.service.ExpAndAnimalAndOverallStatusAndExpPeriodAndMemberInfo;
 import com.cafe24.iso159.exp.service.ExpAndExpJournal;
@@ -67,6 +68,11 @@ public class ExpController {
 		logger.debug("ExpController 호출 {expAnimalList.get}.");
 		List<Animal> animal =  expService.selectExpAnimalList();
 		logger.debug("expAnimalList().get 메서드 animal is {}",animal);
+		//리스트 확인하고 리스트가 없을경우 홈으로
+		if(animal.isEmpty()) {
+			logger.debug("ExpOneList().get 메서드 확인 is {}","리스트없음 홈으로 리턴");
+			return "redirect:/";
+		}
 		model.addAttribute("animal", animal);
 		return "/experience/expAnimalList";
 	}
@@ -122,6 +128,11 @@ public class ExpController {
 		logger.debug("ExpJournalList().get 메서드 expCode is {}",expCode);
 		//expCode로 해당 체험자가 등록한 체험일지 확인
 		List<ExpJournal> expJournal = expService.selectExpJournalList(expCode);
+		//리스트 확인하고 리스트가 없을경우 홈으로
+		if(expJournal.isEmpty()) {
+			logger.debug("ExpOneList().get 메서드 확인 is {}","리스트없음 홈으로 리턴");
+			return "redirect:/";
+		}
 		model.addAttribute("expJournal", expJournal);
 		return "/experience/expJournalList";
 	}
@@ -232,6 +243,11 @@ public class ExpController {
 		logger.debug("expshelterList().get 메서드 blCode is {}",loginBlCode);
 		List<Exp> exp = expService.selectExpShelterList(loginBlCode);
 		logger.debug("expshelterList().get 메서드 exp is {}",exp);
+		//리스트 확인하고 리스트가 없을경우 홈으로
+		if(exp.isEmpty()) {
+			logger.debug("ExpOneList().get 메서드 확인 is {}","리스트없음 홈으로 리턴");
+			return "redirect:/";
+		}
 		model.addAttribute("exp", exp);
 		return "/experience/expShelterList";
 	}
@@ -276,6 +292,13 @@ public class ExpController {
 		Map<String, Object> returnMap = expService.selectExpOneList(map);
 		//리스트 확인
 		logger.debug("ExpOneList().get 메서드 returnMap is {}",returnMap);
+		//꺼내올 리스트 확인 하고 없으면 홈으로 돌림
+		List<ExpAndAnimal> list = (List<ExpAndAnimal>)returnMap.get("expAndAnimal");
+		logger.debug("ExpOneList().get 메서드 list is {}",list);
+		if(list.isEmpty()) {
+			logger.debug("ExpOneList().get 메서드 확인 is {}","리스트없음 홈으로 리턴");
+			return "redirect:/";
+		}
 		model.addAttribute("loginId", mExpId);
 		model.addAttribute("expAndAnimal", returnMap);
 		return "/experience/expList";

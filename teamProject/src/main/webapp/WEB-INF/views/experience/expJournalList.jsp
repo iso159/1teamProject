@@ -11,12 +11,13 @@
 	<!-- top 부분 끝-->
 		<!-- 메인화면 시작 -->
 		<!-- 내용 부분 시작-->
-		<c:if test="${empty expJournal}">
+		<!-- 호스팅 서버로 적용시 적용안됨 -->
+		<%-- <c:if test="${empty expJournal}">
 			<script>
 			alert('기록이 없습니다.');
 			window.history.back();
 			</script>
-		</c:if>
+		</c:if> --%>
         <div id="page-wrapper">
         	<c:forEach var="e" items="${expJournal}" varStatus="status">
         	<div class="row">

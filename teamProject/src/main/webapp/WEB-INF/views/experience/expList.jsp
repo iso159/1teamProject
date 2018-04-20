@@ -20,12 +20,13 @@
 		</div>
 		<!-- h태그제목 끝 -->
 		<!-- 내용 부분 시작-->
-		<c:if test="${empty expAndAnimal.expAndAnimal}">
+		<!-- 호스팅 서버로 적용시 적용안됨 -->
+		<%-- <c:if test="${empty expAndAnimal.expAndAnimal}">
 			<script>
 			alert('기록이 없습니다.');
 			window.history.back();
 			</script>
-		</c:if>
+		</c:if> --%>
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">

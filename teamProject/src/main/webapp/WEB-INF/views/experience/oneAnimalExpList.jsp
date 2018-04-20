@@ -21,12 +21,13 @@
                 </div>
             </div>
           	<!-- h태그제목 끝 -->
-          	<c:if test="${empty returnMap.expAndAnimalAndExpJournal}">
+          	<!-- 호스팅 서버로 적용시 적용안됨 -->
+          	<%-- <c:if test="${empty returnMap.expAndAnimalAndExpJournal}">
 				<script>
 				alert('기록이 없습니다.');
 				window.history.back();
 				</script>
-			</c:if>
+			</c:if> --%>
 			<!-- 내용 부분 시작 -->
 			<div class="panel panel-default">
 				<!-- 테이블 이름 시작 -->
